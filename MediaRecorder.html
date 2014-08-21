@@ -185,12 +185,14 @@ behavior specified in this document. </p>
 
 
 <dl title='interface MediaRecorder : EventTarget' class="idl">
-        <dt>Constructor(MediaStream stream, [TreatUndefinedAs=Missing] optional DOMString mimeType)</dt><dd>
+        <dt>Constructor(MediaStream stream, [TreatUndefinedAs=Missing] optional DOMString mimeType)</dt>
                                 <dl class='parameters'>
             <dt>MediaStream stream</dt>
             <dd>
-              The MediaStream to be recorded.
+              The MediaStream to be recorded.  This will be the value of the <code>stream</code> attribute.
+              See [[!GETUSERMEDIA]] for the definition of MediaStream.
             </dd>
+
              <dt>[TreatUndefinedAs=Missing] optional DOMString mimeType</dt>
             <dd>
               The container format for the recording, which may include any
@@ -198,13 +200,24 @@ behavior specified in this document. </p>
               support the format or any of the parameters specified, it
               <em title="must" class="rfc2119"> must </em> raise an <code>UnsupportedOption</code> Exception. If
               this paramater is not specified, the UA will use a platform-specific
-              default format.
+              default format.  The container format, whether passed in to the constructor or defaulted, will be
+              used as the value of the <code>mimeType</code> attribute.  
             </dd>
-          </dl></dd>
+          </dl>
                 <dt>readonly attribute MediaStream stream</dt><dd>The MediaStream to be
                         recorded.  </dd>
-                        <dt>readonly attribute DOMString mimeType</dt><dd>The MIME type that was be selected as the container for recording. This entry includes all the parameters to the base MimeType. The UA should be able to play back any of the MIME types it supports for recording. For example, it should be able to display a video recording in the HTML &lt;img&gt; tag. The default value for this property is platform-specific.</dd>
-        <dt>readonly attribute RecordingStateEnum state</dt><dd>The current state of the MediaRecorder object. </dd>
+                        <dt>readonly attribute DOMString mimeType</dt><dd>The MIME type that has been                         	
+                        	 selected as the container for recording. This entry includes all the 
+                        	 parameters to the base MimeType. The UA should be able to play back 
+                        	 any of the MIME types it supports for recording. For example, it 
+                        	 should be able to display a video recording in the HTML &lt;img&gt; tag. 
+                        	 The default value for this property is platform-specific.  
+                        	 Note that the mimeType specifies the container format for the recording,
+                        	 and that the codecs that the recording contains will normally be specified as parameters 
+                        	 to it. </dd>
+        <dt>readonly attribute RecordingStateEnum state</dt><dd> The current state of the MediaRecorder object. 
+        	When the MediaRecorder is created, the UA <em title="must" class="rfc2119">must</em> set
+         this attribute to <code>inactive</code>.</dd>
         <dt>attribute EventHandler onstart</dt><dd>Called to handle the start event.</dd>
         <dt>attribute EventHandler onstop</dt><dd>Called to handle the stop event.</dd>
         <dt>attribute EventHandler ondataavailable</dt><dd>Called to handle the dataavailable event.  Note that the Blob (see [[!FILE-API]]) of recorded data is contained in this event and can
@@ -352,12 +365,7 @@ behavior specified in this document. </p>
 
 
 
-<p>The  <code>MediaRecorder()</code>
-      constructor takes one argument which
-      <em title="must" class="rfc2119">must</em> be of type <code>MediaStream</code> (see [[!GETUSERMEDIA]]). When the constructor
-      is invoked, the UA <em title="must" class="rfc2119">must</em> construct a new <code><a class="idlType" href="#idl-def-MediaRecorder">MediaRecorder</a></code> object,
-         set its <a href="#widl-mediastream">mediaStream</a> attribute to be the provided MediaStream, set its <a href="#widl-state">state</a> attribute to 'inactive'
-         and return the object.</p>
+
 
 
 
