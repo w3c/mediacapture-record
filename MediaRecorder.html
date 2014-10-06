@@ -224,7 +224,7 @@ behavior specified in this document. </p>
                 be accessed via the 'data' attribute.</dd>
                 <dt>attribute EventHandler onpause</dt><dd>Called to handle the pause event. </dd>
                 <dt>attribute EventHandler onresume</dt><dd>Called to handle the resume event. </dd>
-                <dt>attribute EventHandler onerror</dt><dd>Called to handle the DOMError event. </dd>
+                <dt>attribute EventHandler onerror</dt><dd>Called to handle a MediaRecorderErrorEvent. </dd>
            <dt>attribute Boolean ignoreMutedMedia</dt><dd>If this attribute is set to
         <code>true</code>, the MediaRecorder will not record anything when the input Media
         Stream is muted.  If this attribute is <code>false</code>, the MediaRecorder will
@@ -276,7 +276,7 @@ behavior specified in this document. </p>
                          the <code>stop</code> event. If the UA is
                         unable to start recording or at any point is unable to contine recording (i.e., for reasons
                         other than a security violation), it <em title="must" class="rfc2119">must</em> raise
-                        a <code>DOMError</code> event, followed by a <code>dataavailable</code> event containing
+                        a <code>MediaRecorderErrorEvent</code>, followed by a <code>dataavailable</code> event containing
                         the Blob it has gathered, follwed by the <code>stop</code> event. 
                 </p>
                 <dl class='parameters'>
@@ -459,8 +459,9 @@ behavior specified in this document. </p>
         <p>Errors are indicated in two ways: exceptions and objects passed to
         error callbacks. In the former case, a <a href="http://www.w3.org/TR/2012/WD-dom-20121206/#exception-domexception">DOMException</a> is raised (see [[!DOM4]]).
         An exception <em title="must" class="rfc2119">must</em> be thrown when the
-        error can be detected at the time that the call is made. In all other cases, an <a href="http://www.w3.org/TR/2012/WD-dom-20121206/#interface-domerror">DOMError</a> object(see [[!DOM4]]) <em title="must" class="rfc2119">must</em> be provided to the failure
-        callback. The error name in the object provided <em title="must" class="rfc2119">must</em> be picked from
+        error can be detected at the time that the call is made. 
+        In all other cases, a <code>MediaRecorderErrorEvent</code>  <em title="must" class="rfc2119">must</em> be raised. 
+        The error name <em title="must" class="rfc2119">must</em> be picked from
          the <code>RecordingErrorName</code>
         enums.  If recording has been started and not yet stopped when the error occurs, then after raising the error, the UA <em title="must" class="rfc2119">must</em>
         raise a  dataavailable event, containing any data that it has gathered,
@@ -472,6 +473,25 @@ behavior specified in this document. </p>
 
 
 
+
+
+
+      <section id="MediaRecorderErrorEvent">
+      	<h2>MediaRecorderErrorEvent</h2>
+           <dl class="idl" title="[NoInterfaceObject] interface MediaRecorderErrorEvent : Event">
+          <dt>readonly attribute RecordingErrorNameEnum name</dt>
+
+          <dd>
+            <p>The name of the error</p>
+          </dd>
+
+          <dt>readonly attribute DOMString? message</dt>
+
+          <dd>A UA-dependent string offering extra human-readable information
+            about the error.</dd>
+
+        </dl>
+</section>
 
 <section>
         <h4>RecordingErrorNameEnum</h4>
@@ -493,7 +513,6 @@ behavior specified in this document. </p>
         </dl>
         
         </section>
-
 <section id="recordingexceptionenum">
         <h2>RecordingExceptionEnum</h2>
         <dl title="enum RecordingExceptionEnum" class="idl">
@@ -503,7 +522,6 @@ behavior specified in this document. </p>
                 been requested.</dd>
         </dl>
         </section>
-
 </section>
  <section id="event-summary" class="informative">
    <h2>Event summary</h2>
