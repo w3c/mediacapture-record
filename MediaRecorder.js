@@ -11,7 +11,7 @@
                   // publishDate:  "2013-11-08",
                   edDraftURI:   "http://dvcs.w3.org/hg/dap/raw-file/tip/media-stream-capture/RecordingProposal.html",
                   previousPublishDate: null,
-                  prevED: "https://dvcs.w3.org/hg/dap/raw-file/default/media-stream-capture/MediaRecorder.html",
+                  prevED: "http://w3c.github.io/mediacapture-record/archives/20140820/MediaRecorder.html",
                   noIDLIn:  true,
                   inlineCSS:  true,
                   noRecTrack:  true,
