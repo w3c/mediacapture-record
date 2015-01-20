@@ -15,6 +15,7 @@
                   noIDLIn:  true,
                   inlineCSS:  true,
                   noRecTrack:  true,
+                  copyrightStart: 2012,
                   shortName:  "mediastream-recording",
                   wg:         ["Device APIs Working Group", "Web Real-Time Communications Working Group"],
                   wgURI:    ["http://www.w3.org/2009/dap/", "http://www.w3.org/2011/04/webrtc/"],
