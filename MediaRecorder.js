@@ -9,7 +9,7 @@
                             url: "mailto:travis.leithead@microsoft.com?subject=MediaStream Capture Scenarios Feedback",
                             companyURL: "http://www.microsoft.com"}],
                   // publishDate:  "2013-11-08",
-                  edDraftURI:   "http://dvcs.w3.org/hg/dap/raw-file/tip/media-stream-capture/RecordingProposal.html",
+                  edDraftURI:   "http://w3c.github.io/mediacapture-record/MediaRecorder.html",
                   previousPublishDate: null,
                   prevED: "http://w3c.github.io/mediacapture-record/archives/20140820/MediaRecorder.html",
                   noIDLIn:  true,
