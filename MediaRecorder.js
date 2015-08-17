@@ -14,7 +14,7 @@
                   prevED: "http://w3c.github.io/mediacapture-record/archives/20140820/MediaRecorder.html",
                   noIDLIn:  true,
                   inlineCSS:  true,
-                  noRecTrack:  true,
+                  noRecTrack:  false,
                   copyrightStart: 2012,
                   shortName:  "mediastream-recording",
                   wg:         ["Device APIs Working Group", "Web Real-Time Communications Working Group"],
