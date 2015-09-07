@@ -8,7 +8,7 @@
                      { name: "Travis Leithead",
                             company: "Microsoft Corp.",
                             url: "mailto:travis.leithead@microsoft.com?subject=MediaStream%20Capture%20Scenarios%20Feedback",
-                            companyURL: "http://www.microsoft.com"
+                            companyURL: "http://www.microsoft.com",
                             w3cid: 40117}],
                   // publishDate:  "2013-11-08",
                   edDraftURI:   "http://w3c.github.io/mediacapture-record/MediaRecorder.html",
