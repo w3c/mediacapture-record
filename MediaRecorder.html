@@ -273,15 +273,14 @@ behavior specified in this document. </p>
 
 <section id="blob-event">
     <h2>Blob Event</h2>
-    <dl title='[Constructor(DOMString type, optional BlobEventInit eventInit)] interface BlobEvent : Event' class='idl'>
-        <dd>                   
-            <dl class='parameters'>
+    <dl title='interface BlobEvent : Event' class='idl'>
+        <dt>[Constructor(DOMString type, optional BlobEventInit eventInit)]</dt>
+            <dd><dl class='parameters'>
                 <dt>DomString type</dt>
                 <dd>Associated <a href=https://dom.spec.whatwg.org/#interface-event>Event type.</a></dd>
                 <dt>BlobEventInit eventInit</dt>
                 <dd>An initializer whose <code>data</code> field will be used to initialize the attribute of the same name.</dd>
-            </dl>
-        </dd>
+        </dl></dd>
         <dt>readonly attribute Blob data</dt>
         <dd>Returns a Blob object whose type attribute indicates the encoding of the blob data.</dd>
     </dl>
