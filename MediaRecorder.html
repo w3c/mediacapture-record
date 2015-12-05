@@ -381,18 +381,30 @@ behavior specified in this document. </p>
 <section id="exception-summary" class="informative">
     <h2>Exception summary</h2>
     <p> Each of the exceptions defined in this document is a <a><code>DOMException</code></a> with a specific type. The exception types and properties such as code value are defined in [[!WEBIDL]].
-    <dl class="idl" title="Exceptions and explanations">
-        <dt>Type</dt>
-        <dd>Description</dd>
-        <dt><code><dfn>InvalidStateError</dfn></code></dt>
-        <dd> An operation was called on an object on which it is not allowed or at a time when it is not allowed, or if a request is made on a source object that has been deleted or removed. </dd>
-        <dt><code><dfn>UnknownError</dfn></code></dt>
-        <dd>The operation failed for an unknown transient reason (e.g. out of memory). User agents SHOULD provide as much additional information as possible in the <code>message</code> attribute.</dd>
-        <dt><code><dfn>NotSupportedError</dfn></code></dt>
-        <dd>A modification to the <code>stream</code> has occurred that makes it impossible to continue recording. An example would be the addition of a Track while recording is occurring. User agents SHOULD provide as much additional information  as possible in the <code>message</code> attribute.</dd>
-        <dt><code><dfn>SecurityError</dfn></code></dt>
-        <dd>The isolation properties of the MediaStream do not allow the MediaRecorder access to it.</dd>
-    </dl>
+
+    <table class="vert">
+      <thead>
+        <tr><th>Name</th><th>Description</th>></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code><dfn>InvalidStateError</dfn></code></td>
+          <td> An operation was called on an object on which it is not allowed or at a time when it is not allowed, or if a request is made on a source object that has been deleted or removed. </td>
+        </tr>
+        <tr>
+          <td><code><dfn>UnknownError</dfn></code></td>
+          <td>The operation failed for an unknown transient reason (e.g. out of memory). User agents SHOULD provide as much additional information as possible in the <code>message</code> attribute.</td>
+        </tr>
+        <tr>
+          <td><code><dfn>NotSupportedError</dfn></code></td>
+          <td>A modification to the <code>stream</code> has occurred that makes it impossible to continue recording. An example would be the addition of a Track while recording is occurring. User agents SHOULD provide as much additional information  as possible in the <code>message</code> attribute.</td>
+        </tr>
+        <tr>
+          <td><code><dfn>SecurityError</dfn></code></td>
+          <td>The isolation properties of the MediaStream do not allow the MediaRecorder access to it.</td>
+        </tr>
+      </tbody>
+    </table>
 </section>
 
 <section id="event-summary" class="informative">
@@ -400,83 +412,42 @@ behavior specified in this document. </p>
    <p>The following additional events fire on <code><a class="idlType" href="#idl-def-MediaRecorder"><code>MediaRecorder</code></a></code> objects:</p>
 
     <table style="border-width:0; width:60%" border="1">
-      <tbody><tr>
-        <th>Event name</th>
-
-        <th>Interface</th>
-
-        <th>Fired when...</th>
-      </tr>
-
-      </tbody><tbody>
+      <thead>
+        <tr><th>Event name</th><th>Interface</th><th>Fired when...</th></tr>
+      </thead><tbody>
         <tr>
           <td><dfn id="event-mediarecorder-start"><code>start</code></dfn></td>
-
           <td><code>Event</code></td>
-
           <td>The UA has started recording data on the MediaStream.</td>
         </tr>
-
         <tr>
           <td><dfn id="event-mediarecorder-stop"><code>stop</code></dfn></td>
-
           <td><code>Event</code></td>
-
           <td>The UA has stopped recording data on the MediaStream.</td>
         </tr>
-
         <tr>
           <td><dfn id="event-mediarecorder-dataavailable"><code>dataavailable</code></dfn></td>
-
           <td><a href="#idl-def-BlobEvent"><code>BlobEvent</code></a></td>
-          <td>The UA generates this even to return data to the application.  The 'data' attribute of this
-                event contains a Blob of recorded data.</td>
+          <td>The UA generates this even to return data to the application.  The 'data' attribute of this event contains a Blob of recorded data.</td>
         </tr>
-
-
         <tr>
           <td><dfn id="event-mediarecorder-pause"><code>pause</code></dfn></td>
-
           <td><code>Event</code></td>
-
           <td>The UA has paused recording data on the MediaStream.</td>
         </tr>
-
-         <tr>
+        <tr>
           <td><dfn id="event-mediarecorder-resume"><code>resume</code></dfn></td>
-
           <td><code>Event</code></td>
-
           <td>The UA has resumed recording data on the MediaStream.</td>
         </tr>
-
         <tr>
           <td><dfn id="event-mediarecorder-DOMError"><code>DOMError</code></dfn></td>
-
           <td><a href="http://www.w3.org/TR/2012/WD-dom-20121206/#interface-domerror"><code>DOMError</code></a></td>
-
-          <td>A fatal error has occurred and the UA has stopped recording. More  detailed error information
-                is available in the 'message' attribute. </td>
+          <td>A fatal error has occurred and the UA has stopped recording. More detailed error information is available in the 'message' attribute. </td>
         </tr>
-
-
       </tbody>
     </table>
-
   </section>
-
-
- <section class="appendix" id="openissues"><!--OddPage--><h2>Open Issues</h2>
-        <ol>
-                <li>Do we need an MTI
-                format?</li>
-                <li>Do we need a "setSyncPoint()" operator and a "syncpoint" signal,
-                        so that the client can tell the recorder to insert a point at
-                        which a recording can be broken up (typically a new I-frame)? </li>
-                        <li>Do we want a general onstatechange handler in place of
-                                onstart, onpause, etc.?</li>
-                </ol>
-</section>
 
    <section>
       <h2>Change Log</h2>
