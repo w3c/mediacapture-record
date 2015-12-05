@@ -103,7 +103,7 @@ behavior specified in this document. </p>
                         	 Note that the mimeType specifies the container format for the recording,
                         	 and that the codecs that the recording contains will normally be specified as parameters 
                         	 to it. </dd>
-        <dt>readonly attribute RecordingStateEnum state</dt><dd> The current state of the MediaRecorder object. 
+        <dt>readonly attribute RecordingState state</dt><dd> The current state of the MediaRecorder object. 
         	When the MediaRecorder is created, the UA <em title="must" class="rfc2119">must</em> set
          this attribute to <code>inactive</code>.</dd>
         <dt>attribute EventHandler onstart</dt><dd>Called to handle the start event.</dd>
@@ -258,9 +258,9 @@ behavior specified in this document. </p>
 
 
 
-<section id="RecordingStateEnum">
-        <h3>RecordingStateEnum</h3>
-        <dl title="enum RecordingStateEnum" class="idl">
+<section id="RecordingState">
+        <h3>RecordingState</h3>
+        <dl title="enum RecordingState" class="idl">
    <dt>inactive</dt>
    <dd>Recording is not occuring. (Either it has not been started or it has been stopped.).</dd>
    <dt>recording</dt>
@@ -369,7 +369,7 @@ behavior specified in this document. </p>
       <section id="MediaRecorderErrorEvent">
           <h2>MediaRecorderErrorEvent</h2>
           <dl class="idl" title="interface MediaRecorderErrorEvent : Event">
-              <dt>readonly attribute RecordingErrorNameEnum name</dt>
+              <dt>readonly attribute RecordingErrorName name</dt>
               <dd>The name of the error</dd>
               <dt>readonly attribute DOMString? message</dt>
               <dd>A UA-dependent string offering extra human-readable information about the error.</dd>
@@ -377,14 +377,14 @@ behavior specified in this document. </p>
 </section>
 
 <section>
-        <h4>RecordingErrorNameEnum</h4>
-        <dl title="enum RecordingErrorNameEnum" class="idl">
-                                <dt>InvalidState</dt>
-                <dd>The <code>MediaRecorder</code> is not in a state
+        <h4>RecordingErrorName</h4>
+        <dl title="enum RecordingErrorName" class="idl">
+          <dt>InvalidState</dt>
+          <dd>The <code>MediaRecorder</code> is not in a state
           in which the proposed operation is allowed
           to be executed.</dd>
-                <dt>OutOfMemory</dt>
-                <dd>The UA has exhaused the available memory. User agents SHOULD provide as much additional information as possible in the <code>message</code> attribute.</dd>
+          <dt>OutOfMemory</dt>
+          <dd>The UA has exhaused the available memory. User agents SHOULD provide as much additional information as possible in the <code>message</code> attribute.</dd>
         <dt>IllegalStreamModification</dt>
         <dd>A modification to the <code>stream</code> has occurred that makes it impossible to continue recording. An example would be the addition of a Track while recording is occurring.
                 User agents SHOULD provide as much additional information  as possible in the <code>message</code> attribute.</dd>
@@ -495,6 +495,7 @@ behavior specified in this document. </p>
           <li>Updated Editors.</li>
           <li>Removed [NoInterfaceObject] from MediaRecorderErrorEvent.</li>
           <li>Removed unused RecordingExceptionEnum.</li>
+          <li>Removed suffix Enum of RecordingStateEnum and RecordingErrorNameEnum.</li>
       </ol>      
     </section>
   </body></html>
