@@ -1,15 +1,23 @@
 var respecConfig = {
     specStatus: "ED",
     editors: [{
+        name: "Miguel Casas-Sanchez",
+        company: "Google, Inc.",
+	companyURL: "http://www.google.com",
+	url: "mailto:mcasas@chromium.org?subject=MediaStream%20Recording%W3C%Spec",
+        w3cid: 82825
+    }, {
         name: "Jim Barnett",
         company: "Genesys",
-        w3cid: 34604
+        w3cid: 34604,
+        note: "Former editor"
     }, { 
         name: "Travis Leithead",
         company: "Microsoft Corp.",
         url: "mailto:travis.leithead@microsoft.com?subject=MediaStream%20Capture%20Scenarios%20Feedback",
         companyURL: "http://www.microsoft.com",
-        w3cid: 40117
+        w3cid: 40117,
+        note: "Former editor"
     }],
     // publishDate:  "2013-11-08",
     edDraftURI:   "http://w3c.github.io/mediacapture-record/MediaRecorder.html",
