@@ -367,20 +367,13 @@ behavior specified in this document. </p>
 
 
       <section id="MediaRecorderErrorEvent">
-      	<h2>MediaRecorderErrorEvent</h2>
-           <dl class="idl" title="[NoInterfaceObject] interface MediaRecorderErrorEvent : Event">
-          <dt>readonly attribute RecordingErrorNameEnum name</dt>
-
-          <dd>
-            <p>The name of the error</p>
-          </dd>
-
-          <dt>readonly attribute DOMString? message</dt>
-
-          <dd>A UA-dependent string offering extra human-readable information
-            about the error.</dd>
-
-        </dl>
+          <h2>MediaRecorderErrorEvent</h2>
+          <dl class="idl" title="interface MediaRecorderErrorEvent : Event">
+              <dt>readonly attribute RecordingErrorNameEnum name</dt>
+              <dd>The name of the error</dd>
+              <dt>readonly attribute DOMString? message</dt>
+              <dd>A UA-dependent string offering extra human-readable information about the error.</dd>
+         </dl>
 </section>
 
 <section>
@@ -509,6 +502,7 @@ behavior specified in this document. </p>
       	  <li>Removed [TreatUndefinedAs=Missing] from Media Recorder IDL.</li>
       	  <li>Added missing constructor parameters to BlobEvent constructor.</li>      	
       	  <li>Updated Editors</li>
+          <li>Removed [NoInterfaceObject] from MediaRecorderErrorEvent</li>
       </ol>      
     </section>
   </body></html>
