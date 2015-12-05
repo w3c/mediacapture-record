@@ -3,8 +3,8 @@ var respecConfig = {
     editors: [{
         name: "Miguel Casas-Sanchez",
         company: "Google, Inc.",
-	companyURL: "http://www.google.com",
-	url: "mailto:mcasas@chromium.org?subject=MediaStream%20Recording%W3C%Spec",
+        companyURL: "http://www.google.com",
+        url: "mailto:mcasas@chromium.org?subject=MediaStream%20Recording%W3C%Spec",
         w3cid: 82825
     }, {
         name: "Jim Barnett",
