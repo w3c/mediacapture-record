@@ -74,8 +74,7 @@ behavior specified in this document. </p>
 
 <dl title='interface MediaRecorder : EventTarget' class="idl">
         <dt>Constructor(MediaStream stream, optional DOMString mimeType)</dt>
-             <dd>                   <dl class='parameters'>
-            <dt>MediaStream stream</dt>
+             <dd> <dl class='parameters'> <dt>MediaStream stream</dt>
             <dd>
               The MediaStream to be recorded.  This will be the value of the <code>stream</code> attribute.
               See [[!GETUSERMEDIA]] for the definition of MediaStream.
@@ -86,24 +85,16 @@ behavior specified in this document. </p>
               The container format for the recording, which may include any
               parameters that are defined for the format.  If the UA does not
               support the format or any of the parameters specified, it
-              <em title="must" class="rfc2119"> must </em> raise an <code>UnsupportedOption</code> Exception. If
+              <em title="must" class="rfc2119"> must </em> raise an <code>NotSupportedError</code> Exception. If
               this paramater is not specified, the UA will use a platform-specific
               default format.  The container format, whether passed in to the constructor or defaulted, will be
-              used as the value of the <code>mimeType</code> attribute.  
+              used as the value of the <code>mimeType</code> attribute.
             </dd>
           </dl></dd>
                 <dt>readonly attribute MediaStream stream</dt><dd>The MediaStream to be
                         recorded.  </dd>
-                        <dt>readonly attribute DOMString mimeType</dt><dd>The MIME type that has been                         	
-                        	 selected as the container for recording. This entry includes all the 
-                        	 parameters to the base MimeType. The UA should be able to play back 
-                        	 any of the MIME types it supports for recording. For example, it 
-                        	 should be able to display a video recording in the HTML &lt;img&gt; tag. 
-                        	 The default value for this property is platform-specific.  
-                        	 Note that the mimeType specifies the container format for the recording,
-                        	 and that the codecs that the recording contains will normally be specified as parameters 
-                        	 to it. </dd>
-        <dt>readonly attribute RecordingState state</dt><dd> The current state of the MediaRecorder object. 
+                        <dt>readonly attribute DOMString mimeType</dt><dd>The MIME type that has been selected as the container for recording. This entry includes all the parameters to the base MimeType. The UA should be able to play back any of the MIME types it supports for recording. For example, it should be able to display a video recording in the HTML &lt;video&gt; tag. The default value for this property is platform-specific. Note that the mimeType specifies the container format for the recording, and that the codecs that the recording contains will normally be specified as parameters to it. </dd>
+        <dt>readonly attribute RecordingState state</dt><dd> The current state of the MediaRecorder object.
         	When the MediaRecorder is created, the UA <em title="must" class="rfc2119">must</em> set
          this attribute to <code>inactive</code>.</dd>
         <dt>attribute EventHandler onstart</dt><dd>Called to handle the start event.</dd>
@@ -128,26 +119,22 @@ behavior specified in this document. </p>
                         the UA <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source,
                         that runs the following steps:
                 <ol>
-                        <li>If the <code>state</code> is not "inactive",        raise a DOM <code>InvalidState</code> error and terminate these steps. Otherwise:</li>
-                                <li>Set <code>state</code> to 'recording' and wait until media
-
-                                        becomes available from <code>stream</code>.</li>
-                        <li>Once data becomes available raise a <code>start</code> event and start gathering the
-
-                                data into a Blob (see [[!FILE-API]]). </li>
-                <li>If the <code>timeSlice</code> argument has been provided, then once <code>timeSlice</code>
+                        <li>If the <code>state</code> is not "inactive", raise a DOM <code>InvalidStateError</code> error and terminate these steps. Otherwise:</li>
+                        <li>Set <code>state</code> to 'recording' and wait until media becomes available from <code>stream</code>.</li>
+                        <li>Once data becomes available raise a <code>start</code> event and start gathering the data into a Blob (see [[!FILE-API]]). </li>
+                        <li>If the <code>timeSlice</code> argument has been provided, then once <code>timeSlice</code>
                         milliseconds of data have been colleced, or some minimum time slice imposed
                         by the UA, whichever is greater, raise a <code>dataavailable</code> event containing
                         the Blob of collected data, and start gathering a new Blob of data.  Otherwise (if <code>timeSlice</code>
                         has not been provided), continue gathering data into the original Blob.</li>
                         <li>When the <code>stream</code> is ended set <code>recording</code>
-                                to 'inactive' and stop gathering data. Callers SHOULD not rely on exactness of the timeSlice value, especially if the timeSlice value is small. Callers SHOULD consider timeSlice as a minimum value</li>
+                                to 'inactive' and stop gathering data. Callers <em title="should" class="rfc2119">should</em> not rely on exactness of the timeSlice value, especially if the timeSlice value is small. Callers <em title="should" class="rfc2119">should</em> consider timeSlice as a minimum value</li>
                                         <li>Then  raise a <code>dataavailable</code> event containing the Blob of data.</li>
                                         <li>Finally, raise a <code>stop</code> event.</li>
                         </ol>
 
                         <p>Note that <code>stop()</code>,
-                                <code>requestData()</code>, and <code>pause</code> also affect the recording behavior.</p>
+                                <code>requestData()</code>, and <code>pause()</code> also affect the recording behavior.</p>
 
 
                         <p>The UA <em title="must" class="rfc2119">must</em> record the MediaStream
@@ -160,12 +147,12 @@ behavior specified in this document. </p>
                        <p> If at any point
                         the <code>stream's</code> isolation properties change so that MediaRecorder is no longer allowed
                         access to it, the UA <em title="must" class="rfc2119">must</em> stop recording, discard any data that it
-                        has gathered and raise a <code>SecurityError</code> event followed by
+                        has gathered and raise a <code>SecurityError</code> exception followed by
                          the <code>stop</code> event. If the UA is
                         unable to start recording or at any point is unable to contine recording (i.e., for reasons
                         other than a security violation), it <em title="must" class="rfc2119">must</em> raise
-                        a <code>MediaRecorderErrorEvent</code>, followed by a <code>dataavailable</code> event containing
-                        the Blob it has gathered, follwed by the <code>stop</code> event. 
+                        a <code>UnknownError</code>, followed by a <code>dataavailable</code> event containing
+                        the Blob it has gathered, follwed by the <code>stop</code> event.
                 </p>
                 <dl class='parameters'>
             <dt>optional  long timeslice</dt>
@@ -181,7 +168,7 @@ behavior specified in this document. </p>
           the UA <em title="must" class="rfc2119">must</em>
           queue a task, using the DOM manipulation task source, that runs the following steps:
                 <ol>
-                        <li>If <code>state</code> is "inactive", raise a DOM <code>InvalideStateError</code>event and terminate these steps.
+                        <li>If <code>state</code> is "inactive", raise a DOM <code>InvalidStateError</code>event and terminate these steps.
           Otherwise:</li>
                         <li>Set <code>state</code> to 'inactive' and stop gathering data. </li>
                         <li>Raise a <code>dataavailable</code> event containing the Blob of data that has been gathered.</li>
@@ -195,7 +182,7 @@ behavior specified in this document. </p>
                 <ol>
                 <li>If <code>state</code> is  "inactive"
           raise a DOM
-          <code>InvalidState</code> error and terminate these steps.  Otherwise: </li>
+          <code>InvalidStateError</code> error and terminate these steps.  Otherwise: </li>
                 <li>Set <code>state</code> to "paused".</li>
                 <li>Stop gathering data into its current Blob (but keep the Blob available so that
                         recording can be resumed in the future).</li>
@@ -208,7 +195,7 @@ behavior specified in this document. </p>
           queue a task, using the DOM manipulation task source, that runs the following steps:
                 <ol>
                         <li>If <code>state</code> is  "inactive"
-          raise a DOM <code>InvalidState</code>
+          raise a DOM <code>InvalidStateError</code>
           error and terminate these steps.  Otherwise: </li>
                 <li>Set <code>state</code> to "recording".</li>
                 <li>Resume (or continue) gathering data into its current Blob.</li>
@@ -223,7 +210,7 @@ behavior specified in this document. </p>
                 <ol>
                         <li>If <code>state</code> is not "recording"
          raise a DOM
-          <code>InvalidState</code> error and terminate these steps.
+          <code>InvalidStateError</code> error and terminate these steps.
           Otherwise:</li>
                 <li>Raise a <code>dataavailable</code> event containing the current Blob of saved data. (Note that this Blob
                         will be empty if no data has been gathered yet.)</li>
@@ -312,7 +299,7 @@ behavior specified in this document. </p>
             <td>MimeType</td>
             <td><code>DOMString</code></td>
             <td> The MIME type that was be selected as the container for recording. This entry includes all the parameters to the base MimeType.
-                The UA should be able to play back any of the MIME types it supports for recording. For example, it should be able to display a video recording in the HTML &lt;img&gt; tag.
+                The UA should be able to play back any of the MIME types it supports for recording. For example, it should be able to display a video recording in the HTML &lt;video&gt; tag.
                 The default value for this property is platform-specific.</td>
           </tr>
                    <tr id="def-property-BitRate">
@@ -343,10 +330,10 @@ behavior specified in this document. </p>
   <section id="error-handling">
     <h2>Error Handling</h2>
 
-    <section id="general-principles">
+    <section id="general-principles" class="informative">
       <h3>General Principles</h3>
 
-      <p>Errors are indicated via <a href="http://www.w3.org/TR/2012/WD-dom-20121206/#exception-domexception">DOMException</a>s raised (see [[!DOM4]]). An exception <em title="must" class="rfc2119">must</em> be thrown when the error can be detected at the time that the call is made. If recording has been started and not yet stopped when the error occurs, then after raising the error, the UA <em title="must" class="rfc2119">must</em> raise a  dataavailable event, containing any data that it has gathered, and then a stop event. The UA  <em title="may" class="rfc2119">may</em> set platform-specific limits, such those for the minimum and maximum Blob size that it will support, or the number of Tracks it will record at once.  It <em title="must" class="rfc2119">must</em> signal a fatal error if these limits are exceeded. </p>
+      <p>Errors are indicated via <a href=" https://heycam.github.io/webidl/#idl-DOMException">DOMException</a>s raised (see [[!DOM4]]). An exception must be thrown when the error can be detected at the time that the call is made. If recording has been started and not yet stopped when the error occurs, then after raising the error, the UA must raise a dataavailable event, containing any data that it has gathered, and then a stop event. The UA may set platform-specific limits, such as those for the minimum and maximum Blob size that it will support, or the number of Tracks it will record at once.  It must signal a fatal error if these limits are exceeded. </p>
     </section>
 
     <section id="exception-summary" class="informative">
@@ -364,11 +351,12 @@ behavior specified in this document. </p>
           </tr>
           <tr>
             <td><code>UnknownError</code></td>
-            <td>The operation failed for an unknown transient reason (e.g. out of memory). User agents SHOULD provide as much additional information as possible in the <code>message</code> attribute.</td>
+            <td>The operation failed for an unknown transient reason (e.g. out of memory), or a modification to the <code>stream</code> has occurred that makes it impossible to continue recording (e.g. a Track has been added while recording is occurring). User agents should provide as much additional information as possible in the <code>message</code> attribute.
+            </td>
           </tr>
           <tr>
             <td><code>NotSupportedError</code></td>
-            <td>A modification to the <code>stream</code> has occurred that makes it impossible to continue recording. An example would be the addition of a Track while recording is occurring. User agents SHOULD provide as much additional information  as possible in the <code>message</code> attribute.</td>
+            <td>A <a class="idlType" href="#idl-def-MediaRecorder"><code>MediaRecorder</code></a> could not be created due to unsupported options (e.g. mime type) specification. User agents should provide as much additional information  as possible in the <code>message</code> attribute.</td>
           </tr>
           <tr>
             <td><code>SecurityError</code></td>
@@ -435,6 +423,6 @@ behavior specified in this document. </p>
           <li>Removed unused RecordingExceptionEnum.</li>
           <li>Removed suffix Enum of RecordingStateEnum and RecordingErrorNameEnum.</li>
           <li>Removed MediaRecorderErrorEvent, detailed generated DOMExceptions.</li>
-      </ol>      
+      </ol>
     </section>
   </body></html>
