@@ -149,14 +149,14 @@
     </dd>
 
     <dt>static bool isTypeSupported(DOMString type)</dt>
-    <dd> Check to see whether a <code>MediaRecorder</code> can record in the specified Mime type. If true is returned from this method, it only indicates that the <code>MediaRecorder</code> implementation is capable of recording Blob objects for the specified MIME type. Recording may still fail if sufficient resources are not available to support the concrete media encoding. When this method is invoked, the user agent must run the following steps:
+    <dd> Check to see whether a <code>MediaRecorder</code> can record in the specified Mime type. If true is returned from this method, it only indicates that the <code>MediaRecorder</code> implementation is capable of recording Blob objects for the specified MIME type. Recording may still fail if sufficient resources are not available to support the concrete media encoding. When this method is invoked, the User Agent must run the following steps:
      <ol class="method-algorithm">
       <li>If <code>type</code> is an empty string, then return false.</li>
       <li>If <code>type</code> does not contain a valid MIME type string, then return false.</li>
-      <li>If <code>type</code> contains a media type or media subtype that the MediaSource does not support, then return false.</li>
+      <li>If <code>type</code> contains a media type or media subtype that the MediaRecorder does not support, then return false.</li>
       <li>If <code>type</code> contains a media container that the MediaSource does not support, then return false.</li>
       <li>If <code>type</code> contains a codec that the MediaSource does not support, then return false.</li>
-      <li>If the MediaSource does not support the specified combination of media type, media subtype, and codecs then return false.</li>
+      <li>If the MediaRecorder does not support the specified combination of media type/subtype, codecs and container then return false.</li>
       <li>Return true.</li>
      </ol>
 
