@@ -22,7 +22,7 @@ var respecConfig = {
     // publishDate:  "2013-11-08",
     edDraftURI:   "http://w3c.github.io/mediacapture-record/MediaRecorder.html",
     previousPublishDate: null,
-    prevED: "http://w3c.github.io/mediacapture-record/archives/20150603/MediaRecorder.html",
+    prevED: "http://w3c.github.io/mediacapture-record/archives/20150819/MediaRecorder.html",
     noIDLIn:  true,
     inlineCSS:  true,
     noRecTrack:  false,

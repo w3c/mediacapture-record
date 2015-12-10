@@ -14,7 +14,7 @@
 # 1. Prepare the release (previous release date before the new one)
 #    $ ./release.sh 20140817 20140909 prepare
 #
-# 2. Browse to the getusermedia.html source file and press Ctrl+Alt+Shift+s
+# 2. Browse to the MediaRecorder.html source file and press Ctrl+Alt+Shift+s
 #    to show the respec save dialog. Click the "Save as HTML" option and save
 #    the resulting document at the location proposed this script.
 #
@@ -143,8 +143,10 @@ case $STAGE in
     fi
     check "Update \"This version\" field in generated source"
 
-    cp -r images archives/$NEW_DATE/
-    check "Copy image resources"
+    if [ -d "images" ] ; then 
+      cp -r images archives/$NEW_DATE/
+      check "Copy image resources"
+    fi
 
     git add archives/$NEW_DATE
     check "Add new archive directory"
@@ -152,10 +154,10 @@ case $STAGE in
     ln -s -f archives/$NEW_DATE/$SRC_NAME index.html
     check "Create index.html sym-link"
 
-    git commit -am "Added dated version $TAG_NAME"
+    git commit --amend -am "Added dated version $TAG_NAME"
     check "Make commit"
 
-    git tag -m "Editor's draft $NEW_DATE." $TAG_NAME
+    git tag -f -m "Editor's draft $NEW_DATE." $TAG_NAME
     check "Add tag"
 
     git rebase master gh-pages
