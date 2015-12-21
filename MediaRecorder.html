@@ -80,7 +80,7 @@
     <dd>Called to handle the resume event. </dd>
 
     <dt>attribute EventHandler onerror</dt>
-    <dd>Called to handle a MediaRecorderErrorEvent. </dd>
+    <dd>Called to handle a <a>ErrorEvent</a>. </dd>
 
     <dt>attribute boolean ignoreMutedMedia</dt>
     <dd>If this attribute is set to <code>true</code>, the MediaRecorder will not record anything when the input Media Stream is muted.  If this attribute is <code>false</code>, the MediaRecorder will record silence (for audio) and black frames (for video) when the input MediaStream is muted.  When the MediaRecorder is created, the UA <em title="must" class="rfc2119">must</em> set this attribute to <code>false</code>.</dd>
@@ -266,39 +266,27 @@
 
   <section id="general-principles"> <h3>General Principles</h3>
 
-   <p>The UA <em title="must" class="rfc2119">must</em> throw a <a href=" https://heycam.github.io/webidl/#idl-DOMException">DOMException</a> (see [[!DOM4]]) when the error can be detected at the time that the call is made. In all other cases, a <code>MediaRecorderErrorEvent</code> <em title="must" class="rfc2119">must</em> be fired. The error name <em title="must" class="rfc2119">must</em> be picked from the <code>RecordingErrorName</code> enums. </p>
-
-   <p>If recording has been started and not yet stopped when the error occurs, then after raising the error, the UA <em title="must" class="rfc2119">must</em> fire a <code>dataavailable</code> event, containing any data that it has gathered, and then a <code>stop</code> event. The UA may set platform-specific limits, such as those for the minimum and maximum Blob size that it will support, or the number of Tracks it will record at once.  It must signal a fatal error if these limits are exceeded. </p>
+   <p>The UA <em title="must" class="rfc2119">must</em> throw a <a href=" https://heycam.github.io/webidl/#idl-DOMException">DOMException</a> (see [[!DOM4]]) when the error can be detected at the time that the call is made. In all other cases, an <a><code>ErrorEvent</code></a> <em title="must" class="rfc2119">must</em> be fired. If recording has been started and not yet stopped when the error occurs, then after raising the error, the UA <em title="must" class="rfc2119">must</em> fire a <code>dataavailable</code> event, containing any data that it has gathered, and then a <code>stop</code> event. The UA may set platform-specific limits, such as those for the minimum and maximum Blob size that it will support, or the number of Tracks it will record at once.  It must signal a fatal error if these limits are exceeded. </p>
   </section>
 
-  <section id="MediaRecorderErrorEvent"> <h2>MediaRecorderErrorEvent</h2>
-   <dl class="idl" title="interface MediaRecorderErrorEvent : Event">
-    <dt>readonly attribute RecordingErrorName name</dt>
-    <dd>The name of the error</dd>
-    <dt>readonly attribute DOMString? message</dt>
-    <dd>A UA-dependent string offering extra human-readable information about the error.</dd>
+  <section> <h3>ErrorEvent</h3>
+   <p>The following interface is defined for cases when an event is raised that could have been caused by an error:</p>
+
+   <p><dfn data-lt="Fire an error event">Firing an error event named <var>e</var></dfn> with an <code>Error</code> <var>error</var> means that an event with the name <var>e</var>, which does not bubble (except where otherwise stated) and is not cancelable (except where otherwise stated), and which uses the <code><a>ErrorEvent</a></code> interface with the <code><a href="#widl-ErrorEvent-error">error</a></code> attribute set to <var>error</var>, MUST be created and dispatched at the given target. If no <code>Error</code> object is specified, the <code><a href="#widl-ErrorEvent-error">error</a></code> attribute defaults to null.</p>
+
+   <dl class="idl" data-merge="ErrorEventInit" title="[Exposed=Window] interface ErrorEvent : Event">
+    <dt>Constructor(DOMString type, ErrorEventInit eventInitDict)</dt>
+    <dd>Constructs a new <code><a>ErrorEvent</a></code>.</dd>
+
+    <dt>readonly attribute Error? error</dt>
+    <dd>If the event was raised because of an error, this attribute may be set to that error object.</dd>
+   </dl>
+
+   <dl class="idl" title="dictionary ErrorEventInit : EventInit">
+    <dt>Error? error = null</dt>
+    <dd>If the event was raised because of an error, this attribute may be set to that error object. </dd>
    </dl>
   </section>
-
-  <section> <h4>RecordingErrorName</h4>
-   <dl title="enum RecordingErrorName" class="idl">
-    <dt>InvalidState</dt>
-    <dd>The <code>MediaRecorder</code> is not in a state in which the proposed operation is allowed to be executed.</dd>
-
-    <dt>OutOfMemory</dt>
-    <dd>The UA has exhaused the available memory. User agents SHOULD provide as much additional information as possible in the <code>message</code> attribute.</dd>
-
-    <dt>IllegalStreamModification</dt>
-    <dd>A modification to the <code>stream</code> has occurred that makes it impossible to continue recording. An example would be the addition of a Track while recording is occurring. User agents SHOULD provide as much additional information  as possible in the <code>message</code> attribute.</dd>
-
-    <dt>SecurityError</dt>
-    <dd>The isolation properties of the MediaStream do not allow the MediaRecorder access to it.</dd>
-
-    <dt>OtherRecordingError</dt>
-    <dd>Used for an fatal error other than those listed above.  User agents SHOULD provide as much additional information as possible in the <code>message</code> attribute.</dd>
-   </dl>
-  </section>
-
 
   <section id="exception-summary" class="informative"><h3>Exception summary</h3>
 
@@ -365,8 +353,8 @@
           <td>The UA has resumed recording data on the MediaStream.</td>
         </tr>
         <tr>
-          <td><dfn id="event-mediarecorder-DOMError"><code>DOMError</code></dfn></td>
-          <td><a href="http://www.w3.org/TR/2012/WD-dom-20121206/#interface-domerror"><code>DOMError</code></a></td>
+          <td><dfn id="event-mediarecorder-ErrorEvent"><code>ErrorEvent</code></dfn></td>
+          <td><a><code>EventError</code></a></td>
           <td>A fatal error has occurred and the UA has stopped recording. More detailed error information is available in the 'message' attribute. </td>
         </tr>
       </tbody>
@@ -387,6 +375,7 @@
           <li>Removed unused RecordingExceptionEnum.</li>
           <li>Removed suffix Enum of RecordingStateEnum and RecordingErrorNameEnum.</li>
           <li>Corrected references to DOMExceptions where it used to say (MediaRecorderError)Events.</li>
+          <li>Substituted MediaRecorderErrorEvent with a simple ErrorEvent, no error enum</li>
       </ol>
     </section>
   </body></html>
