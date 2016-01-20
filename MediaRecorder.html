@@ -151,7 +151,7 @@
     <dt>static bool isTypeSupported(DOMString type)</dt>
     <dd> Check to see whether a <code>MediaRecorder</code> can record in the specified Mime type. If true is returned from this method, it only indicates that the <code>MediaRecorder</code> implementation is capable of recording Blob objects for the specified MIME type. Recording may still fail if sufficient resources are not available to support the concrete media encoding. When this method is invoked, the User Agent must run the following steps:
      <ol class="method-algorithm">
-      <li>If <code>type</code> is an empty string, then return false.</li>
+      <li>If <code>type</code> is an empty string, then return true (note that this case is essentially equivalent to leaving up to the UA the choice of container and codecs on constructor).</li>
       <li>If <code>type</code> does not contain a valid MIME type string, then return false.</li>
       <li>If <code>type</code> contains a media type or media subtype that the MediaRecorder does not support, then return false.</li>
       <li>If <code>type</code> contains a media container that the MediaSource does not support, then return false.</li>
@@ -169,7 +169,7 @@
 
   <section id="MediaRecorderOptions"><h3>MediaRecorderOptions</h3>
    <dl class="idl" title="dictionary MediaRecorderOptions">
-    <dt>DOMString mimeType = ""</dt>
+    <dt>DOMString mimeType</dt>
     <dd>The container and codec(s) format(s) for the recording, which may include any parameters that are defined for the format.  If the UA does not support the format or any of the parameters specified, it <em title="must" class="rfc2119"> must </em> throw an <code>NotSupportedError</code> DOMException. If this paramater is not specified, the UA will use a platform-specific default format.  The container format, whether passed in to the constructor or defaulted, will be used as the value of the <code>mimeType</code> attribute.
     </dd>
     <dt>unsigned long audioBitsPerSecond</dt>
