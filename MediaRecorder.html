@@ -302,11 +302,6 @@
           <td> An operation was called on an object on which it is not allowed or at a time when it is not allowed, or if a request is made on a source object that has been deleted or removed. </td>
         </tr>
         <tr>
-          <td><code>UnknownError</code></td>
-          <td>The operation failed for an unknown transient reason (e.g. out of memory), or a modification to the <code>stream</code> has occurred that makes it impossible to continue recording (e.g. a Track has been added while recording is occurring). User agents should provide as much additional information as possible in the <code>message</code> attribute.
-          </td>
-        </tr>
-        <tr>
           <td><code>NotSupportedError</code></td>
           <td>A <a class="idlType" href="#idl-def-MediaRecorder"><code>MediaRecorder</code></a> could not be created due to unsupported options (e.g. mime type) specification. User agents should provide as much additional information  as possible in the <code>message</code> attribute.</td>
         </tr>
@@ -355,7 +350,7 @@
         <tr>
           <td><dfn id="event-mediarecorder-ErrorEvent"><code>ErrorEvent</code></dfn></td>
           <td><a><code>EventError</code></a></td>
-          <td>A fatal error has occurred and the UA has stopped recording. More detailed error information is available in the 'message' attribute. </td>
+          <td>An error has occurred, e.g. out of memory or a modification to the <code>stream</code> has occurred (e.g. a Track has been added to or removed from the said <code>stream</code> while recording is occurring). </td>
         </tr>
       </tbody>
     </table>
