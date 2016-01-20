@@ -85,6 +85,12 @@
     <dt>attribute boolean ignoreMutedMedia</dt>
     <dd>If this attribute is set to <code>true</code>, the MediaRecorder will not record anything when the input Media Stream is muted.  If this attribute is <code>false</code>, the MediaRecorder will record silence (for audio) and black frames (for video) when the input MediaStream is muted.  When the MediaRecorder is created, the UA <em title="must" class="rfc2119">must</em> set this attribute to <code>false</code>.</dd>
 
+    <dt>readonly attribute unsigned long videoBitsPerSecond</dt>
+    <dd>The value of the Video encoding target bit rate that was passed to the Platform. If the user has not specified any, the Platform implementation is free to choose this value and it <em title="must" class="rfc2119">must</em> read zero.</dd>
+
+    <dt>readonly attribute unsigned long audioBitsPerSecond</dt>
+    <dd>The value of the Audio encoding target bit rate that was passed to the Platform. If the user has not specified any, the Platform implementation is free to choose this value and it <em title="must" class="rfc2119">must</em> read zero.</dd>
+
     <dt>void start()</dt>
     <dd>When a <code>MediaRecorder</code> object’s <code>start()</code> method is invoked, the UA <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
      <ol>
@@ -215,52 +221,25 @@
     </dl>
 </section>
 
-<section id="properties">
-        <h3>MediaRecorder  Properties</h3>
-        <p>
-          [TO DO: Provide API surface to set and read these. When that is done,
-          this section will be removed.]
-          </p>
-     <table class="simple">
-        <thead>
-          <tr>
-            <th>Property Name</th>
-            <th>Values</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr id="def-property-MimeType">
-            <td>MimeType</td>
-            <td><code>DOMString</code></td>
-            <td> The MIME type that was be selected as the container for recording. This entry includes all the parameters to the base MimeType.
-                The UA should be able to play back any of the MIME types it supports for recording. For example, it should be able to display a video recording in the HTML &lt;video&gt; tag.
-                The default value for this property is platform-specific.</td>
-          </tr>
-                   <tr id="def-property-BitRate">
-            <td>BitRate</td>
-            <td><code>long</code></td>
-            <td> The bitrate type that was selected as for recording. The default
-                value for this property is platform-specific.</td>
-          </tr>
-            <tr id="def-property-IgnoreMutedMedia">
-            <td>ignoreMutedMedia</td>
-            <td><code>boolean</code></td>
-            <td> If this property is set to 'true', the MediaRecorder should stop
-                recording when the MediaStream is muted.  If it is false, the
-                MediaRecorder should record silence (for audio) or black frames(for video)
-                when the source MediaStream is muted.  The default value for this
-                property is true.</td>
-          </tr>
-
-
-
-
-
-        </tbody>
-      </table>
-        </section>
-
+<section id="properties"> <h3>MediaRecorder  Properties</h3>
+  <p> [TO DO: Provide API surface to set and read these. When that is done, this section will be removed.]</p>
+  <table class="simple">
+  <thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Values</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id="def-property-MimeType">
+      <td>MimeType</td>
+      <td><code>DOMString</code></td>
+      <td> The MIME type that was be selected as the container for recording. This entry includes all the parameters to the base MimeType. The UA should be able to play back any of the MIME types it supports for recording. For example, it should be able to display a video recording in the HTML &lt;video&gt; tag. The default value for this property is platform-specific.</td>
+    </tr>
+  </tbody>
+  </table>
+</section>
 
  <section id="error-handling"> <h2>Error Handling</h2>
 
@@ -370,7 +349,10 @@
           <li>Removed unused RecordingExceptionEnum.</li>
           <li>Removed suffix Enum of RecordingStateEnum and RecordingErrorNameEnum.</li>
           <li>Corrected references to DOMExceptions where it used to say (MediaRecorderError)Events.</li>
-          <li>Substituted MediaRecorderErrorEvent with a simple ErrorEvent, no error enum</li>
+          <li>Substituted MediaRecorderErrorEvent with a simple ErrorEvent, no error enum.</li>
+          <li>mimeType does not need a default value; isTypeSupported() should be true.</li>
+          <li>Removed UnknownError Exception; added ErrorEvent description.</li>
+          <li>Added read-only attributes videoBitsPerSecond and audioBitsPerSecond.</li>
       </ol>
     </section>
   </body></html>
