@@ -179,11 +179,11 @@
     <dd>The container and codec(s) format(s) for the recording, which may include any parameters that are defined for the format.  If the UA does not support the format or any of the parameters specified, it <em title="must" class="rfc2119"> must </em> throw an <code>NotSupportedError</code> DOMException. If this paramater is not specified, the UA will use a platform-specific default format.  The container format, whether passed in to the constructor or defaulted, will be used as the value of the <code>mimeType</code> attribute.
     </dd>
     <dt>unsigned long audioBitsPerSecond</dt>
-    <dd>Aggregate target bits per second for encoding of the Audio track(s), if any. This is a hint for the encoder and the value might only be achieved over a long time.</dd>
+    <dd>Aggregate target bits per second for encoding of the Audio track(s), if any. This is a hint for the encoder and the value might be surpassed, not achieved, or only be achieved over a long period of time.</dd>
     <dt>unsigned long videoBitsPerSecond</dt>
-    <dd>Aggregate target bits per second for encoding of the Video track(s), if any. This is a hint for the encoder and the value might be surpassed or not achieved.</dd>
+    <dd>Aggregate target bits per second for encoding of the Video track(s), if any. This is a hint for the encoder and the value might be surpassed, not achieved, or only be achieved over a long period of time.</dd>
     <dt>unsigned long bitsPerSecond</dt>
-    <dd>Aggregate target bits per second for encoding of all Video and Audio Track(s) present. This parameter overrides either <code>audioBitsPerSecond</code> or <code>videoBitsPerSecond</code> if present, and might be distributed among the present track encoders as the UA sees fit. This parameter is a hint for the encoder(s) and the total value might be surpassed or not achieved at all.</dd>
+    <dd>Aggregate target bits per second for encoding of all Video and Audio Track(s) present. This parameter overrides either <code>audioBitsPerSecond</code> or <code>videoBitsPerSecond</code> if present, and might be distributed among the present track encoders as the UA sees fit. This parameter is a hint for the encoder(s) and the total value might be surpassed, not achieved, or only be achieved over a long period of time.</dd>
    </dl>
   </section>
 
