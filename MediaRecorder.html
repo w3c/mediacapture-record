@@ -86,10 +86,10 @@
     <dd>If this attribute is set to <code>true</code>, the MediaRecorder will not record anything when the input Media Stream is muted.  If this attribute is <code>false</code>, the MediaRecorder will record silence (for audio) and black frames (for video) when the input MediaStream is muted.  When the MediaRecorder is created, the UA <em title="must" class="rfc2119">must</em> set this attribute to <code>false</code>.</dd>
 
     <dt>readonly attribute unsigned long videoBitsPerSecond</dt>
-    <dd>The value of the Video encoding target bit rate that was passed to the Platform. If the user has not specified any, the Platform implementation is free to choose this value and it <em title="must" class="rfc2119">must</em> read zero.</dd>
+    <dd>The value of the Video encoding target bit rate that was passed to the Platform, or the calculated one if the user has specified <code>bitsPerSecond</code>.</dd>
 
     <dt>readonly attribute unsigned long audioBitsPerSecond</dt>
-    <dd>The value of the Audio encoding target bit rate that was passed to the Platform. If the user has not specified any, the Platform implementation is free to choose this value and it <em title="must" class="rfc2119">must</em> read zero.</dd>
+    <dd>The value of the Audio encoding target bit rate that was passed to the Platform, or the calculated one if the user has specified <code>bitsPerSecond</code>.</dd>
 
     <dt>void start()</dt>
     <dd>When a <code>MediaRecorder</code> object’s <code>start()</code> method is invoked, the UA <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
