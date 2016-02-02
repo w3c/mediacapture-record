@@ -59,7 +59,7 @@
     <dd>The MediaStream to be recorded.  </dd>
 
     <dt>readonly attribute DOMString mimeType</dt>
-    <dd>The MIME type that has been selected as the container for recording. This entry includes all the parameters to the base MimeType. The UA should be able to play back any of the MIME types it supports for recording. For example, it should be able to display a video recording in the HTML &lt;video&gt; tag. The default value for this property is platform-specific. Note that the mimeType specifies the container format for the recording, and that the codecs that the recording contains will normally be specified as parameters to it. </dd>
+    <dd>The MIME type that has been selected as the container for recording. This entry includes all the parameters to the base <code>mimeType</code>. The UA should be able to play back any of the MIME types it supports for recording. For example, it should be able to display a video recording in the HTML &lt;video&gt; tag. The default value for this property is platform-specific. Note that the <code>mimeType</code> specifies the container format for the recording, and that the codecs that the recording contains will normally be specified as parameters to it. </dd>
 
     <dt>readonly attribute RecordingState state</dt>
     <dd> The current state of the MediaRecorder object.	When the MediaRecorder is created, the UA <em title="must" class="rfc2119">must</em> set this attribute to <code>inactive</code>.</dd>
@@ -84,6 +84,12 @@
 
     <dt>attribute boolean ignoreMutedMedia</dt>
     <dd>If this attribute is set to <code>true</code>, the MediaRecorder will not record anything when the input Media Stream is muted.  If this attribute is <code>false</code>, the MediaRecorder will record silence (for audio) and black frames (for video) when the input MediaStream is muted.  When the MediaRecorder is created, the UA <em title="must" class="rfc2119">must</em> set this attribute to <code>false</code>.</dd>
+
+    <dt>readonly attribute unsigned long videoBitsPerSecond</dt>
+    <dd>The value of the Video encoding target bit rate that was passed to the Platform, or the calculated one if the user has specified <code>bitsPerSecond</code>.</dd>
+
+    <dt>readonly attribute unsigned long audioBitsPerSecond</dt>
+    <dd>The value of the Audio encoding target bit rate that was passed to the Platform, or the calculated one if the user has specified <code>bitsPerSecond</code>.</dd>
 
     <dt>void start()</dt>
     <dd>When a <code>MediaRecorder</code> object’s <code>start()</code> method is invoked, the UA <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
@@ -149,7 +155,7 @@
     </dd>
 
     <dt>static bool isTypeSupported(DOMString type)</dt>
-    <dd> Check to see whether a <code>MediaRecorder</code> can record in the specified Mime type. If true is returned from this method, it only indicates that the <code>MediaRecorder</code> implementation is capable of recording Blob objects for the specified MIME type. Recording may still fail if sufficient resources are not available to support the concrete media encoding. When this method is invoked, the User Agent must run the following steps:
+    <dd> Check to see whether a <code>MediaRecorder</code> can record in the specified MIME type. If true is returned from this method, it only indicates that the <code>MediaRecorder</code> implementation is capable of recording Blob objects for the specified MIME type. Recording may still fail if sufficient resources are not available to support the concrete media encoding. When this method is invoked, the User Agent must run the following steps:
      <ol class="method-algorithm">
       <li>If <code>type</code> is an empty string, then return true (note that this case is essentially equivalent to leaving up to the UA the choice of container and codecs on constructor).</li>
       <li>If <code>type</code> does not contain a valid MIME type string, then return false.</li>
@@ -162,7 +168,7 @@
 
      <dl class="parameters">
       <dt>DOMString type</dt>
-      <dd>A <a href="https://tools.ietf.org/html/rfc2046">Mime Type</a>, including parameters, specifying a container and/or codec formats for recording.</dd>
+      <dd>A <a href="https://tools.ietf.org/html/rfc2046">MIME Type</a>, including parameters, specifying a container and/or codec formats for recording.</dd>
      </dl>
     </dd>
   </dl>
@@ -173,11 +179,11 @@
     <dd>The container and codec(s) format(s) for the recording, which may include any parameters that are defined for the format.  If the UA does not support the format or any of the parameters specified, it <em title="must" class="rfc2119"> must </em> throw an <code>NotSupportedError</code> DOMException. If this paramater is not specified, the UA will use a platform-specific default format.  The container format, whether passed in to the constructor or defaulted, will be used as the value of the <code>mimeType</code> attribute.
     </dd>
     <dt>unsigned long audioBitsPerSecond</dt>
-    <dd>Aggregate target bits per second for encoding of the Audio track(s), if any. This is a hint for the encoder and the value might only be achieved over a long time.</dd>
+    <dd>Aggregate target bits per second for encoding of the Audio track(s), if any. This is a hint for the encoder and the value might be surpassed, not achieved, or only be achieved over a long period of time.</dd>
     <dt>unsigned long videoBitsPerSecond</dt>
-    <dd>Aggregate target bits per second for encoding of the Video track(s), if any. This is a hint for the encoder and the value might be surpassed or not achieved.</dd>
+    <dd>Aggregate target bits per second for encoding of the Video track(s), if any. This is a hint for the encoder and the value might be surpassed, not achieved, or only be achieved over a long period of time.</dd>
     <dt>unsigned long bitsPerSecond</dt>
-    <dd>Aggregate target bits per second for encoding of all Video and Audio Track(s) present. This parameter overrides either <code>audioBitsPerSecond</code> or <code>videoBitsPerSecond</code> if present, and might be distributed among the present track encoders as the UA sees fit. This parameter is a hint for the encoder(s) and the total value might be surpassed or not achieved at all.</dd>
+    <dd>Aggregate target bits per second for encoding of all Video and Audio Track(s) present. This parameter overrides either <code>audioBitsPerSecond</code> or <code>videoBitsPerSecond</code> if present, and might be distributed among the present track encoders as the UA sees fit. This parameter is a hint for the encoder(s) and the total value might be surpassed, not achieved, or only be achieved over a long period of time.</dd>
    </dl>
   </section>
 
@@ -215,52 +221,25 @@
     </dl>
 </section>
 
-<section id="properties">
-        <h3>MediaRecorder  Properties</h3>
-        <p>
-          [TO DO: Provide API surface to set and read these. When that is done,
-          this section will be removed.]
-          </p>
-     <table class="simple">
-        <thead>
-          <tr>
-            <th>Property Name</th>
-            <th>Values</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr id="def-property-MimeType">
-            <td>MimeType</td>
-            <td><code>DOMString</code></td>
-            <td> The MIME type that was be selected as the container for recording. This entry includes all the parameters to the base MimeType.
-                The UA should be able to play back any of the MIME types it supports for recording. For example, it should be able to display a video recording in the HTML &lt;video&gt; tag.
-                The default value for this property is platform-specific.</td>
-          </tr>
-                   <tr id="def-property-BitRate">
-            <td>BitRate</td>
-            <td><code>long</code></td>
-            <td> The bitrate type that was selected as for recording. The default
-                value for this property is platform-specific.</td>
-          </tr>
-            <tr id="def-property-IgnoreMutedMedia">
-            <td>ignoreMutedMedia</td>
-            <td><code>boolean</code></td>
-            <td> If this property is set to 'true', the MediaRecorder should stop
-                recording when the MediaStream is muted.  If it is false, the
-                MediaRecorder should record silence (for audio) or black frames(for video)
-                when the source MediaStream is muted.  The default value for this
-                property is true.</td>
-          </tr>
-
-
-
-
-
-        </tbody>
-      </table>
-        </section>
-
+<section id="properties"> <h3>MediaRecorder  Properties</h3>
+  <p> [TO DO: Provide API surface to set and read these. When that is done, this section will be removed.]</p>
+  <table class="simple">
+  <thead>
+    <tr>
+      <th>Property Name</th>
+      <th>Values</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id="def-property-MimeType">
+      <td>MimeType</td>
+      <td><code>DOMString</code></td>
+      <td> The MIME type that was selected as the container for recording. This entry includes all the parameters to the base MIME type. The UA should be able to play back any of the MIME types it supports for recording. For example, it should be able to display a video recording in the HTML &lt;video&gt; tag. The default value for this property is platform-specific.</td>
+    </tr>
+  </tbody>
+  </table>
+</section>
 
  <section id="error-handling"> <h2>Error Handling</h2>
 
@@ -303,7 +282,7 @@
         </tr>
         <tr>
           <td><code>NotSupportedError</code></td>
-          <td>A <a class="idlType" href="#idl-def-MediaRecorder"><code>MediaRecorder</code></a> could not be created due to unsupported options (e.g. mime type) specification. User agents should provide as much additional information  as possible in the <code>message</code> attribute.</td>
+          <td>A <a class="idlType" href="#idl-def-MediaRecorder"><code>MediaRecorder</code></a> could not be created due to unsupported options (e.g. MIME type) specification. User agents should provide as much additional information  as possible in the <code>message</code> attribute.</td>
         </tr>
         <tr>
           <td><code>SecurityError</code></td>
@@ -370,7 +349,10 @@
           <li>Removed unused RecordingExceptionEnum.</li>
           <li>Removed suffix Enum of RecordingStateEnum and RecordingErrorNameEnum.</li>
           <li>Corrected references to DOMExceptions where it used to say (MediaRecorderError)Events.</li>
-          <li>Substituted MediaRecorderErrorEvent with a simple ErrorEvent, no error enum</li>
+          <li>Substituted MediaRecorderErrorEvent with a simple ErrorEvent, no error enum.</li>
+          <li>mimeType does not need a default value; isTypeSupported() should be true.</li>
+          <li>Removed UnknownError Exception; added ErrorEvent description.</li>
+          <li>Added read-only attributes videoBitsPerSecond and audioBitsPerSecond.</li>
       </ol>
     </section>
   </body></html>
