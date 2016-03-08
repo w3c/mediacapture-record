@@ -9,7 +9,7 @@ env:
     - URL="https://w3c.github.io/mediacapture-record/W3CTRMANIFEST"
     - DECISION="https://lists.w3.org/Archives/Public/public-media-capture/2015Dec/0031.html"
     - secure: "W735tVaiK8I/zcfuD/QwdfqbIdgu0upt5V9YX/SDOpjuTMFUNtKE40qjtViclV6Vyh+oVR5JoWTenlTOrWkImfNudFfJYx3AvzmwYKlC+DOjHFDbEDVo3v0uiQEdPVqgTVs9JHHY/CsLE6YBgATib4NIopMXYJ+UzrSzCPM8twk="
- 
+
 script:
   - echo "ok"
 
