@@ -4,7 +4,7 @@ var respecConfig = {
         name: "Miguel Casas-Sanchez",
         company: "Google, Inc.",
         companyURL: "http://www.google.com",
-        url: "mailto:mcasas@chromium.org?subject=MediaStream%20Recording%W3C%Spec",
+        url: "mailto:mcasas@chromium.org?subject=MediaStream%20Recording%20W3C%20Spec",
         w3cid: 82825
     }, {
         name: "Jim Barnett",
@@ -20,16 +20,16 @@ var respecConfig = {
         note: "Former editor"
     }],
     // publishDate:  "2013-11-08",
-    edDraftURI:   "http://w3c.github.io/mediacapture-record/MediaRecorder.html",
+    edDraftURI:   "https://w3c.github.io/mediacapture-record/MediaRecorder.html",
     previousPublishDate: null,
-    prevED: "http://w3c.github.io/mediacapture-record/archives/20151210/MediaRecorder.html",
+    prevED: "https://w3c.github.io/mediacapture-record/archives/20151210/MediaRecorder.html",
     noIDLIn:  true,
     inlineCSS:  true,
     noRecTrack:  false,
     copyrightStart: 2012,
     shortName:  "mediastream-recording",
     wg:         ["Device APIs Working Group", "Web Real-Time Communications Working Group"],
-    wgURI:    ["http://www.w3.org/2009/dap/", "http://www.w3.org/2011/04/webrtc/"],
+    wgURI:    ["https://www.w3.org/2009/dap/", "https://www.w3.org/2011/04/webrtc/"],
     wgPublicList: "public-media-capture",
-    wgPatentURI:  ["http://www.w3.org/2004/01/pp-impl/43696/status", "http://www.w3.org/2004/01/pp-impl/47318/status"]
+    wgPatentURI:  ["https://www.w3.org/2004/01/pp-impl/43696/status", "https://www.w3.org/2004/01/pp-impl/47318/status"]
 };
