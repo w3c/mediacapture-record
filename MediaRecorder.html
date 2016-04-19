@@ -176,7 +176,7 @@
   <section id="MediaRecorderOptions"><h3>MediaRecorderOptions</h3>
    <dl class="idl" title="dictionary MediaRecorderOptions">
     <dt>DOMString mimeType</dt>
-    <dd>The container and codec(s) format(s) for the recording, which may include any parameters that are defined for the format.  If the UA does not support the format or any of the parameters specified, it <em title="must" class="rfc2119"> must </em> throw an <code>NotSupportedError</code> DOMException. If this paramater is not specified, the UA will use a platform-specific default format.  The container format, whether passed in to the constructor or defaulted, will be used as the value of the <code>mimeType</code> attribute.
+    <dd>The container and codec format(s) for the recording, which may include any parameters that are defined for the format.  If the UA does not support the format or any of the parameters specified, it <em title="must" class="rfc2119"> must </em> throw a <code>NotSupportedError</code> DOMException. If this paramater is not specified, the UA will use a platform-specific default format.  The container format, whether passed in to the constructor or defaulted, will be used as the value of the <code>mimeType</code> attribute.
     </dd>
     <dt>unsigned long audioBitsPerSecond</dt>
     <dd>Aggregate target bits per second for encoding of the Audio track(s), if any. This is a hint for the encoder and the value might be surpassed, not achieved, or only be achieved over a long period of time.</dd>
