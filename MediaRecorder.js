@@ -4,7 +4,7 @@ var respecConfig = {
         name: "Miguel Casas-Sanchez",
         company: "Google, Inc.",
         companyURL: "http://www.google.com",
-        url: "mailto:mcasas@chromium.org?subject=MediaStream%20Recording%W3C%Spec",
+        url: "mailto:mcasas@chromium.org?subject=MediaStream%20Recording%20W3C%20Spec",
         w3cid: 82825
     }, {
         name: "Jim Barnett",
