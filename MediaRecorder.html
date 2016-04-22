@@ -154,7 +154,7 @@
      </ol>
     </dd>
 
-    <dt>static bool isTypeSupported(DOMString type)</dt>
+    <dt>static boolean isTypeSupported(DOMString type)</dt>
     <dd> Check to see whether a <code>MediaRecorder</code> can record in the specified MIME type. If true is returned from this method, it only indicates that the <code>MediaRecorder</code> implementation is capable of recording Blob objects for the specified MIME type. Recording may still fail if sufficient resources are not available to support the concrete media encoding. When this method is invoked, the User Agent must run the following steps:
      <ol class="method-algorithm">
       <li>If <code>type</code> is an empty string, then return true (note that this case is essentially equivalent to leaving up to the UA the choice of container and codecs on constructor).</li>
