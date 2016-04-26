@@ -92,22 +92,30 @@
     <dd>The value of the Audio encoding target bit rate that was passed to the Platform (potentially truncated, rounded, etc), or the calculated one if the user has specified <code>bitsPerSecond</code>.</dd>
 
     <dt>void start()</dt>
-    <dd>When a <code>MediaRecorder</code> object’s <code>start()</code> method is invoked, the UA <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
-     <ol>
-      <li>If the <code>state</code> is not "inactive", throw a <code>InvalidStateError</code> DOMException and terminate these steps. Otherwise:</li>
-      <li>Set <code>state</code> to 'recording' and wait until media becomes available from <code>stream</code>.</li>
-      <li>Once data becomes available fire a <code>start</code> event and start gathering the data into a Blob (see [[!FILE-API]]). </li>
-      <li>If the <code>timeSlice</code> argument has been provided, then once <code>timeSlice</code> milliseconds of data have been colleced, or some minimum time slice imposed by the UA, whichever is greater, fire a <code>dataavailable</code> event containing the Blob of collected data, and start gathering a new Blob of data.  Otherwise (if <code>timeSlice</code> has not been provided), continue gathering data into the original Blob.</li>
-      <li>When the <code>stream</code> is ended set <code>recording</code> to 'inactive' and stop gathering data. Callers <em title="should" class="rfc2119">should</em> not rely on exactness of the timeSlice value, especially if the timeSlice value is small. Callers <em title="should" class="rfc2119">should</em> consider timeSlice as a minimum value</li>
-      <li>Then fire a <code>dataavailable</code> event containing the Blob of data.</li>
-      <li>Finally, fire a <code>stop</code> event.</li>
-     </ol>
+    <dd>When a <code>MediaRecorder</code> object’s <code>start()</code> method is invoked, the UA <em title="must" class="rfc2119">must</em> run the following steps:
+      <ol>
+        <li>Let <var>timeslice</var> be the method's first argument, if provided, or <code>undefined</code>.</li>
+        <li>If <code>state</code> is not "inactive", throw an <code>InvalidStateError</code> DOMException and abort these steps.</li>
+        <li>If the stream's isolation properties disallow access from this MediaRecorder, throw a <code>SecurityError</code> DOMException and abort these steps.</li>
+        <li>Set <code>state</code> to "recording", and run the following steps in parallel:</li>
+        <ol>
+           <li>Once media becomes available from one or more of the stream's tracks, start gathering the data into a Blob (see [[!FILE-API]]), and queue a task, using the DOM manipulation task source, to fire a <code>start</code> event. </li>
+           <li>If at any point the stream's isolation properties change so that MediaRecorder is no longer allowed access to it, the UA <em title="must" class="rfc2119">must</em> immediately stop gathering data, discard any data that it has gathered, and queue a task, using the DOM manipulation task source, that <a href="#track-ended">fires an error event</a> with the name <code>SecurityError</code>, immediately followed by a <code>stop</code> event.
+           <li>If the UA at any point is unable to continue gathering data for reasons other than isolation properties, it <em title="must" class="rfc2119">must</em> stop gathering data, let <var>blob</var> be the Blob of collected data, and queue a task, using the DOM manipulation task source, that <a href="#track-ended">fires an error event</a> with the name <code>UnknownError</code>, followed by a <code>dataavailable</code> event containing <var>blob</var>, followed by a <code>stop</code> event.</li>
+           <li>If <var>timeslice</var> is not <code>undefined</code>, then once a minimum of <var>timeslice</var> milliseconds of data have been collected, or some minimum time slice imposed by the UA, whichever is greater, let <var>blob</var> be the Blob of collected data, start gathering a new Blob of data, and queue a task, using the DOM manipulation task source, that fires a <code>dataavailable</code> event containing <var>blob</var>.</li>
+           <li>If all recorded tracks become <a href="/mediacapture-main/getusermedia.html#track-ended">ended</a>, then stop gathering data, let <var>blob</var> be the Blob of collected data, and queue a task, using the DOM manipulation task source, that runs the following steps:</li>
+           <ol>
+             <li>set <code>recording</code> to "inactive".</li>
+             <li>Fire a <code>dataavailable</code> event containing <var>blob</var>.</li>
+             <li>Fire a <code>stop</code> event.</li>
+           </ol>
+         </ol>
+         <li>return <code>undefined</code>.</li>
+       </ol>
 
      <p>Note that <code>stop()</code>, <code>requestData()</code>, and <code>pause()</code> also affect the recording behavior.</p>
 
-     <p>The UA <em title="must" class="rfc2119">must</em> record the MediaStream in such a way that the original Tracks can be retrieved at playback time. When multiple Blobs are returned (because of <code>timeSlice</code> or <code>requestData</code>), the individual Blobs need not be playable, but the combination of all the Blobs from a completed recording <em title="must" class="rfc2119">must</em> be playable.  If any Track within the MediaStream is muted at any time (i.e., if its <code>readyState</code> is set to <code>muted</code>), the UA <em title="must" class="rfc2119">must</em> insert black frames or silence until the Track is unmuted. </p>
-
-     <p> If at any point the <code>stream's</code> isolation properties change so that MediaRecorder is no longer allowed access to it, the UA <em title="must" class="rfc2119">must</em> stop recording, discard any data that it has gathered and throw a <code>SecurityError</code> DOMException followed by the <code>stop</code> event. If the UA is unable to start recording or at any point is unable to continue recording (i.e., for reasons other than a security violation), it <em title="must" class="rfc2119">must</em> throw an <code>UnknownError</code> DOMException, followed by a <code>dataavailable</code> event containing the Blob it has gathered, follwed by the <code>stop</code> event.</p>
+     <p>The UA <em title="must" class="rfc2119">must</em> record the MediaStream in such a way that the original Tracks can be retrieved at playback time. When multiple Blobs are returned (because of <code>timeslice</code> or <code>requestData</code>), the individual Blobs need not be playable, but the combination of all the Blobs from a completed recording <em title="must" class="rfc2119">must</em> be playable.  If any Track within the MediaStream is muted at any time (i.e., if its <code>readyState</code> is set to <code>muted</code>), the UA <em title="must" class="rfc2119">must</em> insert black frames or silence until the Track is unmuted. </p>
 
      <dl class='parameters'>
       <dt>optional  long timeslice</dt>
@@ -231,7 +239,7 @@
   <section> <h3>ErrorEvent</h3>
    <p>The following interface is defined for cases when an event is raised that could have been caused by an error:</p>
 
-   <p><dfn data-lt="Fire an error event">Firing an error event named <var>e</var></dfn> with an <code>Error</code> <var>error</var> means that an event with the name <var>e</var>, which does not bubble (except where otherwise stated) and is not cancelable (except where otherwise stated), and which uses the <code><a>ErrorEvent</a></code> interface with the <code><a href="#widl-ErrorEvent-error">error</a></code> attribute set to <var>error</var>, MUST be created and dispatched at the given target. If no <code>Error</code> object is specified, the <code><a href="#widl-ErrorEvent-error">error</a></code> attribute defaults to null.</p>
+   <p><dfn data-dfn-type="dfn" id="fire-error-event">Firing an error event named <var>e</var></dfn> with an <code>Error</code> <var>error</var> means that an event with the name <var>e</var>, which does not bubble (except where otherwise stated) and is not cancelable (except where otherwise stated), and which uses the <code><a>ErrorEvent</a></code> interface with the <code><a href="#widl-ErrorEvent-error">error</a></code> attribute set to <var>error</var>, must be created and dispatched at the given target. If no <code>Error</code> object is specified, the <code><a href="#widl-ErrorEvent-error">error</a></code> attribute defaults to null.</p>
 
    <dl class="idl" data-merge="ErrorEventInit" title="[Exposed=Window] interface ErrorEvent : Event">
     <dt>Constructor(DOMString type, ErrorEventInit eventInitDict)</dt>
