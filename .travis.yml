@@ -14,5 +14,4 @@ script:
   - echo "ok"
 
 after_success:
-  - test $TRAVIS_BRANCH = "gh-pages" -a $TRAVIS_PULL_REQUEST = false \
-    && curl "https://labs.w3.org/echidna/api/request" --data "url=$URL" --data "decision=$DECISION" --data "token=$TOKEN"
+  - test $TRAVIS_BRANCH = "gh-pages" -a $TRAVIS_PULL_REQUEST = false && curl "https://labs.w3.org/echidna/api/request" --data "url=$URL" --data "decision=$DECISION" --data "token=$TOKEN"
