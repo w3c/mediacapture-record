@@ -69,19 +69,19 @@ interface MediaRecorder : EventTarget {
         <li>Let <var>timeslice</var> be the method's first argument, if provided, or <code>undefined</code>.</li>
         <li>If <code>state</code> is not "inactive", throw an <code>InvalidStateError</code> DOMException and abort these steps.</li>
         <li>If the stream's isolation properties disallow access from this MediaRecorder, throw a <code>SecurityError</code> DOMException and abort these steps.</li>
-        <li>Set <code>state</code> to "recording", and run the following steps in parallel:</li>
+        <li>Set <code>state</code> to "recording", and run the following steps in parallel:
         <ol>
            <li>Once media becomes available from one or more of the stream's tracks, start gathering the data into a Blob (see [[!FILE-API]]), and queue a task, using the DOM manipulation task source, to fire a <code>start</code> event. </li>
            <li>If at any point the stream's isolation properties change so that MediaRecorder is no longer allowed access to it, the UA <em title="must" class="rfc2119">must</em> immediately stop gathering data, discard any data that it has gathered, and queue a task, using the DOM manipulation task source, that <a>fires an error event</a> with the name <code>SecurityError</code>, immediately followed by a <code>stop</code> event.
            </li><li>If the UA at any point is unable to continue gathering data for reasons other than isolation properties, it <em title="must" class="rfc2119">must</em> stop gathering data, let <var>blob</var> be the Blob of collected data, and queue a task, using the DOM manipulation task source, that <a>fires an error event</a> with the name <code>UnknownError</code>, followed by a <code>dataavailable</code> event containing <var>blob</var>, followed by a <code>stop</code> event.</li>
            <li>If <var>timeslice</var> is not <code>undefined</code>, then once a minimum of <var>timeslice</var> milliseconds of data have been collected, or some minimum time slice imposed by the UA, whichever is greater, let <var>blob</var> be the Blob of collected data, start gathering a new Blob of data, and queue a task, using the DOM manipulation task source, that fires a <code>dataavailable</code> event containing <var>blob</var>.</li>
-           <li>If all recorded tracks become <a href="http://www.w3.org/TR/mediacapture-streams/#track-ended">ended</a> [[!GETUSERMEDIA]], then stop gathering data, let <var>blob</var> be the Blob of collected data, and queue a task, using the DOM manipulation task source, that runs the following steps:</li>
+           <li>If all recorded tracks become <a href="http://www.w3.org/TR/mediacapture-streams/#track-ended">ended</a> [[!GETUSERMEDIA]], then stop gathering data, let <var>blob</var> be the Blob of collected data, and queue a task, using the DOM manipulation task source, that runs the following steps:
            <ol>
              <li>set <code>recording</code> to "inactive".</li>
              <li>Fire a <code>dataavailable</code> event containing <var>blob</var>.</li>
              <li>Fire a <code>stop</code> event.</li>
-           </ol>
-         </ol>
+           </ol></li>
+         </ol></li>
          <li>return <code>undefined</code>.</li>
        </ol>
 
