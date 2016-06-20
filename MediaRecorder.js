@@ -28,7 +28,7 @@ var respecConfig = {
     noRecTrack:  false,
     copyrightStart: 2012,
     shortName:  "mediastream-recording",
-    wg:         ["Device APIs Working Group", "Web Real-Time Communications Working Group"],
+    wg:         ["Device and Sensors Working Group", "Web Real-Time Communications Working Group"],
     wgURI:    ["https://www.w3.org/2009/dap/", "https://www.w3.org/2011/04/webrtc/"],
     wgPublicList: "public-media-capture",
     wgPatentURI:  ["https://www.w3.org/2004/01/pp-impl/43696/status", "https://www.w3.org/2004/01/pp-impl/47318/status"]
