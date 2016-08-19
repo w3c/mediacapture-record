@@ -454,21 +454,23 @@ interface MediaRecorder : EventTarget {
             <li>Run the following steps in parallel:
              <ol>
              <li>Let <var>resultList</var> be an empty list.
-             <li>For each <a href="https://tools.ietf.org/html/rfc2046">MIME
-             type</a> <var>type</var> that is supported for encoding and/or
+             <li>For each <dfn>minimal</dfn> <a href="https://tools.ietf.org/html/rfc2046">
+             MIME type</a> <var>type</var> that is supported for encoding and/or
              multiplexing (i.e. <code>isSuportedType(<var>mimeType</var>)</code>
              is true), add <var>type</var> to <var>resultList</var>.
+             A <dfn>minimal</dfn> <a href="https://tools.ietf.org/html/rfc2046">
+             MIME type</a> is composed, for the scope of this method, following
+             the rules of <a href="https://tools.ietf.org/html/rfc6381">rfc6381
+             </a>.
+             <var>resultList</var> MAY be ordered by the UA so that MIME types
+             closer to the beginning are preferred, for example due to larger
+             probability of being supported by encode accelerators.
              </li>
              <li>Resolve <var>p</var> with <var>resultList</var>.</li>
              </ol>
              </li>
-            <li> Return <var>p</var></li>
+            <li>Return <var>p</var>.</li>
             </ol>
-            <div>
-              <p class="note"> <var>resultList</var> MAY be ordered by the UA so
-              that MIME types closer to the beginning have a larger probability
-              of being supported by encode accelerators.</p>
-            </div>
             <div>
               <em>Return type:</em>
               <code>Promise&lt;sequence&lt;DOMString&gt;&gt;</code>
