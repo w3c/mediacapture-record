@@ -446,8 +446,7 @@ interface MediaRecorder : EventTarget {
 
           <dt><dfn><code>getSupportedTypes</code></dfn>, static</dt>
           <dd>
-            When <code>getSupportedTypes()</code> method is invoked, the UA MUST
-            queue a task, using the DOM manipulation task source, that runs the
+            When <code>getSupportedTypes()</code> method is invoked, run the
             following steps:
             <ol>
             <li>Let <var>p</var> be a promise.</li>
