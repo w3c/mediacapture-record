@@ -458,12 +458,12 @@ interface MediaRecorder : EventTarget {
              multiplexing (i.e. <code>isSuportedType(<var>type</var>)</code>
              is true), add <var>type</var> to <var>resultList</var>.
 
-             <var>type</var> must be a <a def-id="mime-types">valid MIME type
+             <var>type</var> MUST be a <a def-id="mime-types">valid MIME type
              </a> [[!HTML5]]. The codecs parameter [[!RFC6381]], if necessary to
-             specify exactly how the resource is encoded, should be added
+             specify exactly how the resource is encoded, SHOULD be added
              to <code>type</code>. If <var>type</var> can be expressed in several
              equivalent ways (e.g. with or without quotes), the shortest form
-             and lowercase letters should be preferred.
+             and lowercase letters SHOULD be preferred.
 
              </a>.
              <var>resultList</var> MAY be ordered by the UA so that MIME types
