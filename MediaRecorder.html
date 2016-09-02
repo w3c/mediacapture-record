@@ -446,20 +446,23 @@ interface MediaRecorder : EventTarget {
 
           <dt><dfn><code>getSupportedTypes</code></dfn>, static</dt>
           <dd>
-            When <code>getSupportedTypes()</code> method is invoked, run the
-            following steps:
+            When this method is invoked, the User Agent must run the following
+            steps:
             <ol>
             <li>Let <var>p</var> be a promise.</li>
             <li>Run the following steps in parallel:
              <ol>
              <li>Let <var>resultList</var> be an empty list.
-             <li>For each <dfn>minimal</dfn> <a href="https://tools.ietf.org/html/rfc2046">
-             MIME type</a> <var>type</var> that is supported for encoding and/or
-             multiplexing (i.e. <code>isSuportedType(<var>mimeType</var>)</code>
+             <li>For each <a href="https://tools.ietf.org/html/rfc2046">MIME
+             type</a> <var>type</var> that is supported for encoding and/or
+             multiplexing (i.e. <code>isSuportedType(<var>type</var>)</code>
              is true), add <var>type</var> to <var>resultList</var>.
-             A <dfn>minimal</dfn> <a href="https://tools.ietf.org/html/rfc2046">
-             MIME type</a> is composed, for the scope of this method, following
-             the rules of <a href="https://tools.ietf.org/html/rfc6381">rfc6381
+
+             <var>type</var> must be a <a def-id="mime-types">valid MIME type
+             </a> [[!HTML5]]. The codecs parameter [[!RFC6381]], if necessary to
+             specify exactly how the resource is encoded, should be added
+             to <code>type</code>.
+
              </a>.
              <var>resultList</var> MAY be ordered by the UA so that MIME types
              closer to the beginning are preferred, for example due to larger
