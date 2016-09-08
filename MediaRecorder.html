@@ -462,8 +462,9 @@ interface MediaRecorder : EventTarget {
              </a> [[!HTML5]]. The codecs parameter [[!RFC6381]], if necessary to
              specify exactly how the resource is encoded, SHOULD be added
              to <code>type</code>. If <var>type</var> can be expressed in several
-             equivalent ways (e.g. with or without quotes), the shortest form
-             and lowercase letters SHOULD be preferred.
+             equivalent ways (e.g. with or without quotes or whitespaces), the
+             one using the smallest amount of lowercase characters MUST be
+             preferred.
 
              </a>.
              <var>resultList</var> MAY be ordered by the UA so that MIME types
