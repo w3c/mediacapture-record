@@ -461,11 +461,11 @@ interface MediaRecorder : EventTarget {
              <var>type</var> MUST be a <a def-id="mime-types">valid MIME type
              </a> [[!HTML5]]. The codecs parameter [[!RFC6381]], if necessary to
              specify exactly how the resource is encoded, SHOULD be added
-             to <code>type</code>. If <var>type</var> can be expressed in several
-             equivalent ways (e.g. with or without quotes or whitespaces), the
-             shortest one, employing the least amount of whitespaces, and
-             with the largest amount of lowercase characters MUST be
-             preferred.
+             to <code>type</code>.
+             If <var>type</var> can be expressed in several equivalent ways
+             (e.g. with or without quotes and whitespace, or different
+             capitalization), the shortest form with the largest number of
+             lowercase characters MUST be used.
 
              </a>.
              <var>resultList</var> MAY be ordered by the UA so that MIME types
