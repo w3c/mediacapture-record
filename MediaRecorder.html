@@ -80,6 +80,7 @@ interface MediaRecorder : EventTarget {
     void           resume ();
     void           requestData ();
     static boolean isTypeSupported (DOMString type);
+    static Promise&lt;sequence&lt;DOMString&gt;&gt; getSupportedTypes ();
 };</pre>
       <section>
         <h2>Constructors</h2>
@@ -442,6 +443,46 @@ interface MediaRecorder : EventTarget {
               <em>Return type:</em> <code>boolean</code>
             </div>
           </dd>
+
+          <dt><dfn><code>getSupportedTypes</code></dfn>, static</dt>
+          <dd>
+            When this method is invoked, the User Agent must run the following
+            steps:
+            <ol>
+            <li>Let <var>p</var> be a promise.</li>
+            <li>Run the following steps in parallel:
+             <ol>
+             <li>Let <var>resultList</var> be an empty list.
+             <li>For each <a href="https://tools.ietf.org/html/rfc2046">MIME
+             type</a> <var>type</var> that is supported for encoding and/or
+             multiplexing (i.e. <code>isSuportedType(<var>type</var>)</code>
+             is true), add <var>type</var> to <var>resultList</var>.
+
+             <var>type</var> MUST be a <a def-id="mime-types">valid MIME type
+             </a> [[!HTML5]]. The codecs parameter [[!RFC6381]], if necessary to
+             specify exactly how the resource is encoded, SHOULD be added
+             to <code>type</code>.
+             If <var>type</var> can be expressed in several equivalent ways
+             (e.g. with or without quotes and whitespace, or different
+             capitalization), the shortest form with the largest number of
+             lowercase characters MUST be used.
+
+             </a>.
+             <var>resultList</var> MAY be ordered by the UA so that MIME types
+             closer to the beginning are preferred, for example due to larger
+             probability of being supported by encode accelerators.
+             </li>
+             <li>Resolve <var>p</var> with <var>resultList</var>.</li>
+             </ol>
+             </li>
+            <li>Return <var>p</var>.</li>
+            </ol>
+            <div>
+              <em>Return type:</em>
+              <code>Promise&lt;sequence&lt;DOMString&gt;&gt;</code>
+            </div>
+          </dd>
+
         </dl>
       </section>
     </div>
@@ -832,6 +873,7 @@ interface ErrorEvent : Event {
       <li>Added read-only attributes videoBitsPerSecond and
       audioBitsPerSecond.</li>
       <li>Removed MediaRecorder Properties Section, which was a TODO.</li>
+      <li>Added method <code>getSupportedTypes()<code></li>
     </ol>
   </section>
 </body>
