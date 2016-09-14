@@ -11,7 +11,7 @@ var respecConfig = {
         company: "Genesys",
         w3cid: 34604,
         note: "Former editor"
-    }, { 
+    }, {
         name: "Travis Leithead",
         company: "Microsoft Corp.",
         url: "mailto:travis.leithead@microsoft.com?subject=MediaStream%20Capture%20Scenarios%20Feedback",
@@ -31,5 +31,25 @@ var respecConfig = {
     wg:         ["Device and Sensors Working Group", "Web Real-Time Communications Working Group"],
     wgURI:    ["https://www.w3.org/2009/dap/", "https://www.w3.org/2011/04/webrtc/"],
     wgPublicList: "public-media-capture",
-    wgPatentURI:  ["https://www.w3.org/2004/01/pp-impl/43696/status", "https://www.w3.org/2004/01/pp-impl/47318/status"]
+    wgPatentURI:  ["https://www.w3.org/2004/01/pp-impl/43696/status", "https://www.w3.org/2004/01/pp-impl/47318/status"],
+
+    otherLinks: [
+    {
+      key: "Participate",
+      data: [
+        {
+          value: "Mailing list",
+          href: "https://lists.w3.org/Archives/Public/public-media-capture/"
+        },
+        {
+          value: "Browse open issues",
+          href: "https://github.com/w3c/mediacapture-record/issues"
+        },
+        {
+          value: "File a bug",
+          href: "https://github.com/w3c/mediacapture-record/issues/new"
+        }
+      ]
+    }
+  ]
 };
