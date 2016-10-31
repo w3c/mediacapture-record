@@ -30,17 +30,23 @@
   </section>
   <section id="overview" class="informative">
     <h2>Overview</h2>
+
     <p>This API attempts to make basic recording very simple, while still
     allowing for more complex use cases. In the simplest case, the application
-    instatiates the MediaRecorder object, calls record() and then calls stop()
-    or waits for the MediaStream to be ended. The contents of the recording
-    will be made available in the platform's default encoding via the
-    dataavailable event. Functions are available to query the platform's
+    instatiates a <code><a>MediaRecorder</a></code> object, calls <a href="#dom-
+    mediarecorder-start">start()</a> and then calls <a href="#dom-mediarecorder-
+    start">stop()</a> or waits for the MediaStreamTrack(s) to be ended. The
+    contents of the recording will be made available in the platform's default
+    encoding via the <a href="#dom-mediarecorder-ondataavailable">
+    ondataavailable</a> event. Functions are available to query the platform's
     available set of encodings, and to select the desired ones if the author
-    wishes. The application can also choose how much data it wants to receive
-    at one time. By default a Blob containing the entire recording is returned
-    when the recording finishes. However the application can choose to receive
-    smaller buffers of data at regular intervals.</p>
+    wishes. The application can also choose how much data it wants to receive at
+    one time. By default a <a
+    href="https://www.w3.org/TR/FileAPI/#blob"><code>Blob</code></a> containing
+    the entire recording is returned when the recording finishes. However the
+    application can choose to receive smaller buffers of data at regular
+    intervals.</p>
+
   </section>
   <section id="not-conformance" class="informative">
     <h2>Conformance</h2>
@@ -109,7 +115,7 @@ interface MediaRecorder : EventTarget {
                 </tr>
                 <tr>
                   <td class="prmName">options</td>
-                  <td class="prmType"><code>MediaRecorderOptions</code></td>
+                  <td class="prmType"><code><a>MediaRecorderOptions</a></code></td>
                   <td class="prmNullFalse"><span role="img" aria-label=
                   "False">&#10008;</span></td>
                   <td class="prmOptTrue"><span role="img" aria-label=
@@ -131,44 +137,55 @@ interface MediaRecorder : EventTarget {
           <dt><dfn><code>stream</code></dfn> of type <span class=
           "idlAttrType"><a>MediaStream</a></span>, readonly</dt>
           <dd>The MediaStream to be recorded.</dd>
+
           <dt><dfn><code>mimeType</code></dfn> of type <span class=
           "idlAttrType"><a>DOMString</a></span>, readonly</dt>
-          <dd>The MIME type that has been selected as the container for
-          recording. This entry includes all the parameters to the base
+
+          <dd>The MIME type [[!RFC2046]] that has been selected as the container
+          for recording. This entry includes all the parameters to the base
           <code>mimeType</code>. The UA should be able to play back any of the
           MIME types it supports for recording. For example, it should be able
           to display a video recording in the HTML &lt;video&gt; tag. The
-          default value for this property is platform-specific. Note that the
-          <code>mimeType</code> specifies the container format for the
-          recording, and that the codecs that the recording contains will
-          normally be specified as parameters to it.</dd>
+          default value for this property is platform-specific.
+
+          <div class="note"> <code><a>mimeType</a></code> specifies the media
+          type and container format for the recording via a type/subtype
+          combination, with the codecs and/or profiles parameters [[RFC6381]]
+          specified where ambiguity might arise. Individual codecs might have
+          further optional specific parameters. </div></dd>
+
           <dt><dfn><code>state</code></dfn> of type <span class=
-          "idlAttrType"><a>RecordingState</a></span>, readonly</dt>
-          <dd>The current state of the MediaRecorder object. When the
-          MediaRecorder is created, the UA <em title="must" class=
-          "rfc2119">must</em> set this attribute to <code>inactive</code>.</dd>
+          "idlAttrType"><a>RecordingState</a></span>, readonly</dt> <dd>The
+          current state of the MediaRecorder object. When the MediaRecorder is
+          created, the UA MUST set this attribute to <code>inactive</code>.</dd>
+
           <dt><dfn><code>onstart</code></dfn> of type <span class=
           "idlAttrType"><a>EventHandler</a></span></dt>
           <dd>Called to handle the start event.</dd>
+
           <dt><dfn><code>onstop</code></dfn> of type <span class=
           "idlAttrType"><a>EventHandler</a></span></dt>
           <dd>Called to handle the stop event.</dd>
+
           <dt><dfn><code>ondataavailable</code></dfn> of type <span class=
           "idlAttrType"><a>EventHandler</a></span></dt>
-          <dd>Called to handle the dataavailable event. Note that the Blob (see
-          [[!FILE-API]]) of recorded data is contained in this event and can be
+          <dd>Called to handle the dataavailable event. The <a
+          href="https://www.w3.org/TR/FileAPI/#blob"><code>Blob</code></a>
+          [[!FILE-API]] of recorded data is contained in this event and can be
           accessed via the 'data' attribute.</dd>
+
           <dt><dfn><code>onpause</code></dfn> of type <span class=
           "idlAttrType"><a>EventHandler</a></span></dt>
           <dd>Called to handle the pause event.</dd>
+
           <dt><dfn><code>onresume</code></dfn> of type <span class=
           "idlAttrType"><a>EventHandler</a></span></dt>
           <dd>Called to handle the resume event.</dd>
+
           <dt><dfn><code>onerror</code></dfn> of type <span class=
           "idlAttrType"><a>EventHandler</a></span></dt>
-          <dd>
-            Called to handle an <a>ErrorEvent</a>.
-          </dd>
+          <dd>Called to handle an <a>ErrorEvent</a>.</dd>
+
           <dt><dfn><code>ignoreMutedMedia</code></dfn> of type <span class=
           "idlAttrType"><a>boolean</a></span></dt>
           <dd>If this attribute is set to <code>true</code>, MediaRecorder will
@@ -182,16 +199,15 @@ interface MediaRecorder : EventTarget {
 
           <dt><dfn><code>videoBitsPerSecond</code></dfn> of type <span class=
           "idlAttrType"><a>unsigned long</a></span>, readonly</dt>
-          <dd>The value of the Video encoding target bit rate that was passed
-          to the Platform (potentially truncated, rounded, etc), or the
-          calculated one if the user has specified
-          <code>bitsPerSecond</code>.</dd>
+          <dd>The value of the Video encoding target bit rate that was passed to
+          the Platform (potentially truncated, rounded, etc), or the calculated
+          one if the user has specified <code>bitsPerSecond</code>.</dd>
+
           <dt><dfn><code>audioBitsPerSecond</code></dfn> of type <span class=
           "idlAttrType"><a>unsigned long</a></span>, readonly</dt>
-          <dd>The value of the Audio encoding target bit rate that was passed
-          to the Platform (potentially truncated, rounded, etc), or the
-          calculated one if the user has specified
-          <code>bitsPerSecond</code>.</dd>
+          <dd>The value of the Audio encoding target bit rate that was passed to
+          the Platform (potentially truncated, rounded, etc), or the calculated
+          one if the user has specified <code>bitsPerSecond</code>.</dd>
         </dl>
       </section>
       <section>
@@ -201,12 +217,12 @@ interface MediaRecorder : EventTarget {
           <dt><dfn><code>start</code></dfn></dt>
           <dd>
             When a <code>MediaRecorder</code> object&#8217;s
-            <code>start()</code> method is invoked, the UA <em title="must"
-            class="rfc2119">must</em> run the following steps:
+            <code>start()</code> method is invoked, the UA MUST run the
+            following steps:
             <ol>
               <li>Let <var>timeslice</var> be the method's first argument, if
               provided, or <code>undefined</code>.</li>
-              <li>If <code>state</code> is not "inactive", throw an
+              <li>If <code>state</code> is not <code>inactive</code>, throw an
               <code>InvalidStateError</code> DOMException and abort these
               steps.</li>
               <li>If the stream's isolation properties disallow access from
@@ -215,37 +231,40 @@ interface MediaRecorder : EventTarget {
               <li>Set <code>state</code> to "recording", and run the following
               steps in parallel:
                 <ol>
+
                   <li>Once media becomes available from one or more of the
                   stream's tracks, start gathering the data into a Blob (see
                   [[!FILE-API]]), and queue a task, using the DOM manipulation
-                  task source, to fire a <code>start</code> event.</li>
+                  task source, to fire an event named <code>start</code>.</li>
+
                   <li>If at any point the stream's isolation properties change
                   so that MediaRecorder is no longer allowed access to it, the
-                  UA <em title="must" class="rfc2119">must</em> immediately
-                  stop gathering data, discard any data that it has gathered,
-                  and queue a task, using the DOM manipulation task source,
-                  that <a>fires an error event</a> with the name
+                  UA MUST immediately stop gathering data, discard any data that
+                  it has gathered, and queue a task, using the DOM manipulation
+                  task source, that <a>fires an error event</a> with the name
                   <code>SecurityError</code>, immediately followed by a <code>
-                    stop</code> event.
-                  </li>
+                  stop</code> event. </li>
+
                   <li>If the UA at any point is unable to continue gathering
-                  data for reasons other than isolation properties, it
-                  <em title="must" class="rfc2119">must</em> stop gathering
-                  data, let <var>blob</var> be the Blob of collected data, and
-                  queue a task, using the DOM manipulation task source, that
-                  <a>fires an error event</a> with the name
+                  data for reasons other than isolation properties, it MUST stop
+                  gathering data, let <var>blob</var> be the Blob of collected
+                  data, and queue a task, using the DOM manipulation task
+                  source, that <a>fires an error event</a> with the name
                   <code>UnknownError</code>, followed by a
                   <code>dataavailable</code> event containing <var>blob</var>,
-                  followed by a <code>stop</code> event.
-                  </li>
+                  followed by a <code>stop</code> event. </li>
+
                   <li>If <var>timeslice</var> is not <code>undefined</code>,
                   then once a minimum of <var>timeslice</var> milliseconds of
                   data have been collected, or some minimum time slice imposed
                   by the UA, whichever is greater, let <var>blob</var> be the
                   Blob of collected data, start gathering a new Blob of data,
-                  and queue a task, using the DOM manipulation task source,
-                  that fires a <code>dataavailable</code> event containing
-                  <var>blob</var>.</li>
+                  and queue a task, using the DOM manipulation task source, that
+                  fires a <code>dataavailable</code> event containing
+                  <var>blob</var>. Note that an <code>undefined</code> value of
+                  <var>timeslice</var> will be understood as the largest
+                  <code>long</code> value.</li>
+
                   <li>If all recorded tracks become <a href=
                   "http://www.w3.org/TR/mediacapture-streams/#track-ended">ended</a>
                   [[!GETUSERMEDIA]], then stop gathering data, let
@@ -254,11 +273,12 @@ interface MediaRecorder : EventTarget {
                   following steps:
                     <ol>
                       <li>set <code>recording</code> to "inactive".</li>
-                      <li>Fire a <code>dataavailable</code> event containing
-                      <var>blob</var>.</li>
-                      <li>Fire a <code>stop</code> event.</li>
+                      <li>Fire an event named <code>dataavailable</code>
+                      containing <var>blob</var>.</li>
+                      <li>Fire an event named <code>stop</code>.</li>
                     </ol>
                   </li>
+
                 </ol>
               </li>
               <li>return <code>undefined</code>.</li>
@@ -271,13 +291,13 @@ interface MediaRecorder : EventTarget {
             Blobs are returned (because of <code>timeslice</code> or
             <code>requestData</code>), the individual Blobs need not be
             playable, but the combination of all the Blobs from a completed
-            recording <em title="must" class= "rfc2119">must</em> be playable.</p>
+            recording MUST be playable.</p>
 
             <p> If any Track within the MediaStream is muted at any time (i.e.,
             if its <code>muted</code> flag is set to <code>true</code>), the UA
-            <em title="must" class="rfc2119">must</em> insert black frames or
-            silence until the Track is unmuted, or record nothing, depending on
-            the value of <a>ignoreMutedMedia</a>.</p>
+            MUST insert black frames or silence until the Track is unmuted, or
+            record nothing, depending on the value of
+            <a>ignoreMutedMedia</a>.</p>
 
             <table class="parameters">
               <tbody>
@@ -295,8 +315,8 @@ interface MediaRecorder : EventTarget {
                   "False">&#10008;</span></td>
                   <td class="prmOptTrue"><span role="img" aria-label=
                   "True">&#10004;</span></td>
-                  <td class="prmDesc">The number of milliseconds of data to
-                  return in a single Blob.</td>
+                  <td class="prmDesc">The minimum number of milliseconds of data
+                  to return in a single Blob.</td>
                 </tr>
               </tbody>
             </table>
@@ -307,18 +327,17 @@ interface MediaRecorder : EventTarget {
           <dt><dfn><code>stop</code></dfn></dt>
           <dd>
             When a <code>MediaRecorder</code> object&#8217;s <code>stop</code>
-            method is invoked, the UA <em title="must" class=
-            "rfc2119">must</em> queue a task, using the DOM manipulation task
-            source, that runs the following steps:
+            method is invoked, the UA MUST queue a task, using the DOM
+            manipulation task source, that runs the following steps:
             <ol>
-              <li>If <code>state</code> is "inactive", throw a
+              <li>If <code>state</code> is <code>inactive</code>, throw an
               <code>InvalidStateError</code> DOMException and terminate these
               steps. Otherwise:</li>
-              <li>Set <code>state</code> to 'inactive' and stop gathering
-              data.</li>
-              <li>Fire a <code>dataavailable</code> event containing the Blob
-              of data that has been gathered.</li>
-              <li>Fire a <code>stop</code> event</li>
+              <li>Set <code>state</code> to <code>inactive</code> and stop
+              gathering data.</li>
+              <li>Fire an event named <code>dataavailable</code> containing the
+              Blob of data that has been gathered.</li>
+              <li>Fire an event named <code>stop</code>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -330,9 +349,9 @@ interface MediaRecorder : EventTarget {
           <dt><dfn><code>pause</code></dfn></dt>
           <dd>
             When a <code>MediaRecorder</code> object&#8217;s
-            <code>pause()</code>method is invoked, the UA <em title="must"
-            class="rfc2119">must</em> queue a task, using the DOM manipulation
-            task source, that runs the following steps:
+            <code>pause()</code>method is invoked, the UA MUST queue a task,
+            using the DOM manipulation task source, that runs the following
+            steps:
             <ol>
               <li>If <code>state</code> is "inactive" throw an
               <code>InvalidStateError</code> DOMException and terminate these
@@ -340,7 +359,7 @@ interface MediaRecorder : EventTarget {
               <li>Set <code>state</code> to "paused".</li>
               <li>Stop gathering data into its current Blob (but keep the Blob
               available so that recording can be resumed in the future).</li>
-              <li>Fire a <code>pause</code> event</li>
+              <li>Fire an event named <code>pause</code>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -352,9 +371,9 @@ interface MediaRecorder : EventTarget {
           <dt><dfn><code>resume</code></dfn></dt>
           <dd>
             When a <code>MediaRecorder</code> object&#8217;s
-            <code>resume()</code> method is invoked, the UA <em title="must"
-            class="rfc2119">must</em> queue a task, using the DOM manipulation
-            task source, that runs the following steps:
+            <code>resume()</code> method is invoked, the UA MUST queue a task,
+            using the DOM manipulation task source, that runs the following
+            steps:
             <ol>
               <li>If <code>state</code> is "inactive" throw an
               <code>InvalidStateError</code> DOMException and terminate these
@@ -362,7 +381,7 @@ interface MediaRecorder : EventTarget {
               <li>Set <code>state</code> to "recording".</li>
               <li>Resume (or continue) gathering data into its current
               Blob.</li>
-              <li>Fire a <code>resume</code> event.</li>
+              <li>Fire an event named <code>resume</code>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -374,14 +393,14 @@ interface MediaRecorder : EventTarget {
           <dt><dfn><code>requestData</code></dfn></dt>
           <dd>
             When a <code>MediaRecorder</code>object&#8217;s
-            <code>requestData()</code> method is invoked, the UA <em title=
-            "must" class="rfc2119">must</em> queue a task, using the DOM
-            manipulation task source, that runs the following steps:
+            <code>requestData()</code> method is invoked, the UA MUST queue a
+            task, using the DOM manipulation task source, that runs the
+            following steps:
             <ol>
               <li>If <code>state</code> is not "recording" throw an
               <code>InvalidStateError</code> DOMException and terminate these
               steps. Otherwise:</li>
-              <li>Fire a <code>dataavailable</code> event containing the
+              <li>Fire an event named <code>dataavailable</code> containing the
               current Blob of saved data. (Note that this Blob will be empty if
               no data has been gathered yet.)</li>
               <li>Create a new Blob and gather subsequent data into it.</li>
@@ -395,7 +414,7 @@ interface MediaRecorder : EventTarget {
           </dd>
           <dt><dfn><code>isTypeSupported</code></dfn>, static</dt>
           <dd>
-            Check to see whether a <code>MediaRecorder</code> can record in the
+            Check to see whether a <code>MediaRecorder</code> can record in a
             specified MIME type. If true is returned from this method, it only
             indicates that the <code>MediaRecorder</code> implementation is
             capable of recording Blob objects for the specified MIME type.
@@ -453,40 +472,45 @@ interface MediaRecorder : EventTarget {
     <section id="MediaRecorderOptions">
       <h3>MediaRecorderOptions</h3>
       <div>
-        <pre class="idl">dictionary MediaRecorderOptions {
-             DOMString     mimeType;
-             unsigned long audioBitsPerSecond;
-             unsigned long videoBitsPerSecond;
-             unsigned long bitsPerSecond;
-};</pre>
+        <pre class="idl">
+          dictionary MediaRecorderOptions {
+            DOMString     mimeType;
+            unsigned long audioBitsPerSecond;
+            unsigned long videoBitsPerSecond;
+            unsigned long bitsPerSecond;
+          };
+        </pre>
         <section>
           <h2>Dictionary <a class="idlType">MediaRecorderOptions</a>
           Members</h2>
           <dl data-link-for="MediaRecorderOptions" data-dfn-for=
           "MediaRecorderOptions" class="dictionary-members">
+
             <dt><dfn><code>mimeType</code></dfn> of type <span class=
             "idlMemberType"><a>DOMString</a></span></dt>
-            <dd>The container and codec format(s) for the recording, which may
-            include any parameters that are defined for the format. If the UA
-            does not support the format or any of the parameters specified, it
-            <em title="must" class="rfc2119">must</em> throw a
-            <code>NotSupportedError</code> DOMException. If this paramater is
-            not specified, the UA will use a platform-specific default format.
-            The container format, whether passed in to the constructor or
-            defaulted, will be used as the value of the <code>mimeType</code>
-            attribute.</dd>
+            <dd>The container and codec format(s) [[!RFC2046]] for the
+            recording, which may include any parameters that are defined for the
+            format. If the UA does not support the format or any of the
+            parameters specified, it MUST throw a <code>NotSupportedError</code>
+            DOMException. If this paramater is not specified, the UA will use a
+            platform-specific default format. The container format, whether
+            passed in to the constructor or defaulted, will be used as the value
+            of the <code>mimeType</code> attribute.</dd>
+
             <dt><dfn><code>audioBitsPerSecond</code></dfn> of type <span class=
             "idlMemberType"><a>unsigned long</a></span></dt>
             <dd>Aggregate target bits per second for encoding of the Audio
             track(s), if any. This is a hint for the encoder and the value
             might be surpassed, not achieved, or only be achieved over a long
             period of time.</dd>
+
             <dt><dfn><code>videoBitsPerSecond</code></dfn> of type <span class=
             "idlMemberType"><a>unsigned long</a></span></dt>
             <dd>Aggregate target bits per second for encoding of the Video
             track(s), if any. This is a hint for the encoder and the value
             might be surpassed, not achieved, or only be achieved over a long
             period of time.</dd>
+
             <dt><dfn><code>bitsPerSecond</code></dfn> of type <span class=
             "idlMemberType"><a>unsigned long</a></span></dt>
             <dd>Aggregate target bits per second for encoding of all Video and
@@ -595,16 +619,20 @@ interface BlobEvent : Event {
         "attributes">
           <dt><dfn><code>data</code></dfn> of type <span class=
           "idlAttrType"><a>Blob</a></span>, readonly</dt>
-          <dd>Returns a Blob object whose type attribute indicates the encoding
-          of the blob data.</dd>
+          <dd>Returns a <a
+          href="https://www.w3.org/TR/FileAPI/#blob"><code>Blob</code></a>
+          object whose type attribute indicates the encoding of the blob
+          data.</dd>
         </dl>
       </section>
     </div>
     <h3>BlobEventInit</h3>
     <div>
-      <pre class="idl">dictionary BlobEventInit {
-    required Blob data;
-};</pre>
+      <pre class="idl">
+        dictionary BlobEventInit {
+          required Blob data;
+        };
+      </pre>
       <section>
         <h2>Dictionary <a class="idlType">BlobEventInit</a> Members</h2>
         <dl data-link-for="BlobEventInit" data-dfn-for="BlobEventInit" class=
@@ -620,39 +648,39 @@ interface BlobEvent : Event {
     <h2>Error Handling</h2>
     <section id="general-principles">
       <h3>General Principles</h3>
-      <p>The UA <em title="must" class="rfc2119">must</em> throw a <a href=
-      "https://heycam.github.io/webidl/#idl-DOMException">DOMException</a> (see
-      [[!DOM4]]) when the error can be detected at the time that the call is
-      made. In all other cases, an <a><code>ErrorEvent</code></a> <em title=
-      "must" class="rfc2119">must</em> be fired. If recording has been started
-      and not yet stopped when the error occurs, then after raising the error,
-      the UA <em title="must" class="rfc2119">must</em> fire a
-      <code>dataavailable</code> event, containing any data that it has
-      gathered, and then a <code>stop</code> event. The UA may set
-      platform-specific limits, such as those for the minimum and maximum Blob
-      size that it will support, or the number of Tracks it will record at
-      once. It must signal a fatal error if these limits are exceeded.</p>
+      <p>The UA MUST throw a <a href= "https://heycam.github.io/webidl/#idl-
+      DOMException">DOMException</a> (see [[!DOM4]]) when the error can be
+      detected at the time that the call is made. In all other cases, an
+      <a><code>ErrorEvent</code></a> MUST be fired. If recording has been
+      started and not yet stopped when the error occurs, then after raising the
+      error, the UA MUST fire an event named <code>dataavailable</code>,
+      containing any data that it has gathered, and then a <code>stop</code>
+      event. The UA may set platform-specific limits, such as those for the
+      minimum and maximum Blob size that it will support, or the number of
+      Tracks it will record at once. It must signal a fatal error if these
+      limits are exceeded.</p>
     </section>
     <section>
       <h3>ErrorEvent</h3>
-      <p>The following interface is defined for cases when an event is raised
-      that could have been caused by an error:</p>
-      <p><dfn data-dfn-type="dfn" data-lt="fires an error event">Firing an
-      error event named <var>e</var></dfn> with an <code>Error</code>
-      <var>error</var> means that an event with the name <var>e</var>, which
-      does not bubble (except where otherwise stated) and is not cancelable
-      (except where otherwise stated), and which uses the
-      <code><a>ErrorEvent</a></code> interface with the <code><a data-link-for=
-      "ErrorEvent">error</a></code> attribute set to <var>error</var>, must be
-      created and dispatched at the given target. If no <code>Error</code>
-      object is specified, the <code><a data-link-for=
+      <p>The <a>ErrorEvent</a> interface is defined for cases when an event is raised
+      that could have been caused by an error.</p> <p><dfn data-dfn-type="dfn"
+      data-lt="fires an error event">Firing an error event named
+      <var>e</var></dfn> with an <code>Error</code> <var>error</var> means that
+      an event with the name <var>e</var>, which does not bubble (except where
+      otherwise stated) and is not cancelable (except where otherwise stated),
+      and which uses the <code><a>ErrorEvent</a></code> interface with the
+      <code><a data-link-for= "ErrorEvent">error</a></code> attribute set to
+      <var>error</var>, must be created and <a href="https://dom.spec.whatwg.org
+      /#concept-event-dispatch">dispatched</a> at the given target. If no
+      <code>Error</code> object is specified, the <code><a data-link-for=
       "ErrorEvent">error</a></code> attribute defaults to null.</p>
       <div>
-        <pre class="idl">[Exposed=Window,
- Constructor (DOMString type, ErrorEventInit eventInitDict)]
-interface ErrorEvent : Event {
-    readonly        attribute Error? error;
-};</pre>
+        <pre class="idl">
+          [Exposed=Window, Constructor (DOMString type, ErrorEventInit eventInitDict)]
+          interface ErrorEvent : Event {
+            readonly        attribute Error? error;
+          };
+        </pre>
         <section>
           <h2>Constructors</h2>
           <dl data-link-for="ErrorEvent" data-dfn-for="ErrorEvent" class=
@@ -698,7 +726,7 @@ interface ErrorEvent : Event {
           "attributes">
             <dt><dfn><code>error</code></dfn> of type <span class=
             "idlAttrType"><a>Error</a></span>, readonly , nullable</dt>
-            <dd>If the event was raised because of an error, this attribute may
+            <dd>If the event was raised because of an error, this attribute MAY
             be set to that error object.</dd>
           </dl>
         </section>
@@ -714,7 +742,7 @@ interface ErrorEvent : Event {
             <dt><dfn><code>error</code></dfn> of type <span class=
             "idlMemberType"><a>Error</a></span>, nullable, defaulting to
             <code>null</code></dt>
-            <dd>If the event was raised because of an error, this attribute may
+            <dd>If the event was raised because of an error, this attribute MAY
             be set to that error object.</dd>
           </dl>
         </section>
@@ -760,8 +788,8 @@ interface ErrorEvent : Event {
   </section>
   <section id="event-summary" class="informative">
     <h2>Event summary</h2>
-    <p>The following additional events fire on
-    <code><a><code>MediaRecorder</code></a></code> objects:</p>
+    <p>The following additional events fire on <code><a>MediaRecorder</a></code>
+    objects:</p>
     <table class="vert">
       <thead>
         <tr>
@@ -774,12 +802,12 @@ interface ErrorEvent : Event {
         <tr>
           <td><dfn id="event-mediarecorder-start"><code>start</code></dfn></td>
           <td><code>Event</code></td>
-          <td>The UA has started recording data on the MediaStream.</td>
+          <td>The UA has started recording data from the MediaStream.</td>
         </tr>
         <tr>
           <td><dfn id="event-mediarecorder-stop"><code>stop</code></dfn></td>
           <td><code>Event</code></td>
-          <td>The UA has stopped recording data on the MediaStream.</td>
+          <td>The UA has stopped recording data from the MediaStream.</td>
         </tr>
         <tr>
           <td><dfn id=
@@ -793,13 +821,13 @@ interface ErrorEvent : Event {
         <tr>
           <td><dfn id="event-mediarecorder-pause"><code>pause</code></dfn></td>
           <td><code>Event</code></td>
-          <td>The UA has paused recording data on the MediaStream.</td>
+          <td>The UA has paused recording data from the MediaStream.</td>
         </tr>
         <tr>
           <td><dfn id=
           "event-mediarecorder-resume"><code>resume</code></dfn></td>
           <td><code>Event</code></td>
-          <td>The UA has resumed recording data on the MediaStream.</td>
+          <td>The UA has resumed recording data from the MediaStream.</td>
         </tr>
         <tr>
           <td><dfn id=
@@ -812,32 +840,6 @@ interface ErrorEvent : Event {
         </tr>
       </tbody>
     </table>
-  </section>
-  <section>
-    <h2>Change Log</h2>
-    <p>This section will be removed before publication.</p>
-    <h2>Changes since October 6, 2014</h2>
-    <ol>
-      <li>Correct statement about Patent Policy.</li>
-      <li>Add MediaRecorderErrorEvent, remove reference to DOMError.</li>
-      <li>Removed [TreatUndefinedAs=Missing] from Media Recorder IDL.</li>
-      <li>Added missing constructor parameters to BlobEvent constructor.</li>
-      <li>Updated Editors.</li>
-      <li>Removed [NoInterfaceObject] from MediaRecorderErrorEvent.</li>
-      <li>Removed unused RecordingExceptionEnum.</li>
-      <li>Removed suffix Enum of RecordingStateEnum and
-      RecordingErrorNameEnum.</li>
-      <li>Corrected references to DOMExceptions where it used to say
-      (MediaRecorderError)Events.</li>
-      <li>Substituted MediaRecorderErrorEvent with a simple ErrorEvent, no
-      error enum.</li>
-      <li>mimeType does not need a default value; isTypeSupported() should be
-      true.</li>
-      <li>Removed UnknownError Exception; added ErrorEvent description.</li>
-      <li>Added read-only attributes videoBitsPerSecond and
-      audioBitsPerSecond.</li>
-      <li>Removed MediaRecorder Properties Section, which was a TODO.</li>
-    </ol>
   </section>
 </body>
 </html>
