@@ -732,9 +732,11 @@ interface BlobEvent : Event {
         </section>
       </div>
       <div>
-        <pre class="idl">dictionary ErrorEventInit : EventInit {
-             Error? error = null;
-};</pre>
+        <pre class="idl">
+          dictionary ErrorEventInit : EventInit {
+            Error? error = null;
+          };
+        </pre>
         <section>
           <h2>Dictionary <a class="idlType">ErrorEventInit</a> Members</h2>
           <dl data-link-for="ErrorEventInit" data-dfn-for="ErrorEventInit"
@@ -840,6 +842,94 @@ interface BlobEvent : Event {
         </tr>
       </tbody>
     </table>
+  </section>
+
+
+  <section id="examples" class="informative">
+  <h2>Examples</h2>
+
+  <div class="note">
+  Slightly modified versions of these examples can be found in e.g. <a
+   href="https://codepen.io/collection/XjkNbN/">this codepen collection</a>.
+   </div>
+
+  <section>
+  <h3>Check for <code>MediaRecorder</code> and <code>MIMEType</code>.</h3>
+
+  <div class="note">
+  The following example can also be found in e.g. <a
+  href="https://codepen.io/miguelao/pen/edqNab?editors=0010">this codepen</a>
+  with minimal modifications.
+  </div>
+
+  <pre class='example'>
+  if (window.MediaRecorder == undefined) {
+    console.error('MediaRecorder not supported, boo');
+  } else {
+    var codecs = ["video/webm",
+                  "video/webm;codecs=vp8",
+                  "audio/webm",
+                  "video/mp4;codecs=h264",
+                  "video/invalid"];
+    codecs.forEach( codec => {
+      console.log(codec + ' is ' +  (MediaRecorder.isTypeSupported(codec) ?
+                                         'supported' : 'NOT supported '));
+    });
+  }
+  </pre>
+  </section>
+
+  <section>
+  <h3>Recording webcam video and audio</h3>
+  <div class="note">
+  The following example can also be found in e.g. <a
+  href="https://codepen.io/miguelao/pen/wzVMJb?editors=0010">this codepen</a>
+  with minimal modifications.
+  </div>
+
+  <pre class='example'>
+  &lt;html>
+  &lt;body>
+  &lt;video autoplay/>
+  &lt;script>
+    var recordedChunks = [];
+
+    function gotMedia(stream) {
+      var video = document.querySelector('video');
+      video.src = URL.createObjectURL(stream);
+      var recorder = null;
+      try {
+        recorder = new MediaRecorder(stream, {mimeType : "video/webm"});
+      } catch (e) {
+        console.error('Exception while creating MediaRecorder: ' + e);
+        return;
+      }
+
+      recorder.ondataavailable = (event) => {
+        console.log(' Recorded chunk of size ' + event.data.size + "B");
+        recordedChunks.push(event.data);
+      };
+
+      recorder.start(100);
+    }
+
+    navigator.mediaDevices.getUserMedia({video: true , audio: true})
+        .then(gotMedia)
+        .catch(e => { console.error('getUserMedia() failed: ' + e); });
+  &lt;/script>
+  &lt;/body>
+  &lt;/html>
+  </pre>
+
+  <div class="note">
+  <code>recordedChunks</code> can be saved to a file using e.g. the function
+  <code>download()</code> in the <a
+  href="https://developers.google.com/web/updates/2016/01/mediarecorder">
+  MediaRecorder Web Fundamentals article</a>.
+  </div>
+
+  </section>
+
   </section>
 </body>
 </html>
