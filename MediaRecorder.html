@@ -167,17 +167,19 @@ interface MediaRecorder : EventTarget {
           <dt><dfn><code>onerror</code></dfn> of type <span class=
           "idlAttrType"><a>EventHandler</a></span></dt>
           <dd>
-            Called to handle a <a>ErrorEvent</a>.
+            Called to handle an <a>ErrorEvent</a>.
           </dd>
           <dt><dfn><code>ignoreMutedMedia</code></dfn> of type <span class=
           "idlAttrType"><a>boolean</a></span></dt>
-          <dd>If this attribute is set to <code>true</code>, the MediaRecorder
-          will not record anything when the input Media Stream is muted. If
-          this attribute is <code>false</code>, the MediaRecorder will record
-          silence (for audio) and black frames (for video) when the input
-          MediaStream is muted. When the MediaRecorder is created, the UA
-          <em title="must" class="rfc2119">must</em> set this attribute to
+          <dd>If this attribute is set to <code>true</code>, MediaRecorder will
+          not record any input when a given source <a
+          href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">
+          <code>MediaStreamTrack</code></a> is muted. If this attribute is
+          <code>false</code>, MediaRecorder will record silence (for audio) and
+          black frames (for video) when the input MediaStream is muted. When the
+          MediaRecorder is created, the UA MUST set this attribute to
           <code>false</code>.</dd>
+
           <dt><dfn><code>videoBitsPerSecond</code></dfn> of type <span class=
           "idlAttrType"><a>unsigned long</a></span>, readonly</dt>
           <dd>The value of the Video encoding target bit rate that was passed
@@ -263,17 +265,20 @@ interface MediaRecorder : EventTarget {
             </ol>
             <p>Note that <code>stop()</code>, <code>requestData()</code>, and
             <code>pause()</code> also affect the recording behavior.</p>
-            <p>The UA <em title="must" class="rfc2119">must</em> record the
-            MediaStream in such a way that the original Tracks can be retrieved
-            at playback time. When multiple Blobs are returned (because of
-            <code>timeslice</code> or <code>requestData</code>), the individual
-            Blobs need not be playable, but the combination of all the Blobs
-            from a completed recording <em title="must" class=
-            "rfc2119">must</em> be playable. If any Track within the
-            MediaStream is muted at any time (i.e., if its
-            <code>readyState</code> is set to <code>muted</code>), the UA
+
+            <p>The UA MUST record the MediaStream in such a way that the
+            original Tracks can be retrieved at playback time. When multiple
+            Blobs are returned (because of <code>timeslice</code> or
+            <code>requestData</code>), the individual Blobs need not be
+            playable, but the combination of all the Blobs from a completed
+            recording <em title="must" class= "rfc2119">must</em> be playable.</p>
+
+            <p> If any Track within the MediaStream is muted at any time (i.e.,
+            if its <code>muted</code> flag is set to <code>true</code>), the UA
             <em title="must" class="rfc2119">must</em> insert black frames or
-            silence until the Track is unmuted.</p>
+            silence until the Track is unmuted, or record nothing, depending on
+            the value of <a>ignoreMutedMedia</a>.</p>
+
             <table class="parameters">
               <tbody>
                 <tr>
