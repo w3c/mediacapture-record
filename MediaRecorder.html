@@ -254,7 +254,7 @@
                   <ol>
                     <li>Set <a>state</a> to
                     <a href="#dom-recordingstate-inactive">inactive</a>.</li>
-                    <li><a href="#dfn-firing-an-error-event-named-e">Fire an
+                    <li><a href="#dfn-to-fire-an-error-event">Fire an
                     error event</a> named <code>SecurityError</code> at
                     <var>target</var>.
                     </li>
@@ -271,11 +271,11 @@
                   <ol>
                     <li>Set <a>state</a> to
                     <a href="#dom-recordingstate-inactive">inactive</a>.</li>
-                    <li><a href="#dfn-firing-an-error-event-named-e">Fire an
+                    <li><a href="#dfn-to-fire-an-error-event-named">Fire an
                     error event</a> named <code>UnknownError</code> at
                     <var>target</var>.
                     </li>
-                    <li><a href="#dfn-firing-a-blob-event">Fire a blob event</a>
+                    <li><a href="#dfn-to-fire-a-blob-event">Fire a blob event</a>
                     named <code>dataavailable</code> at <var>target</var> with
                     <var>blob</var>.</li>
                     <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">
@@ -304,7 +304,7 @@
                   <ol>
                     <li>Set <a>state</a> to
                     <a href="#dom-recordingstate-inactive">inactive</a>.</li>
-                    <li><a href="#dfn-firing-a-blob-event">Fire a blob event</a>
+                    <li><a href="#dfn-to-fire-a-blob-event">Fire a blob event</a>
                     named <code>dataavailable</code> at <var>target</var> with
                     <var>blob</var>.</li>
                     <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">
@@ -372,7 +372,7 @@
               inactive</a> and stop gathering data.</li>
               <li>Let <var>blob</var> be the Blob of collected data so far and
               let <var>target</var> be the MediaRecorder context object, then
-              <a href="#dfn-firing-a-blob-event">fire a blob event</a> named
+              <a href="#dfn-to-fire-a-blob-event">fire a blob event</a> named
               <code>dataavailable</code> at <var>target</var> with
               <var>blob</var>.</li>
               <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
@@ -449,7 +449,7 @@
               steps::</li>
               <li>Let <var>blob</var> be the Blob of collected data so far and
               let <var>target</var> be the MediaRecorder context object, then
-              <a href="#dfn-firing-a-blob-event">fire a blob event</a> named
+              <a href="#dfn-to-fire-a-blob-event">fire a blob event</a> named
               <code>dataavailable</code> at <var>target</var> with
               <var>blob</var>.
               (Note that <var>blob</var> will be empty if no data has been
@@ -735,7 +735,7 @@
       named <a><code>ErrorEvent</code></a>.
       If recording has been started and not yet stopped when the error occurs,
       let <var>blob</var> be the Blob of collected data so far; after raising
-      the error, the UA MUST <a href="#dfn-firing-a-blob-event">fire a
+      the error, the UA MUST <a href="#dfn-to-fire-a-blob-event">fire a
       dataavailable event</a> with <var>blob</var>; immediately after
       the UA MUST then
       <a href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a>
