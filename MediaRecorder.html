@@ -223,7 +223,8 @@
             following steps:
             <ol>
               <li>Let <var>target</var> be the MediaRecorder context object.
-              Let <var>timeslice</var> be the method's first argument, if
+              </li>
+              <li>Let <var>timeslice</var> be the method's first argument, if
               provided, or <code>undefined</code>. </li>
 
               <li>If <a>state</a> is not <a href="#dom-recordingstate-inactive">
@@ -242,7 +243,8 @@
                   ([[!FILE-API]]) <var>blob</var> and queue a task, using the
                   DOM manipulation task source, to <a
                   href="https://dom.spec.whatwg.org/#concept-event-fire">fire
-                  an event</a> named <code>start</code>.</li>
+                  an event</a> named <code>start</code> at <var>target</var>.
+                  </li>
 
                   <li>If at any point the stream's isolation properties change
                   so that MediaRecorder is no longer allowed access to it, the
@@ -253,10 +255,12 @@
                     <li>Set <a>state</a> to
                     <a href="#dom-recordingstate-inactive">inactive</a>.</li>
                     <li><a href="#dfn-firing-an-error-event-named-e">Fire an
-                    error event</a> with the name <code>SecurityError</code>
+                    error event</a> named <code>SecurityError</code> at
+                    <var>target</var>.
                     </li>
                     <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">
-                    Fire an event</a> named <code>stop</code>.</li>
+                    Fire an event</a> named <code>stop</code> at
+                    <var>target</var>.</li>
                   </ol>
                   </li>
 
@@ -268,13 +272,15 @@
                     <li>Set <a>state</a> to
                     <a href="#dom-recordingstate-inactive">inactive</a>.</li>
                     <li><a href="#dfn-firing-an-error-event-named-e">Fire an
-                    error event</a> with the name <code>UnknownError</code>
+                    error event</a> named <code>UnknownError</code> at
+                    <var>target</var>.
                     </li>
                     <li><a href="#dfn-firing-a-blob-event">Fire a blob event</a>
                     named <code>dataavailable</code> at <var>target</var> with
                     <var>blob</var>.</li>
                     <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">
-                    Fire an event</a> named <code>stop</code>.</li>
+                    Fire an event</a> named <code>stop</code> at
+                    <var>target</var>.</li>
                   </ol>
                   </li>
 
@@ -284,7 +290,8 @@
                   by the UA, whichever is greater, start gathering data into a
                   a new Blob <var>blob</var>, and queue a task, using the DOM
                   manipulation task source, that
-                  <a>fires a dataavailable event</a> with <var>blob</var>.
+                  <a>fires a blob event</a> named <code>dataavailable</code>
+                  at <var>target</var> with <var>blob</var>.
                   Note that an <code>undefined</code> value of
                   <var>timeslice</var> will be understood as the largest
                   <code>long</code> value.</li>
@@ -301,7 +308,8 @@
                     named <code>dataavailable</code> at <var>target</var> with
                     <var>blob</var>.</li>
                     <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">
-                    Fire an event</a> named <code>stop</code>.</li>
+                    Fire an event</a> named <code>stop</code> at
+                    <var>target</var>.</li>
                   </ol>
                   </li>
 
@@ -368,7 +376,7 @@
               <code>dataavailable</code> at <var>target</var> with
               <var>blob</var>.</li>
               <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
-              an event</a> named <code>stop</code>.</li>
+              an event</a> named <code>stop</code> at <var>target</var>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -392,8 +400,9 @@
               paused</a>.</li>
               <li>Stop gathering data into <var>blob</var> (but keep it
               available so that recording can be resumed in the future).</li>
-              <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
-              an event</a> named <code>pause</code>.</li>
+              <li>Let <var>target</var> be the MediaRecorder context object.
+              <a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
+              an event</a> named <code>pause</code> at <var>target</var>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -416,8 +425,9 @@
               recording</a>.</li>
               <li>Resume (or continue) gathering data into the current
               <var>blob</var>.</li>
-              <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
-              an event</a> named <code>resume</code>.</li>
+              <li>Let <var>target</var> be the MediaRecorder context object.
+              <a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
+              an event</a> named <code>resume</code> at <var>target</var>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -513,15 +523,17 @@
     <section>
       <h2>Data handling</h2>
         <p><dfn data-dfn-type="dfn"
-        data-lt="fire a blob event">Firing a blob event</dfn> with a
+        data-lt="fire a blob event">To fire a blob event</dfn> with a
         <a href="https://www.w3.org/TR/FileAPI/#blob"><code>Blob</code></a>
         <var>blob</var> means
         <a href="https://dom.spec.whatwg.org/#concept-event-fire">firing
         an event</a> at <var>target</var> using a <a>BlobEvent</a> with its
-        <code>data</code> initialized to <var>blob</var>.
+        <code>data</code> attribute initialized to <var>blob</var>.
+        <div class="note">
         Usually <var>blob</var> will be the data gathered by the UA after the
         last transition to <a href="#dom-recordingstate-recording">recording
         </a> <a href="#dom-mediarecorder-state">state</a>.
+        </div>
        </p>
     </section>
 
@@ -712,7 +724,7 @@
   </section>
   <section id="error-handling">
     <h2>Error Handling</h2>
-    <section id="general-principles">
+    <section id="general-principles"  class="informative">
       <h3>General Principles</h3>
 
       <p>The UA MUST throw a <a
@@ -739,22 +751,22 @@
       <p>The <a>ErrorEvent</a> interface is defined for cases when an event is raised
       that could have been caused by an error.</p>
       <p><dfn data-dfn-type="dfn"
-      data-lt="firing an error event">Firing an error event named
-      <var>e</var></dfn> with an <code>Error</code> <var>error</var> means that
-      an event with the name <var>e</var>, which does not bubble (except where
-      otherwise stated) and is not cancelable (except where otherwise stated),
-      and which uses the <code><a>ErrorEvent</a></code> interface with the
-      <code><a data-link-for= "ErrorEvent">error</a></code> attribute set to
+      data-lt="firing an error event">To fire an error event</dfn> named
+      <var>e</var> with a <code>DOMException</code> named <var>error</var> means
+      that an event with the name <var>e</var>, which does not bubble (except
+      where otherwise stated) and is not cancelable (except where otherwise
+      stated), and which uses the <code><a>ErrorEvent</a></code> interface with
+      the <code><a data-link-for= "ErrorEvent">error</a></code> attribute set to
       <var>error</var>, must be created and
       <a href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched
-      </a> at the given target. If no <code>Error</code> object is specified,
-      the <code><a data-link-for="ErrorEvent">error</a></code> attribute
-      defaults to null.</p>
+      </a> at the given target. If no <code>DOMException</code> object is
+      specified, the <code><a data-link-for="ErrorEvent">error</a></code>
+      attribute defaults to null.</p>
       <div>
         <pre class="idl">
           [Exposed=Window, Constructor (DOMString type, ErrorEventInit eventInitDict)]
           interface ErrorEvent : Event {
-            readonly attribute Error? error;
+            readonly attribute DOMException? error;
           };
         </pre>
         <section>
