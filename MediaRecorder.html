@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href="MediaRecorder.css" rel="stylesheet" type="text/css">
   <title>MediaStream Recording</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <script type="text/javascript" src=
@@ -33,15 +32,15 @@
 
     <p>This API attempts to make basic recording very simple, while still
     allowing for more complex use cases. In the simplest case, the application
-    instatiates a <code><a>MediaRecorder</a></code> object, calls <a href="#dom-
-    mediarecorder-start">start()</a> and then calls <a href="#dom-mediarecorder-
-    start">stop()</a> or waits for the MediaStreamTrack(s) to be ended. The
-    contents of the recording will be made available in the platform's default
-    encoding via the <a href="#dom-mediarecorder-ondataavailable">
-    ondataavailable</a> event. Functions are available to query the platform's
-    available set of encodings, and to select the desired ones if the author
-    wishes. The application can also choose how much data it wants to receive at
-    one time. By default a <a
+    instantiates a <code><a>MediaRecorder</a></code> object, calls
+    <a href="#dom-mediarecorder-start">start()</a> and then calls
+    <a href="#dom-mediarecorder-stop">stop()</a> or waits for the
+    MediaStreamTrack(s) to be ended. The contents of the recording will be made
+    available in the platform's default encoding via the <a
+    href="#dom-mediarecorder-ondataavailable">ondataavailable</a> event.
+    Functions are available to query the platform's available set of encodings,
+    and to select the desired ones if the author wishes. The application can
+    also choose how much data it wants to receive at one time. By default a <a
     href="https://www.w3.org/TR/FileAPI/#blob"><code>Blob</code></a> containing
     the entire recording is returned when the recording finishes. However the
     application can choose to receive smaller buffers of data at regular
@@ -66,27 +65,28 @@
     <h2>Media Recorder API</h2>
     <div>
       <pre class="idl">
-      [ Constructor (MediaStream stream, optional MediaRecorderOptions options)]
-interface MediaRecorder : EventTarget {
-    readonly        attribute MediaStream    stream;
-    readonly        attribute DOMString      mimeType;
-    readonly        attribute RecordingState state;
-                    attribute EventHandler   onstart;
-                    attribute EventHandler   onstop;
-                    attribute EventHandler   ondataavailable;
-                    attribute EventHandler   onpause;
-                    attribute EventHandler   onresume;
-                    attribute EventHandler   onerror;
-                    attribute boolean        ignoreMutedMedia;
-    readonly        attribute unsigned long  videoBitsPerSecond;
-    readonly        attribute unsigned long  audioBitsPerSecond;
-    void           start (optional long timeslice);
-    void           stop ();
-    void           pause ();
-    void           resume ();
-    void           requestData ();
-    static boolean isTypeSupported (DOMString type);
-};</pre>
+      [Constructor (MediaStream stream, optional MediaRecorderOptions options)]
+      interface MediaRecorder : EventTarget {
+        readonly attribute MediaStream stream;
+        readonly attribute DOMString mimeType;
+        readonly attribute RecordingState state;
+        attribute EventHandler onstart;
+        attribute EventHandler onstop;
+        attribute EventHandler ondataavailable;
+        attribute EventHandler onpause;
+        attribute EventHandler onresume;
+        attribute EventHandler onerror;
+        attribute boolean ignoreMutedMedia;
+        readonly attribute unsigned long videoBitsPerSecond;
+        readonly attribute unsigned long audioBitsPerSecond;
+        void start (optional long timeslice);
+        void stop ();
+        void pause ();
+        void resume ();
+        void requestData ();
+        static boolean isTypeSupported (DOMString type);
+      };
+      </pre>
       <section>
         <h2>Constructors</h2>
         <dl data-link-for="MediaRecorder" data-dfn-for="MediaRecorder" class=
@@ -157,7 +157,8 @@ interface MediaRecorder : EventTarget {
           <dt><dfn><code>state</code></dfn> of type <span class=
           "idlAttrType"><a>RecordingState</a></span>, readonly</dt> <dd>The
           current state of the MediaRecorder object. When the MediaRecorder is
-          created, the UA MUST set this attribute to <code>inactive</code>.</dd>
+          created, the UA MUST set this attribute to
+          <a href="#dom-recordingstate-inactive">inactive</a>.</dd>
 
           <dt><dfn><code>onstart</code></dfn> of type <span class=
           "idlAttrType"><a>EventHandler</a></span></dt>
@@ -172,7 +173,7 @@ interface MediaRecorder : EventTarget {
           <dd>Called to handle the dataavailable event. The <a
           href="https://www.w3.org/TR/FileAPI/#blob"><code>Blob</code></a>
           [[!FILE-API]] of recorded data is contained in this event and can be
-          accessed via the 'data' attribute.</dd>
+          accessed via its <code>data</code> attribute.</dd>
 
           <dt><dfn><code>onpause</code></dfn> of type <span class=
           "idlAttrType"><a>EventHandler</a></span></dt>
@@ -193,9 +194,10 @@ interface MediaRecorder : EventTarget {
           href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">
           <code>MediaStreamTrack</code></a> is muted. If this attribute is
           <code>false</code>, MediaRecorder will record silence (for audio) and
-          black frames (for video) when the input MediaStream is muted. When the
-          MediaRecorder is created, the UA MUST set this attribute to
-          <code>false</code>.</dd>
+          black frames (for video) when the corresponding MediaStreamTrack is
+          <a href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-muted">
+          muted</a>. When the MediaRecorder is created, the UA MUST set this
+          attribute to <code>false</code>.</dd>
 
           <dt><dfn><code>videoBitsPerSecond</code></dfn> of type <span class=
           "idlAttrType"><a>unsigned long</a></span>, readonly</dt>
@@ -220,63 +222,95 @@ interface MediaRecorder : EventTarget {
             <code>start()</code> method is invoked, the UA MUST run the
             following steps:
             <ol>
+              <li>Let <var>target</var> be the MediaRecorder context object.
+              </li>
               <li>Let <var>timeslice</var> be the method's first argument, if
-              provided, or <code>undefined</code>.</li>
-              <li>If <code>state</code> is not <code>inactive</code>, throw an
-              <code>InvalidStateError</code> DOMException and abort these
-              steps.</li>
+              provided, or <code>undefined</code>. </li>
+
+              <li>If <a>state</a> is not <a href="#dom-recordingstate-inactive">
+              inactive</a>, throw an <code>InvalidStateError</code> DOMException
+              and abort these steps.</li>
+
               <li>If the stream's isolation properties disallow access from
               this MediaRecorder, throw a <code>SecurityError</code>
               DOMException and abort these steps.</li>
-              <li>Set <code>state</code> to "recording", and run the following
-              steps in parallel:
-                <ol>
 
+              <li>Set <a>state</a> to <a href="#dom-recordingstate-recording">
+              recording</a>, and run the following steps in parallel:
+                <ol>
                   <li>Once media becomes available from one or more of the
-                  stream's tracks, start gathering the data into a Blob (see
-                  [[!FILE-API]]), and queue a task, using the DOM manipulation
-                  task source, to fire an event named <code>start</code>.</li>
+                  stream's tracks, start gathering the data into a Blob
+                  ([[!FILE-API]]) <var>blob</var> and queue a task, using the
+                  DOM manipulation task source, to <a
+                  href="https://dom.spec.whatwg.org/#concept-event-fire">fire
+                  an event</a> named <code>start</code> at <var>target</var>.
+                  </li>
 
                   <li>If at any point the stream's isolation properties change
                   so that MediaRecorder is no longer allowed access to it, the
                   UA MUST immediately stop gathering data, discard any data that
                   it has gathered, and queue a task, using the DOM manipulation
-                  task source, that <a>fires an error event</a> with the name
-                  <code>SecurityError</code>, immediately followed by a <code>
-                  stop</code> event. </li>
+                  task source, that runs the following steps:
+                  <ol>
+                    <li>Set <a>state</a> to
+                    <a href="#dom-recordingstate-inactive">inactive</a>.</li>
+                    <li><a href="#dfn-firing-an-error-event-named-e">Fire an
+                    error event</a> named <code>SecurityError</code> at
+                    <var>target</var>.
+                    </li>
+                    <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">
+                    Fire an event</a> named <code>stop</code> at
+                    <var>target</var>.</li>
+                  </ol>
+                  </li>
 
                   <li>If the UA at any point is unable to continue gathering
                   data for reasons other than isolation properties, it MUST stop
-                  gathering data, let <var>blob</var> be the Blob of collected
-                  data, and queue a task, using the DOM manipulation task
-                  source, that <a>fires an error event</a> with the name
-                  <code>UnknownError</code>, followed by a
-                  <code>dataavailable</code> event containing <var>blob</var>,
-                  followed by a <code>stop</code> event. </li>
+                  gathering data, and queue a task, using the DOM manipulation
+                  task source, that runs the following steps:
+                  <ol>
+                    <li>Set <a>state</a> to
+                    <a href="#dom-recordingstate-inactive">inactive</a>.</li>
+                    <li><a href="#dfn-firing-an-error-event-named-e">Fire an
+                    error event</a> named <code>UnknownError</code> at
+                    <var>target</var>.
+                    </li>
+                    <li><a href="#dfn-firing-a-blob-event">Fire a blob event</a>
+                    named <code>dataavailable</code> at <var>target</var> with
+                    <var>blob</var>.</li>
+                    <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">
+                    Fire an event</a> named <code>stop</code> at
+                    <var>target</var>.</li>
+                  </ol>
+                  </li>
 
                   <li>If <var>timeslice</var> is not <code>undefined</code>,
                   then once a minimum of <var>timeslice</var> milliseconds of
                   data have been collected, or some minimum time slice imposed
-                  by the UA, whichever is greater, let <var>blob</var> be the
-                  Blob of collected data, start gathering a new Blob of data,
-                  and queue a task, using the DOM manipulation task source, that
-                  fires a <code>dataavailable</code> event containing
-                  <var>blob</var>. Note that an <code>undefined</code> value of
+                  by the UA, whichever is greater, start gathering data into a
+                  a new Blob <var>blob</var>, and queue a task, using the DOM
+                  manipulation task source, that
+                  <a>fires a blob event</a> named <code>dataavailable</code>
+                  at <var>target</var> with <var>blob</var>.
+                  Note that an <code>undefined</code> value of
                   <var>timeslice</var> will be understood as the largest
                   <code>long</code> value.</li>
 
-                  <li>If all recorded tracks become <a href=
-                  "http://www.w3.org/TR/mediacapture-streams/#track-ended">ended</a>
-                  [[!GETUSERMEDIA]], then stop gathering data, let
-                  <var>blob</var> be the Blob of collected data, and queue a
-                  task, using the DOM manipulation task source, that runs the
-                  following steps:
-                    <ol>
-                      <li>set <code>recording</code> to "inactive".</li>
-                      <li>Fire an event named <code>dataavailable</code>
-                      containing <var>blob</var>.</li>
-                      <li>Fire an event named <code>stop</code>.</li>
-                    </ol>
+                  <li>If all recorded tracks become <a
+                  href="http://www.w3.org/TR/mediacapture-streams/#track-ended">
+                  ended</a> [[!GETUSERMEDIA]], then stop gathering data, and
+                  queue a task, using the DOM manipulation task source, that
+                  runs the following steps:
+                  <ol>
+                    <li>Set <a>state</a> to
+                    <a href="#dom-recordingstate-inactive">inactive</a>.</li>
+                    <li><a href="#dfn-firing-a-blob-event">Fire a blob event</a>
+                    named <code>dataavailable</code> at <var>target</var> with
+                    <var>blob</var>.</li>
+                    <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">
+                    Fire an event</a> named <code>stop</code> at
+                    <var>target</var>.</li>
+                  </ol>
                   </li>
 
                 </ol>
@@ -327,17 +361,22 @@ interface MediaRecorder : EventTarget {
           <dt><dfn><code>stop</code></dfn></dt>
           <dd>
             When a <code>MediaRecorder</code> object&#8217;s <code>stop</code>
-            method is invoked, the UA MUST queue a task, using the DOM
-            manipulation task source, that runs the following steps:
+            method is invoked, the UA MUST run the following steps:
             <ol>
-              <li>If <code>state</code> is <code>inactive</code>, throw an
-              <code>InvalidStateError</code> DOMException and terminate these
-              steps. Otherwise:</li>
-              <li>Set <code>state</code> to <code>inactive</code> and stop
-              gathering data.</li>
-              <li>Fire an event named <code>dataavailable</code> containing the
-              Blob of data that has been gathered.</li>
-              <li>Fire an event named <code>stop</code>.</li>
+              <li>If <a>state</a> is <a href="#dom-recordingstate-inactive">
+              inactive</a>, throw an <code>InvalidStateError</code> DOMException
+              and terminate these steps. Otherwise the UA MUST queue a task,
+              using the DOM manipulation task source, that runs the following
+              steps:</li>
+              <li>Set <a>state</a> to <a href="#dom-recordingstate-inactive">
+              inactive</a> and stop gathering data.</li>
+              <li>Let <var>blob</var> be the Blob of collected data so far and
+              let <var>target</var> be the MediaRecorder context object, then
+              <a href="#dfn-firing-a-blob-event">fire a blob event</a> named
+              <code>dataavailable</code> at <var>target</var> with
+              <var>blob</var>.</li>
+              <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
+              an event</a> named <code>stop</code> at <var>target</var>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -349,17 +388,21 @@ interface MediaRecorder : EventTarget {
           <dt><dfn><code>pause</code></dfn></dt>
           <dd>
             When a <code>MediaRecorder</code> object&#8217;s
-            <code>pause()</code>method is invoked, the UA MUST queue a task,
-            using the DOM manipulation task source, that runs the following
+            <code>pause()</code>method is invoked, the UA MUST run the following
             steps:
             <ol>
-              <li>If <code>state</code> is "inactive" throw an
-              <code>InvalidStateError</code> DOMException and terminate these
-              steps. Otherwise:</li>
-              <li>Set <code>state</code> to "paused".</li>
-              <li>Stop gathering data into its current Blob (but keep the Blob
+              <li>If <a>state</a> is <a href="#dom-recordingstate-inactive">
+              inactive</a> throw an <code>InvalidStateError</code> DOMException
+              and terminate these steps. Otherwise the UA MUST queue a task,
+              using the DOM manipulation task source, that runs the following
+              steps:</li>
+              <li>Set <a>state</a> to <a href="#dom-recordingstate-paused">
+              paused</a>.</li>
+              <li>Stop gathering data into <var>blob</var> (but keep it
               available so that recording can be resumed in the future).</li>
-              <li>Fire an event named <code>pause</code>.</li>
+              <li>Let <var>target</var> be the MediaRecorder context object.
+              <a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
+              an event</a> named <code>pause</code> at <var>target</var>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -370,18 +413,21 @@ interface MediaRecorder : EventTarget {
           </dd>
           <dt><dfn><code>resume</code></dfn></dt>
           <dd>
-            When a <code>MediaRecorder</code> object&#8217;s
-            <code>resume()</code> method is invoked, the UA MUST queue a task,
-            using the DOM manipulation task source, that runs the following
-            steps:
+            When a <code>MediaRecorder</code> object&#8217;s <code>resume()
+            </code> method is invoked, the UA MUST run the following steps:
             <ol>
-              <li>If <code>state</code> is "inactive" throw an
-              <code>InvalidStateError</code> DOMException and terminate these
-              steps. Otherwise:</li>
-              <li>Set <code>state</code> to "recording".</li>
-              <li>Resume (or continue) gathering data into its current
-              Blob.</li>
-              <li>Fire an event named <code>resume</code>.</li>
+              <li>If <a>state</a> is <a href="#dom-recordingstate-inactive">
+              inactive</a> throw an <code>InvalidStateError</code> DOMException
+              and terminate these steps. Otherwise the UA MUST queue a task,
+              using the DOM manipulation task source, that runs the following
+              steps:</li>
+              <li>Set <a>state</a> to <a href="#dom-recordingstate-recording">
+              recording</a>.</li>
+              <li>Resume (or continue) gathering data into the current
+              <var>blob</var>.</li>
+              <li>Let <var>target</var> be the MediaRecorder context object.
+              <a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
+              an event</a> named <code>resume</code> at <var>target</var>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -393,16 +439,21 @@ interface MediaRecorder : EventTarget {
           <dt><dfn><code>requestData</code></dfn></dt>
           <dd>
             When a <code>MediaRecorder</code>object&#8217;s
-            <code>requestData()</code> method is invoked, the UA MUST queue a
-            task, using the DOM manipulation task source, that runs the
+            <code>requestData()</code> method is invoked, the UA MUST run the
             following steps:
             <ol>
-              <li>If <code>state</code> is not "recording" throw an
-              <code>InvalidStateError</code> DOMException and terminate these
-              steps. Otherwise:</li>
-              <li>Fire an event named <code>dataavailable</code> containing the
-              current Blob of saved data. (Note that this Blob will be empty if
-              no data has been gathered yet.)</li>
+              <li>If <a>state</a> is not <a href="#dom-recordingstate-recording">
+              recording</a> throw an <code>InvalidStateError</code> DOMException
+              and terminate these steps. Otherwise the UA MUST queue a task,
+              using the DOM manipulation task source, that runs the following
+              steps::</li>
+              <li>Let <var>blob</var> be the Blob of collected data so far and
+              let <var>target</var> be the MediaRecorder context object, then
+              <a href="#dfn-firing-a-blob-event">fire a blob event</a> named
+              <code>dataavailable</code> at <var>target</var> with
+              <var>blob</var>.
+              (Note that <var>blob</var> will be empty if no data has been
+              gathered yet.)</li>
               <li>Create a new Blob and gather subsequent data into it.</li>
             </ol>
             <div>
@@ -469,12 +520,29 @@ interface MediaRecorder : EventTarget {
         </dl>
       </section>
     </div>
+    <section>
+      <h2>Data handling</h2>
+        <p><dfn data-dfn-type="dfn"
+        data-lt="fire a blob event">To fire a blob event</dfn> with a
+        <a href="https://www.w3.org/TR/FileAPI/#blob"><code>Blob</code></a>
+        <var>blob</var> means
+        <a href="https://dom.spec.whatwg.org/#concept-event-fire">firing
+        an event</a> at <var>target</var> using a <a>BlobEvent</a> with its
+        <code>data</code> attribute initialized to <var>blob</var>.
+        <div class="note">
+        Usually <var>blob</var> will be the data gathered by the UA after the
+        last transition to <a href="#dom-recordingstate-recording">recording
+        </a> <a href="#dom-mediarecorder-state">state</a>.
+        </div>
+       </p>
+    </section>
+
     <section id="MediaRecorderOptions">
       <h3>MediaRecorderOptions</h3>
       <div>
         <pre class="idl">
           dictionary MediaRecorderOptions {
-            DOMString     mimeType;
+            DOMString mimeType;
             unsigned long audioBitsPerSecond;
             unsigned long videoBitsPerSecond;
             unsigned long bitsPerSecond;
@@ -495,7 +563,14 @@ interface MediaRecorder : EventTarget {
             DOMException. If this paramater is not specified, the UA will use a
             platform-specific default format. The container format, whether
             passed in to the constructor or defaulted, will be used as the value
-            of the <code>mimeType</code> attribute.</dd>
+            of the <code>mimeType</code> attribute.
+
+            <div class="note"> <code><a>mimeType</a></code> specifies the media
+            type and container format for the recording via a type/subtype
+            combination, with the codecs and/or profiles parameters [[RFC6381]]
+            specified where ambiguity might arise. Individual codecs might have
+            further optional specific parameters. </div></dd>
+            </dd>
 
             <dt><dfn><code>audioBitsPerSecond</code></dfn> of type <span class=
             "idlMemberType"><a>unsigned long</a></span></dt>
@@ -527,11 +602,13 @@ interface MediaRecorder : EventTarget {
     <section id="RecordingState">
       <h3>RecordingState</h3>
       <div>
-        <pre class="idl">enum RecordingState {
-    "inactive",
-    "recording",
-    "paused"
-};</pre>
+        <pre class="idl">
+          enum RecordingState {
+            "inactive",
+            "recording",
+            "paused"
+          };
+        </pre>
         <table data-link-for="RecordingState" data-dfn-for="RecordingState"
         class="simple">
           <tbody>
@@ -565,10 +642,11 @@ interface MediaRecorder : EventTarget {
     <h2>Blob Event</h2>
     <div>
       <pre class="idl">
-      [ Constructor (DOMString type, BlobEventInit eventInitDict)]
-interface BlobEvent : Event {
-    readonly        attribute Blob data;
-};</pre>
+        [Constructor (DOMString type, BlobEventInit eventInitDict)]
+        interface BlobEvent : Event {
+          readonly attribute Blob data;
+        };
+      </pre>
       <section>
         <h2>Constructors</h2>
         <dl data-link-for="BlobEvent" data-dfn-for="BlobEvent" class=
@@ -646,39 +724,49 @@ interface BlobEvent : Event {
   </section>
   <section id="error-handling">
     <h2>Error Handling</h2>
-    <section id="general-principles">
+    <section id="general-principles"  class="informative">
       <h3>General Principles</h3>
-      <p>The UA MUST throw a <a href= "https://heycam.github.io/webidl/#idl-
-      DOMException">DOMException</a> (see [[!DOM4]]) when the error can be
-      detected at the time that the call is made. In all other cases, an
-      <a><code>ErrorEvent</code></a> MUST be fired. If recording has been
-      started and not yet stopped when the error occurs, then after raising the
-      error, the UA MUST fire an event named <code>dataavailable</code>,
-      containing any data that it has gathered, and then a <code>stop</code>
-      event. The UA may set platform-specific limits, such as those for the
-      minimum and maximum Blob size that it will support, or the number of
-      Tracks it will record at once. It must signal a fatal error if these
-      limits are exceeded.</p>
+
+      <p>The UA MUST throw a <a
+      href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a>
+      ([[!DOM]]) when the error can be detected at the time that the call is
+      made. In all other cases the UA MUST
+      <a href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a>
+      named <a><code>ErrorEvent</code></a>.
+      If recording has been started and not yet stopped when the error occurs,
+      let <var>blob</var> be the Blob of collected data so far; after raising
+      the error, the UA MUST <a href="#dfn-firing-a-blob-event">fire a
+      dataavailable event</a> with <var>blob</var>; immediately after
+      the UA MUST then
+      <a href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a>
+      named <code>stop</code>.
+      The UA may set platform-specific limits, such as those for the minimum and
+      maximum Blob size that it will support, or the number of Tracks it will
+      record at once.
+      It must signal a fatal error if these limits are exceeded.</p>
+
     </section>
     <section>
       <h3>ErrorEvent</h3>
       <p>The <a>ErrorEvent</a> interface is defined for cases when an event is raised
-      that could have been caused by an error.</p> <p><dfn data-dfn-type="dfn"
-      data-lt="fires an error event">Firing an error event named
-      <var>e</var></dfn> with an <code>Error</code> <var>error</var> means that
-      an event with the name <var>e</var>, which does not bubble (except where
-      otherwise stated) and is not cancelable (except where otherwise stated),
-      and which uses the <code><a>ErrorEvent</a></code> interface with the
-      <code><a data-link-for= "ErrorEvent">error</a></code> attribute set to
-      <var>error</var>, must be created and <a href="https://dom.spec.whatwg.org
-      /#concept-event-dispatch">dispatched</a> at the given target. If no
-      <code>Error</code> object is specified, the <code><a data-link-for=
-      "ErrorEvent">error</a></code> attribute defaults to null.</p>
+      that could have been caused by an error.</p>
+      <p><dfn data-dfn-type="dfn"
+      data-lt="firing an error event">To fire an error event</dfn> named
+      <var>e</var> with a <code>DOMException</code> named <var>error</var> means
+      that an event with the name <var>e</var>, which does not bubble (except
+      where otherwise stated) and is not cancelable (except where otherwise
+      stated), and which uses the <code><a>ErrorEvent</a></code> interface with
+      the <code><a data-link-for= "ErrorEvent">error</a></code> attribute set to
+      <var>error</var>, must be created and
+      <a href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched
+      </a> at the given target. If no <code>DOMException</code> object is
+      specified, the <code><a data-link-for="ErrorEvent">error</a></code>
+      attribute defaults to null.</p>
       <div>
         <pre class="idl">
           [Exposed=Window, Constructor (DOMString type, ErrorEventInit eventInitDict)]
           interface ErrorEvent : Event {
-            readonly        attribute Error? error;
+            readonly attribute DOMException? error;
           };
         </pre>
         <section>
@@ -797,7 +885,8 @@ interface BlobEvent : Event {
         <tr>
           <th>Event name</th>
           <th>Interface</th>
-          <th>Fired when...</th>
+          <th><a href="https://dom.spec.whatwg.org/#concept-event-fire">Fired
+          </a> when...</th>
         </tr>
       </thead>
       <tbody>
