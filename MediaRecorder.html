@@ -367,16 +367,21 @@
               inactive</a>, throw an <code>InvalidStateError</code> DOMException
               and terminate these steps. Otherwise the UA MUST queue a task,
               using the DOM manipulation task source, that runs the following
-              steps:</li>
-              <li>Set <a>state</a> to <a href="#dom-recordingstate-inactive">
-              inactive</a> and stop gathering data.</li>
-              <li>Let <var>blob</var> be the Blob of collected data so far and
-              let <var>target</var> be the MediaRecorder context object, then
-              <a href="#dfn-to-fire-a-blob-event">fire a blob event</a> named
-              <code>dataavailable</code> at <var>target</var> with
-              <var>blob</var>.</li>
-              <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
-              an event</a> named <code>stop</code> at <var>target</var>.</li>
+              steps:
+              <ol>
+               <li>Set <a>state</a> to <a href="#dom-recordingstate-inactive">
+               inactive</a> and stop gathering data.</li>
+               <li>Let <var>blob</var> be the Blob of collected data so far and
+               let <var>target</var> be the MediaRecorder context object, then
+               <a href="#dfn-to-fire-a-blob-event">fire a blob event</a> named
+               <code>dataavailable</code> at <var>target</var> with
+               <var>blob</var>.</li>
+               <li>
+               <a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
+               an event</a> named <code>stop</code> at <var>target</var>.</li>
+              </ol>
+              </li>
+              <li>return <code>undefined</code>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -395,14 +400,18 @@
               inactive</a> throw an <code>InvalidStateError</code> DOMException
               and terminate these steps. Otherwise the UA MUST queue a task,
               using the DOM manipulation task source, that runs the following
-              steps:</li>
-              <li>Set <a>state</a> to <a href="#dom-recordingstate-paused">
-              paused</a>.</li>
-              <li>Stop gathering data into <var>blob</var> (but keep it
-              available so that recording can be resumed in the future).</li>
-              <li>Let <var>target</var> be the MediaRecorder context object.
-              <a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
-              an event</a> named <code>pause</code> at <var>target</var>.</li>
+              steps:
+              <ol>
+               <li>Set <a>state</a> to <a href="#dom-recordingstate-paused">
+               paused</a>.</li>
+               <li>Stop gathering data into <var>blob</var> (but keep it
+               available so that recording can be resumed in the future).</li>
+               <li>Let <var>target</var> be the MediaRecorder context object.
+               <a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
+               an event</a> named <code>pause</code> at <var>target</var>.</li>
+               </ol>
+              </li>
+              <li>return <code>undefined</code>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -420,14 +429,18 @@
               inactive</a> throw an <code>InvalidStateError</code> DOMException
               and terminate these steps. Otherwise the UA MUST queue a task,
               using the DOM manipulation task source, that runs the following
-              steps:</li>
-              <li>Set <a>state</a> to <a href="#dom-recordingstate-recording">
-              recording</a>.</li>
-              <li>Resume (or continue) gathering data into the current
-              <var>blob</var>.</li>
-              <li>Let <var>target</var> be the MediaRecorder context object.
-              <a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
-              an event</a> named <code>resume</code> at <var>target</var>.</li>
+              steps:
+              <ol>
+               <li>Set <a>state</a> to <a href="#dom-recordingstate-recording">
+               recording</a>.</li>
+               <li>Resume (or continue) gathering data into the current
+               <var>blob</var>.</li>
+               <li>Let <var>target</var> be the MediaRecorder context object.
+               <a href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
+               an event</a> named <code>resume</code> at <var>target</var>.</li>
+              </ol>
+              </li>
+              <li>return <code>undefined</code>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -446,15 +459,19 @@
               recording</a> throw an <code>InvalidStateError</code> DOMException
               and terminate these steps. Otherwise the UA MUST queue a task,
               using the DOM manipulation task source, that runs the following
-              steps::</li>
-              <li>Let <var>blob</var> be the Blob of collected data so far and
-              let <var>target</var> be the MediaRecorder context object, then
-              <a href="#dfn-to-fire-a-blob-event">fire a blob event</a> named
-              <code>dataavailable</code> at <var>target</var> with
-              <var>blob</var>.
-              (Note that <var>blob</var> will be empty if no data has been
-              gathered yet.)</li>
-              <li>Create a new Blob and gather subsequent data into it.</li>
+              steps:
+              <ol>
+               <li>Let <var>blob</var> be the Blob of collected data so far and
+               let <var>target</var> be the MediaRecorder context object, then
+               <a href="#dfn-to-fire-a-blob-event">fire a blob event</a> named
+               <code>dataavailable</code> at <var>target</var> with
+               <var>blob</var>.
+               (Note that <var>blob</var> will be empty if no data has been
+               gathered yet.)</li>
+               <li>Create a new Blob and gather subsequent data into it.</li>
+              </ol>
+              </li>
+              <li>return <code>undefined</code>.</li>
             </ol>
             <div>
               <em>No parameters.</em>
@@ -727,23 +744,23 @@
     <section id="general-principles"  class="informative">
       <h3>General Principles</h3>
 
-      <p>The UA MUST throw a <a
+      <p>The UA will throw a <a
       href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a>
       ([[!DOM]]) when the error can be detected at the time that the call is
-      made. In all other cases the UA MUST
+      made. In all other cases the UA will
       <a href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a>
       named <a><code>ErrorEvent</code></a>.
       If recording has been started and not yet stopped when the error occurs,
       let <var>blob</var> be the Blob of collected data so far; after raising
-      the error, the UA MUST <a href="#dfn-to-fire-a-blob-event">fire a
+      the error, the UA will <a href="#dfn-to-fire-a-blob-event">fire a
       dataavailable event</a> with <var>blob</var>; immediately after
-      the UA MUST then
+      the UA will then
       <a href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a>
       named <code>stop</code>.
       The UA may set platform-specific limits, such as those for the minimum and
       maximum Blob size that it will support, or the number of Tracks it will
       record at once.
-      It must signal a fatal error if these limits are exceeded.</p>
+      It will signal a fatal error if these limits are exceeded.</p>
 
     </section>
     <section>
