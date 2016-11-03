@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>MediaStream Recording</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -529,12 +529,13 @@
         <a href="https://dom.spec.whatwg.org/#concept-event-fire">firing
         an event</a> at <var>target</var> using a <a>BlobEvent</a> with its
         <code>data</code> attribute initialized to <var>blob</var>.
+       </p>
+
         <div class="note">
         Usually <var>blob</var> will be the data gathered by the UA after the
         last transition to <a href="#dom-recordingstate-recording">recording
         </a> <a href="#dom-mediarecorder-state">state</a>.
         </div>
-       </p>
     </section>
 
     <section id="MediaRecorderOptions">
@@ -570,7 +571,6 @@
             combination, with the codecs and/or profiles parameters [[RFC6381]]
             specified where ambiguity might arise. Individual codecs might have
             further optional specific parameters. </div></dd>
-            </dd>
 
             <dt><dfn><code>audioBitsPerSecond</code></dfn> of type <span class=
             "idlMemberType"><a>unsigned long</a></span></dt>
