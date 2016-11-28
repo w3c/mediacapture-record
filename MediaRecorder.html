@@ -654,6 +654,7 @@
         [Constructor (DOMString type, BlobEventInit eventInitDict)]
         interface BlobEvent : Event {
           readonly attribute Blob data;
+          readonly attribute DOMHighResTimeStamp timecode;
         };
       </pre>
       <section>
@@ -704,12 +705,19 @@
         <h2>Attributes</h2>
         <dl data-link-for="BlobEvent" data-dfn-for="BlobEvent" class=
         "attributes">
-          <dt><dfn><code>data</code></dfn> of type <span class=
-          "idlAttrType"><a>Blob</a></span>, readonly</dt>
-          <dd>Returns a <a
-          href="https://www.w3.org/TR/FileAPI/#blob"><code>Blob</code></a>
-          object whose type attribute indicates the encoding of the blob
-          data.</dd>
+          <dt><dfn><code>data</code></dfn> of type <span class="idlAttrType">
+          <a href="https://www.w3.org/TR/FileAPI/#blob">Blob</a></span>,
+          readonly</dt>
+          <dd>The encoded blob. Its
+          <a href="https://www.w3.org/TR/FileAPI/#dfn-type">
+          type</a> attribute correlates to the selected
+          <a href="#dom-mediarecorder-mimeType">mimeType</a>.</dd>
+
+          <dt><dfn><code>timecode</code></dfn> of type <span class "idlAttrType">
+          <a href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">
+          DOMHighResTimeStamp</a></span>, readonly</dt>
+          <dd><code>Timecode</code> associated with the Blob data, relative to
+          the first produced <code>blob</code>.</dd>
         </dl>
       </section>
     </div>
