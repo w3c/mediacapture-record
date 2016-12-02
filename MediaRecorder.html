@@ -653,8 +653,8 @@
       <pre class="idl">
         [Constructor (DOMString type, BlobEventInit eventInitDict)]
         interface BlobEvent : Event {
-          readonly attribute Blob data;
-          readonly attribute DOMHighResTimeStamp timecode;
+          [SameObject] readonly attribute Blob data;
+          [SameObject] readonly attribute DOMHighResTimeStamp timecode;
         };
       </pre>
       <section>
