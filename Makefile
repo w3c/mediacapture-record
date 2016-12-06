@@ -2,7 +2,7 @@ LINEWRAP = false
 
 all: MediaRecorder.diff.html 
 
-clean:
+clean::
 	- rm -f MediaRecorder.diff.html MediaRecorder.txt MediaRecorder.orig.txt
 
 MediaRecorder.txt: MediaRecorder.html

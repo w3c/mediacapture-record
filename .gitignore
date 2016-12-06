@@ -1,9 +1,8 @@
 *~
-old
-old?
-foo
-bar
 .DS_Store
+build
+support
+webrtc-respec-ci
 MediaRecorder.diff.html
 MediaRecorder.orig.html
 MediaRecorder.orig.txt
