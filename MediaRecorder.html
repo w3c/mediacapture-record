@@ -188,15 +188,18 @@
 
           <dt><dfn><code>ignoreMutedMedia</code></dfn> of type <span class=
           "idlAttrType"><a>boolean</a></span></dt>
-          <dd>If this attribute is set to <code>true</code>, MediaRecorder will
-          not record any input when a given source <a
-          href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">
-          <code>MediaStreamTrack</code></a> is muted. If this attribute is
-          <code>false</code>, MediaRecorder will record silence (for audio) and
-          black frames (for video) when the corresponding MediaStreamTrack is
+          <dd>This attribute configures a MediaRecorder's behaviour when a given
+          input
+          <a href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">
+          <code>MediaStreamTrack</code></a> <var>track</var> is
           <a href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-muted">
-          muted</a>. When the MediaRecorder is created, the UA MUST set this
-          attribute to <code>false</code>.</dd>
+          muted</a> (this attribute has no effect on non-muted tracks).
+          If this attribute is set to <code>true</code>, MediaRecorder will
+          not record any input. If this attribute is <code>false</code>,
+          MediaRecorder will record silence (for audio) and black frames
+          (for video).  When the MediaRecorder is created, the UA MUST set this
+          attribute to <code>false</code>.
+          </dd>
 
           <dt><dfn><code>videoBitsPerSecond</code></dfn> of type <span class=
           "idlAttrType"><a>unsigned long</a></span>, readonly</dt>
@@ -326,11 +329,11 @@
             playable, but the combination of all the Blobs from a completed
             recording MUST be playable.</p>
 
-            <p> If any Track within the MediaStream is muted at any time (i.e.,
-            if its <code>muted</code> flag is set to <code>true</code>), the UA
-            MUST insert black frames or silence until the Track is unmuted, or
-            record nothing, depending on the value of
-            <a>ignoreMutedMedia</a>.</p>
+            <p> The UA MUST insert black frames or silence, or record nothing,
+            depending on the value of <a>ignoreMutedMedia</a>, for as long as
+            a given <var>track</var> within the MediaStream  is
+            <a href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-muted">
+            muted</a>. This behaviour only applies to the muted tracks.</p>
 
             <table class="parameters">
               <tbody>
