@@ -971,14 +971,15 @@
   if (window.MediaRecorder == undefined) {
     console.error('MediaRecorder not supported, boo');
   } else {
-    var codecs = ["video/webm",
-                  "video/webm;codecs=vp8",
-                  "audio/webm",
-                  "video/mp4;codecs=h264",
-                  "video/invalid"];
-    codecs.forEach( codec => {
-      console.log(codec + ' is ' +  (MediaRecorder.isTypeSupported(codec) ?
-                                         'supported' : 'NOT supported '));
+    var contentTypes = ["video/webm",
+                        "video/webm;codecs=vp8",
+                        "audio/webm",
+                        "video/mp4;codecs=h264",
+                        "video/invalid"];
+    contentTypes.forEach(contentType => {
+      console.log(contentType + ' is '
+          + (MediaRecorder.isTypeSupported(contentType) ?
+              'supported' : 'NOT supported '));
     });
   }
   </pre>
