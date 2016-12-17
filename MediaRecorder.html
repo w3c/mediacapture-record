@@ -75,7 +75,6 @@
         attribute EventHandler onpause;
         attribute EventHandler onresume;
         attribute EventHandler onerror;
-        attribute boolean ignoreMutedMedia;
         readonly attribute unsigned long videoBitsPerSecond;
         readonly attribute unsigned long audioBitsPerSecond;
         void start (optional long timeslice);
@@ -185,18 +184,6 @@
           <dt><dfn><code>onerror</code></dfn> of type <span class=
           "idlAttrType"><a>EventHandler</a></span></dt>
           <dd>Called to handle an <a>ErrorEvent</a>.</dd>
-
-          <dt><dfn><code>ignoreMutedMedia</code></dfn> of type <span class=
-          "idlAttrType"><a>boolean</a></span></dt>
-          <dd>If this attribute is set to <code>true</code>, MediaRecorder will
-          not record any input when a given source <a
-          href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">
-          <code>MediaStreamTrack</code></a> is muted. If this attribute is
-          <code>false</code>, MediaRecorder will record silence (for audio) and
-          black frames (for video) when the corresponding MediaStreamTrack is
-          <a href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-muted">
-          muted</a>. When the MediaRecorder is created, the UA MUST set this
-          attribute to <code>false</code>.</dd>
 
           <dt><dfn><code>videoBitsPerSecond</code></dfn> of type <span class=
           "idlAttrType"><a>unsigned long</a></span>, readonly</dt>
@@ -325,12 +312,6 @@
             <code>requestData</code>), the individual Blobs need not be
             playable, but the combination of all the Blobs from a completed
             recording MUST be playable.</p>
-
-            <p> If any Track within the MediaStream is muted at any time (i.e.,
-            if its <code>muted</code> flag is set to <code>true</code>), the UA
-            MUST insert black frames or silence until the Track is unmuted, or
-            record nothing, depending on the value of
-            <a>ignoreMutedMedia</a>.</p>
 
             <table class="parameters">
               <tbody>
