@@ -716,12 +716,9 @@
           <dt><dfn><code>timecode</code></dfn> of type <span class "idlAttrType">
           <a href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">
           DOMHighResTimeStamp</a></span>, readonly</dt>
-          <dd>The difference between the current <var>data</var>'s timestamp and
-          the <var>timecode</var> of the first produced <a>BlobEvent</a>.
-          If <var>data</var> is composed of several chunks that could have
-          independent <var>timecode</var>s (e.g. several encoded video frames),
-          then <var>timecode</var> MUST refer to the earliest individually
-          addressable chunk.
+          <dd>The difference between the timestamp of the first chunk in
+          <var>data</var> and the timestamp of the first chunk in the first
+          <a>BlobEvent</a> produced by this recorder.
           Note that the <var>timecode</var> in the first produced
           <a>BlobEvent</a> does not need to be zero.
           </dd>
