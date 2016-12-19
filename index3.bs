@@ -1,0 +1,171 @@
+<pre class="metadata">
+Title: MediaStream Recording
+Repository: mediacapture-record
+Group: dap
+Status: ED
+ED: https://w3c.github.io/mediacapture-record/
+Shortname: mediastream-recording
+Level: 1
+Editor: Miguel Casas-Sanchez, w3cid 82825, Google Inc., mcasas@google.com
+Former Editor: Jim Barnett, w3cid 34604, Genesis
+Former Editor: Travis Leithead, w3cid 40117, Microsoft Corp., travis.leithead@microsoft.com
+Abstract: This document defines a recording API for use with {{MediaStream}}s.
+
+!Participate: <a href="https://lists.w3.org/Archives/Public/public-media-capture/">Mailing list</a>
+!Participate: <a href="https://github.com/w3c/mediacapture-record">GitHub repo</a> (<a href="https://github.com/w3c/mediacapture-record/issues/new">new issue</a>, <a href="https://github.com/w3c/mediacapture-record/issues">open issues</a>)
+
+!Implementation: <a href="https://github.com/w3c/mediacapture-record/blob/gh-pages/implementation-status.md">Implementation Status</a>
+!Implementation: <a href="http://caniuse.com/#feat=mediarecorder">Can I use Media Recording?</a>
+
+</pre>
+
+<style>
+table {
+  border-collapse: collapse;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  text-align: left;
+}
+table caption {
+  font-weight: bold;
+  padding: 3px;
+  text-align: left;
+}
+table td, table th {
+  border: 1px solid black;
+  padding: 3px;
+}
+</style>
+
+# Overview # {#overview}
+
+This API attempts to make basic recording very simple, while still allowing for
+more complex use cases. In the simplest case, the application instantiates a
+{{MediaRecorder}} object, calls {{start()}} and then calls {{stop()}} or waits
+for the {{MediaStreamTrack}}(s) to be ended. The contents of the recording will
+be made available in the platform's default encoding via the {{ondataavailable}}
+event.  Functions are available to query the platform's available set of
+encodings, and to select the desired ones if the author wishes. The application
+can also choose how much data it wants to receive at one time. By default a
+{{Blob}} containing the entire recording is returned when the recording
+finishes. However the application can choose to receive smaller buffers of data
+at regular intervals.
+
+
+# Media Recorder API # {#mediarecorder}
+
+<pre class="idl">
+[Constructor(MediaStream stream, optional MediaRecorderOptions options)]
+interface MediaRecorder : EventTarget {
+  readonly attribute MediaStream stream;
+  readonly attribute DOMString mimeType;
+  readonly attribute RecordingState state;
+  attribute EventHandler onstart;
+  attribute EventHandler onstop;
+  attribute EventHandler ondataavailable;
+  attribute EventHandler onpause;
+  attribute EventHandler onresume;
+  attribute EventHandler onerror;
+  readonly attribute unsigned long videoBitsPerSecond;
+  readonly attribute unsigned long audioBitsPerSecond;
+
+  void start(optional long timeslice);
+  void stop();
+  void pause();
+  void resume();
+  void requestData();
+
+  static boolean isTypeSupported(DOMString type);
+};
+</pre>
+
+## Constructors ## {#mediarecorderconstructor}
+
+<dl class="domintro">
+  <dt><dfn constructor for="MediaRecorder"><code>MediaRecorder(MediaStream stream, optional MediaRecorderOptions options)</code></dfn></dt>
+  <dd></dd>
+</dl>
+
+## Attributes ## {#mediarecorderattributes}
+
+<dl class="domintro">
+  <dt><dfn attribute for="MediaRecorder"><code>stream</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn attribute for="MediaRecorder"><code>mimeType</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn attribute for="MediaRecorder"><code>state</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn attribute for="MediaRecorder"><code>onstart</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn attribute for="MediaRecorder"><code>onstop</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn attribute for="MediaRecorder"><code>ondataavailable</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn attribute for="MediaRecorder"><code>onpause</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn attribute for="MediaRecorder"><code>onresume</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn attribute for="MediaRecorder"><code>onerror</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn attribute for="MediaRecorder"><code>videoBitsPerSecond</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn attribute for="MediaRecorder"><code>audioBitsPerSecond</code></dfn></dt>
+  <dd></dd>
+</dl>
+
+## Methods ## {#mediarecordermethods}
+
+<dl class="domintro">
+  <dt><dfn method for="MediaRecorder"><code>start(optional long timeslice)</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn method for="MediaRecorder"><code>stop()</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn method for="MediaRecorder"><code>pause()</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn method for="MediaRecorder"><code>resume()</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn method for="MediaRecorder"><code>requestData()</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn method for="MediaRecorder"><code>isTypeSupported(DOMString type)</code></dfn></dt>
+  <dd></dd>
+</dl>
+
+<pre class="anchors">
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStream; url: mediastream
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStreamTrack; url: mediastreamtrack
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: onmute; url: widl-MediaStreamTrack-onmute
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: onunmute; url: widl-MediaStreamTrack-onunmute
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: readyState; url: widl-MediaStreamTrack-readyState
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: kind; url: widl-MediaStreamTrack-kind
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: enum-value; text: live; url: idl-def-MediaStreamTrackState.live
+</pre>
+
+<pre class="link-defaults">
+spec: html
+    type: dfn
+        text: allowed to show a popup
+        text: in parallel
+        text: incumbent settings object
+</pre>
+
