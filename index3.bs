@@ -79,14 +79,14 @@ interface MediaRecorder : EventTarget {
 };
 </pre>
 
-## Constructors ## {#mediarecorderconstructor}
+## Constructors ## {#mediarecorder-constructor}
 
 <dl class="domintro">
   <dt><dfn constructor for="MediaRecorder"><code>MediaRecorder(MediaStream stream, optional MediaRecorderOptions options)</code></dfn></dt>
   <dd></dd>
 </dl>
 
-## Attributes ## {#mediarecorderattributes}
+## Attributes ## {#mediarecorder-attributes}
 
 <dl class="domintro">
   <dt><dfn attribute for="MediaRecorder"><code>stream</code></dfn></dt>
@@ -123,7 +123,7 @@ interface MediaRecorder : EventTarget {
   <dd></dd>
 </dl>
 
-## Methods ## {#mediarecordermethods}
+## Methods ## {#mediarecorder-methods}
 
 <dl class="domintro">
   <dt><dfn method for="MediaRecorder"><code>start(optional long timeslice)</code></dfn></dt>
@@ -144,6 +144,91 @@ interface MediaRecorder : EventTarget {
   <dt><dfn method for="MediaRecorder"><code>isTypeSupported(DOMString type)</code></dfn></dt>
   <dd></dd>
 </dl>
+
+
+## MediaRecorderOptions ## {#mediarecorderoptions}
+
+<pre class="idl">
+dictionary MediaRecorderOptions {
+  DOMString mimeType;
+  unsigned long audioBitsPerSecond;
+  unsigned long videoBitsPerSecond;
+  unsigned long bitsPerSecond;
+};
+</pre>
+
+### Members ### {#mediarecorderoptions-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="MediaRecorderOptions"><code>mimeType</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn dict-member for="MediaRecorderOptions"><code>audioBitsPerSecond</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn dict-member for="MediaRecorderOptions"><code>videoBitsPerSecond</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn dict-member for="MediaRecorderOptions"><code>bitsPerSecond</code></dfn></dt>
+  <dd></dd>
+</dl>
+
+
+## RecordingState ## {#recordingstate}
+
+<pre class="idl">
+enum RecordingState {
+  "inactive",
+  "recording",
+  "paused"
+};
+</pre>
+
+## Values ## {##recordingstate-values}
+
+<dl class="domintro">
+  <dt><dfn enum-value for="RecordingState"><code>inactive</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn enum-value for="RecordingState"><code>recording</code></dfn></dt>
+  <dd></dd>
+
+  <dt><dfn enum-value for="RecordingState"><code>paused</code></dfn></dt>
+  <dd></dd>
+</dl>
+
+# Blob Event ## {#blobevent}
+
+<pre class="idl">
+  [Constructor(DOMString type, BlobEventInit eventInitDict)]
+  interface BlobEvent : Event {
+    readonly attribute Blob data;
+  };
+</pre>
+
+## Constructors ## {#blobevent-constructor}
+
+<dl class="domintro">
+  <dt><dfn constructor for="BlobEvent"><code>BlobEvent(DOMString type, BlobEventInit eventInitDict)</code></dfn></dt>
+  <dd></dd>
+</dl>
+
+## Attributes ## {#blobevent-attributes}
+
+<dl class="domintro">
+  <dt><dfn attribute for="BlobEvent"><code>data</code></dfn></dt>
+  <dd></dd>
+
+</dl>
+
+
+
+
+
+
+
+
+
 
 <pre class="anchors">
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStream; url: mediastream
