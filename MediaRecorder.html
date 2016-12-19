@@ -313,6 +313,15 @@
             playable, but the combination of all the Blobs from a completed
             recording MUST be playable.</p>
 
+            <p> If any Track within the MediaStream is
+            <a href="https://www.w3.org/TR/mediacapture-streams/#track-muted">
+            muted</a> or
+            <a href="https://www.w3.org/TR/mediacapture-streams/#track-enabled">
+            disabled</a> at any time (i.e., if its <code>muted</code> or
+            <code>enabled</code> flag, respectively, is set to
+            <code>true</code>), the UA will only record black frames or silence
+            since that is the content produced by the Track.</p>
+
             <table class="parameters">
               <tbody>
                 <tr>
