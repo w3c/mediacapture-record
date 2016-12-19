@@ -184,7 +184,7 @@ enum RecordingState {
 };
 </pre>
 
-## Values ## {##recordingstate-values}
+### Values ### {##recordingstate-values}
 
 <dl class="domintro">
   <dt><dfn enum-value for="RecordingState"><code>inactive</code></dfn></dt>
@@ -197,7 +197,7 @@ enum RecordingState {
   <dd></dd>
 </dl>
 
-# Blob Event ## {#blobevent}
+# Blob Event # {#blobevent}
 
 <pre class="idl">
   [Constructor(DOMString type, BlobEventInit eventInitDict)]
@@ -222,6 +222,154 @@ enum RecordingState {
 </dl>
 
 
+## BlobEventInit ## {#blobeventinit}
+
+<pre class="idl">
+dictionary BlobEventInit {
+  required Blob data;
+};
+</pre>
+
+### Members ### {#blobeventinit-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="BlobEventInit"><code>data</code></dfn></dt>
+  <dd></dd>
+</dl>
+
+# Error handling
+## General principles
+<em>This section is non-normative.</em>
+
+## ErrorEvent
+
+
+<pre class="idl">
+[Exposed=Window, Constructor(DOMString type, optional ErrorEventInit eventInitDict)]
+interface ErrorEvent : Event {
+  readonly attribute DOMException? error;
+};
+</pre>
+
+### Constructors ### {#errorevent-constructor}
+
+<dl class="domintro">
+  <dt><dfn constructor for="ErrorEvent"><code>ErrorEvent(DOMString type, ErrorEventInit eventInitDict)</code></dfn></dt>
+  <dd></dd>
+</dl>
+
+### Attributes ### {#errorevent-attributes}
+
+<dl class="domintro">
+  <dt><dfn attribute for="ErrorEvent"><code>error</code></dfn></dt>
+  <dd></dd>
+</dl>
+
+### ErrorEventInit ### {#erroreventinit}
+
+<pre class="idl">
+dictionary ErrorEventInit {
+  Error? error = null;
+};
+</pre>
+
+#### Members #### {#erroreventinit-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="ErrorEventInit"><code>error</code></dfn></dt>
+  <dd></dd>
+</dl>
+
+## Exception Summary ## {#exception-summary}
+
+# Event summary
+
+
+# Examples # {#examples}
+
+<div class="note">
+Slightly modified versions of these examples can be found in e.g. <a
+ href="https://codepen.io/collection/XjkNbN/">this codepen collection</a>.
+</div>
+
+## Check for {{MediaRecorder}} and mime types.
+
+<div class="note">
+The following example can also be found in e.g. <a
+  href="https://codepen.io/miguelao/pen/edqNab?editors=0010">this codepen</a>
+with minimal modifications.
+</div>
+
+<div class="example" highlight="javascript">
+  <pre>
+  if (window.MediaRecorder == undefined) {
+    console.error('MediaRecorder not supported, boo');
+  } else {
+    var contentTypes = ["video/webm",
+                        "video/webm;codecs=vp8",
+                        "audio/webm",
+                        "video/mp4;codecs=h264",
+                        "video/invalid"];
+    contentTypes.forEach(contentType => {
+      console.log(contentType + ' is '
+          + (MediaRecorder.isTypeSupported(contentType) ?
+              'supported' : 'NOT supported '));
+    });
+  }
+  </pre>
+</div>
+
+
+## Recording webcam video and audio
+
+<div class="note">
+The following example can also be found in e.g. <a
+ href="https://codepen.io/miguelao/pen/wzVMJb?editors=0010">this codepen</a>
+with minimal modifications.
+</div>
+
+<div class="example" highlight="javascript">
+  <pre>
+  &lt;html>
+  &lt;body>
+  &lt;video autoplay/>
+  &lt;script>
+    var recordedChunks = [];
+
+    function gotMedia(stream) {
+      var video = document.querySelector('video');
+      video.src = URL.createObjectURL(stream);
+      var recorder = null;
+      try {
+        recorder = new MediaRecorder(stream, {mimeType : "video/webm"});
+      } catch (e) {
+        console.error('Exception while creating MediaRecorder: ' + e);
+        return;
+      }
+
+      recorder.ondataavailable = (event) => {
+        console.log(' Recorded chunk of size ' + event.data.size + "B");
+        recordedChunks.push(event.data);
+      };
+
+      recorder.start(100);
+    }
+
+    navigator.mediaDevices.getUserMedia({video: true , audio: true})
+        .then(gotMedia)
+        .catch(e => { console.error('getUserMedia() failed: ' + e); });
+  &lt;/script>
+  &lt;/body>
+  &lt;/html>
+  </pre>
+</div>
+
+<div class="note">
+<code>recordedChunks</code> can be saved to a file using e.g. the function
+  <code>download()</code> in the <a
+  href="https://developers.google.com/web/updates/2016/01/mediarecorder">
+  MediaRecorder Web Fundamentals article</a>.
+</div>
 
 
 
@@ -229,6 +377,9 @@ enum RecordingState {
 
 
 
+<pre class="anchors">
+type: interface; text: DOMString; url: https://heycam.github.io/webidl/#idl-DOMString; spec: webidl
+</pre>
 
 <pre class="anchors">
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStream; url: mediastream
