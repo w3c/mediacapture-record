@@ -595,12 +595,12 @@
             <dt><dfn><code>bitsPerSecond</code></dfn> of type <span class=
             "idlMemberType"><a>unsigned long</a></span></dt>
             <dd>Aggregate target bits per second for encoding of all Video and
-            Audio Track(s) present. This parameter overrides either
-            <code>audioBitsPerSecond</code> or <code>videoBitsPerSecond</code>
-            if present, and might be distributed among the present track
-            encoders as the UA sees fit. This parameter is a hint for the
-            encoder(s) and the total value might be surpassed, not achieved, or
-            only be achieved over a long period of time.</dd>
+            Audio Track(s) present. This parameter will limit either
+            <code>audioBitsPerSecond</code>, <code>videoBitsPerSecond</code> or
+            their sum, whichever is present, and might be distributed among the
+            present track encoders as the UA sees fit. This parameter is a hint
+            for the encoder(s) and the total value might be surpassed, not
+            achieved, or only be achieved over a long period of time.</dd>
           </dl>
         </section>
       </div>
