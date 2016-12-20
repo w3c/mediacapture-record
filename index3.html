@@ -1464,7 +1464,6 @@ pre.idl.highlight { color: #708090; }
      <dd><span><a href="https://github.com/w3c/mediacapture-record">GitHub repo</a> (<a href="https://github.com/w3c/mediacapture-record/issues/new">new issue</a>, <a href="https://github.com/w3c/mediacapture-record/issues">open issues</a>)</span>
      <dd><span></span>
      <dt>Implementation:
-     <dd><span><a href="https://github.com/w3c/mediacapture-record/blob/gh-pages/implementation-status.md">Implementation Status</a></span>
      <dd><span><a href="http://caniuse.com/#feat=mediarecorder">Can I use Media Recording?</a></span>
      <dd><span></span>
     </dl>
@@ -1503,58 +1502,59 @@ pre.idl.highlight { color: #708090; }
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
     <li><a href="#overview"><span class="secno">1</span> <span class="content">Overview</span></a>
+    <li><a href="#security-and-privacy"><span class="secno">2</span> <span class="content">Privacy and Security Considerations</span></a>
     <li>
-     <a href="#mediarecorder-api"><span class="secno">2</span> <span class="content">Media Recorder API</span></a>
+     <a href="#mediarecorder-api"><span class="secno">3</span> <span class="content">Media Recorder API</span></a>
      <ol class="toc">
-      <li><a href="#mediarecorder-constructor"><span class="secno">2.1</span> <span class="content">Constructors</span></a>
-      <li><a href="#mediarecorder-attributes"><span class="secno">2.2</span> <span class="content">Attributes</span></a>
-      <li><a href="#mediarecorder-methods"><span class="secno">2.3</span> <span class="content">Methods</span></a>
-      <li><a href="#data-handling"><span class="secno">2.4</span> <span class="content">Data handling</span></a>
+      <li><a href="#mediarecorder-constructor"><span class="secno">3.1</span> <span class="content">Constructors</span></a>
+      <li><a href="#mediarecorder-attributes"><span class="secno">3.2</span> <span class="content">Attributes</span></a>
+      <li><a href="#mediarecorder-methods"><span class="secno">3.3</span> <span class="content">Methods</span></a>
+      <li><a href="#data-handling"><span class="secno">3.4</span> <span class="content">Data handling</span></a>
       <li>
-       <a href="#mediarecorderoptions-section"><span class="secno">2.5</span> <span class="content">MediaRecorderOptions</span></a>
+       <a href="#mediarecorderoptions-section"><span class="secno">3.5</span> <span class="content">MediaRecorderOptions</span></a>
        <ol class="toc">
-        <li><a href="#mediarecorderoptions-members"><span class="secno">2.5.1</span> <span class="content">Members</span></a>
+        <li><a href="#mediarecorderoptions-members"><span class="secno">3.5.1</span> <span class="content">Members</span></a>
        </ol>
       <li>
-       <a href="#recordingstate"><span class="secno">2.6</span> <span class="content">RecordingState</span></a>
+       <a href="#recordingstate"><span class="secno">3.6</span> <span class="content">RecordingState</span></a>
        <ol class="toc">
-        <li><a href="##recordingstate-values"><span class="secno">2.6.1</span> <span class="content">Values</span></a>
-       </ol>
-     </ol>
-    <li>
-     <a href="#blobevent-section"><span class="secno">3</span> <span class="content">Blob Event</span></a>
-     <ol class="toc">
-      <li><a href="#blobevent-constructor"><span class="secno">3.1</span> <span class="content">Constructors</span></a>
-      <li><a href="#blobevent-attributes"><span class="secno">3.2</span> <span class="content">Attributes</span></a>
-      <li>
-       <a href="#blobeventinit"><span class="secno">3.3</span> <span class="content">BlobEventInit</span></a>
-       <ol class="toc">
-        <li><a href="#blobeventinit-members"><span class="secno">3.3.1</span> <span class="content">Members</span></a>
+        <li><a href="##recordingstate-values"><span class="secno">3.6.1</span> <span class="content">Values</span></a>
        </ol>
      </ol>
     <li>
-     <a href="#error-handling"><span class="secno">4</span> <span class="content">Error handling</span></a>
+     <a href="#blobevent-section"><span class="secno">4</span> <span class="content">Blob Event</span></a>
      <ol class="toc">
-      <li><a href="#general-principles"><span class="secno">4.1</span> <span class="content">General principles</span></a>
+      <li><a href="#blobevent-constructor"><span class="secno">4.1</span> <span class="content">Constructors</span></a>
+      <li><a href="#blobevent-attributes"><span class="secno">4.2</span> <span class="content">Attributes</span></a>
       <li>
-       <a href="#errorevent-section"><span class="secno">4.2</span> <span class="content">ErrorEvent</span></a>
+       <a href="#blobeventinit"><span class="secno">4.3</span> <span class="content">BlobEventInit</span></a>
        <ol class="toc">
-        <li><a href="#errorevent-constructor"><span class="secno">4.2.1</span> <span class="content">Constructors</span></a>
-        <li><a href="#errorevent-attributes"><span class="secno">4.2.2</span> <span class="content">Attributes</span></a>
+        <li><a href="#blobeventinit-members"><span class="secno">4.3.1</span> <span class="content">Members</span></a>
+       </ol>
+     </ol>
+    <li>
+     <a href="#error-handling"><span class="secno">5</span> <span class="content">Error handling</span></a>
+     <ol class="toc">
+      <li><a href="#error-handling-principles"><span class="secno">5.1</span> <span class="content">General principles</span></a>
+      <li>
+       <a href="#errorevent-section"><span class="secno">5.2</span> <span class="content">ErrorEvent</span></a>
+       <ol class="toc">
+        <li><a href="#errorevent-constructor"><span class="secno">5.2.1</span> <span class="content">Constructors</span></a>
+        <li><a href="#errorevent-attributes"><span class="secno">5.2.2</span> <span class="content">Attributes</span></a>
         <li>
-         <a href="#erroreventinit"><span class="secno">4.2.3</span> <span class="content">ErrorEventInit</span></a>
+         <a href="#erroreventinit"><span class="secno">5.2.3</span> <span class="content">ErrorEventInit</span></a>
          <ol class="toc">
-          <li><a href="#erroreventinit-members"><span class="secno">4.2.3.1</span> <span class="content">Members</span></a>
+          <li><a href="#erroreventinit-members"><span class="secno">5.2.3.1</span> <span class="content">Members</span></a>
          </ol>
        </ol>
-      <li><a href="#exception-summary"><span class="secno">4.3</span> <span class="content">Exception Summary</span></a>
+      <li><a href="#exception-summary"><span class="secno">5.3</span> <span class="content">Exception Summary</span></a>
      </ol>
-    <li><a href="#event-summary"><span class="secno">5</span> <span class="content">Event summary</span></a>
+    <li><a href="#event-summary"><span class="secno">6</span> <span class="content">Event summary</span></a>
     <li>
-     <a href="#examples"><span class="secno">6</span> <span class="content">Examples</span></a>
+     <a href="#examples"><span class="secno">7</span> <span class="content">Examples</span></a>
      <ol class="toc">
-      <li><a href="#check-for-mediarecorder-and-mime-types"><span class="secno">6.1</span> <span class="content">Check for <code class="idl"><span>MediaRecorder</span></code> and mime types.</span></a>
-      <li><a href="#recording-webcam-video-and-audio"><span class="secno">6.2</span> <span class="content">Recording webcam video and audio</span></a>
+      <li><a href="#example1"><span class="secno">7.1</span> <span class="content">Check for <code class="idl"><span>MediaRecorder</span></code> and mime types</span></a>
+      <li><a href="#example2"><span class="secno">7.2</span> <span class="content">Recording webcam video and audio</span></a>
      </ol>
     <li>
      <a href="#conformance"><span class="secno"></span> <span class="content">Conformance</span></a>
@@ -1588,7 +1588,9 @@ encodings, and to select the desired ones if the author wishes. The application
 can also choose how much data it wants to receive at one time. By default a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> containing the entire recording is returned when the recording
 finishes. However the application can choose to receive smaller buffers of data
 at regular intervals.</p>
-   <h2 class="heading settled" data-level="2" id="mediarecorder-api"><span class="secno">2. </span><span class="content">Media Recorder API</span><a class="self-link" href="#mediarecorder-api"></a></h2>
+   <h2 class="heading settled" data-level="2" id="security-and-privacy"><span class="secno">2. </span><span class="content">Privacy and Security Considerations</span><a class="self-link" href="#security-and-privacy"></a></h2>
+   <p class="note" role="note">Write some text here.</p>
+   <h2 class="heading settled" data-level="3" id="mediarecorder-api"><span class="secno">3. </span><span class="content">Media Recorder API</span><a class="self-link" href="#mediarecorder-api"></a></h2>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="constructor" href="#dom-mediarecorder-mediarecorder" id="ref-for-dom-mediarecorder-mediarecorder-1">Constructor</a>(<a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#mediastream">MediaStream</a> <dfn class="nv idl-code" data-dfn-for="MediaRecorder/MediaRecorder(stream, options)" data-dfn-type="argument" data-export="" id="dom-mediarecorder-mediarecorder-stream-options-stream">stream<a class="self-link" href="#dom-mediarecorder-mediarecorder-stream-options-stream"></a></dfn>, <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-mediarecorderoptions" id="ref-for-dictdef-mediarecorderoptions-1">MediaRecorderOptions</a> <dfn class="nv idl-code" data-dfn-for="MediaRecorder/MediaRecorder(stream, options)" data-dfn-type="argument" data-export="" id="dom-mediarecorder-mediarecorder-stream-options-options">options<a class="self-link" href="#dom-mediarecorder-mediarecorder-stream-options-options"></a></dfn>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="mediarecorder">MediaRecorder</dfn> : <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget">EventTarget</a> {
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#mediastream">MediaStream</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaStream" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream-1">stream</a>;
@@ -1612,7 +1614,7 @@ at regular intervals.</p>
   <span class="kt">static</span> <span class="kt">boolean</span> <a class="nv idl-code" data-link-type="method" href="#dom-mediarecorder-istypesupported" id="ref-for-dom-mediarecorder-istypesupported-1">isTypeSupported</a>(<span class="kt">DOMString</span> <dfn class="nv idl-code" data-dfn-for="MediaRecorder/isTypeSupported(type)" data-dfn-type="argument" data-export="" id="dom-mediarecorder-istypesupported-type-type">type<a class="self-link" href="#dom-mediarecorder-istypesupported-type-type"></a></dfn>);
 };
 </pre>
-   <h3 class="heading settled" data-level="2.1" id="mediarecorder-constructor"><span class="secno">2.1. </span><span class="content">Constructors</span><a class="self-link" href="#mediarecorder-constructor"></a></h3>
+   <h3 class="heading settled" data-level="3.1" id="mediarecorder-constructor"><span class="secno">3.1. </span><span class="content">Constructors</span><a class="self-link" href="#mediarecorder-constructor"></a></h3>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="constructor" data-export="" data-lt="MediaRecorder(stream, options)|MediaRecorder(stream)" id="dom-mediarecorder-mediarecorder"><code>MediaRecorder(MediaStream stream, optional MediaRecorderOptions options)</code></dfn>
     <dd>
@@ -1641,60 +1643,74 @@ at regular intervals.</p>
         become the value of <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-mimetype" id="ref-for-dom-mediarecorder-mimetype-2">mimeType</a></code> attribute.
      </table>
    </dl>
-   <h3 class="heading settled" data-level="2.2" id="mediarecorder-attributes"><span class="secno">2.2. </span><span class="content">Attributes</span><a class="self-link" href="#mediarecorder-attributes"></a></h3>
+   <h3 class="heading settled" data-level="3.2" id="mediarecorder-attributes"><span class="secno">3.2. </span><span class="content">Attributes</span><a class="self-link" href="#mediarecorder-attributes"></a></h3>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="attribute" data-export="" id="dom-mediarecorder-stream"><code>stream</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#mediastream">MediaStream</a>, readonly</span>
-    <dd>
+    <dd>The <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastream">MediaStream</a></code> to be recorded.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="attribute" data-export="" id="dom-mediarecorder-mimetype"><code>mimeType</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a>, readonly</span>
     <dd>
+     The MIME type <a data-link-type="biblio" href="#biblio-rfc2046">[RFC2046]</a> that has been selected as the container
+  for recording. This entry includes all the parameters to the base <code>mimeType</code>. The UA should be able to play back any of the
+  MIME types it supports for recording. For example, it should be able
+  to display a video recording in the HTML &lt;video> tag. The
+  default value for this property is platform-specific. 
+     <div class="note" role="note"> <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-mimetype" id="ref-for-dom-mediarecorder-mimetype-3">mimeType</a></code> specifies the media type and
+  container format for the recording via a type/subtype combination, with the
+  codecs and/or profiles parameters <a data-link-type="biblio" href="#biblio-rfc6381">[RFC6381]</a> specified where ambiguity might
+  arise. Individual codecs might have further optional specific parameters. </div>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="attribute" data-export="" id="dom-mediarecorder-state"><code>state</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-recordingstate" id="ref-for-enumdef-recordingstate-2">RecordingState</a>, readonly</span>
-    <dd>
+    <dd>The current state of the <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-2">MediaRecorder</a></code> object. When the <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-3">MediaRecorder</a></code> is created, the UA MUST set this attribute to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-1">inactive</a></code>. 
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="attribute" data-export="" id="dom-mediarecorder-onstart"><code>onstart</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a></span>
-    <dd>
+    <dd>Called to handle the <a data-link-type="dfn" href="#start" id="ref-for-start-1">start</a> event.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="attribute" data-export="" id="dom-mediarecorder-onstop"><code>onstop</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a></span>
-    <dd>
+    <dd>Called to handle the <a data-link-type="dfn" href="#stop" id="ref-for-stop-1">stop</a> event.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="attribute" data-export="" id="dom-mediarecorder-ondataavailable"><code>ondataavailable</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a></span>
-    <dd>
+    <dd>Called to handle the <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable-1">dataavailable</a> event. The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> of recorded
+  data is contained in this event and can be accessed via its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data-1">data</a></code> attribute.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="attribute" data-export="" id="dom-mediarecorder-onpause"><code>onpause</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a></span>
-    <dd>
+    <dd>Called to handle the <a data-link-type="dfn" href="#pause" id="ref-for-pause-1">pause</a> event.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="attribute" data-export="" id="dom-mediarecorder-onresume"><code>onresume</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a></span>
-    <dd>
+    <dd>Called to handle the <a data-link-type="dfn" href="#resume" id="ref-for-resume-1">resume</a> event.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="attribute" data-export="" id="dom-mediarecorder-onerror"><code>onerror</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">EventHandler</a></span>
-    <dd>
+    <dd>Called to handle an <code class="idl"><a data-link-type="idl" href="#errorevent" id="ref-for-errorevent-1">ErrorEvent</a></code>.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="attribute" data-export="" id="dom-mediarecorder-videobitspersecond"><code>videoBitsPerSecond</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-unsigned-long">unsigned long</a>, readonly</span>
-    <dd>
+    <dd>The value of the Video encoding target bit rate that was passed to
+  the Platform (potentially truncated, rounded, etc), or the calculated
+  one if the user has specified <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond-1">bitsPerSecond</a></code>.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="attribute" data-export="" id="dom-mediarecorder-audiobitspersecond"><code>audioBitsPerSecond</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-unsigned-long">unsigned long</a>, readonly</span>
-    <dd>
+    <dd>The value of the Audio encoding target bit rate that was passed to
+  the Platform (potentially truncated, rounded, etc), or the calculated
+  one if the user has specified <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond-2">bitsPerSecond</a></code>.
    </dl>
-   <h3 class="heading settled" data-level="2.3" id="mediarecorder-methods"><span class="secno">2.3. </span><span class="content">Methods</span><a class="self-link" href="#mediarecorder-methods"></a></h3>
+   <h3 class="heading settled" data-level="3.3" id="mediarecorder-methods"><span class="secno">3.3. </span><span class="content">Methods</span><a class="self-link" href="#mediarecorder-methods"></a></h3>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="method" data-export="" data-lt="start(timeslice)|start()" id="dom-mediarecorder-start"><code>start(optional long timeslice)</code></dfn>
     <dd>
-      When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-2">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-start" id="ref-for-dom-mediarecorder-start-3">start()</a></code> method is invoked, the UA
+      When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-4">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-start" id="ref-for-dom-mediarecorder-start-3">start()</a></code> method is invoked, the UA
   MUST run the following steps: 
      <ol>
       <li>Let <var>target</var> be the MediaRecorder context object.
       <li>Let <var>timeslice</var> be the method’s first argument, if provided,
     or <code>undefined</code>. 
-      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-2">state</a></code> is not <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-1">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and abort these steps.
-      <li>If the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream-3">stream</a></code>'s isolation properties disallow access from
-    this <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-3">MediaRecorder</a></code>, throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and abort
-    these steps.
+      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-2">state</a></code> is not <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-2">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and abort these steps.
+      <li>If the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream-3">stream</a></code>'s isolation properties disallow access
+    from this <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-5">MediaRecorder</a></code>, throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and
+    abort these steps.
       <li>
        Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-3">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording-1">recording</a></code>, and run the following steps in parallel: 
        <ol>
-        <li>Once media becomes available from one or more of the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream-4">stream</a></code>'s
-      tracks, start gathering the data into a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> <var>blob</var> and queue
-      a task, using the DOM manipulation task source, to <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <a data-link-type="dfn" href="#start" id="ref-for-start-1">start</a> at <var>target</var>. 
+        <li>Once media becomes available from one or more of the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream-4">stream</a></code>'s tracks, start gathering the data into a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> <var>blob</var> and queue a task, using the DOM manipulation task
+      source, to <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <a data-link-type="dfn" href="#start" id="ref-for-start-2">start</a> at <var>target</var>. 
         <li>
-         If at any point the stream’s isolation properties change so that <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-4">MediaRecorder</a></code> is no longer allowed access to it, the UA MUST
-      immediately stop gathering data, discard any data that it has gathered,
-      and queue a task, using the DOM manipulation task source, that runs
-      the following steps: 
+         If at any point the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream-5">stream</a></code>'s isolation properties
+      change so that <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-6">MediaRecorder</a></code> is no longer allowed access to it, the UA
+      MUST immediately stop gathering data, discard any data that it has
+      gathered, and queue a task, using the DOM manipulation task source, that
+      runs the following steps: 
          <ol>
-          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-4">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-2">inactive</a></code>.
+          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-4">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-3">inactive</a></code>.
           <li><a data-link-type="dfn" href="#fire-an-error-event" id="ref-for-fire-an-error-event-1">Fire an error event</a> named <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code> at <var>target</var>.
-          <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <a data-link-type="dfn" href="#stop" id="ref-for-stop-1">stop</a> at <var>target</var>.
+          <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <a data-link-type="dfn" href="#stop" id="ref-for-stop-2">stop</a> at <var>target</var>.
          </ol>
         <li>
          If the UA at any point is unable to continue gathering data for
@@ -1702,17 +1718,17 @@ at regular intervals.</p>
       queue a task, using the DOM manipulation task source, that runs the
       following steps: 
          <ol>
-          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-5">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-3">inactive</a></code>.
+          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-5">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-4">inactive</a></code>.
           <li><a data-link-type="dfn" href="#fire-an-error-event" id="ref-for-fire-an-error-event-2">Fire an error event</a> named <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#unknownerror">UnknownError</a></code> at <var>target</var>.
-          <li><a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event-1">Fire a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable-1">dataavailable</a> at <var>target</var> with <var>blob</var>.
-          <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <a data-link-type="dfn" href="#stop" id="ref-for-stop-2">stop</a> at <var>target</var>.
+          <li><a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event-1">Fire a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable-2">dataavailable</a> at <var>target</var> with <var>blob</var>.
+          <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <a data-link-type="dfn" href="#stop" id="ref-for-stop-3">stop</a> at <var>target</var>.
          </ol>
         <li>
          If <var>timeslice</var> is not <code>undefined</code>, then once a
       minimum of <var>timeslice</var> milliseconds of data have been collected,
       or some minimum time slice imposed by the UA, whichever is greater, start
       gathering data into a new <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> <var>blob</var>, and queue a task,
-      using the DOM manipulation task source, that <a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event-2">fires a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable-2">dataavailable</a> at <var>target</var> with <var>blob</var>. 
+      using the DOM manipulation task source, that <a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event-2">fires a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable-3">dataavailable</a> at <var>target</var> with <var>blob</var>. 
          <p>Note that an <code>undefined</code> value of <var>timeslice</var> will
       be understood as the largest <code>long</code> value.</p>
         <p></p>
@@ -1721,21 +1737,22 @@ at regular intervals.</p>
       queue a task, using the DOM manipulation task source, that runs the
       following steps: 
          <ol>
-          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-6">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-4">inactive</a></code>.
-          <li><a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event-3">Fire a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable-3">dataavailable</a> at <var>target</var> with <var>blob</var>.
-          <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <a data-link-type="dfn" href="#stop" id="ref-for-stop-3">stop</a> at <var>target</var>.
+          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-6">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-5">inactive</a></code>.
+          <li><a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event-3">Fire a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable-4">dataavailable</a> at <var>target</var> with <var>blob</var>.
+          <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <a data-link-type="dfn" href="#stop" id="ref-for-stop-4">stop</a> at <var>target</var>.
          </ol>
        </ol>
       <li>return <code>undefined</code>.
      </ol>
      <p>Note that <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stop" id="ref-for-dom-mediarecorder-stop-3">stop()</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-requestdata" id="ref-for-dom-mediarecorder-requestdata-2">requestData()</a></code>, and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-pause" id="ref-for-dom-mediarecorder-pause-2">pause()</a></code> also affect the
   recording behavior.</p>
-     <p>The UA MUST record <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream-5">stream</a></code> in such a way that the original Tracks can be
-  retrieved at playback time. When multiple <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code>s are returned (because of <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-start-timeslice-timeslice" id="ref-for-dom-mediarecorder-start-timeslice-timeslice-1">timeslice</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-requestdata" id="ref-for-dom-mediarecorder-requestdata-3">requestData()</a></code>), the individual Blobs need not be
-  playable, but the combination of all the Blobs from a completed recording MUST
-  be playable.</p>
-     <p> If any Track within the MediaStream is <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-muted">muted</a></code> or not <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-enabled">enabled</a></code> at any
-  time, the UA will only record black frames or silence since that is the
+     <p>The UA MUST record <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream-6">stream</a></code> in such a way that the original
+  Tracks can be retrieved at playback time. When multiple <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code>s are returned
+  (because of <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-start-timeslice-timeslice" id="ref-for-dom-mediarecorder-start-timeslice-timeslice-1">timeslice</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-requestdata" id="ref-for-dom-mediarecorder-requestdata-3">requestData()</a></code>), the individual Blobs need not
+  be playable, but the combination of all the Blobs from a completed recording
+  MUST be playable.</p>
+     <p> If any Track within the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastream">MediaStream</a></code> is <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-muted">muted</a></code> or not <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-enabled">enabled</a></code> at
+  any time, the UA will only record black frames or silence since that is the
   content produced by the Track.</p>
      <table class="parameters">
       <tbody>
@@ -1755,73 +1772,73 @@ at regular intervals.</p>
      </table>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="method" data-export="" id="dom-mediarecorder-stop"><code>stop()</code></dfn>
     <dd>
-      When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-5">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stop" id="ref-for-dom-mediarecorder-stop-4">stop()</a></code> method is invoked, the UA
+      When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-7">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stop" id="ref-for-dom-mediarecorder-stop-4">stop()</a></code> method is invoked, the UA
   MUST run the following steps: 
      <ol>
       <li>
-       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-7">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-5">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
+       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-7">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-6">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
     task, using the DOM manipulation task source, that runs the following steps: 
        <ol>
-        <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-8">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-6">inactive</a></code> and stop gathering data.
+        <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-8">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-7">inactive</a></code> and stop gathering data.
         <li>Let <var>blob</var> be the Blob of collected data so far and
-      let <var>target</var> be the MediaRecorder context object, then <a data-link-type="dfn">fire a blob event</a> named <code class="idl"><a data-link-type="idl">dataavailable</a></code> at <var>target</var> with <var>blob</var>.
-        <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#dom-sensor-stop">stop</a></code> at <var>target</var>.
+      let <var>target</var> be the MediaRecorder context object, then <a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event-4">fire a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable-5">dataavailable</a> at <var>target</var> with <var>blob</var>.
+        <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <a data-link-type="dfn" href="#stop" id="ref-for-stop-5">stop</a> at <var>target</var>.
        </ol>
       <li>return <code>undefined</code>.
      </ol>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="method" data-export="" id="dom-mediarecorder-pause"><code>pause()</code></dfn>
     <dd>
-      When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-6">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-pause" id="ref-for-dom-mediarecorder-pause-3">pause()</a></code> method is invoked, the UA
+      When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-8">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-pause" id="ref-for-dom-mediarecorder-pause-3">pause()</a></code> method is invoked, the UA
   MUST run the following steps: 
      <ol>
       <li>
-       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-9">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-7">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
+       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-9">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-8">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
     task, using the DOM manipulation task source, that runs the following steps: 
        <ol>
         <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-10">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-paused" id="ref-for-dom-recordingstate-paused-1">paused</a></code>.
         <li>Stop gathering data into <var>blob</var> (but keep it
       available so that recording can be resumed in the future).
-        <li>Let <var>target</var> be the MediaRecorder context object. <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <code class="idl"><a data-link-type="idl">pause</a></code> at <var>target</var>.
+        <li>Let <var>target</var> be the MediaRecorder context object. <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire an event</a> named <a data-link-type="dfn" href="#pause" id="ref-for-pause-2">pause</a> at <var>target</var>.
        </ol>
       <li>return <code>undefined</code>.
      </ol>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="method" data-export="" id="dom-mediarecorder-resume"><code>resume()</code></dfn>
     <dd>
-      When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-7">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-resume" id="ref-for-dom-mediarecorder-resume-2">resume()</a></code> method is invoked, the
+      When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-9">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-resume" id="ref-for-dom-mediarecorder-resume-2">resume()</a></code> method is invoked, the
   UA MUST run the following steps: 
      <ol>
       <li>
-       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-11">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-8">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
+       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-11">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-9">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
     task, using the DOM manipulation task source, that runs the following steps: 
        <ol>
         <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-12">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording-2">recording</a></code>.
         <li>Resume (or continue) gathering data into the current <var>blob</var>. 
         <li>Let <var>target</var> be the MediaRecorder context object. <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">Fire
-      an event</a> named <code class="idl"><a data-link-type="idl">resume</a></code> at <var>target</var>.
+      an event</a> named <a data-link-type="dfn" href="#resume" id="ref-for-resume-2">resume</a> at <var>target</var>.
        </ol>
       <li>return <code>undefined</code>.
      </ol>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="method" data-export="" id="dom-mediarecorder-requestdata"><code>requestData()</code></dfn>
     <dd>
-      When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-8">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-requestdata" id="ref-for-dom-mediarecorder-requestdata-4">requestData()</a></code> method is invoked,
+      When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-10">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-requestdata" id="ref-for-dom-mediarecorder-requestdata-4">requestData()</a></code> method is invoked,
   the UA MUST run the following steps: 
      <ol>
       <li>
-       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-13">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-9">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
+       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-13">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-10">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
     task, using the DOM manipulation task source, that runs the following steps: 
        <ol>
         <li>Let <var>blob</var> be the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> of collected data so far and
-      let <var>target</var> be the <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-9">MediaRecorder</a></code> context object, then <a data-link-type="dfn">fire a blob event</a> named <code class="idl"><a data-link-type="idl">dataavailable</a></code> at <var>target</var> with <var>blob</var>.
+      let <var>target</var> be the <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-11">MediaRecorder</a></code> context object, then <a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event-5">fire a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable-6">dataavailable</a> at <var>target</var> with <var>blob</var>.
       (Note that <var>blob</var> will be empty if no data has been gathered
       yet.)
         <li>Create a new Blob and gather subsequent data into it.
        </ol>
       <li>return <code>undefined</code>.
      </ol>
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="method" data-export="" data-lt="isTypeSupported(type)" id="dom-mediarecorder-istypesupported"><code>isTypeSupported(DOMString type)</code></dfn>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="method" data-export="" data-lt="isTypeSupported(type)" id="dom-mediarecorder-istypesupported"><code>isTypeSupported(DOMString type) </code></dfn>
     <dd>
-      Check to see whether a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-10">MediaRecorder</a></code> can record in a specified MIME type.
-  If true is returned from this method, it only indicates that the <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-11">MediaRecorder</a></code> implementation is capable of recording <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> objects for
+      Check to see whether a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-12">MediaRecorder</a></code> can record in a specified MIME type.
+  If true is returned from this method, it only indicates that the <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-13">MediaRecorder</a></code> implementation is capable of recording <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> objects for
   the specified MIME type. Recording may still fail if sufficient resources are
   not available to support the concrete media encoding. When this method is
   invoked, the User Agent must run the following steps: 
@@ -1834,8 +1851,8 @@ at regular intervals.</p>
       <li>If <code>type</code> contains a media type or media subtype
     that the MediaRecorder does not support, then return false.
       <li>If <code>type</code> contains a media container that the
-    MediaSource does not support, then return false.
-      <li>If <code>type</code> contains a codec that the MediaSource
+    MediaRecorder does not support, then return false.
+      <li>If <code>type</code> contains a codec that the MediaRecorder
     does not support, then return false.
       <li>If the MediaRecorder does not support the specified
     combination of media type/subtype, codecs and container then
@@ -1860,20 +1877,20 @@ at regular intervals.</p>
           codec formats for recording. 
      </table>
    </dl>
-   <h3 class="heading settled" data-level="2.4" id="data-handling"><span class="secno">2.4. </span><span class="content">Data handling</span><a class="self-link" href="#data-handling"></a></h3>
+   <h3 class="heading settled" data-level="3.4" id="data-handling"><span class="secno">3.4. </span><span class="content">Data handling</span><a class="self-link" href="#data-handling"></a></h3>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="to-fire-a-blob-event">To fire a blob event</dfn> with a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> <var>blob</var> means to <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> at <var>target</var> using a <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent-1">BlobEvent</a></code> with
-its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data-1">data</a></code> attribute initialized to <var>blob</var>.</p>
+its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data-2">data</a></code> attribute initialized to <var>blob</var>.</p>
    <div class="note" role="note"> Usually <var>blob</var> will be the data gathered by the UA after the
   last transition to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording-3">recording</a></code> <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state-14">state</a></code>. </div>
-   <h3 class="heading settled" data-level="2.5" id="mediarecorderoptions-section"><span class="secno">2.5. </span><span class="content">MediaRecorderOptions</span><a class="self-link" href="#mediarecorderoptions-section"></a></h3>
+   <h3 class="heading settled" data-level="3.5" id="mediarecorderoptions-section"><span class="secno">3.5. </span><span class="content">MediaRecorderOptions</span><a class="self-link" href="#mediarecorderoptions-section"></a></h3>
 <pre class="idl highlight def"><span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-mediarecorderoptions">MediaRecorderOptions</dfn> {
   <span class="kt">DOMString</span> <a class="nv idl-code" data-link-type="dict-member" data-type="DOMString " href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype-2">mimeType</a>;
   <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond-1">audioBitsPerSecond</a>;
   <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond-1">videoBitsPerSecond</a>;
-  <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond-1">bitsPerSecond</a>;
+  <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond-3">bitsPerSecond</a>;
 };
 </pre>
-   <h4 class="heading settled" data-level="2.5.1" id="mediarecorderoptions-members"><span class="secno">2.5.1. </span><span class="content">Members</span><a class="self-link" href="#mediarecorderoptions-members"></a></h4>
+   <h4 class="heading settled" data-level="3.5.1" id="mediarecorderoptions-members"><span class="secno">3.5.1. </span><span class="content">Members</span><a class="self-link" href="#mediarecorderoptions-members"></a></h4>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export="" id="dom-mediarecorderoptions-mimetype"><code>mimeType</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span>
     <dd>
@@ -1882,7 +1899,7 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
   support the format or any of the parameters specified, it MUST throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notsupportederror">NotSupportedError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code>. If this paramater is not specified,
   the UA will use a platform-specific default format. The container format,
   whether passed in to the constructor or defaulted, will be used as the value
-  of the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-mimetype" id="ref-for-dom-mediarecorder-mimetype-3">mimeType</a></code> attribute. 
+  of the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-mimetype" id="ref-for-dom-mediarecorder-mimetype-4">mimeType</a></code> attribute. 
      <div class="note" role="note"> <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype-3">mimeType</a></code> specifies the media
   type and container format for the recording via a type/subtype
   combination, with the codecs and/or profiles parameters <a data-link-type="biblio" href="#biblio-rfc6381">[RFC6381]</a> specified where ambiguity might arise. Individual codecs might have
@@ -1903,14 +1920,14 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
   and the total value might be surpassed, not achieved, or only be achieved over
   a long period of time.
    </dl>
-   <h3 class="heading settled" data-level="2.6" id="recordingstate"><span class="secno">2.6. </span><span class="content">RecordingState</span><a class="self-link" href="#recordingstate"></a></h3>
+   <h3 class="heading settled" data-level="3.6" id="recordingstate"><span class="secno">3.6. </span><span class="content">RecordingState</span><a class="self-link" href="#recordingstate"></a></h3>
 <pre class="idl highlight def"><span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-recordingstate">RecordingState</dfn> {
-  <a class="s idl-code" data-link-type="enum-value" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-10">"inactive"</a>,
+  <a class="s idl-code" data-link-type="enum-value" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive-11">"inactive"</a>,
   <a class="s idl-code" data-link-type="enum-value" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording-4">"recording"</a>,
   <a class="s idl-code" data-link-type="enum-value" href="#dom-recordingstate-paused" id="ref-for-dom-recordingstate-paused-2">"paused"</a>
 };
 </pre>
-   <h4 class="heading settled" data-level="2.6.1" id="#recordingstate-values"><span class="secno">2.6.1. </span><span class="content">Values</span><a class="self-link" href="#%23recordingstate-values"></a></h4>
+   <h4 class="heading settled" data-level="3.6.1" id="#recordingstate-values"><span class="secno">3.6.1. </span><span class="content">Values</span><a class="self-link" href="#%23recordingstate-values"></a></h4>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="RecordingState" data-dfn-type="enum-value" data-export="" id="dom-recordingstate-inactive"><code>inactive</code></dfn>
     <dd>Recording is not occuring: Either it has not been started or it has been
@@ -1920,52 +1937,51 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="RecordingState" data-dfn-type="enum-value" data-export="" id="dom-recordingstate-paused"><code>paused</code></dfn>
     <dd>Recording has been started, then paused, and not yet stopped or resumed.
    </dl>
-   <h2 class="heading settled" data-level="3" id="blobevent-section"><span class="secno">3. </span><span class="content">Blob Event</span><a class="self-link" href="#blobevent-section"></a></h2>
+   <h2 class="heading settled" data-level="4" id="blobevent-section"><span class="secno">4. </span><span class="content">Blob Event</span><a class="self-link" href="#blobevent-section"></a></h2>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="constructor" href="#dom-blobevent-blobevent" id="ref-for-dom-blobevent-blobevent-1">Constructor</a>(<span class="kt">DOMString</span> <dfn class="nv idl-code" data-dfn-for="BlobEvent/BlobEvent(type, eventInitDict)" data-dfn-type="argument" data-export="" id="dom-blobevent-blobevent-type-eventinitdict-type">type<a class="self-link" href="#dom-blobevent-blobevent-type-eventinitdict-type"></a></dfn>, <a class="n" data-link-type="idl-name" href="#dictdef-blobeventinit" id="ref-for-dictdef-blobeventinit-1">BlobEventInit</a> <dfn class="nv idl-code" data-dfn-for="BlobEvent/BlobEvent(type, eventInitDict)" data-dfn-type="argument" data-export="" id="dom-blobevent-blobevent-type-eventinitdict-eventinitdict">eventInitDict<a class="self-link" href="#dom-blobevent-blobevent-type-eventinitdict-eventinitdict"></a></dfn>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="blobevent">BlobEvent</dfn> : <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#event">Event</a> {
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="Blob" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data-2">data</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="Blob" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data-3">data</a>;
 };
 </pre>
-   <h3 class="heading settled" data-level="3.1" id="blobevent-constructor"><span class="secno">3.1. </span><span class="content">Constructors</span><a class="self-link" href="#blobevent-constructor"></a></h3>
+   <h3 class="heading settled" data-level="4.1" id="blobevent-constructor"><span class="secno">4.1. </span><span class="content">Constructors</span><a class="self-link" href="#blobevent-constructor"></a></h3>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEvent" data-dfn-type="constructor" data-export="" data-lt="BlobEvent(type, eventInitDict)" id="dom-blobevent-blobevent"><code>BlobEvent(DOMString type, BlobEventInit eventInitDict)</code></dfn>
     <dd>
    </dl>
-   <h3 class="heading settled" data-level="3.2" id="blobevent-attributes"><span class="secno">3.2. </span><span class="content">Attributes</span><a class="self-link" href="#blobevent-attributes"></a></h3>
+   <h3 class="heading settled" data-level="4.2" id="blobevent-attributes"><span class="secno">4.2. </span><span class="content">Attributes</span><a class="self-link" href="#blobevent-attributes"></a></h3>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEvent" data-dfn-type="attribute" data-export="" id="dom-blobevent-data"><code>data</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a>, readonly</span>
     <dd>Returns a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> object whose <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-type">type</a></code> attribute indicates the
   encoding of the blob data.
    </dl>
-   <h3 class="heading settled" data-level="3.3" id="blobeventinit"><span class="secno">3.3. </span><span class="content">BlobEventInit</span><a class="self-link" href="#blobeventinit"></a></h3>
+   <h3 class="heading settled" data-level="4.3" id="blobeventinit"><span class="secno">4.3. </span><span class="content">BlobEventInit</span><a class="self-link" href="#blobeventinit"></a></h3>
 <pre class="idl highlight def"><span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-blobeventinit">BlobEventInit</dfn> {
   <span class="kt">required</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="dict-member" data-type="Blob " href="#dom-blobeventinit-data" id="ref-for-dom-blobeventinit-data-1">data</a>;
 };
 </pre>
-   <h4 class="heading settled" data-level="3.3.1" id="blobeventinit-members"><span class="secno">3.3.1. </span><span class="content">Members</span><a class="self-link" href="#blobeventinit-members"></a></h4>
+   <h4 class="heading settled" data-level="4.3.1" id="blobeventinit-members"><span class="secno">4.3.1. </span><span class="content">Members</span><a class="self-link" href="#blobeventinit-members"></a></h4>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEventInit" data-dfn-type="dict-member" data-export="" id="dom-blobeventinit-data"><code>data</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></span>
-    <dd>A <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> object containing the data to deliver via this event.
+    <dd>A <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> object containing the data to deliver via <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent-2">BlobEvent</a></code>.
    </dl>
-   <h2 class="heading settled" data-level="4" id="error-handling"><span class="secno">4. </span><span class="content">Error handling</span><a class="self-link" href="#error-handling"></a></h2>
-   <h3 class="heading settled" data-level="4.1" id="general-principles"><span class="secno">4.1. </span><span class="content">General principles</span><a class="self-link" href="#general-principles"></a></h3>
+   <h2 class="heading settled" data-level="5" id="error-handling"><span class="secno">5. </span><span class="content">Error handling</span><a class="self-link" href="#error-handling"></a></h2>
+   <h3 class="heading settled" data-level="5.1" id="error-handling-principles"><span class="secno">5.1. </span><span class="content">General principles</span><a class="self-link" href="#error-handling-principles"></a></h3>
     <em>This section is non-normative.</em> 
    <p>The UA will throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> when the error can be detected at the time
-that the call is made. In all other cases the UA will <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code class="idl"><a data-link-type="idl" href="#errorevent" id="ref-for-errorevent-1">ErrorEvent</a></code>.  If recording has been started and not yet stopped when the
+that the call is made. In all other cases the UA will <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code class="idl"><a data-link-type="idl" href="#errorevent" id="ref-for-errorevent-2">ErrorEvent</a></code>.  If recording has been started and not yet stopped when the
 error occurs, let <var>blob</var> be the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> of collected data so far;
-after raising the error, the UA will <a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event-4">fire a
+after raising the error, the UA will <a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event-6">fire a
 dataavailable event</a> with <var>blob</var>; immediately after the UA will then <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a> named <code>stop</code>.
 The UA may set platform-specific limits, such as those for the minimum and
-maximum <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> size that it will support, or the number of Tracks it will
-record at once.
+maximum <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> size that it will support, or the number of <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code>s it will record at once.
 It will signal a fatal error if these limits are exceeded.</p>
-   <h3 class="heading settled" data-level="4.2" id="errorevent-section"><span class="secno">4.2. </span><span class="content">ErrorEvent</span><a class="self-link" href="#errorevent-section"></a></h3>
-   <p>The <code class="idl"><a data-link-type="idl" href="#errorevent" id="ref-for-errorevent-2">ErrorEvent</a></code> interface is defined for cases when an event is raised that
+   <h3 class="heading settled" data-level="5.2" id="errorevent-section"><span class="secno">5.2. </span><span class="content">ErrorEvent</span><a class="self-link" href="#errorevent-section"></a></h3>
+   <p>The <code class="idl"><a data-link-type="idl" href="#errorevent" id="ref-for-errorevent-3">ErrorEvent</a></code> interface is defined for cases when an event is raised that
 could have been caused by an error.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="fire an error event" data-noexport="" id="fire-an-error-event">To fire an error event</dfn> named <var>e</var> with a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> named <var>error</var> means that an
 event with the name <var>e</var>, which does not bubble (except where otherwise
 stated) and is not cancelable (except where otherwise stated), and which uses
-the <code class="idl"><a data-link-type="idl" href="#errorevent" id="ref-for-errorevent-3">ErrorEvent</a></code> interface with the <code class="idl"><a data-link-type="idl" href="#dom-errorevent-error" id="ref-for-dom-errorevent-error-1">error</a></code> attribute set to <var>error</var>, must be created and <a href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched</a> at
+the <code class="idl"><a data-link-type="idl" href="#errorevent" id="ref-for-errorevent-4">ErrorEvent</a></code> interface with the <code class="idl"><a data-link-type="idl" href="#dom-errorevent-error" id="ref-for-dom-errorevent-error-1">error</a></code> attribute set to <var>error</var>, must be created and <a href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched</a> at
 the given target. If no <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> object is specified, the <code class="idl"><a data-link-type="idl" href="#dom-errorevent-error" id="ref-for-dom-errorevent-error-2">error</a></code> attribute defaults to null.</p>
    <p></p>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=<span class="n">Window</span>, <a class="nv idl-code" data-link-type="constructor" href="#dom-errorevent-errorevent" id="ref-for-dom-errorevent-errorevent-1">Constructor</a>(<span class="kt">DOMString</span> <dfn class="nv idl-code" data-dfn-for="ErrorEvent/ErrorEvent(type, eventInitDict)" data-dfn-type="argument" data-export="" id="dom-errorevent-errorevent-type-eventinitdict-type">type<a class="self-link" href="#dom-errorevent-errorevent-type-eventinitdict-type"></a></dfn>, <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-erroreventinit" id="ref-for-dictdef-erroreventinit-1">ErrorEventInit</a> <dfn class="nv idl-code" data-dfn-for="ErrorEvent/ErrorEvent(type, eventInitDict)" data-dfn-type="argument" data-export="" id="dom-errorevent-errorevent-type-eventinitdict-eventinitdict">eventInitDict<a class="self-link" href="#dom-errorevent-errorevent-type-eventinitdict-eventinitdict"></a></dfn>)]
@@ -1973,11 +1989,11 @@ the given target. If no <code class="idl"><a data-link-type="idl" href="https://
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>? <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMException?" href="#dom-errorevent-error" id="ref-for-dom-errorevent-error-3">error</a>;
 };
 </pre>
-   <h4 class="heading settled" data-level="4.2.1" id="errorevent-constructor"><span class="secno">4.2.1. </span><span class="content">Constructors</span><a class="self-link" href="#errorevent-constructor"></a></h4>
+   <h4 class="heading settled" data-level="5.2.1" id="errorevent-constructor"><span class="secno">5.2.1. </span><span class="content">Constructors</span><a class="self-link" href="#errorevent-constructor"></a></h4>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="ErrorEvent" data-dfn-type="constructor" data-export="" data-lt="ErrorEvent(type, eventInitDict)" id="dom-errorevent-errorevent"><code>ErrorEvent(DOMString type, ErrorEventInit eventInitDict)</code></dfn>
     <dd>
-      Constructs a new <code class="idl"><a data-link-type="idl" href="#errorevent" id="ref-for-errorevent-4">ErrorEvent</a></code>. 
+      Constructs a new <code class="idl"><a data-link-type="idl" href="#errorevent" id="ref-for-errorevent-5">ErrorEvent</a></code>. 
      <table class="parameters">
       <tbody>
        <tr>
@@ -2000,24 +2016,24 @@ the given target. If no <code class="idl"><a data-link-type="idl" href="https://
         <td class="prmDesc">
      </table>
    </dl>
-   <h4 class="heading settled" data-level="4.2.2" id="errorevent-attributes"><span class="secno">4.2.2. </span><span class="content">Attributes</span><a class="self-link" href="#errorevent-attributes"></a></h4>
+   <h4 class="heading settled" data-level="5.2.2" id="errorevent-attributes"><span class="secno">5.2.2. </span><span class="content">Attributes</span><a class="self-link" href="#errorevent-attributes"></a></h4>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="ErrorEvent" data-dfn-type="attribute" data-export="" id="dom-errorevent-error"><code>error</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>, readonly, nullable</span>
     <dd>If the event was raised because of an error, this attribute MAY be set to
   that error object.
    </dl>
-   <h4 class="heading settled" data-level="4.2.3" id="erroreventinit"><span class="secno">4.2.3. </span><span class="content">ErrorEventInit</span><a class="self-link" href="#erroreventinit"></a></h4>
+   <h4 class="heading settled" data-level="5.2.3" id="erroreventinit"><span class="secno">5.2.3. </span><span class="content">ErrorEventInit</span><a class="self-link" href="#erroreventinit"></a></h4>
 <pre class="idl highlight def"><span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-erroreventinit">ErrorEventInit</dfn> {
   <span class="kt">Error</span>? <a class="nv idl-code" data-default="null" data-link-type="dict-member" data-type="Error? " href="#dom-erroreventinit-error" id="ref-for-dom-erroreventinit-error-1">error</a> = <span class="kt">null</span>;
 };
 </pre>
-   <h5 class="heading settled" data-level="4.2.3.1" id="erroreventinit-members"><span class="secno">4.2.3.1. </span><span class="content">Members</span><a class="self-link" href="#erroreventinit-members"></a></h5>
+   <h5 class="heading settled" data-level="5.2.3.1" id="erroreventinit-members"><span class="secno">5.2.3.1. </span><span class="content">Members</span><a class="self-link" href="#erroreventinit-members"></a></h5>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="ErrorEventInit" data-dfn-type="dict-member" data-export="" id="dom-erroreventinit-error"><code>error</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-Error">Error</a>, nullable, defaulting to <code>null</code></span>
     <dd>If the event was raised because of an error, this attribute MAY be set to
   that error object.
    </dl>
-   <h3 class="heading settled" data-level="4.3" id="exception-summary"><span class="secno">4.3. </span><span class="content">Exception Summary</span><a class="self-link" href="#exception-summary"></a></h3>
+   <h3 class="heading settled" data-level="5.3" id="exception-summary"><span class="secno">5.3. </span><span class="content">Exception Summary</span><a class="self-link" href="#exception-summary"></a></h3>
    <p>Each of the exceptions defined in this document is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> with a
 specific type.</p>
    <table class="vert">
@@ -2033,7 +2049,7 @@ specific type.</p>
       source object that has been deleted or removed.
      <tr>
       <td><code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notsupportederror">NotSupportedError</a></code>
-      <td> A <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-12">MediaRecorder</a></code> could not be created due to unsupported options
+      <td> A <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-14">MediaRecorder</a></code> could not be created due to unsupported options
         (e.g. MIME type) specification. User agents should provide as much
         additional information as possible in the <code>message</code> attribute. 
      <tr>
@@ -2041,8 +2057,8 @@ specific type.</p>
       <td>The isolation properties of the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastream">MediaStream</a></code> do not allow the
       MediaRecorder access to it.
    </table>
-   <h2 class="heading settled" data-level="5" id="event-summary"><span class="secno">5. </span><span class="content">Event summary</span><a class="self-link" href="#event-summary"></a></h2>
-   <p>The following additional events fire on <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-13">MediaRecorder</a></code> objects:</p>
+   <h2 class="heading settled" data-level="6" id="event-summary"><span class="secno">6. </span><span class="content">Event summary</span><a class="self-link" href="#event-summary"></a></h2>
+   <p>The following additional events fire on <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-15">MediaRecorder</a></code> objects:</p>
    <table class="vert">
     <thead>
      <tr>
@@ -2060,28 +2076,28 @@ specific type.</p>
       <td>The UA has stopped recording data from the MediaStream.
      <tr>
       <td><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="dataavailable">dataavailable</dfn>
-      <td><code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent-2">BlobEvent</a></code>
-      <td>The UA generates this even to return data to the application. The <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data-3">data</a></code> attribute of this event contains a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> of recorded
+      <td><code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent-3">BlobEvent</a></code>
+      <td>The UA generates this even to return data to the application. The <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data-4">data</a></code> attribute of this event contains a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> of recorded
       data.
      <tr>
-      <td><dfn data-dfn-type="dfn" data-noexport="" id="pause">pause<a class="self-link" href="#pause"></a></dfn>
+      <td><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="pause">pause</dfn>
       <td><code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#event">Event</a></code>
       <td>The UA has paused recording data from the MediaStream.
      <tr>
-      <td><dfn data-dfn-type="dfn" data-noexport="" id="resume">resume<a class="self-link" href="#resume"></a></dfn>
+      <td><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="resume">resume</dfn>
       <td><code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#event">Event</a></code>
       <td>The UA has resumed recording data from the MediaStream.
      <tr>
       <td><code>ErrorEvent</code>
-      <td><code class="idl"><a data-link-type="idl" href="#errorevent" id="ref-for-errorevent-5">ErrorEvent</a></code>
+      <td><code class="idl"><a data-link-type="idl" href="#errorevent" id="ref-for-errorevent-6">ErrorEvent</a></code>
       <td>An error has occurred, e.g. out of memory or a modification to
-      the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream-6">stream</a></code> has occurred that makes it impossible to
+      the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream-7">stream</a></code> has occurred that makes it impossible to
       continue recording (e.g. a Track has been added to or removed from
-      the said <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream-7">stream</a></code> while recording is occurring).
+      the said <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream-8">stream</a></code> while recording is occurring).
    </table>
-   <h2 class="heading settled" data-level="6" id="examples"><span class="secno">6. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
+   <h2 class="heading settled" data-level="7" id="examples"><span class="secno">7. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <div class="note" role="note"> Slightly modified versions of these examples can be found in e.g. <a href="https://codepen.io/collection/XjkNbN/">this codepen collection</a>. </div>
-   <h3 class="heading settled" data-level="6.1" id="check-for-mediarecorder-and-mime-types"><span class="secno">6.1. </span><span class="content">Check for <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-14">MediaRecorder</a></code> and mime types.</span><a class="self-link" href="#check-for-mediarecorder-and-mime-types"></a></h3>
+   <h3 class="heading settled" data-level="7.1" id="example1"><span class="secno">7.1. </span><span class="content">Check for <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-16">MediaRecorder</a></code> and mime types</span><a class="self-link" href="#example1"></a></h3>
    <div class="note" role="note"> The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/edqNab?editors=0010">this codepen</a> with minimal modifications. </div>
    <div class="example" id="example-5ded3322">
     <a class="self-link" href="#example-5ded3322"></a> 
@@ -2101,7 +2117,7 @@ specific type.</p>
 <span class="p">}</span>
 </pre>
    </div>
-   <h3 class="heading settled" data-level="6.2" id="recording-webcam-video-and-audio"><span class="secno">6.2. </span><span class="content">Recording webcam video and audio</span><a class="self-link" href="#recording-webcam-video-and-audio"></a></h3>
+   <h3 class="heading settled" data-level="7.2" id="example2"><span class="secno">7.2. </span><span class="content">Recording webcam video and audio</span><a class="self-link" href="#example2"></a></h3>
    <div class="note" role="note"> The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/wzVMJb?editors=0010">this codepen</a> with minimal modifications. </div>
    <div class="example" id="example-c22217ca">
     <a class="self-link" href="#example-c22217ca"></a> 
@@ -2185,71 +2201,71 @@ specific type.</p>
    <li>
     audioBitsPerSecond
     <ul>
-     <li><a href="#dom-mediarecorder-audiobitspersecond">attribute for MediaRecorder</a><span>, in §2.2</span>
-     <li><a href="#dom-mediarecorderoptions-audiobitspersecond">dict-member for MediaRecorderOptions</a><span>, in §2.5.1</span>
+     <li><a href="#dom-mediarecorder-audiobitspersecond">attribute for MediaRecorder</a><span>, in §3.2</span>
+     <li><a href="#dom-mediarecorderoptions-audiobitspersecond">dict-member for MediaRecorderOptions</a><span>, in §3.5.1</span>
     </ul>
-   <li><a href="#dom-mediarecorderoptions-bitspersecond">bitsPerSecond</a><span>, in §2.5.1</span>
-   <li><a href="#blobevent">BlobEvent</a><span>, in §3</span>
-   <li><a href="#dictdef-blobeventinit">BlobEventInit</a><span>, in §3.3</span>
-   <li><a href="#dom-blobevent-blobevent">BlobEvent(type, eventInitDict)</a><span>, in §3.1</span>
+   <li><a href="#dom-mediarecorderoptions-bitspersecond">bitsPerSecond</a><span>, in §3.5.1</span>
+   <li><a href="#blobevent">BlobEvent</a><span>, in §4</span>
+   <li><a href="#dictdef-blobeventinit">BlobEventInit</a><span>, in §4.3</span>
+   <li><a href="#dom-blobevent-blobevent">BlobEvent(type, eventInitDict)</a><span>, in §4.1</span>
    <li><a href="#conformant-server">conformant server</a><span>, in §Unnumbered section</span>
    <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §Unnumbered section</span>
    <li>
     data
     <ul>
-     <li><a href="#dom-blobevent-data">attribute for BlobEvent</a><span>, in §3.2</span>
-     <li><a href="#dom-blobeventinit-data">dict-member for BlobEventInit</a><span>, in §3.3.1</span>
+     <li><a href="#dom-blobevent-data">attribute for BlobEvent</a><span>, in §4.2</span>
+     <li><a href="#dom-blobeventinit-data">dict-member for BlobEventInit</a><span>, in §4.3.1</span>
     </ul>
-   <li><a href="#dataavailable">dataavailable</a><span>, in §5</span>
+   <li><a href="#dataavailable">dataavailable</a><span>, in §6</span>
    <li>
     error
     <ul>
-     <li><a href="#dom-errorevent-error">attribute for ErrorEvent</a><span>, in §4.2.2</span>
-     <li><a href="#dom-erroreventinit-error">dict-member for ErrorEventInit</a><span>, in §4.2.3.1</span>
+     <li><a href="#dom-errorevent-error">attribute for ErrorEvent</a><span>, in §5.2.2</span>
+     <li><a href="#dom-erroreventinit-error">dict-member for ErrorEventInit</a><span>, in §5.2.3.1</span>
     </ul>
-   <li><a href="#errorevent">ErrorEvent</a><span>, in §4.2</span>
-   <li><a href="#dictdef-erroreventinit">ErrorEventInit</a><span>, in §4.2.3</span>
-   <li><a href="#dom-errorevent-errorevent">ErrorEvent(type, eventInitDict)</a><span>, in §4.2.1</span>
-   <li><a href="#fire-an-error-event">fire an error event</a><span>, in §4.2</span>
-   <li><a href="#dom-recordingstate-inactive">inactive</a><span>, in §2.6.1</span>
-   <li><a href="#dom-mediarecorder-istypesupported">isTypeSupported(type)</a><span>, in §2.3</span>
-   <li><a href="#mediarecorder">MediaRecorder</a><span>, in §2</span>
-   <li><a href="#dictdef-mediarecorderoptions">MediaRecorderOptions</a><span>, in §2.5</span>
-   <li><a href="#dom-mediarecorder-mediarecorder">MediaRecorder(stream)</a><span>, in §2.1</span>
-   <li><a href="#dom-mediarecorder-mediarecorder">MediaRecorder(stream, options)</a><span>, in §2.1</span>
+   <li><a href="#errorevent">ErrorEvent</a><span>, in §5.2</span>
+   <li><a href="#dictdef-erroreventinit">ErrorEventInit</a><span>, in §5.2.3</span>
+   <li><a href="#dom-errorevent-errorevent">ErrorEvent(type, eventInitDict)</a><span>, in §5.2.1</span>
+   <li><a href="#fire-an-error-event">fire an error event</a><span>, in §5.2</span>
+   <li><a href="#dom-recordingstate-inactive">inactive</a><span>, in §3.6.1</span>
+   <li><a href="#dom-mediarecorder-istypesupported">isTypeSupported(type)</a><span>, in §3.3</span>
+   <li><a href="#mediarecorder">MediaRecorder</a><span>, in §3</span>
+   <li><a href="#dictdef-mediarecorderoptions">MediaRecorderOptions</a><span>, in §3.5</span>
+   <li><a href="#dom-mediarecorder-mediarecorder">MediaRecorder(stream)</a><span>, in §3.1</span>
+   <li><a href="#dom-mediarecorder-mediarecorder">MediaRecorder(stream, options)</a><span>, in §3.1</span>
    <li>
     mimeType
     <ul>
-     <li><a href="#dom-mediarecorder-mimetype">attribute for MediaRecorder</a><span>, in §2.2</span>
-     <li><a href="#dom-mediarecorderoptions-mimetype">dict-member for MediaRecorderOptions</a><span>, in §2.5.1</span>
+     <li><a href="#dom-mediarecorder-mimetype">attribute for MediaRecorder</a><span>, in §3.2</span>
+     <li><a href="#dom-mediarecorderoptions-mimetype">dict-member for MediaRecorderOptions</a><span>, in §3.5.1</span>
     </ul>
-   <li><a href="#dom-mediarecorder-ondataavailable">ondataavailable</a><span>, in §2.2</span>
-   <li><a href="#dom-mediarecorder-onerror">onerror</a><span>, in §2.2</span>
-   <li><a href="#dom-mediarecorder-onpause">onpause</a><span>, in §2.2</span>
-   <li><a href="#dom-mediarecorder-onresume">onresume</a><span>, in §2.2</span>
-   <li><a href="#dom-mediarecorder-onstart">onstart</a><span>, in §2.2</span>
-   <li><a href="#dom-mediarecorder-onstop">onstop</a><span>, in §2.2</span>
-   <li><a href="#dom-mediarecorder-pause">pause()</a><span>, in §2.3</span>
-   <li><a href="#pause">pause</a><span>, in §5</span>
-   <li><a href="#dom-recordingstate-paused">paused</a><span>, in §2.6.1</span>
-   <li><a href="#dom-recordingstate-recording">recording</a><span>, in §2.6.1</span>
-   <li><a href="#enumdef-recordingstate">RecordingState</a><span>, in §2.6</span>
-   <li><a href="#dom-mediarecorder-requestdata">requestData()</a><span>, in §2.3</span>
-   <li><a href="#resume">resume</a><span>, in §5</span>
-   <li><a href="#dom-mediarecorder-resume">resume()</a><span>, in §2.3</span>
-   <li><a href="#start">start</a><span>, in §5</span>
-   <li><a href="#dom-mediarecorder-start">start()</a><span>, in §2.3</span>
-   <li><a href="#dom-mediarecorder-start">start(timeslice)</a><span>, in §2.3</span>
-   <li><a href="#dom-mediarecorder-state">state</a><span>, in §2.2</span>
-   <li><a href="#stop">stop</a><span>, in §5</span>
-   <li><a href="#dom-mediarecorder-stop">stop()</a><span>, in §2.3</span>
-   <li><a href="#dom-mediarecorder-stream">stream</a><span>, in §2.2</span>
-   <li><a href="#to-fire-a-blob-event">To fire a blob event</a><span>, in §2.4</span>
+   <li><a href="#dom-mediarecorder-ondataavailable">ondataavailable</a><span>, in §3.2</span>
+   <li><a href="#dom-mediarecorder-onerror">onerror</a><span>, in §3.2</span>
+   <li><a href="#dom-mediarecorder-onpause">onpause</a><span>, in §3.2</span>
+   <li><a href="#dom-mediarecorder-onresume">onresume</a><span>, in §3.2</span>
+   <li><a href="#dom-mediarecorder-onstart">onstart</a><span>, in §3.2</span>
+   <li><a href="#dom-mediarecorder-onstop">onstop</a><span>, in §3.2</span>
+   <li><a href="#dom-mediarecorder-pause">pause()</a><span>, in §3.3</span>
+   <li><a href="#pause">pause</a><span>, in §6</span>
+   <li><a href="#dom-recordingstate-paused">paused</a><span>, in §3.6.1</span>
+   <li><a href="#dom-recordingstate-recording">recording</a><span>, in §3.6.1</span>
+   <li><a href="#enumdef-recordingstate">RecordingState</a><span>, in §3.6</span>
+   <li><a href="#dom-mediarecorder-requestdata">requestData()</a><span>, in §3.3</span>
+   <li><a href="#resume">resume</a><span>, in §6</span>
+   <li><a href="#dom-mediarecorder-resume">resume()</a><span>, in §3.3</span>
+   <li><a href="#start">start</a><span>, in §6</span>
+   <li><a href="#dom-mediarecorder-start">start()</a><span>, in §3.3</span>
+   <li><a href="#dom-mediarecorder-start">start(timeslice)</a><span>, in §3.3</span>
+   <li><a href="#dom-mediarecorder-state">state</a><span>, in §3.2</span>
+   <li><a href="#stop">stop</a><span>, in §6</span>
+   <li><a href="#dom-mediarecorder-stop">stop()</a><span>, in §3.3</span>
+   <li><a href="#dom-mediarecorder-stream">stream</a><span>, in §3.2</span>
+   <li><a href="#to-fire-a-blob-event">To fire a blob event</a><span>, in §3.4</span>
    <li>
     videoBitsPerSecond
     <ul>
-     <li><a href="#dom-mediarecorder-videobitspersecond">attribute for MediaRecorder</a><span>, in §2.2</span>
-     <li><a href="#dom-mediarecorderoptions-videobitspersecond">dict-member for MediaRecorderOptions</a><span>, in §2.5.1</span>
+     <li><a href="#dom-mediarecorder-videobitspersecond">attribute for MediaRecorder</a><span>, in §3.2</span>
+     <li><a href="#dom-mediarecorderoptions-videobitspersecond">dict-member for MediaRecorderOptions</a><span>, in §3.5.1</span>
     </ul>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -2266,11 +2282,6 @@ specific type.</p>
     <ul>
      <li><a href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a>
      <li><a href="https://w3c.github.io/FileAPI/#dfn-type">type</a>
-    </ul>
-   <li>
-    <a data-link-type="biblio">[generic-sensor]</a> defines the following terms:
-    <ul>
-     <li><a href="https://w3c.github.io/sensors/#dom-sensor-stop">stop</a>
     </ul>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
@@ -2296,8 +2307,6 @@ specific type.</p>
   <dl>
    <dt id="biblio-fileapi">[FileAPI]
    <dd>Arun Ranganathan; Jonas Sicking. <a href="https://w3c.github.io/FileAPI/">File API</a>. URL: <a href="https://w3c.github.io/FileAPI/">https://w3c.github.io/FileAPI/</a>
-   <dt id="biblio-generic-sensor">[GENERIC-SENSOR]
-   <dd>Tobie Langel; Rick Waldron. <a href="https://w3c.github.io/sensors/">Generic Sensor API</a>. URL: <a href="https://w3c.github.io/sensors/">https://w3c.github.io/sensors/</a>
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-rfc2046">[RFC2046]
@@ -2374,301 +2383,325 @@ specific type.</p>
    <b><a href="#mediarecorder">#mediarecorder</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-mediarecorder-1">1. Overview</a>
-    <li><a href="#ref-for-mediarecorder-2">2.3. Methods</a> <a href="#ref-for-mediarecorder-3">(2)</a> <a href="#ref-for-mediarecorder-4">(3)</a> <a href="#ref-for-mediarecorder-5">(4)</a> <a href="#ref-for-mediarecorder-6">(5)</a> <a href="#ref-for-mediarecorder-7">(6)</a> <a href="#ref-for-mediarecorder-8">(7)</a> <a href="#ref-for-mediarecorder-9">(8)</a> <a href="#ref-for-mediarecorder-10">(9)</a> <a href="#ref-for-mediarecorder-11">(10)</a>
-    <li><a href="#ref-for-mediarecorder-12">4.3. Exception Summary</a>
-    <li><a href="#ref-for-mediarecorder-13">5. Event summary</a>
-    <li><a href="#ref-for-mediarecorder-14">6.1. Check for MediaRecorder and mime types.</a>
+    <li><a href="#ref-for-mediarecorder-2">3.2. Attributes</a> <a href="#ref-for-mediarecorder-3">(2)</a>
+    <li><a href="#ref-for-mediarecorder-4">3.3. Methods</a> <a href="#ref-for-mediarecorder-5">(2)</a> <a href="#ref-for-mediarecorder-6">(3)</a> <a href="#ref-for-mediarecorder-7">(4)</a> <a href="#ref-for-mediarecorder-8">(5)</a> <a href="#ref-for-mediarecorder-9">(6)</a> <a href="#ref-for-mediarecorder-10">(7)</a> <a href="#ref-for-mediarecorder-11">(8)</a> <a href="#ref-for-mediarecorder-12">(9)</a> <a href="#ref-for-mediarecorder-13">(10)</a>
+    <li><a href="#ref-for-mediarecorder-14">5.3. Exception Summary</a>
+    <li><a href="#ref-for-mediarecorder-15">6. Event summary</a>
+    <li><a href="#ref-for-mediarecorder-16">7.1. Check for MediaRecorder and mime types</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-start-timeslice-timeslice">
    <b><a href="#dom-mediarecorder-start-timeslice-timeslice">#dom-mediarecorder-start-timeslice-timeslice</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-start-timeslice-timeslice-1">2.3. Methods</a>
+    <li><a href="#ref-for-dom-mediarecorder-start-timeslice-timeslice-1">3.3. Methods</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-mediarecorder">
    <b><a href="#dom-mediarecorder-mediarecorder">#dom-mediarecorder-mediarecorder</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-mediarecorder-1">2. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-mediarecorder-1">3. Media Recorder API</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-stream">
    <b><a href="#dom-mediarecorder-stream">#dom-mediarecorder-stream</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-stream-1">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-stream-2">2.1. Constructors</a>
-    <li><a href="#ref-for-dom-mediarecorder-stream-3">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-stream-4">(2)</a> <a href="#ref-for-dom-mediarecorder-stream-5">(3)</a>
-    <li><a href="#ref-for-dom-mediarecorder-stream-6">5. Event summary</a> <a href="#ref-for-dom-mediarecorder-stream-7">(2)</a>
+    <li><a href="#ref-for-dom-mediarecorder-stream-1">3. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-stream-2">3.1. Constructors</a>
+    <li><a href="#ref-for-dom-mediarecorder-stream-3">3.3. Methods</a> <a href="#ref-for-dom-mediarecorder-stream-4">(2)</a> <a href="#ref-for-dom-mediarecorder-stream-5">(3)</a> <a href="#ref-for-dom-mediarecorder-stream-6">(4)</a>
+    <li><a href="#ref-for-dom-mediarecorder-stream-7">6. Event summary</a> <a href="#ref-for-dom-mediarecorder-stream-8">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-mimetype">
    <b><a href="#dom-mediarecorder-mimetype">#dom-mediarecorder-mimetype</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-mimetype-1">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-mimetype-2">2.1. Constructors</a>
-    <li><a href="#ref-for-dom-mediarecorder-mimetype-3">2.5.1. Members</a>
+    <li><a href="#ref-for-dom-mediarecorder-mimetype-1">3. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-mimetype-2">3.1. Constructors</a>
+    <li><a href="#ref-for-dom-mediarecorder-mimetype-3">3.2. Attributes</a>
+    <li><a href="#ref-for-dom-mediarecorder-mimetype-4">3.5.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-state">
    <b><a href="#dom-mediarecorder-state">#dom-mediarecorder-state</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-state-1">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-state-2">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-state-3">(2)</a> <a href="#ref-for-dom-mediarecorder-state-4">(3)</a> <a href="#ref-for-dom-mediarecorder-state-5">(4)</a> <a href="#ref-for-dom-mediarecorder-state-6">(5)</a> <a href="#ref-for-dom-mediarecorder-state-7">(6)</a> <a href="#ref-for-dom-mediarecorder-state-8">(7)</a> <a href="#ref-for-dom-mediarecorder-state-9">(8)</a> <a href="#ref-for-dom-mediarecorder-state-10">(9)</a> <a href="#ref-for-dom-mediarecorder-state-11">(10)</a> <a href="#ref-for-dom-mediarecorder-state-12">(11)</a> <a href="#ref-for-dom-mediarecorder-state-13">(12)</a>
-    <li><a href="#ref-for-dom-mediarecorder-state-14">2.4. Data handling</a>
+    <li><a href="#ref-for-dom-mediarecorder-state-1">3. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-state-2">3.3. Methods</a> <a href="#ref-for-dom-mediarecorder-state-3">(2)</a> <a href="#ref-for-dom-mediarecorder-state-4">(3)</a> <a href="#ref-for-dom-mediarecorder-state-5">(4)</a> <a href="#ref-for-dom-mediarecorder-state-6">(5)</a> <a href="#ref-for-dom-mediarecorder-state-7">(6)</a> <a href="#ref-for-dom-mediarecorder-state-8">(7)</a> <a href="#ref-for-dom-mediarecorder-state-9">(8)</a> <a href="#ref-for-dom-mediarecorder-state-10">(9)</a> <a href="#ref-for-dom-mediarecorder-state-11">(10)</a> <a href="#ref-for-dom-mediarecorder-state-12">(11)</a> <a href="#ref-for-dom-mediarecorder-state-13">(12)</a>
+    <li><a href="#ref-for-dom-mediarecorder-state-14">3.4. Data handling</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-onstart">
    <b><a href="#dom-mediarecorder-onstart">#dom-mediarecorder-onstart</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-onstart-1">2. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-onstart-1">3. Media Recorder API</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-onstop">
    <b><a href="#dom-mediarecorder-onstop">#dom-mediarecorder-onstop</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-onstop-1">2. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-onstop-1">3. Media Recorder API</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-ondataavailable">
    <b><a href="#dom-mediarecorder-ondataavailable">#dom-mediarecorder-ondataavailable</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediarecorder-ondataavailable-1">1. Overview</a>
-    <li><a href="#ref-for-dom-mediarecorder-ondataavailable-2">2. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-ondataavailable-2">3. Media Recorder API</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-onpause">
    <b><a href="#dom-mediarecorder-onpause">#dom-mediarecorder-onpause</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-onpause-1">2. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-onpause-1">3. Media Recorder API</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-onresume">
    <b><a href="#dom-mediarecorder-onresume">#dom-mediarecorder-onresume</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-onresume-1">2. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-onresume-1">3. Media Recorder API</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-onerror">
    <b><a href="#dom-mediarecorder-onerror">#dom-mediarecorder-onerror</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-onerror-1">2. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-onerror-1">3. Media Recorder API</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-videobitspersecond">
    <b><a href="#dom-mediarecorder-videobitspersecond">#dom-mediarecorder-videobitspersecond</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-videobitspersecond-1">2. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-videobitspersecond-1">3. Media Recorder API</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-audiobitspersecond">
    <b><a href="#dom-mediarecorder-audiobitspersecond">#dom-mediarecorder-audiobitspersecond</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-audiobitspersecond-1">2. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-audiobitspersecond-1">3. Media Recorder API</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-start">
    <b><a href="#dom-mediarecorder-start">#dom-mediarecorder-start</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediarecorder-start-1">1. Overview</a>
-    <li><a href="#ref-for-dom-mediarecorder-start-2">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-start-3">2.3. Methods</a>
+    <li><a href="#ref-for-dom-mediarecorder-start-2">3. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-start-3">3.3. Methods</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-stop">
    <b><a href="#dom-mediarecorder-stop">#dom-mediarecorder-stop</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediarecorder-stop-1">1. Overview</a>
-    <li><a href="#ref-for-dom-mediarecorder-stop-2">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-stop-3">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-stop-4">(2)</a>
+    <li><a href="#ref-for-dom-mediarecorder-stop-2">3. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-stop-3">3.3. Methods</a> <a href="#ref-for-dom-mediarecorder-stop-4">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-pause">
    <b><a href="#dom-mediarecorder-pause">#dom-mediarecorder-pause</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-pause-1">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-pause-2">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-pause-3">(2)</a>
+    <li><a href="#ref-for-dom-mediarecorder-pause-1">3. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-pause-2">3.3. Methods</a> <a href="#ref-for-dom-mediarecorder-pause-3">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-resume">
    <b><a href="#dom-mediarecorder-resume">#dom-mediarecorder-resume</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-resume-1">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-resume-2">2.3. Methods</a>
+    <li><a href="#ref-for-dom-mediarecorder-resume-1">3. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-resume-2">3.3. Methods</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-requestdata">
    <b><a href="#dom-mediarecorder-requestdata">#dom-mediarecorder-requestdata</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-requestdata-1">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-requestdata-2">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-requestdata-3">(2)</a> <a href="#ref-for-dom-mediarecorder-requestdata-4">(3)</a>
+    <li><a href="#ref-for-dom-mediarecorder-requestdata-1">3. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-requestdata-2">3.3. Methods</a> <a href="#ref-for-dom-mediarecorder-requestdata-3">(2)</a> <a href="#ref-for-dom-mediarecorder-requestdata-4">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-istypesupported">
    <b><a href="#dom-mediarecorder-istypesupported">#dom-mediarecorder-istypesupported</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorder-istypesupported-1">2. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-istypesupported-1">3. Media Recorder API</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="to-fire-a-blob-event">
    <b><a href="#to-fire-a-blob-event">#to-fire-a-blob-event</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-to-fire-a-blob-event-1">2.3. Methods</a> <a href="#ref-for-to-fire-a-blob-event-2">(2)</a> <a href="#ref-for-to-fire-a-blob-event-3">(3)</a>
-    <li><a href="#ref-for-to-fire-a-blob-event-4">4.1. General principles</a>
+    <li><a href="#ref-for-to-fire-a-blob-event-1">3.3. Methods</a> <a href="#ref-for-to-fire-a-blob-event-2">(2)</a> <a href="#ref-for-to-fire-a-blob-event-3">(3)</a> <a href="#ref-for-to-fire-a-blob-event-4">(4)</a> <a href="#ref-for-to-fire-a-blob-event-5">(5)</a>
+    <li><a href="#ref-for-to-fire-a-blob-event-6">5.1. General principles</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-mediarecorderoptions">
    <b><a href="#dictdef-mediarecorderoptions">#dictdef-mediarecorderoptions</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-mediarecorderoptions-1">2. Media Recorder API</a>
-    <li><a href="#ref-for-dictdef-mediarecorderoptions-2">2.1. Constructors</a>
+    <li><a href="#ref-for-dictdef-mediarecorderoptions-1">3. Media Recorder API</a>
+    <li><a href="#ref-for-dictdef-mediarecorderoptions-2">3.1. Constructors</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorderoptions-mimetype">
    <b><a href="#dom-mediarecorderoptions-mimetype">#dom-mediarecorderoptions-mimetype</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype-1">2.1. Constructors</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype-2">2.5. MediaRecorderOptions</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype-3">2.5.1. Members</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype-1">3.1. Constructors</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype-2">3.5. MediaRecorderOptions</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype-3">3.5.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorderoptions-audiobitspersecond">
    <b><a href="#dom-mediarecorderoptions-audiobitspersecond">#dom-mediarecorderoptions-audiobitspersecond</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond-1">2.5. MediaRecorderOptions</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond-2">2.5.1. Members</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond-1">3.5. MediaRecorderOptions</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond-2">3.5.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorderoptions-videobitspersecond">
    <b><a href="#dom-mediarecorderoptions-videobitspersecond">#dom-mediarecorderoptions-videobitspersecond</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond-1">2.5. MediaRecorderOptions</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond-2">2.5.1. Members</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond-1">3.5. MediaRecorderOptions</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond-2">3.5.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorderoptions-bitspersecond">
    <b><a href="#dom-mediarecorderoptions-bitspersecond">#dom-mediarecorderoptions-bitspersecond</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-bitspersecond-1">2.5. MediaRecorderOptions</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-bitspersecond-1">3.2. Attributes</a> <a href="#ref-for-dom-mediarecorderoptions-bitspersecond-2">(2)</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-bitspersecond-3">3.5. MediaRecorderOptions</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="enumdef-recordingstate">
    <b><a href="#enumdef-recordingstate">#enumdef-recordingstate</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-enumdef-recordingstate-1">2. Media Recorder API</a>
-    <li><a href="#ref-for-enumdef-recordingstate-2">2.2. Attributes</a>
+    <li><a href="#ref-for-enumdef-recordingstate-1">3. Media Recorder API</a>
+    <li><a href="#ref-for-enumdef-recordingstate-2">3.2. Attributes</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-recordingstate-inactive">
    <b><a href="#dom-recordingstate-inactive">#dom-recordingstate-inactive</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-recordingstate-inactive-1">2.3. Methods</a> <a href="#ref-for-dom-recordingstate-inactive-2">(2)</a> <a href="#ref-for-dom-recordingstate-inactive-3">(3)</a> <a href="#ref-for-dom-recordingstate-inactive-4">(4)</a> <a href="#ref-for-dom-recordingstate-inactive-5">(5)</a> <a href="#ref-for-dom-recordingstate-inactive-6">(6)</a> <a href="#ref-for-dom-recordingstate-inactive-7">(7)</a> <a href="#ref-for-dom-recordingstate-inactive-8">(8)</a> <a href="#ref-for-dom-recordingstate-inactive-9">(9)</a>
-    <li><a href="#ref-for-dom-recordingstate-inactive-10">2.6. RecordingState</a>
+    <li><a href="#ref-for-dom-recordingstate-inactive-1">3.2. Attributes</a>
+    <li><a href="#ref-for-dom-recordingstate-inactive-2">3.3. Methods</a> <a href="#ref-for-dom-recordingstate-inactive-3">(2)</a> <a href="#ref-for-dom-recordingstate-inactive-4">(3)</a> <a href="#ref-for-dom-recordingstate-inactive-5">(4)</a> <a href="#ref-for-dom-recordingstate-inactive-6">(5)</a> <a href="#ref-for-dom-recordingstate-inactive-7">(6)</a> <a href="#ref-for-dom-recordingstate-inactive-8">(7)</a> <a href="#ref-for-dom-recordingstate-inactive-9">(8)</a> <a href="#ref-for-dom-recordingstate-inactive-10">(9)</a>
+    <li><a href="#ref-for-dom-recordingstate-inactive-11">3.6. RecordingState</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-recordingstate-recording">
    <b><a href="#dom-recordingstate-recording">#dom-recordingstate-recording</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-recordingstate-recording-1">2.3. Methods</a> <a href="#ref-for-dom-recordingstate-recording-2">(2)</a>
-    <li><a href="#ref-for-dom-recordingstate-recording-3">2.4. Data handling</a>
-    <li><a href="#ref-for-dom-recordingstate-recording-4">2.6. RecordingState</a>
+    <li><a href="#ref-for-dom-recordingstate-recording-1">3.3. Methods</a> <a href="#ref-for-dom-recordingstate-recording-2">(2)</a>
+    <li><a href="#ref-for-dom-recordingstate-recording-3">3.4. Data handling</a>
+    <li><a href="#ref-for-dom-recordingstate-recording-4">3.6. RecordingState</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-recordingstate-paused">
    <b><a href="#dom-recordingstate-paused">#dom-recordingstate-paused</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-recordingstate-paused-1">2.3. Methods</a>
-    <li><a href="#ref-for-dom-recordingstate-paused-2">2.6. RecordingState</a>
+    <li><a href="#ref-for-dom-recordingstate-paused-1">3.3. Methods</a>
+    <li><a href="#ref-for-dom-recordingstate-paused-2">3.6. RecordingState</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="blobevent">
    <b><a href="#blobevent">#blobevent</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-blobevent-1">2.4. Data handling</a>
-    <li><a href="#ref-for-blobevent-2">5. Event summary</a>
+    <li><a href="#ref-for-blobevent-1">3.4. Data handling</a>
+    <li><a href="#ref-for-blobevent-2">4.3.1. Members</a>
+    <li><a href="#ref-for-blobevent-3">6. Event summary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-blobevent-blobevent">
    <b><a href="#dom-blobevent-blobevent">#dom-blobevent-blobevent</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-blobevent-blobevent-1">3. Blob Event</a>
+    <li><a href="#ref-for-dom-blobevent-blobevent-1">4. Blob Event</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-blobevent-data">
    <b><a href="#dom-blobevent-data">#dom-blobevent-data</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-blobevent-data-1">2.4. Data handling</a>
-    <li><a href="#ref-for-dom-blobevent-data-2">3. Blob Event</a>
-    <li><a href="#ref-for-dom-blobevent-data-3">5. Event summary</a>
+    <li><a href="#ref-for-dom-blobevent-data-1">3.2. Attributes</a>
+    <li><a href="#ref-for-dom-blobevent-data-2">3.4. Data handling</a>
+    <li><a href="#ref-for-dom-blobevent-data-3">4. Blob Event</a>
+    <li><a href="#ref-for-dom-blobevent-data-4">6. Event summary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-blobeventinit">
    <b><a href="#dictdef-blobeventinit">#dictdef-blobeventinit</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-blobeventinit-1">3. Blob Event</a>
+    <li><a href="#ref-for-dictdef-blobeventinit-1">4. Blob Event</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-blobeventinit-data">
    <b><a href="#dom-blobeventinit-data">#dom-blobeventinit-data</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-blobeventinit-data-1">3.3. BlobEventInit</a>
+    <li><a href="#ref-for-dom-blobeventinit-data-1">4.3. BlobEventInit</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="fire-an-error-event">
    <b><a href="#fire-an-error-event">#fire-an-error-event</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-fire-an-error-event-1">2.3. Methods</a> <a href="#ref-for-fire-an-error-event-2">(2)</a>
+    <li><a href="#ref-for-fire-an-error-event-1">3.3. Methods</a> <a href="#ref-for-fire-an-error-event-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="errorevent">
    <b><a href="#errorevent">#errorevent</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-errorevent-1">4.1. General principles</a>
-    <li><a href="#ref-for-errorevent-2">4.2. ErrorEvent</a> <a href="#ref-for-errorevent-3">(2)</a>
-    <li><a href="#ref-for-errorevent-4">4.2.1. Constructors</a>
-    <li><a href="#ref-for-errorevent-5">5. Event summary</a>
+    <li><a href="#ref-for-errorevent-1">3.2. Attributes</a>
+    <li><a href="#ref-for-errorevent-2">5.1. General principles</a>
+    <li><a href="#ref-for-errorevent-3">5.2. ErrorEvent</a> <a href="#ref-for-errorevent-4">(2)</a>
+    <li><a href="#ref-for-errorevent-5">5.2.1. Constructors</a>
+    <li><a href="#ref-for-errorevent-6">6. Event summary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-errorevent-errorevent">
    <b><a href="#dom-errorevent-errorevent">#dom-errorevent-errorevent</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-errorevent-errorevent-1">4.2. ErrorEvent</a>
+    <li><a href="#ref-for-dom-errorevent-errorevent-1">5.2. ErrorEvent</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-errorevent-error">
    <b><a href="#dom-errorevent-error">#dom-errorevent-error</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-errorevent-error-1">4.2. ErrorEvent</a> <a href="#ref-for-dom-errorevent-error-2">(2)</a> <a href="#ref-for-dom-errorevent-error-3">(3)</a>
+    <li><a href="#ref-for-dom-errorevent-error-1">5.2. ErrorEvent</a> <a href="#ref-for-dom-errorevent-error-2">(2)</a> <a href="#ref-for-dom-errorevent-error-3">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-erroreventinit">
    <b><a href="#dictdef-erroreventinit">#dictdef-erroreventinit</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-erroreventinit-1">4.2. ErrorEvent</a>
-    <li><a href="#ref-for-dictdef-erroreventinit-2">4.2.1. Constructors</a>
+    <li><a href="#ref-for-dictdef-erroreventinit-1">5.2. ErrorEvent</a>
+    <li><a href="#ref-for-dictdef-erroreventinit-2">5.2.1. Constructors</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-erroreventinit-error">
    <b><a href="#dom-erroreventinit-error">#dom-erroreventinit-error</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-erroreventinit-error-1">4.2.3. ErrorEventInit</a>
+    <li><a href="#ref-for-dom-erroreventinit-error-1">5.2.3. ErrorEventInit</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="start">
    <b><a href="#start">#start</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-start-1">2.3. Methods</a>
+    <li><a href="#ref-for-start-1">3.2. Attributes</a>
+    <li><a href="#ref-for-start-2">3.3. Methods</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="stop">
    <b><a href="#stop">#stop</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-stop-1">2.3. Methods</a> <a href="#ref-for-stop-2">(2)</a> <a href="#ref-for-stop-3">(3)</a>
+    <li><a href="#ref-for-stop-1">3.2. Attributes</a>
+    <li><a href="#ref-for-stop-2">3.3. Methods</a> <a href="#ref-for-stop-3">(2)</a> <a href="#ref-for-stop-4">(3)</a> <a href="#ref-for-stop-5">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dataavailable">
    <b><a href="#dataavailable">#dataavailable</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dataavailable-1">2.3. Methods</a> <a href="#ref-for-dataavailable-2">(2)</a> <a href="#ref-for-dataavailable-3">(3)</a>
+    <li><a href="#ref-for-dataavailable-1">3.2. Attributes</a>
+    <li><a href="#ref-for-dataavailable-2">3.3. Methods</a> <a href="#ref-for-dataavailable-3">(2)</a> <a href="#ref-for-dataavailable-4">(3)</a> <a href="#ref-for-dataavailable-5">(4)</a> <a href="#ref-for-dataavailable-6">(5)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="pause">
+   <b><a href="#pause">#pause</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-pause-1">3.2. Attributes</a>
+    <li><a href="#ref-for-pause-2">3.3. Methods</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="resume">
+   <b><a href="#resume">#resume</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-resume-1">3.2. Attributes</a>
+    <li><a href="#ref-for-resume-2">3.3. Methods</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */

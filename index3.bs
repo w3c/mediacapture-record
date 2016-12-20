@@ -14,7 +14,6 @@ Abstract: This document defines a recording API for use with {{MediaStream}}s.
 !Participate: <a href="https://lists.w3.org/Archives/Public/public-media-capture/">Mailing list</a>
 !Participate: <a href="https://github.com/w3c/mediacapture-record">GitHub repo</a> (<a href="https://github.com/w3c/mediacapture-record/issues/new">new issue</a>, <a href="https://github.com/w3c/mediacapture-record/issues">open issues</a>)
 
-!Implementation: <a href="https://github.com/w3c/mediacapture-record/blob/gh-pages/implementation-status.md">Implementation Status</a>
 !Implementation: <a href="http://caniuse.com/#feat=mediarecorder">Can I use Media Recording?</a>
 
 </pre>
@@ -50,6 +49,10 @@ can also choose how much data it wants to receive at one time. By default a
 {{Blob}} containing the entire recording is returned when the recording
 finishes. However the application can choose to receive smaller buffers of data
 at regular intervals.
+
+<h2 id="security-and-privacy">Privacy and Security Considerations</h2>
+
+<p class="note">Write some text here.</p>
 
 
 # Media Recorder API # {#mediarecorder-api}
@@ -124,37 +127,56 @@ interface MediaRecorder : EventTarget {
 
 <dl class="domintro">
   <dt><dfn attribute for="MediaRecorder"><code>stream</code></dfn></dt>
-  <dd></dd>
+  <dd>The {{MediaStream}} to be recorded.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>mimeType</code></dfn></dt>
-  <dd></dd>
+  <dd>The MIME type [[!RFC2046]] that has been selected as the container
+  for recording. This entry includes all the parameters to the base
+  <code>mimeType</code>. The UA should be able to play back any of the
+  MIME types it supports for recording. For example, it should be able
+  to display a video recording in the HTML &lt;video&gt; tag. The
+  default value for this property is platform-specific.
+
+  <div class="note"> {{MediaRecorder/mimeType}} specifies the media type and
+  container format for the recording via a type/subtype combination, with the
+  codecs and/or profiles parameters [[RFC6381]] specified where ambiguity might
+  arise. Individual codecs might have further optional specific parameters.
+  </div></dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>state</code></dfn></dt>
-  <dd></dd>
+  <dd>The current state of the {{MediaRecorder}} object. When the
+  {{MediaRecorder}} is created, the UA MUST set this attribute to {{inactive}}.
+  </dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>onstart</code></dfn></dt>
-  <dd></dd>
+  <dd>Called to handle the <a>start</a> event.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>onstop</code></dfn></dt>
-  <dd></dd>
+  <dd>Called to handle the <a>stop</a> event.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>ondataavailable</code></dfn></dt>
-  <dd></dd>
+  <dd>Called to handle the <a>dataavailable</a> event. The {{Blob}} of recorded
+  data is contained in this event and can be accessed via its {{BlobEvent/data}}
+  attribute.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>onpause</code></dfn></dt>
-  <dd></dd>
+  <dd>Called to handle the <a>pause</a> event.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>onresume</code></dfn></dt>
-  <dd></dd>
+  <dd>Called to handle the <a>resume</a> event.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>onerror</code></dfn></dt>
-  <dd></dd>
+  <dd>Called to handle an {{ErrorEvent}}.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>videoBitsPerSecond</code></dfn></dt>
-  <dd></dd>
+  <dd>The value of the Video encoding target bit rate that was passed to
+  the Platform (potentially truncated, rounded, etc), or the calculated
+  one if the user has specified {{bitsPerSecond}}.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>audioBitsPerSecond</code></dfn></dt>
-  <dd></dd>
+  <dd>The value of the Audio encoding target bit rate that was passed to
+  the Platform (potentially truncated, rounded, etc), or the calculated
+  one if the user has specified {{bitsPerSecond}}.</dd>
 </dl>
 
 ## Methods ## {#mediarecorder-methods}
@@ -172,22 +194,23 @@ interface MediaRecorder : EventTarget {
     <li>If {{state}} is not {{inactive}}, throw an {{InvalidStateError}}
     {{DOMException}} and abort these steps.</li>
 
-    <li>If the {{stream}}'s isolation properties disallow access from
-    this {{MediaRecorder}}, throw a {{SecurityError}} {{DOMException}} and abort
-    these steps.</li>
+    <li>If the {{MediaRecorder/stream}}'s isolation properties disallow access
+    from this {{MediaRecorder}}, throw a {{SecurityError}} {{DOMException}} and
+    abort these steps.</li>
 
     <li>Set {{state}} to {{recording}}, and run the following steps in parallel:
     <ol>
-      <li>Once media becomes available from one or more of the {{stream}}'s
-      tracks, start gathering the data into a {{Blob}} <var>blob</var> and queue
-      a task, using the DOM manipulation task source, to <a>fire an event</a>
-      named <a>start</a> at <var>target</var>. </li>
+      <li>Once media becomes available from one or more of the
+      {{MediaRecorder/stream}}'s tracks, start gathering the data into a
+      {{Blob}} <var>blob</var> and queue a task, using the DOM manipulation task
+      source, to <a>fire an event</a> named <a>start</a> at <var>target</var>.
+      </li>
 
-      <li>If at any point the stream's isolation properties change so that
-      {{MediaRecorder}} is no longer allowed access to it, the UA MUST
-      immediately stop gathering data, discard any data that it has gathered,
-      and queue a task, using the DOM manipulation task source, that runs
-      the following steps:
+      <li>If at any point the {{MediaRecorder/stream}}'s isolation properties
+      change so that {{MediaRecorder}} is no longer allowed access to it, the UA
+      MUST immediately stop gathering data, discard any data that it has
+      gathered, and queue a task, using the DOM manipulation task source, that
+      runs the following steps:
       <ol>
         <li>Set {{state}} to {{inactive}}.</li>
         <li><a>Fire an error event</a> named {{SecurityError}} at
@@ -241,14 +264,14 @@ interface MediaRecorder : EventTarget {
   <p>Note that {{stop()}}, {{requestData()}}, and {{pause()}} also affect the
   recording behavior.</p>
 
-  <p>The UA MUST record {{stream}} in such a way that the original Tracks can be
-  retrieved at playback time. When multiple {{Blob}}s are returned (because of
-  {{timeslice}} or {{requestData()}}), the individual Blobs need not be
-  playable, but the combination of all the Blobs from a completed recording MUST
-  be playable.</p>
+  <p>The UA MUST record {{MediaRecorder/stream}} in such a way that the original
+  Tracks can be retrieved at playback time. When multiple {{Blob}}s are returned
+  (because of {{timeslice}} or {{requestData()}}), the individual Blobs need not
+  be playable, but the combination of all the Blobs from a completed recording
+  MUST be playable.</p>
 
-  <p> If any Track within the MediaStream is {{muted}} or not {{enabled}} at any
-  time, the UA will only record black frames or silence since that is the
+  <p> If any Track within the {{MediaStream}} is {{muted}} or not {{enabled}} at
+  any time, the UA will only record black frames or silence since that is the
   content produced by the Track.</p>
 
   <table class="parameters">
@@ -284,9 +307,9 @@ interface MediaRecorder : EventTarget {
       <li>Set {{state}} to {{inactive}} and stop gathering data.</li>
       <li>Let <var>blob</var> be the Blob of collected data so far and
       let <var>target</var> be the MediaRecorder context object, then
-      <a>fire a blob event</a> named {{dataavailable}} at <var>target</var> with
-      <var>blob</var>.</li>
-      <li><a>Fire an event</a> named {{stop}} at <var>target</var>.</li>
+      <a href="#to-fire-a-blob-event">fire a blob event</a> named
+      <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
+      <li><a>Fire an event</a> named <a>stop</a> at <var>target</var>.</li>
     </ol>
     </li>
     <li>return <code>undefined</code>.</li>
@@ -306,7 +329,7 @@ interface MediaRecorder : EventTarget {
       <li>Stop gathering data into <var>blob</var> (but keep it
       available so that recording can be resumed in the future).</li>
       <li>Let <var>target</var> be the MediaRecorder context object.
-      <a>Fire an event</a> named {{pause}} at <var>target</var>.</li>
+      <a>Fire an event</a> named <a>pause</a> at <var>target</var>.</li>
     </ol>
     </li>
     <li>return <code>undefined</code>.</li>
@@ -326,7 +349,7 @@ interface MediaRecorder : EventTarget {
       <li>Resume (or continue) gathering data into the current <var>blob</var>.
       </li>
       <li>Let <var>target</var> be the MediaRecorder context object. <a>Fire
-      an event</a> named {{resume}} at <var>target</var>.</li>
+      an event</a> named <a>resume</a> at <var>target</var>.</li>
     </ol>
     </li>
     <li>return <code>undefined</code>.</li>
@@ -344,8 +367,8 @@ interface MediaRecorder : EventTarget {
     <ol>
       <li>Let <var>blob</var> be the {{Blob}} of collected data so far and
       let <var>target</var> be the {{MediaRecorder}} context object, then
-      <a>fire a blob event</a> named {{dataavailable}} at <var>target</var> with
-      <var>blob</var>.
+      <a href="#to-fire-a-blob-event">fire a blob event</a> named
+      <a>dataavailable</a> at <var>target</var> with <var>blob</var>.
       (Note that <var>blob</var> will be empty if no data has been gathered
       yet.)</li>
 
@@ -356,7 +379,8 @@ interface MediaRecorder : EventTarget {
   </ol>
   </dd>
 
-  <dt><dfn method for="MediaRecorder"><code>isTypeSupported(DOMString type)</code></dfn></dt>
+  <dt><dfn method for="MediaRecorder"><code>isTypeSupported(DOMString type)
+    </code></dfn></dt>
   <dd>
   Check to see whether a {{MediaRecorder}} can record in a specified MIME type.
   If true is returned from this method, it only indicates that the
@@ -373,8 +397,8 @@ interface MediaRecorder : EventTarget {
     <li>If <code>type</code> contains a media type or media subtype
     that the MediaRecorder does not support, then return false.</li>
     <li>If <code>type</code> contains a media container that the
-    MediaSource does not support, then return false.</li>
-    <li>If <code>type</code> contains a codec that the MediaSource
+    MediaRecorder does not support, then return false.</li>
+    <li>If <code>type</code> contains a codec that the MediaRecorder
     does not support, then return false.</li>
     <li>If the MediaRecorder does not support the specified
     combination of media type/subtype, codecs and container then
@@ -406,7 +430,7 @@ interface MediaRecorder : EventTarget {
   </dd>
 </dl>
 
-## Data handling
+## Data handling ## {#data-handling}
 
 <dfn>To fire a blob event</dfn>  with a {{Blob}} <var>blob</var> means to
 <a>fire an event</a> at <var ignore=''>target</var> using a {{BlobEvent}} with
@@ -529,11 +553,12 @@ dictionary BlobEventInit {
 
 <dl class="domintro">
   <dt><dfn dict-member for="BlobEventInit"><code>data</code></dfn></dt>
-  <dd>A {{Blob}} object containing the data to deliver via this event.</dd>
+  <dd>A {{Blob}} object containing the data to deliver via {{BlobEvent}}.</dd>
 </dl>
 
-# Error handling
-## General principles
+# Error handling # {#error-handling}
+
+## General principles ## {#error-handling-principles}
 <em>This section is non-normative.</em>
 
 The UA will throw a {{DOMException}} when the error can be detected at the time
@@ -544,8 +569,8 @@ after raising the error, the UA will <a href="#to-fire-a-blob-event">fire a
 dataavailable event</a> with <var>blob</var>; immediately after the UA will then
 <a>fire an event</a> named <code>stop</code>.
 The UA may set platform-specific limits, such as those for the minimum and
-maximum {{Blob}} size that it will support, or the number of Tracks it will
-record at once.
+maximum {{Blob}} size that it will support, or the number of
+{{MediaStreamTrack}}s it will record at once.
 It will signal a fatal error if these limits are exceeded.
 
 
@@ -667,7 +692,7 @@ specific type.
 </table>
 
 
-# Event summary
+# Event summary # {#event-summary}
 
 The following additional events fire on {{MediaRecorder}} objects:
 
@@ -726,7 +751,7 @@ Slightly modified versions of these examples can be found in e.g. <a
  href="https://codepen.io/collection/XjkNbN/">this codepen collection</a>.
 </div>
 
-## Check for {{MediaRecorder}} and mime types.
+## Check for {{MediaRecorder}} and mime types ## {#example1}
 
 <div class="note">
 The following example can also be found in e.g. <a
@@ -754,7 +779,7 @@ with minimal modifications.
 </div>
 
 
-## Recording webcam video and audio
+## Recording webcam video and audio ## {#example2}
 
 <div class="note">
 The following example can also be found in e.g. <a
