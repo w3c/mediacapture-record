@@ -52,7 +52,7 @@ finishes. However the application can choose to receive smaller buffers of data
 at regular intervals.
 
 
-# Media Recorder API # {#mediarecorder}
+# Media Recorder API # {#mediarecorder-api}
 
 <pre class="idl">
 [Constructor(MediaStream stream, optional MediaRecorderOptions options)]
@@ -101,7 +101,7 @@ interface MediaRecorder : EventTarget {
         <td class="prmOptFalse"><span role="img" aria-label=
         "False">&#10008;</span></td>
         <td class="prmDesc">The {{MediaStream}} to be recorded. This will
-        be the value of the {{stream}} attribute.</td>
+        be the value of the {{MediaRecorder/stream}} attribute.</td>
       </tr>
       <tr>
         <td class="prmName">options</td>
@@ -113,7 +113,7 @@ interface MediaRecorder : EventTarget {
         <td class="prmDesc">A dictionary of options to for the UA instructing
         how the recording will take part.
         {{MediaRecorderOptions/mimeType|options.mimeType}}, if present, will
-        become the value of {{mimeType}} attribute.</td>
+        become the value of {{MediaRecorder/mimeType}} attribute.</td>
       </tr>
     </tbody>
   </table>
@@ -161,29 +161,256 @@ interface MediaRecorder : EventTarget {
 
 <dl class="domintro">
   <dt><dfn method for="MediaRecorder"><code>start(optional long timeslice)</code></dfn></dt>
-  <dd></dd>
+  <dd>
+  When a {{MediaRecorder}} object&#8217;s {{start()}} method is invoked, the UA
+  MUST run the following steps:
+  <ol>
+    <li>Let <var>target</var> be the MediaRecorder context object.</li>
+    <li>Let <var>timeslice</var> be the method's first argument, if provided,
+    or <code>undefined</code>. </li>
+
+    <li>If {{state}} is not {{inactive}}, throw an {{InvalidStateError}}
+    {{DOMException}} and abort these steps.</li>
+
+    <li>If the {{stream}}'s isolation properties disallow access from
+    this {{MediaRecorder}}, throw a {{SecurityError}} {{DOMException}} and abort
+    these steps.</li>
+
+    <li>Set {{state}} to {{recording}}, and run the following steps in parallel:
+    <ol>
+      <li>Once media becomes available from one or more of the {{stream}}'s
+      tracks, start gathering the data into a {{Blob}} <var>blob</var> and queue
+      a task, using the DOM manipulation task source, to <a>fire an event</a>
+      named <a>start</a> at <var>target</var>. </li>
+
+      <li>If at any point the stream's isolation properties change so that
+      {{MediaRecorder}} is no longer allowed access to it, the UA MUST
+      immediately stop gathering data, discard any data that it has gathered,
+      and queue a task, using the DOM manipulation task source, that runs
+      the following steps:
+      <ol>
+        <li>Set {{state}} to {{inactive}}.</li>
+        <li><a>Fire an error event</a> named {{SecurityError}} at
+        <var>target</var>.</li>
+        <li><a>Fire an event</a> named <a>stop</a> at <var>target</var>.</li>
+      </ol>
+      </li>
+
+      <li>If the UA at any point is unable to continue gathering data for
+      reasons other than isolation properties, it MUST stop gathering data, and
+      queue a task, using the DOM manipulation task source, that runs the
+      following steps:
+      <ol>
+        <li>Set {{state}} to {{inactive}}.</li>
+        <li><a>Fire an error event</a> named {{UnknownError}} at
+        <var>target</var>.</li>
+        <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
+        <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
+        <li><a>Fire an event</a> named <a>stop</a> at <var>target</var>.</li>
+      </ol>
+      </li>
+
+      <li>If <var>timeslice</var> is not <code>undefined</code>, then once a
+      minimum of <var>timeslice</var> milliseconds of data have been collected,
+      or some minimum time slice imposed by the UA, whichever is greater, start
+      gathering data into a new {{Blob}} <var>blob</var>, and queue a task,
+      using the DOM manipulation task source, that
+      <a href="#to-fire-a-blob-event">fires a blob event</a> named
+      <a>dataavailable</a> at <var>target</var> with <var>blob</var>.
+
+      Note that an <code>undefined</code> value of <var>timeslice</var> will
+      be understood as the largest <code>long</code> value.</li>
+
+      <li>If all recorded tracks become {{ended}}, then stop gathering data, and
+      queue a task, using the DOM manipulation task source, that runs the
+      following steps:
+      <ol>
+        <li>Set {{state}} to {{inactive}}.</li>
+        <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
+        <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
+        <li><a>Fire an event</a> named <a>stop</a> at
+        <var>target</var>.</li>
+      </ol>
+      </li>
+
+    </ol>
+    </li>
+    <li>return <code>undefined</code>.</li>
+  </ol>
+
+  <p>Note that {{stop()}}, {{requestData()}}, and {{pause()}} also affect the
+  recording behavior.</p>
+
+  <p>The UA MUST record {{stream}} in such a way that the original Tracks can be
+  retrieved at playback time. When multiple {{Blob}}s are returned (because of
+  {{timeslice}} or {{requestData()}}), the individual Blobs need not be
+  playable, but the combination of all the Blobs from a completed recording MUST
+  be playable.</p>
+
+  <p> If any Track within the MediaStream is {{muted}} or not {{enabled}} at any
+  time, the UA will only record black frames or silence since that is the
+  content produced by the Track.</p>
+
+  <table class="parameters">
+    <tbody>
+      <tr>
+        <th>Parameter</th>
+        <th>Type</th>
+        <th>Nullable</th>
+        <th>Optional</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td class="prmName">timeslice</td>
+        <td class="prmType"><code>long</code></td>
+        <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
+        <td class="prmOptTrue"><span role="img" aria-label="True">&#10004;</span></td>
+        <td class="prmDesc">The minimum number of milliseconds of data
+        to return in a single Blob.</td>
+      </tr>
+    </tbody>
+  </table>
+  </dd>
 
   <dt><dfn method for="MediaRecorder"><code>stop()</code></dfn></dt>
-  <dd></dd>
+  <dd>
+  When a {{MediaRecorder}} object&#8217;s {{stop()}} method is invoked, the UA
+  MUST run the following steps:
+  <ol>
+    <li>If {{state}} is {{inactive}} throw an {{InvalidStateError}}
+    {{DOMException}} and terminate these steps. Otherwise the UA MUST queue a
+    task, using the DOM manipulation task source, that runs the following steps:
+    <ol>
+      <li>Set {{state}} to {{inactive}} and stop gathering data.</li>
+      <li>Let <var>blob</var> be the Blob of collected data so far and
+      let <var>target</var> be the MediaRecorder context object, then
+      <a>fire a blob event</a> named {{dataavailable}} at <var>target</var> with
+      <var>blob</var>.</li>
+      <li><a>Fire an event</a> named {{stop}} at <var>target</var>.</li>
+    </ol>
+    </li>
+    <li>return <code>undefined</code>.</li>
+  </ol>
+  </dd>
 
   <dt><dfn method for="MediaRecorder"><code>pause()</code></dfn></dt>
-  <dd></dd>
+  <dd>
+  When a {{MediaRecorder}} object&#8217;s {{pause()}} method is invoked, the UA
+  MUST run the following steps:
+  <ol>
+    <li>If {{state}} is {{inactive}} throw an {{InvalidStateError}}
+    {{DOMException}} and terminate these steps. Otherwise the UA MUST queue a
+    task, using the DOM manipulation task source, that runs the following steps:
+    <ol>
+      <li>Set {{state}} to {{paused}}.</li>
+      <li>Stop gathering data into <var>blob</var> (but keep it
+      available so that recording can be resumed in the future).</li>
+      <li>Let <var>target</var> be the MediaRecorder context object.
+      <a>Fire an event</a> named {{pause}} at <var>target</var>.</li>
+    </ol>
+    </li>
+    <li>return <code>undefined</code>.</li>
+  </ol>
+  </dd>
 
   <dt><dfn method for="MediaRecorder"><code>resume()</code></dfn></dt>
-  <dd></dd>
+  <dd>
+  When a {{MediaRecorder}} object&#8217;s {{resume()}} method is invoked, the
+  UA MUST run the following steps:
+  <ol>
+    <li>If {{state}} is {{inactive}} throw an {{InvalidStateError}}
+    {{DOMException}} and terminate these steps. Otherwise the UA MUST queue a
+    task, using the DOM manipulation task source, that runs the following steps:
+    <ol>
+      <li>Set {{state}} to {{recording}}.</li>
+      <li>Resume (or continue) gathering data into the current <var>blob</var>.
+      </li>
+      <li>Let <var>target</var> be the MediaRecorder context object. <a>Fire
+      an event</a> named {{resume}} at <var>target</var>.</li>
+    </ol>
+    </li>
+    <li>return <code>undefined</code>.</li>
+  </ol>
+  </dd>
 
   <dt><dfn method for="MediaRecorder"><code>requestData()</code></dfn></dt>
-  <dd></dd>
+  <dd>
+  When a {{MediaRecorder}} object&#8217;s {{requestData()}} method is invoked,
+  the UA MUST run the following steps:
+  <ol>
+    <li>If {{state}} is {{inactive}} throw an {{InvalidStateError}}
+    {{DOMException}} and terminate these steps. Otherwise the UA MUST queue a
+    task, using the DOM manipulation task source, that runs the following steps:
+    <ol>
+      <li>Let <var>blob</var> be the {{Blob}} of collected data so far and
+      let <var>target</var> be the {{MediaRecorder}} context object, then
+      <a>fire a blob event</a> named {{dataavailable}} at <var>target</var> with
+      <var>blob</var>.
+      (Note that <var>blob</var> will be empty if no data has been gathered
+      yet.)</li>
+
+      <li>Create a new Blob and gather subsequent data into it.</li>
+    </ol>
+    </li>
+    <li>return <code>undefined</code>.</li>
+  </ol>
+  </dd>
 
   <dt><dfn method for="MediaRecorder"><code>isTypeSupported(DOMString type)</code></dfn></dt>
-  <dd></dd>
+  <dd>
+  Check to see whether a {{MediaRecorder}} can record in a specified MIME type.
+  If true is returned from this method, it only indicates that the
+  {{MediaRecorder}} implementation is capable of recording {{Blob}} objects for
+  the specified MIME type. Recording may still fail if sufficient resources are
+  not available to support the concrete media encoding. When this method is
+  invoked, the User Agent must run the following steps:
+  <ol class="method-algorithm">
+    <li>If <code>type</code> is an empty string, then return true
+    (note that this case is essentially equivalent to leaving up to
+    the UA the choice of container and codecs on constructor).</li>
+    <li>If <code>type</code> does not contain a valid MIME type
+    string, then return false.</li>
+    <li>If <code>type</code> contains a media type or media subtype
+    that the MediaRecorder does not support, then return false.</li>
+    <li>If <code>type</code> contains a media container that the
+    MediaSource does not support, then return false.</li>
+    <li>If <code>type</code> contains a codec that the MediaSource
+    does not support, then return false.</li>
+    <li>If the MediaRecorder does not support the specified
+    combination of media type/subtype, codecs and container then
+    return false.</li>
+    <li>Return true.</li>
+  </ol>
+  <table class="parameters">
+    <tbody>
+      <tr>
+        <th>Parameter</th>
+        <th>Type</th>
+        <th>Nullable</th>
+        <th>Optional</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td class="prmName">type</td>
+        <td class="prmType">{{DOMString}}</td>
+        <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
+        <td class="prmOptFalse"><span role="img" aria-label="False">&#10008;</span></td>
+        <td class="prmDesc">
+          A <a href="https://tools.ietf.org/html/rfc2046">MIME Type</a>,
+          including parameters when needed, specifying a container and/or
+          codec formats for recording.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </dd>
 </dl>
 
 ## Data handling
 
 <dfn>To fire a blob event</dfn>  with a {{Blob}} <var>blob</var> means to
-<a>fire an event</a> at <var>target</var> using a {{BlobEvent}} with its
-{{BlobEvent/data}} attribute initialized to <var>blob</var>.
+<a>fire an event</a> at <var ignore=''>target</var> using a {{BlobEvent}} with
+its {{BlobEvent/data}} attribute initialized to <var>blob</var>.
 
 <div class="note">
   Usually <var>blob</var> will be the data gathered by the UA after the
@@ -191,7 +418,7 @@ interface MediaRecorder : EventTarget {
 </div>
 
 
-## MediaRecorderOptions ## {#mediarecorderoptions}
+## MediaRecorderOptions ## {#mediarecorderoptions-section}
 
 <pre class="idl">
 dictionary MediaRecorderOptions {
@@ -232,8 +459,10 @@ dictionary MediaRecorderOptions {
 
   <dt><dfn dict-member for="MediaRecorderOptions"><code>bitsPerSecond</code></dfn></dt>
   <dd>Aggregate target bits per second for encoding of all video and audio
-  Track(s) present. This parameter caps either {{audioBitsPerSecond}} or
-  {{videoBitsPerSecond}} if present, and might be distributed among the present
+  Track(s) present. This parameter caps either
+  {{MediaRecorderOptions/audioBitsPerSecond}} or
+  {{MediaRecorderOptions/videoBitsPerSecond}} if present, and might be
+  distributed among the present
   track encoders as the UA sees fit. This parameter is a hint for the encoder(s)
   and the total value might be surpassed, not achieved, or only be achieved over
   a long period of time.</dd>
@@ -264,7 +493,7 @@ enum RecordingState {
   <dd>Recording has been started, then paused, and not yet stopped or resumed.</dd>
 </dl>
 
-# Blob Event # {#blobevent}
+# Blob Event # {#blobevent-section}
 
 <pre class="idl">
   [Constructor(DOMString type, BlobEventInit eventInitDict)]
@@ -320,12 +549,12 @@ record at once.
 It will signal a fatal error if these limits are exceeded.
 
 
-## ErrorEvent
+## ErrorEvent ## {#errorevent-section}
 
 The {{ErrorEvent}} interface is defined for cases when an event is raised that
 could have been caused by an error.
 
-<dfn data-dfn-type="dfn" data-lt="firing an error event">To fire an error event</dfn>
+<dfn data-dfn-type="dfn" data-lt="fire an error event">To fire an error event</dfn>
 named <var>e</var> with a {{DOMException}} named <var>error</var> means that an
 event with the name <var>e</var>, which does not bubble (except where otherwise
 stated) and is not cancelable (except where otherwise stated), and which uses
@@ -453,29 +682,29 @@ The following additional events fire on {{MediaRecorder}} objects:
   </thead>
   <tbody>
     <tr>
-      <td><code>start</code></td>
+      <td><dfn>start</dfn></td>
       <td>{{Event}}</td>
       <td>The UA has started recording data from the MediaStream.</td>
     </tr>
     <tr>
-      <td><code>stop</code></td>
+      <td><dfn>stop</dfn></td>
       <td>{{Event}}</td>
       <td>The UA has stopped recording data from the MediaStream.</td>
     </tr>
     <tr>
-      <td><code>dataavailable</code></td>
+      <td><dfn>dataavailable</dfn></td>
       <td>{{BlobEvent}}</td>
       <td>The UA generates this even to return data to the application. The
       {{BlobEvent/data}} attribute of this event contains a {{Blob}} of recorded
       data.</td>
     </tr>
     <tr>
-      <td><code>pause</code></td>
+      <td><dfn>pause</dfn></td>
       <td>{{Event}}</td>
       <td>The UA has paused recording data from the MediaStream.</td>
     </tr>
     <tr>
-      <td><code>resume</code></td>
+      <td><dfn>resume</dfn></td>
       <td>{{Event}}</td>
       <td>The UA has resumed recording data from the MediaStream.</td>
     </tr>
@@ -483,9 +712,9 @@ The following additional events fire on {{MediaRecorder}} objects:
       <td><code>ErrorEvent</code></td>
       <td>{{ErrorEvent}}</td>
       <td>An error has occurred, e.g. out of memory or a modification to
-      the {{stream}} has occurred that makes it impossible to
+      the {{MediaRecorder/stream}} has occurred that makes it impossible to
       continue recording (e.g. a Track has been added to or removed from
-      the said {{stream}} while recording is occurring).</td>
+      the said {{MediaRecorder/stream}} while recording is occurring).</td>
     </tr>
   </tbody>
 </table>
@@ -591,11 +820,11 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: 
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: onmute; url: widl-MediaStreamTrack-onmute
 
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: onunmute; url: widl-MediaStreamTrack-onunmute
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: muted; url: widl-MediaStreamTrack-muted
 
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: readyState; url: widl-MediaStreamTrack-readyState
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: enabled; url: widl-MediaStreamTrack-enabled
 
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: kind; url: widl-MediaStreamTrack-kind
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: enum-value; text: ended; url: idl-def-MediaStreamTrackState.ended
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: enum-value; text: live; url: idl-def-MediaStreamTrackState.live
 </pre>
