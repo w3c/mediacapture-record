@@ -482,14 +482,14 @@ dictionary MediaRecorderOptions {
   achieved, or only be achieved over a long period of time.</dd>
 
   <dt><dfn dict-member for="MediaRecorderOptions"><code>bitsPerSecond</code></dfn></dt>
-  <dd>Aggregate target bits per second for encoding of all video and audio
-  Track(s) present. This parameter caps either
+  <dd> Aggregate target bits per second for encoding of all Video and Audio
+  Track(s) present. This parameter overrides either
   {{MediaRecorderOptions/audioBitsPerSecond}} or
   {{MediaRecorderOptions/videoBitsPerSecond}} if present, and might be
-  distributed among the present
-  track encoders as the UA sees fit. This parameter is a hint for the encoder(s)
-  and the total value might be surpassed, not achieved, or only be achieved over
-  a long period of time.</dd>
+  distributed among the present track encoders as the UA sees fit. This
+  parameter is a hint for the encoder(s) and the total value might be surpassed,
+  not achieved, or only be achieved over a long period of time.
+  </dd>
 </dl>
 
 
