@@ -653,7 +653,8 @@
       <pre class="idl">
         [Constructor (DOMString type, BlobEventInit eventInitDict)]
         interface BlobEvent : Event {
-          readonly attribute Blob data;
+          [SameObject] readonly attribute Blob data;
+          readonly attribute DOMHighResTimeStamp timecode;
         };
       </pre>
       <section>
@@ -704,12 +705,23 @@
         <h2>Attributes</h2>
         <dl data-link-for="BlobEvent" data-dfn-for="BlobEvent" class=
         "attributes">
-          <dt><dfn><code>data</code></dfn> of type <span class=
-          "idlAttrType"><a>Blob</a></span>, readonly</dt>
-          <dd>Returns a <a
-          href="https://www.w3.org/TR/FileAPI/#blob"><code>Blob</code></a>
-          object whose type attribute indicates the encoding of the blob
-          data.</dd>
+          <dt><dfn><code>data</code></dfn> of type <span class="idlAttrType">
+          <a href="https://www.w3.org/TR/FileAPI/#blob">Blob</a></span>,
+          readonly</dt>
+          <dd>The encoded blob. Its
+          <a href="https://www.w3.org/TR/FileAPI/#dfn-type">
+          type</a> attribute correlates to the selected
+          <a href="#dom-mediarecorder-mimetype">mimeType</a>.</dd>
+
+          <dt><dfn><code>timecode</code></dfn> of type <span class="idlAttrType">
+          <a href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">
+          DOMHighResTimeStamp</a></span>, readonly</dt>
+          <dd>The difference between the timestamp of the first chunk in
+          <var>data</var> and the timestamp of the first chunk in the first
+          <a>BlobEvent</a> produced by this recorder.
+          Note that the <var>timecode</var> in the first produced
+          <a>BlobEvent</a> does not need to be zero.
+          </dd>
         </dl>
       </section>
     </div>
@@ -718,6 +730,7 @@
       <pre class="idl">
         dictionary BlobEventInit {
           required Blob data;
+          DOMHighResTimeStamp timecode;
         };
       </pre>
       <section>
@@ -727,6 +740,12 @@
           <dt><dfn><code>data</code></dfn> of type <span class=
           "idlMemberType"><a>Blob</a></span>, required</dt>
           <dd>A Blob object containing the data to deliver via this event.</dd>
+
+          <dt><dfn><code>timecode</code></dfn> of type <span class="idlMemberType">
+          <a href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">
+          DOMHighResTimeStamp</a></span>, optional</dt>
+          <dd>The timecode to be used in initializing <a>BlobEvent</a>.</dd>
+
         </dl>
       </section>
     </div>
