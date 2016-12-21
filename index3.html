@@ -1940,7 +1940,8 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
    <h2 class="heading settled" data-level="4" id="blobevent-section"><span class="secno">4. </span><span class="content">Blob Event</span><a class="self-link" href="#blobevent-section"></a></h2>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="constructor" href="#dom-blobevent-blobevent" id="ref-for-dom-blobevent-blobevent-1">Constructor</a>(<span class="kt">DOMString</span> <dfn class="nv idl-code" data-dfn-for="BlobEvent/BlobEvent(type, eventInitDict)" data-dfn-type="argument" data-export="" id="dom-blobevent-blobevent-type-eventinitdict-type">type<a class="self-link" href="#dom-blobevent-blobevent-type-eventinitdict-type"></a></dfn>, <a class="n" data-link-type="idl-name" href="#dictdef-blobeventinit" id="ref-for-dictdef-blobeventinit-1">BlobEventInit</a> <dfn class="nv idl-code" data-dfn-for="BlobEvent/BlobEvent(type, eventInitDict)" data-dfn-type="argument" data-export="" id="dom-blobevent-blobevent-type-eventinitdict-eventinitdict">eventInitDict<a class="self-link" href="#dom-blobevent-blobevent-type-eventinitdict-eventinitdict"></a></dfn>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="blobevent">BlobEvent</dfn> : <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#event">Event</a> {
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="Blob" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data-3">data</a>;
+  [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SameObject">SameObject</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="Blob" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data-3">data</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMHighResTimeStamp" href="#dom-blobevent-timecode" id="ref-for-dom-blobevent-timecode-1">timecode</a>;
 };
 </pre>
    <h3 class="heading settled" data-level="4.1" id="blobevent-constructor"><span class="secno">4.1. </span><span class="content">Constructors</span><a class="self-link" href="#blobevent-constructor"></a></h3>
@@ -1951,18 +1952,23 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
    <h3 class="heading settled" data-level="4.2" id="blobevent-attributes"><span class="secno">4.2. </span><span class="content">Attributes</span><a class="self-link" href="#blobevent-attributes"></a></h3>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEvent" data-dfn-type="attribute" data-export="" id="dom-blobevent-data"><code>data</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a>, readonly</span>
-    <dd>Returns a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> object whose <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-type">type</a></code> attribute indicates the
-  encoding of the blob data.
+    <dd>The encoded <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> whose <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-type">type</a></code> attribute indicates the
+  encoding of the blob data. 
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEvent" data-dfn-type="attribute" data-export="" id="dom-blobevent-timecode"><code>timecode</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a>, readonly</span>
+    <dd>The difference between the timestamp of the first chunk in <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data-4">data</a></code> and the timestamp of the first chunk in the first <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent-2">BlobEvent</a></code> produced by this recorder.  Note that the <code class="idl"><a data-link-type="idl" href="#dom-blobevent-timecode" id="ref-for-dom-blobevent-timecode-2">timecode</a></code> in the first produced <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent-3">BlobEvent</a></code> does not need to be zero. 
    </dl>
    <h3 class="heading settled" data-level="4.3" id="blobeventinit"><span class="secno">4.3. </span><span class="content">BlobEventInit</span><a class="self-link" href="#blobeventinit"></a></h3>
 <pre class="idl highlight def"><span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-blobeventinit">BlobEventInit</dfn> {
   <span class="kt">required</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="dict-member" data-type="Blob " href="#dom-blobeventinit-data" id="ref-for-dom-blobeventinit-data-1">data</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> <a class="nv idl-code" data-link-type="dict-member" data-type="DOMHighResTimeStamp " href="#dom-blobeventinit-timecode" id="ref-for-dom-blobeventinit-timecode-1">timecode</a>;
 };
 </pre>
    <h4 class="heading settled" data-level="4.3.1" id="blobeventinit-members"><span class="secno">4.3.1. </span><span class="content">Members</span><a class="self-link" href="#blobeventinit-members"></a></h4>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEventInit" data-dfn-type="dict-member" data-export="" id="dom-blobeventinit-data"><code>data</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></span>
-    <dd>A <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> object containing the data to deliver via <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent-2">BlobEvent</a></code>.
+    <dd>A <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> object containing the data to deliver via <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent-4">BlobEvent</a></code>.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEventInit" data-dfn-type="dict-member" data-export="" id="dom-blobeventinit-timecode"><code>timecode</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a></span>
+    <dd>The timecode to be used in initializing <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent-5">BlobEvent</a></code>.
    </dl>
    <h2 class="heading settled" data-level="5" id="error-handling"><span class="secno">5. </span><span class="content">Error handling</span><a class="self-link" href="#error-handling"></a></h2>
    <h3 class="heading settled" data-level="5.1" id="error-handling-principles"><span class="secno">5.1. </span><span class="content">General principles</span><a class="self-link" href="#error-handling-principles"></a></h3>
@@ -2076,8 +2082,8 @@ specific type.</p>
       <td>The UA has stopped recording data from the MediaStream.
      <tr>
       <td><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="dataavailable">dataavailable</dfn>
-      <td><code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent-3">BlobEvent</a></code>
-      <td>The UA generates this even to return data to the application. The <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data-4">data</a></code> attribute of this event contains a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> of recorded
+      <td><code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent-6">BlobEvent</a></code>
+      <td>The UA generates this even to return data to the application. The <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data-5">data</a></code> attribute of this event contains a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> of recorded
       data.
      <tr>
       <td><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="pause">pause</dfn>
@@ -2260,6 +2266,12 @@ specific type.</p>
    <li><a href="#stop">stop</a><span>, in §6</span>
    <li><a href="#dom-mediarecorder-stop">stop()</a><span>, in §3.3</span>
    <li><a href="#dom-mediarecorder-stream">stream</a><span>, in §3.2</span>
+   <li>
+    timecode
+    <ul>
+     <li><a href="#dom-blobevent-timecode">attribute for BlobEvent</a><span>, in §4.2</span>
+     <li><a href="#dom-blobeventinit-timecode">dict-member for BlobEventInit</a><span>, in §4.3.1</span>
+    </ul>
    <li><a href="#to-fire-a-blob-event">To fire a blob event</a><span>, in §3.4</span>
    <li>
     videoBitsPerSecond
@@ -2297,6 +2309,7 @@ specific type.</p>
      <li><a href="https://heycam.github.io/webidl/#Exposed">Exposed</a>
      <li><a href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a>
      <li><a href="https://heycam.github.io/webidl/#notsupportederror">NotSupportedError</a>
+     <li><a href="https://heycam.github.io/webidl/#SameObject">SameObject</a>
      <li><a href="https://heycam.github.io/webidl/#securityerror">SecurityError</a>
      <li><a href="https://heycam.github.io/webidl/#unknownerror">UnknownError</a>
      <li><a href="https://heycam.github.io/webidl/#idl-unsigned-long">unsigned long</a>
@@ -2362,11 +2375,13 @@ specific type.</p>
 
 [<a class="nv idl-code" data-link-type="constructor" href="#dom-blobevent-blobevent">Constructor</a>(<span class="kt">DOMString</span> <a class="nv" href="#dom-blobevent-blobevent-type-eventinitdict-type">type</a>, <a class="n" data-link-type="idl-name" href="#dictdef-blobeventinit">BlobEventInit</a> <a class="nv" href="#dom-blobevent-blobevent-type-eventinitdict-eventinitdict">eventInitDict</a>)]
 <span class="kt">interface</span> <a class="nv" href="#blobevent">BlobEvent</a> : <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#event">Event</a> {
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="Blob" href="#dom-blobevent-data">data</a>;
+  [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SameObject">SameObject</a>] <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="Blob" href="#dom-blobevent-data">data</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="DOMHighResTimeStamp" href="#dom-blobevent-timecode">timecode</a>;
 };
 
 <span class="kt">dictionary</span> <a class="nv" href="#dictdef-blobeventinit">BlobEventInit</a> {
   <span class="kt">required</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a> <a class="nv idl-code" data-link-type="dict-member" data-type="Blob " href="#dom-blobeventinit-data">data</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp">DOMHighResTimeStamp</a> <a class="nv idl-code" data-link-type="dict-member" data-type="DOMHighResTimeStamp " href="#dom-blobeventinit-timecode">timecode</a>;
 };
 
 [<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=<span class="n">Window</span>, <a class="nv idl-code" data-link-type="constructor" href="#dom-errorevent-errorevent">Constructor</a>(<span class="kt">DOMString</span> <a class="nv" href="#dom-errorevent-errorevent-type-eventinitdict-type">type</a>, <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-erroreventinit">ErrorEventInit</a> <a class="nv" href="#dom-errorevent-errorevent-type-eventinitdict-eventinitdict">eventInitDict</a>)]
@@ -2597,8 +2612,9 @@ specific type.</p>
    <b><a href="#blobevent">#blobevent</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-blobevent-1">3.4. Data handling</a>
-    <li><a href="#ref-for-blobevent-2">4.3.1. Members</a>
-    <li><a href="#ref-for-blobevent-3">6. Event summary</a>
+    <li><a href="#ref-for-blobevent-2">4.2. Attributes</a> <a href="#ref-for-blobevent-3">(2)</a>
+    <li><a href="#ref-for-blobevent-4">4.3.1. Members</a> <a href="#ref-for-blobevent-5">(2)</a>
+    <li><a href="#ref-for-blobevent-6">6. Event summary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-blobevent-blobevent">
@@ -2613,7 +2629,15 @@ specific type.</p>
     <li><a href="#ref-for-dom-blobevent-data-1">3.2. Attributes</a>
     <li><a href="#ref-for-dom-blobevent-data-2">3.4. Data handling</a>
     <li><a href="#ref-for-dom-blobevent-data-3">4. Blob Event</a>
-    <li><a href="#ref-for-dom-blobevent-data-4">6. Event summary</a>
+    <li><a href="#ref-for-dom-blobevent-data-4">4.2. Attributes</a>
+    <li><a href="#ref-for-dom-blobevent-data-5">6. Event summary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-blobevent-timecode">
+   <b><a href="#dom-blobevent-timecode">#dom-blobevent-timecode</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-blobevent-timecode-1">4. Blob Event</a>
+    <li><a href="#ref-for-dom-blobevent-timecode-2">4.2. Attributes</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-blobeventinit">
@@ -2626,6 +2650,12 @@ specific type.</p>
    <b><a href="#dom-blobeventinit-data">#dom-blobeventinit-data</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-blobeventinit-data-1">4.3. BlobEventInit</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-blobeventinit-timecode">
+   <b><a href="#dom-blobeventinit-timecode">#dom-blobeventinit-timecode</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-blobeventinit-timecode-1">4.3. BlobEventInit</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="fire-an-error-event">

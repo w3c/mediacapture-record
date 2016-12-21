@@ -524,7 +524,8 @@ enum RecordingState {
 <pre class="idl">
   [Constructor(DOMString type, BlobEventInit eventInitDict)]
   interface BlobEvent : Event {
-    readonly attribute Blob data;
+    [SameObject] readonly attribute Blob data;
+    readonly attribute DOMHighResTimeStamp timecode;
   };
 </pre>
 
@@ -539,8 +540,16 @@ enum RecordingState {
 
 <dl class="domintro">
   <dt><dfn attribute for="BlobEvent"><code>data</code></dfn></dt>
-  <dd>Returns a {{Blob}} object whose {{Blob/type}} attribute indicates the
-  encoding of the blob data.</dd>
+  <dd>The encoded {{Blob}} whose {{Blob/type}} attribute indicates the
+  encoding of the blob data.
+
+  <dt><dfn attribute for="BlobEvent"><code>timecode</code></dfn></dt>
+  <dd>The difference between the timestamp of the first chunk in
+  {{BlobEvent/data}} and the timestamp of the first chunk in the first
+  {{BlobEvent}} produced by this recorder.  Note that the {{BlobEvent/timecode}}
+  in the first produced {{BlobEvent}} does not need to be zero.
+  </dd>
+
 </dl>
 
 ## BlobEventInit ## {#blobeventinit}
@@ -548,6 +557,7 @@ enum RecordingState {
 <pre class="idl">
 dictionary BlobEventInit {
   required Blob data;
+  DOMHighResTimeStamp timecode;
 };
 </pre>
 
@@ -556,6 +566,9 @@ dictionary BlobEventInit {
 <dl class="domintro">
   <dt><dfn dict-member for="BlobEventInit"><code>data</code></dfn></dt>
   <dd>A {{Blob}} object containing the data to deliver via {{BlobEvent}}.</dd>
+
+  <dt><dfn dict-member for="BlobEventInit"><code>timecode</code></dfn></dt>
+  <dd>The timecode to be used in initializing {{BlobEvent}}.</dd>
 </dl>
 
 # Error handling # {#error-handling}
@@ -838,6 +851,10 @@ with minimal modifications.
 
 <pre class="anchors">
 type: interface; text: DOMString; url: https://heycam.github.io/webidl/#idl-DOMString; spec: webidl
+</pre>
+
+<pre class="anchors">
+type: interface; text: DOMHighResTimeStamp; url: https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp;
 </pre>
 
 <pre class="anchors">
