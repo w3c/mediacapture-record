@@ -234,9 +234,9 @@
 
                   <li>If at any point the stream's isolation properties change
                   so that MediaRecorder is no longer allowed access to it, the
-                  UA MUST immediately stop gathering data, discard any data that
-                  it has gathered, and queue a task, using the DOM manipulation
-                  task source, that runs the following steps:
+                  UA MUST immediately stop gathering data, and queue a task,
+                  using the DOM manipulation task source, that runs the
+                  following steps:
                   <ol>
                     <li>Set <a>state</a> to
                     <a href="#dom-recordingstate-inactive">inactive</a>.</li>
@@ -244,6 +244,9 @@
                     error event</a> named <code>SecurityError</code> at
                     <var>target</var>.
                     </li>
+                    <li><a href="#dfn-to-fire-a-blob-event">Fire a blob event</a>
+                    named <code>dataavailable</code> at <var>target</var> with
+                    <var>blob</var>.</li>
                     <li><a href="https://dom.spec.whatwg.org/#concept-event-fire">
                     Fire an event</a> named <code>stop</code> at
                     <var>target</var>.</li>
