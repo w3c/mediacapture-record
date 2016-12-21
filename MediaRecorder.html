@@ -447,7 +447,7 @@
             <code>requestData()</code> method is invoked, the UA MUST run the
             following steps:
             <ol>
-              <li>If <a>state</a> is not <a href="#dom-recordingstate-recording">
+              <li>If <a>state</a> is <a href="#dom-recordingstate-recording">
               inactive</a> throw an <code>InvalidStateError</code> DOMException
               and terminate these steps. Otherwise the UA MUST queue a task,
               using the DOM manipulation task source, that runs the following
@@ -490,8 +490,8 @@
               <li>If <code>type</code> contains a media type or media subtype
               that the MediaRecorder does not support, then return false.</li>
               <li>If <code>type</code> contains a media container that the
-              MediaSource does not support, then return false.</li>
-              <li>If <code>type</code> contains a codec that the MediaSource
+              MediaRecorder does not support, then return false.</li>
+              <li>If <code>type</code> contains a codec that the MediaRecorder
               does not support, then return false.</li>
               <li>If the MediaRecorder does not support the specified
               combination of media type/subtype, codecs and container then
