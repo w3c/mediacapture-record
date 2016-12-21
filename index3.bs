@@ -207,14 +207,16 @@ interface MediaRecorder : EventTarget {
       </li>
 
       <li>If at any point the {{MediaRecorder/stream}}'s isolation properties
-      change so that {{MediaRecorder}} is no longer allowed access to it, the UA
-      MUST immediately stop gathering data, discard any data that it has
+      change so that {{MediaRecorder}} is no longer allowed access to it, the
+      UA MUST immediately stop gathering data, discard any data that it has
       gathered, and queue a task, using the DOM manipulation task source, that
       runs the following steps:
       <ol>
         <li>Set {{state}} to {{inactive}}.</li>
         <li><a>Fire an error event</a> named {{SecurityError}} at
         <var>target</var>.</li>
+        <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
+        <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
         <li><a>Fire an event</a> named <a>stop</a> at <var>target</var>.</li>
       </ol>
       </li>
