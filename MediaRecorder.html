@@ -760,7 +760,7 @@
       ([[!DOM]]) when the error can be detected at the time that the call is
       made. In all other cases the UA will
       <a href="https://dom.spec.whatwg.org/#concept-event-fire">fire an event</a>
-      named <a><code>ErrorEvent</code></a>.
+      named <a><code>MediaRecorderErrorEvent</code></a>.
       If recording has been started and not yet stopped when the error occurs,
       let <var>blob</var> be the Blob of collected data so far; after raising
       the error, the UA will <a href="#dfn-to-fire-a-blob-event">fire a
@@ -775,97 +775,84 @@
 
     </section>
     <section>
-      <h3>ErrorEvent</h3>
-      <p>The <a>ErrorEvent</a> interface is defined for cases when an event is raised
-      that could have been caused by an error.</p>
-      <p><dfn data-dfn-type="dfn"
-      data-lt="firing an error event">To fire an error event</dfn> named
-      <var>e</var> with a <code>DOMException</code> named <var>error</var> means
+      <h3>MediaRecorderErrorEvent</h3>
+      <p>The <a>MediaRecorderErrorEvent</a> interface is defined for cases when
+      an event is raised that could have been caused by an error.</p>
+      <p><dfn data-dfn-type="dfn" data-lt="firing an error event">To fire an
+      error event</dfn> named <var>e</var> with a <code>DOMException</code> named <var>error</var> means
       that an event with the name <var>e</var>, which does not bubble (except
       where otherwise stated) and is not cancelable (except where otherwise
-      stated), and which uses the <code><a>ErrorEvent</a></code> interface with
-      the <code><a data-link-for= "ErrorEvent">error</a></code> attribute set to
-      <var>error</var>, must be created and
+      stated), and which uses the <code><a>MediaRecorderErrorEvent</a></code>
+      interface with the <code><a data-link-for= "MediaRecorderErrorEvent">error
+      </a></code> attribute set to <var>error</var>, must be created and
       <a href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched
       </a> at the given target. If no <code>DOMException</code> object is
-      specified, the <code><a data-link-for="ErrorEvent">error</a></code>
-      attribute defaults to null.</p>
+      specified, the <code><a data-link-for="MediaRecorderErrorEvent">error
+      </a></code> attribute defaults to null.</p>
       <div>
-        <pre class="idl">
-          [Exposed=Window, Constructor (DOMString type, ErrorEventInit eventInitDict)]
-          interface ErrorEvent : Event {
-            readonly attribute DOMException? error;
-          };
-        </pre>
-        <section>
-          <h2>Constructors</h2>
-          <dl data-link-for="ErrorEvent" data-dfn-for="ErrorEvent" class=
-          "constructors">
-            <dt><code>ErrorEvent</code></dt>
-            <dd>
-              Constructs a new <code><a>ErrorEvent</a></code>.
-              <table class="parameters">
-                <tbody>
-                  <tr>
-                    <th>Parameter</th>
-                    <th>Type</th>
-                    <th>Nullable</th>
-                    <th>Optional</th>
-                    <th>Description</th>
-                  </tr>
-                  <tr>
-                    <td class="prmName">type</td>
-                    <td class="prmType"><code>DOMString</code></td>
-                    <td class="prmNullFalse"><span role="img" aria-label=
-                    "False">&#10008;</span></td>
-                    <td class="prmOptFalse"><span role="img" aria-label=
-                    "False">&#10008;</span></td>
-                    <td class="prmDesc"></td>
-                  </tr>
-                  <tr>
-                    <td class="prmName">eventInitDict</td>
-                    <td class="prmType"><code>ErrorEventInit</code></td>
-                    <td class="prmNullFalse"><span role="img" aria-label=
-                    "False">&#10008;</span></td>
-                    <td class="prmOptFalse"><span role="img" aria-label=
-                    "False">&#10008;</span></td>
-                    <td class="prmDesc"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Attributes</h2>
-          <dl data-link-for="ErrorEvent" data-dfn-for="ErrorEvent" class=
-          "attributes">
-            <dt><dfn><code>error</code></dfn> of type <span class=
-            "idlAttrType"><a>Error</a></span>, readonly , nullable</dt>
-            <dd>If the event was raised because of an error, this attribute MAY
-            be set to that error object.</dd>
-          </dl>
-        </section>
-      </div>
-      <div>
-        <pre class="idl">
-          dictionary ErrorEventInit : EventInit {
-            Error? error = null;
-          };
-        </pre>
-        <section>
-          <h2>Dictionary <a class="idlType">ErrorEventInit</a> Members</h2>
-          <dl data-link-for="ErrorEventInit" data-dfn-for="ErrorEventInit"
-          class="dictionary-members">
-            <dt><dfn><code>error</code></dfn> of type <span class=
-            "idlMemberType"><a>Error</a></span>, nullable, defaulting to
-            <code>null</code></dt>
-            <dd>If the event was raised because of an error, this attribute MAY
-            be set to that error object.</dd>
-          </dl>
-        </section>
-      </div>
+      <pre class="idl">
+        [Exposed=Window, Constructor (DOMString name, optional DOMString message)]
+        interface MediaRecorderErrorEvent : Event {
+          [SameObject] readonly attribute DOMException error;
+        };
+      </pre>
+      <section>
+        <h2>Constructors</h2>
+        <dl data-link-for="MediaRecorderErrorEvent"
+            data-dfn-for="MediaRecorderErrorEvent" class="constructors">
+        <dt><code>MediaRecorderErrorEvent</code></dt>
+        <dd>
+          Constructs a new <code><a>MediaRecorderErrorEvent</a></code>.
+          <table class="parameters">
+          <tbody>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Nullable</th>
+              <th>Optional</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td class="prmName">name</td>
+              <td class="prmType"><code>DOMString</code></td>
+              <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
+              <td class="prmOptFalse"><span role="img" aria-label="False">&#10008;</span></td>
+              <td class="prmDesc">
+              The
+              <a href="https://heycam.github.io/webidl/#idl-DOMException-error-names">
+              error name</a> to be used to construct
+              <a data-link-for="MediaRecorderErrorEvent">error</a>.
+              </td>
+            </tr>
+            <tr>
+              <td class="prmName">message</td>
+              <td class="prmType"><code>DOMString</code></td>
+              <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
+              <td class="prmOptTrue"><span role="img" aria-label="False">&#10004;</span></td>
+              <td class="prmDesc">An explanatory message about the error
+              circumstances. This argument, if present, will be used to
+              initialize <code><a data-link-for="MediaRecorderErrorEvent">
+              error</a></code>'s <a href="https://www.w3.org/TR/WebIDL-1/#es-DOMException-constructor-object">message</a>.
+              </td>
+            </tr>
+          </tbody>
+          </table>
+        </dd>
+        </dl>
+      </section>
+      <section>
+        <h2>Attributes</h2>
+        <dl data-link-for="MediaRecorderErrorEvent"
+            data-dfn-for="MediaRecorderErrorEvent" class="attributes">
+        <dt><dfn><code>error</code></dfn> of type <span class="idlAttrType">
+          <a href="https://heycam.github.io/webidl/#dfn-DOMException">
+          DOMException</a></span>, readonly</dt>
+        <dd>The DOMException error.</dd>
+        </dl>
+      </section>
+    </div>
     </section>
+
     <section id="exception-summary" class="informative">
       <h3>Exception summary</h3>
       <p>Each of the exceptions defined in this document is a <a href=
@@ -949,9 +936,9 @@
           <td>The UA has resumed recording data from the MediaStream.</td>
         </tr>
         <tr>
-          <td><dfn id=
-          "event-mediarecorder-ErrorEvent"><code>ErrorEvent</code></dfn></td>
-          <td><code>EventError</code></td>
+          <td><dfn id="event-mediarecorder-MediaRecorderErrorEvent"><code>
+          MediaRecorderErrorEvent</code></dfn></td>
+          <td><code>MediaRecorderErrorEvent</code></td>
           <td>An error has occurred, e.g. out of memory or a modification to
           the <code>stream</code> has occurred that makes it impossible to
           continue recording (e.g. a Track has been added to or removed from
