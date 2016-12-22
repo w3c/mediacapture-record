@@ -777,7 +777,7 @@
     <section>
       <h3>MediaRecorderErrorEvent</h3>
       <p>The <a>MediaRecorderErrorEvent</a> interface is defined for cases when
-      an event is raised that could have been caused by an error.</p>
+      an event is raised that was caused by an error.</p>
       <p><dfn data-dfn-type="dfn" data-lt="firing an error event">To fire an
       error event</dfn> named <var>e</var> with a <code>DOMException</code>
       named <var>error</var> means that an event with the name <var>e</var>,
@@ -787,11 +787,9 @@
       the <code><a data-link-for= "MediaRecorderErrorEvent">error</a></code>
       attribute set to <var>error</var>, must be created and
       <a href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched
-      </a> at the given target. If no <code>DOMException</code> object is
-      specified, the <code><a data-link-for="MediaRecorderErrorEvent">error
-      </a></code> attribute defaults to null.</p>
-
+      </a> at the given target.</p>
       <div>
+
       <pre class="idl">
         dictionary MediaRecorderErrorEventInit : EventInit {
           required DOMException error;
@@ -799,7 +797,7 @@
 
         [Exposed=Window, Constructor (DOMString type, MediaRecorderErrorEventInit eventInitDict)]
         interface MediaRecorderErrorEvent : Event {
-          [SameObject] readonly attribute DOMException? error;
+          [SameObject] readonly attribute DOMException error;
         };
       </pre>
       <section>
@@ -807,38 +805,8 @@
         <dl data-link-for="MediaRecorderErrorEvent"
             data-dfn-for="MediaRecorderErrorEvent" class="constructors">
         <dt><code>MediaRecorderErrorEvent</code></dt>
-        <dd>
-          Constructs a new <code><a>MediaRecorderErrorEvent</a></code>.
-          <table class="parameters">
-          <tbody>
-            <tr>
-              <th>Parameter</th>
-              <th>Type</th>
-              <th>Nullable</th>
-              <th>Optional</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-              <td class="prmName">type</td>
-              <td class="prmType"><code>DOMString</code></td>
-              <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
-              <td class="prmOptFalse"><span role="img" aria-label="False">&#10008;</span></td>
-              <td class="prmDesc">
-              The
-              <a href="https://heycam.github.io/webidl/#idl-DOMException-error-names">
-              error name</a> to be used in constructing
-              <a data-link-for="MediaRecorderErrorEvent">error</a>.
-              </td>
-            </tr>
-            <tr>
-              <td class="prmName">eventInitDict</td>
-              <td class="prmType"><a class="idlType"><code>MediaRecorderErrorEventInit</code></a></td>
-              <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
-              <td class="prmOptTrue"><span role="img" aria-label="False">&#10004;</span></td>
-              <td class="prmDesc"></td>
-            </tr>
-          </tbody>
-          </table>
+        <dd><a href="https://dom.spec.whatwg.org/#concept-event-constructor">
+          Constructs</a> a new <code><a>MediaRecorderErrorEvent</a></code>.
         </dd>
         </dl>
       </section>
@@ -849,7 +817,7 @@
         <dt><dfn><code>error</code></dfn> of type <span class="idlAttrType">
           <a href="https://heycam.github.io/webidl/#dfn-DOMException">
           DOMException</a></span>, readonly</dt>
-        <dd>The DOMException error that triggered the event, if any.</dd>
+        <dd>The DOMException error that triggered the event.</dd>
         </dl>
       </section>
       <section>
@@ -858,12 +826,21 @@
             data-dfn-for="MediaRecorderErrorEventInit" class="dictionary-members">
         <dt><dfn><code>error</code></dfn> of type <span class="idlAttrType">
           <a href="https://heycam.github.io/webidl/#dfn-DOMException">
-          DOMException</a></span>, readonly</dt>
+          DOMException</a></span>, required</dt>
         <dd>The <a href="https://heycam.github.io/webidl/#dfn-DOMException">
           DOMException</a> causing the error that triggered the event.
           An explanatory message about the error circumstances MAY be provided
-          in its <a href="https://www.w3.org/TR/WebIDL-1/#es-DOMException-constructor-object">
+          in its <a href="https://heycam.github.io/webidl/#es-DOMException-constructor-object">
           message</a> attribute.
+
+          <div class="note">
+          If an implementation places non-standard properties on
+          <a href="https://heycam.github.io/webidl/#dfn-DOMException">
+          DOMException<a>, exposing e.g. stack traces or error line numbers,
+          these are encouraged to point to whichever method call most closely
+          identifies the run-time operation that caused the error, e.g.
+          <a href="#dom-mediarecorder-start">start()</a>.
+          </div>
         </dd>
         </dl>
       </section>
