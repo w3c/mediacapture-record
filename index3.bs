@@ -1,7 +1,7 @@
 <pre class="metadata">
 Title: MediaStream Recording
 Repository: mediacapture-record
-Group: dap
+Group: mediacapture
 Status: ED
 ED: https://w3c.github.io/mediacapture-record/
 Shortname: mediastream-recording
