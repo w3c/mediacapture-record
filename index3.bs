@@ -588,7 +588,6 @@ maximum {{Blob}} size that it will support, or the number of
 {{MediaStreamTrack}}s it will record at once.
 It will signal a fatal error if these limits are exceeded.
 
-
 ## MediaRecorderErrorEvent ## {#errorevent-section}
 
 The {{MediaRecorderErrorEvent}} interface is defined for cases when an event is
