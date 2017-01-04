@@ -166,7 +166,7 @@ interface MediaRecorder : EventTarget {
   <dd>Called to handle the <a>resume</a> event.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>onerror</code></dfn></dt>
-  <dd>Called to handle an {{ErrorEvent}}.</dd>
+  <dd>Called to handle a {{MediaRecorderErrorEvent}}.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>videoBitsPerSecond</code></dfn></dt>
   <dd>The value of the Video encoding target bit rate that was passed to
@@ -578,9 +578,9 @@ dictionary BlobEventInit {
 
 The UA will throw a {{DOMException}} when the error can be detected at the time
 that the call is made. In all other cases the UA will <a>fire an event</a> named
-{{ErrorEvent}}.  If recording has been started and not yet stopped when the
-error occurs, let <var>blob</var> be the {{Blob}} of collected data so far;
-after raising the error, the UA will <a href="#to-fire-a-blob-event">fire a
+{{MediaRecorderErrorEvent}}.  If recording has been started and not yet stopped
+when the error occurs, let <var>blob</var> be the {{Blob}} of collected data so
+far; after raising the error, the UA will <a href="#to-fire-a-blob-event">fire a
 dataavailable event</a> with <var>blob</var>; immediately after the UA will then
 <a>fire an event</a> named <code>stop</code>.
 The UA may set platform-specific limits, such as those for the minimum and
@@ -589,34 +589,38 @@ maximum {{Blob}} size that it will support, or the number of
 It will signal a fatal error if these limits are exceeded.
 
 
-## ErrorEvent ## {#errorevent-section}
+## MediaRecorderErrorEvent ## {#errorevent-section}
 
-The {{ErrorEvent}} interface is defined for cases when an event is raised that
-could have been caused by an error.
+The {{MediaRecorderErrorEvent}} interface is defined for cases when an event is
+raised that was caused by an error.
 
 <dfn data-dfn-type="dfn" data-lt="fire an error event">To fire an error event</dfn>
 named <var>e</var> with a {{DOMException}} named <var>error</var> means that an
 event with the name <var>e</var>, which does not bubble (except where otherwise
 stated) and is not cancelable (except where otherwise stated), and which uses
-the {{ErrorEvent}} interface with the {{ErrorEvent/error}} attribute set to
-<var>error</var>, must be created and
+the {{MediaRecorderErrorEvent}} interface with the
+{{MediaRecorderErrorEvent/error}} attribute set to <var>error</var>, must be
+created and
 <a href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched</a> at
-the given target. If no {{DOMException}} object is specified, the
-{{ErrorEvent/error}} attribute defaults to null.</p>
+the given target.</p>
 
 <pre class="idl">
-[Exposed=Window, Constructor(DOMString type, optional ErrorEventInit eventInitDict)]
-interface ErrorEvent : Event {
-  readonly attribute DOMException? error;
+dictionary MediaRecorderErrorEventInit : EventInit {
+  required DOMException error;
+};
+
+[Exposed=Window, Constructor(DOMString type, MediaRecorderErrorEventInit eventInitDict)]
+interface MediaRecorderErrorEvent : Event {
+  [SameObject] readonly attribute DOMException error;
 };
 </pre>
 
 ### Constructors ### {#errorevent-constructor}
 
 <dl class="domintro">
-  <dt><dfn constructor for="ErrorEvent"><code>ErrorEvent(DOMString type, ErrorEventInit eventInitDict)</code></dfn></dt>
+  <dt><dfn constructor for="MediaRecorderErrorEvent"><code>MediaRecorderErrorEvent(DOMString type, MediaRecorderErrorEventInit eventInitDict)</code></dfn></dt>
   <dd>
-  Constructs a new {{ErrorEvent}}.
+  Constructs a new {{MediaRecorderErrorEvent}}.
 
   <table class="parameters">
     <tbody>
@@ -636,7 +640,7 @@ interface ErrorEvent : Event {
       </tr>
       <tr>
         <td class="prmName">eventInitDict</td>
-        <td class="prmType">{{ErrorEventInit}}</td>
+        <td class="prmType">{{MediaRecorderErrorEventInit}}</td>
         <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
         <td class="prmOptFalse"><span role="img" aria-label="False">&#10008;</span></td>
         <td class="prmDesc"></td>
@@ -650,25 +654,26 @@ interface ErrorEvent : Event {
 ### Attributes ### {#errorevent-attributes}
 
 <dl class="domintro">
-  <dt><dfn attribute for="ErrorEvent"><code>error</code></dfn></dt>
-  <dd>If the event was raised because of an error, this attribute MAY be set to
-  that error object.</dd>
+  <dt><dfn attribute for="MediaRecorderErrorEvent"><code>error</code></dfn></dt>
+  <dd>The DOMException error that triggered the event.</dd>
 </dl>
 
-### ErrorEventInit ### {#erroreventinit}
-
-<pre class="idl">
-dictionary ErrorEventInit {
-  Error? error = null;
-};
-</pre>
-
-#### Members #### {#erroreventinit-members}
+### MediaRecorderErrorEventInit ### {#erroreventinit}
 
 <dl class="domintro">
-  <dt><dfn dict-member for="ErrorEventInit"><code>error</code></dfn></dt>
-  <dd>If the event was raised because of an error, this attribute MAY be set to
-  that error object.</dd>
+  <dt><dfn dict-member for="MediaRecorderErrorEventInit"><code>error</code></dfn></dt>
+  <dd>The {{DOMException}} causing the error that triggered the event.
+  An explanatory message about the error circumstances MAY be provided
+  in its <a href="https://heycam.github.io/webidl/#es-DOMException-constructor-object">
+  message</a> attribute.
+
+  <div class="note">
+  If an implementation places non-standard properties on {{DOMException}},
+  exposing e.g. stack traces or error line numbers, these are encouraged to
+  point to whichever method call most closely identifies the run-time operation
+  that caused the error, e.g. {{start()}}.
+  </div>
+  </dd>
 </dl>
 
 ## Exception Summary ## {#exception-summary}
@@ -749,8 +754,8 @@ The following additional events fire on {{MediaRecorder}} objects:
       <td>The UA has resumed recording data from the MediaStream.</td>
     </tr>
     <tr>
-      <td><code>ErrorEvent</code></td>
-      <td>{{ErrorEvent}}</td>
+      <td><dfn>error</dfn></td>
+      <td>{{MediaRecorderErrorEvent}}</td>
       <td>An error has occurred, e.g. out of memory or a modification to
       the {{MediaRecorder/stream}} has occurred that makes it impossible to
       continue recording (e.g. a Track has been added to or removed from
