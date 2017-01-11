@@ -15,7 +15,7 @@ Abstract: This document defines a recording API for use with {{MediaStream}}s.
 !Participate: <a href="https://github.com/w3c/mediacapture-record">GitHub repo</a> (<a href="https://github.com/w3c/mediacapture-record/issues/new">new issue</a>, <a href="https://github.com/w3c/mediacapture-record/issues">open issues</a>)
 
 !Implementation: <a href="http://caniuse.com/#feat=mediarecorder">Can I use Media Recording?</a>
-
+!Implementation: <a href="https://github.com/miguelao/mediacapture-record-implementation-status/blob/master/chromium.md">Chromium Encode Acceleration Support</a>
 </pre>
 
 <style>
