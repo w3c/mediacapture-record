@@ -50,11 +50,6 @@ can also choose how much data it wants to receive at one time. By default a
 finishes. However the application can choose to receive smaller buffers of data
 at regular intervals.
 
-<h2 id="security-and-privacy">Privacy and Security Considerations</h2>
-
-<p class="note">Write some text here.</p>
-
-
 # Media Recorder API # {#mediarecorder-api}
 
 <pre class="idl">
@@ -785,8 +780,9 @@ with minimal modifications.
   } else {
     var contentTypes = ["video/webm",
                         "video/webm;codecs=vp8",
+                        "video/x-matroska;codecs=avc1",
                         "audio/webm",
-                        "video/mp4;codecs=h264",
+                        "video/mp4;codecs=avc1",
                         "video/invalid"];
     contentTypes.forEach(contentType => {
       console.log(contentType + ' is '
