@@ -1183,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 176d39d5a285c04f57d2f0e078fa69273028eb45" name="generator">
+  <meta content="Bikeshed version 48f3e0ec257a756aad6df3ed37b6360b66ae5352" name="generator">
 <style>
 table {
   border-collapse: collapse;
@@ -1447,7 +1447,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Recording</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-01-11">11 January 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-01-20">20 January 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1878,6 +1878,7 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
   <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond-1">audioBitsPerSecond</a>;
   <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond-1">videoBitsPerSecond</a>;
   <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond-3">bitsPerSecond</a>;
+  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-mediarecorderoptions-forcevideoframerate" id="ref-for-dom-mediarecorderoptions-forcevideoframerate-1">forceVideoFrameRate</a>;
 };
 </pre>
    <h4 class="heading settled" data-level="2.5.1" id="mediarecorderoptions-members"><span class="secno">2.5.1. </span><span class="content">Members</span><a class="self-link" href="#mediarecorderoptions-members"></a></h4>
@@ -1908,6 +1909,8 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
   distributed among the present track encoders as the UA sees fit. This
   parameter is a hint for the encoder(s) and the total value might be surpassed,
   not achieved, or only be achieved over a long period of time. 
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export="" id="dom-mediarecorderoptions-forcevideoframerate"><code>forceVideoFrameRate</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double">double</a></span>
+    <dd>This parameter, if present, represents the source video frame rate that will be used to generate the encoded timestamps, instead of the normal behaviour of following the wall clock. This allows for speeding up or slowing down the frame rate in the container versus the source frame rate, sometimes called "conforming" and used for e.g. slow motion videos.  This parameter is ignored if audio is being recorded. 
    </dl>
    <h3 class="heading settled" data-level="2.6" id="recordingstate"><span class="secno">2.6. </span><span class="content">RecordingState</span><a class="self-link" href="#recordingstate"></a></h3>
 <pre class="idl highlight def"><span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-recordingstate">RecordingState</dfn> {
@@ -2226,6 +2229,7 @@ specific type.</p>
      <li><a href="#error">definition of</a><span>, in §5</span>
     </ul>
    <li><a href="#fire-an-error-event">fire an error event</a><span>, in §4.2</span>
+   <li><a href="#dom-mediarecorderoptions-forcevideoframerate">forceVideoFrameRate</a><span>, in §2.5.1</span>
    <li><a href="#dom-recordingstate-inactive">inactive</a><span>, in §2.6.1</span>
    <li><a href="#dom-mediarecorder-istypesupported">isTypeSupported(type)</a><span>, in §2.3</span>
    <li><a href="#mediarecorder">MediaRecorder</a><span>, in §2</span>
@@ -2308,6 +2312,7 @@ specific type.</p>
      <li><a href="https://heycam.github.io/webidl/#SameObject">SameObject</a>
      <li><a href="https://heycam.github.io/webidl/#securityerror">SecurityError</a>
      <li><a href="https://heycam.github.io/webidl/#unknownerror">UnknownError</a>
+     <li><a href="https://heycam.github.io/webidl/#idl-double">double</a>
      <li><a href="https://heycam.github.io/webidl/#idl-unsigned-long">unsigned long</a>
     </ul>
   </ul>
@@ -2361,6 +2366,7 @@ specific type.</p>
   <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-audiobitspersecond">audioBitsPerSecond</a>;
   <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videobitspersecond">videoBitsPerSecond</a>;
   <span class="kt">unsigned</span> <span class="kt">long</span> <a class="nv idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-bitspersecond">bitsPerSecond</a>;
+  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-mediarecorderoptions-forcevideoframerate">forceVideoFrameRate</a>;
 };
 
 <span class="kt">enum</span> <a class="nv" href="#enumdef-recordingstate">RecordingState</a> {
@@ -2573,6 +2579,12 @@ specific type.</p>
    <ul>
     <li><a href="#ref-for-dom-mediarecorderoptions-bitspersecond-1">2.2. Attributes</a> <a href="#ref-for-dom-mediarecorderoptions-bitspersecond-2">(2)</a>
     <li><a href="#ref-for-dom-mediarecorderoptions-bitspersecond-3">2.5. MediaRecorderOptions</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediarecorderoptions-forcevideoframerate">
+   <b><a href="#dom-mediarecorderoptions-forcevideoframerate">#dom-mediarecorderoptions-forcevideoframerate</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediarecorderoptions-forcevideoframerate-1">2.5. MediaRecorderOptions</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="enumdef-recordingstate">
