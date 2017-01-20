@@ -447,6 +447,7 @@ dictionary MediaRecorderOptions {
   unsigned long audioBitsPerSecond;
   unsigned long videoBitsPerSecond;
   unsigned long bitsPerSecond;
+  double forceVideoFrameRate;
 };
 </pre>
 
@@ -486,6 +487,10 @@ dictionary MediaRecorderOptions {
   distributed among the present track encoders as the UA sees fit. This
   parameter is a hint for the encoder(s) and the total value might be surpassed,
   not achieved, or only be achieved over a long period of time.
+  </dd>
+
+  <dt><dfn dict-member for="MediaRecorderOptions"><code>forceVideoFrameRate</code></dfn></dt>
+  <dd>This parameter, if present, represents the source video frame rate that will be used to generate the encoded timestamps, instead of the normal behaviour of following the wall clock. This allows for speeding up or slowing down the frame rate in the container versus the source frame rate, sometimes called "conforming" and used for e.g. slow motion videos.  This parameter is ignored if audio is being recorded.
   </dd>
 </dl>
 
