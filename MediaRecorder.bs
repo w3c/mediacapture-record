@@ -578,7 +578,7 @@ when the error occurs, let <var>blob</var> be the {{Blob}} of collected data so
 far; before raising the error, the UA will <a href="#to-fire-a-blob-event">fire a
 dataavailable event</a> with <var>blob</var>; then the UA will
 <a>fire an event</a> named <code>stop</code>; finally the UA will
-<a>fire an event</a> named <code>error</code>.
+<a>fire an error event</a>.
 The UA may set platform-specific limits, such as those for the minimum and
 maximum {{Blob}} size that it will support, or the number of
 {{MediaStreamTrack}}s it will record at once.
