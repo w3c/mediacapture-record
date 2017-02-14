@@ -1544,7 +1544,7 @@ pre.idl.highlight { color: #708090; }
     <li>
      <a href="#examples"><span class="secno">6</span> <span class="content">Examples</span></a>
      <ol class="toc">
-      <li><a href="#example1"><span class="secno">6.1</span> <span class="content">Check for <code class="idl"><span>MediaRecorder</span></code> and mime types</span></a>
+      <li><a href="#example1"><span class="secno">6.1</span> <span class="content">Check for <code class="idl"><span>MediaRecorder</span></code> and content types</span></a>
       <li><a href="#example2"><span class="secno">6.2</span> <span class="content">Recording webcam video and audio</span></a>
      </ol>
     <li>
@@ -2097,7 +2097,9 @@ specific type.</p>
    </table>
    <h2 class="heading settled" data-level="6" id="examples"><span class="secno">6. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <div class="note" role="note"> Slightly modified versions of these examples can be found in e.g. <a href="https://codepen.io/collection/XjkNbN/">this codepen collection</a>. </div>
-   <h3 class="heading settled" data-level="6.1" id="example1"><span class="secno">6.1. </span><span class="content">Check for <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-16">MediaRecorder</a></code> and mime types</span><a class="self-link" href="#example1"></a></h3>
+   <h3 class="heading settled" data-level="6.1" id="example1"><span class="secno">6.1. </span><span class="content">Check for <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder-16">MediaRecorder</a></code> and content types</span><a class="self-link" href="#example1"></a></h3>
+   <p>This example checks if the implementation supports a few popular codec/container
+combinations.</p>
    <div class="note" role="note"> The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/edqNab?editors=0010">this codepen</a> with minimal modifications. </div>
    <div class="example" id="example-b081dead">
     <a class="self-link" href="#example-b081dead"></a> 
@@ -2119,9 +2121,14 @@ specific type.</p>
 </pre>
    </div>
    <h3 class="heading settled" data-level="6.2" id="example2"><span class="secno">6.2. </span><span class="content">Recording webcam video and audio</span><a class="self-link" href="#example2"></a></h3>
+   <p>This example captures an video+audio <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastream">MediaStream</a></code> using <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#dom-mediadevices-getusermedia">getUserMedia()</a></code>,
+plugs it into a <code>&lt;video></code> tag and tries to record it,
+retrieving the recorded chunks via the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-ondataavailable" id="ref-for-dom-mediarecorder-ondataavailable-3">ondataavailable</a></code> event.  Note that the
+recording will go on forever until either MediaRecorder is <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stop" id="ref-for-dom-mediarecorder-stop-5">stop()</a></code>ed or all
+the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code>s of the recorded <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastream">MediaStream</a></code> are <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaStreamTrackState.ended">ended</a></code>.</p>
    <div class="note" role="note"> The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/wzVMJb?editors=0010">this codepen</a> with minimal modifications. </div>
-   <div class="example" id="example-c22217ca">
-    <a class="self-link" href="#example-c22217ca"></a> 
+   <div class="example" id="example-71f7478f">
+    <a class="self-link" href="#example-71f7478f"></a> 
 <pre class="highlight"><span class="o">&lt;</span>html<span class="o">></span>
 <span class="o">&lt;</span>body<span class="o">></span>
 <span class="o">&lt;</span>video autoplay<span class="o">/</span><span class="o">></span>
@@ -2129,8 +2136,10 @@ specific type.</p>
   <span class="kd">var</span> recordedChunks <span class="o">=</span> <span class="p">[</span><span class="p">]</span><span class="p">;</span>
 
   <span class="kd">function</span> gotMedia<span class="p">(</span>stream<span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> video <span class="o">=</span> document<span class="p">.</span>querySelector<span class="p">(</span><span class="s1">'video'</span><span class="p">)</span><span class="p">;</span>
+    <span class="c1">// |video| shows a live view of the captured MediaStream.
+</span>    <span class="kd">var</span> video <span class="o">=</span> document<span class="p">.</span>querySelector<span class="p">(</span><span class="s1">'video'</span><span class="p">)</span><span class="p">;</span>
     video<span class="p">.</span>src <span class="o">=</span> URL<span class="p">.</span>createObjectURL<span class="p">(</span>stream<span class="p">)</span><span class="p">;</span>
+
     <span class="kd">var</span> recorder <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
     <span class="k">try</span> <span class="p">{</span>
       recorder <span class="o">=</span> <span class="k">new</span> MediaRecorder<span class="p">(</span>stream<span class="p">,</span> <span class="p">{</span>mimeType <span class="o">:</span> <span class="s2">"video/webm"</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
@@ -2155,7 +2164,7 @@ specific type.</p>
 <span class="o">&lt;</span>/html>
 </pre>
    </div>
-   <div class="note" role="note"> <code>recordedChunks</code> can be saved to a file using e.g. the function <code>download()</code> in the <a href="https://developers.google.com/web/updates/2016/01/mediarecorder"> MediaRecorder Web Fundamentals article</a>. </div>
+   <div class="note" role="note"> The <code>recordedChunks</code> can be saved to a file using e.g. the function <code>download()</code> in the <a href="https://developers.google.com/web/updates/2016/01/mediarecorder"> MediaRecorder Web Fundamentals article</a>. </div>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -2398,7 +2407,7 @@ specific type.</p>
     <li><a href="#ref-for-mediarecorder-4">2.3. Methods</a> <a href="#ref-for-mediarecorder-5">(2)</a> <a href="#ref-for-mediarecorder-6">(3)</a> <a href="#ref-for-mediarecorder-7">(4)</a> <a href="#ref-for-mediarecorder-8">(5)</a> <a href="#ref-for-mediarecorder-9">(6)</a> <a href="#ref-for-mediarecorder-10">(7)</a> <a href="#ref-for-mediarecorder-11">(8)</a> <a href="#ref-for-mediarecorder-12">(9)</a> <a href="#ref-for-mediarecorder-13">(10)</a>
     <li><a href="#ref-for-mediarecorder-14">4.3. Exception Summary</a>
     <li><a href="#ref-for-mediarecorder-15">5. Event summary</a>
-    <li><a href="#ref-for-mediarecorder-16">6.1. Check for MediaRecorder and mime types</a>
+    <li><a href="#ref-for-mediarecorder-16">6.1. Check for MediaRecorder and content types</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-start-timeslice-timeslice">
@@ -2456,6 +2465,7 @@ specific type.</p>
    <ul>
     <li><a href="#ref-for-dom-mediarecorder-ondataavailable-1">1. Overview</a>
     <li><a href="#ref-for-dom-mediarecorder-ondataavailable-2">2. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-ondataavailable-3">6.2. Recording webcam video and audio</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-onpause">
@@ -2503,6 +2513,7 @@ specific type.</p>
     <li><a href="#ref-for-dom-mediarecorder-stop-1">1. Overview</a>
     <li><a href="#ref-for-dom-mediarecorder-stop-2">2. Media Recorder API</a>
     <li><a href="#ref-for-dom-mediarecorder-stop-3">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-stop-4">(2)</a>
+    <li><a href="#ref-for-dom-mediarecorder-stop-5">6.2. Recording webcam video and audio</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-pause">
