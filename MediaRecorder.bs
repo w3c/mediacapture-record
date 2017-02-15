@@ -779,7 +779,10 @@ Slightly modified versions of these examples can be found in e.g. <a
  href="https://codepen.io/collection/XjkNbN/">this codepen collection</a>.
 </div>
 
-## Check for {{MediaRecorder}} and mime types ## {#example1}
+## Check for {{MediaRecorder}} and content types ## {#example1}
+
+This example checks if the implementation supports a few popular codec/container
+combinations.
 
 <div class="note">
 The following example can also be found in e.g. <a
@@ -810,6 +813,12 @@ with minimal modifications.
 
 ## Recording webcam video and audio ## {#example2}
 
+This example captures an video+audio {{MediaStream}} using {{getUserMedia()}},
+plugs it into a <code>&lt;video&gt;</code> tag and tries to record it,
+retrieving the recorded chunks via the {{ondataavailable}} event.  Note that the
+recording will go on forever until either MediaRecorder is {{stop()}}ed or all
+the {{MediaStreamTrack}}s of the recorded {{MediaStream}} are {{ended}}.
+
 <div class="note">
 The following example can also be found in e.g. <a
  href="https://codepen.io/miguelao/pen/wzVMJb?editors=0010">this codepen</a>
@@ -825,8 +834,10 @@ with minimal modifications.
     var recordedChunks = [];
 
     function gotMedia(stream) {
+      // |video| shows a live view of the captured MediaStream.
       var video = document.querySelector('video');
       video.src = URL.createObjectURL(stream);
+
       var recorder = null;
       try {
         recorder = new MediaRecorder(stream, {mimeType : "video/webm"});
@@ -853,7 +864,7 @@ with minimal modifications.
 </div>
 
 <div class="note">
-<code>recordedChunks</code> can be saved to a file using e.g. the function
+The <code>recordedChunks</code> can be saved to a file using e.g. the function
   <code>download()</code> in the <a
   href="https://developers.google.com/web/updates/2016/01/mediarecorder">
   MediaRecorder Web Fundamentals article</a>.
@@ -877,6 +888,8 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStreamTrack; url: mediastreamtrack
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: onmute; url: widl-MediaStreamTrack-onmute
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getUserMedia(); url: dom-mediadevices-getusermedia
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: muted; url: widl-MediaStreamTrack-muted
 
