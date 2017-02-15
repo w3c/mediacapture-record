@@ -286,7 +286,7 @@ interface MediaRecorder : EventTarget {
         <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
         <td class="prmOptTrue"><span role="img" aria-label="True">&#10004;</span></td>
         <td class="prmDesc">The minimum number of milliseconds of data
-        to return in a single Blob.</td>
+        to return in a single {{Blob}}.</td>
       </tr>
     </tbody>
   </table>
@@ -302,7 +302,7 @@ interface MediaRecorder : EventTarget {
     task, using the DOM manipulation task source, that runs the following steps:
     <ol>
       <li>Set {{state}} to {{inactive}} and stop gathering data.</li>
-      <li>Let <var>blob</var> be the Blob of collected data so far and
+      <li>Let <var>blob</var> be the {{Blob}} of collected data so far and
       let <var>target</var> be the MediaRecorder context object, then
       <a href="#to-fire-a-blob-event">fire a blob event</a> named
       <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
@@ -369,7 +369,7 @@ interface MediaRecorder : EventTarget {
       (Note that <var>blob</var> will be empty if no data has been gathered
       yet.)</li>
 
-      <li>Create a new Blob and gather subsequent data into it.</li>
+      <li>Create a new {{Blob}} and gather subsequent data into it.</li>
     </ol>
     </li>
     <li>return <code>undefined</code>.</li>
@@ -570,31 +570,28 @@ dictionary BlobEventInit {
 
 ## General principles ## {#error-handling-principles}
 
-If at any moment the UA finds an error condition, the UA MUST run the following
-steps:
-  <ol>
-    <li>If {{state}} is {{inactive}} throw an {{InvalidStateError}}
-    {{DOMException}} and terminate these steps. Otherwise the UA MUST queue a
-    task, using the DOM manipulation task source, that runs the following steps:
-    <ol>
-      <li>Set {{state}} to {{inactive}} and stop gathering data.</li>
-      <li>Let <var>blob</var> be the {{Blob}} of collected data so far and
-      let <var>target</var> be the MediaRecorder context object</li>
+If at any moment the UA finds an error condition, the UA MUST queue a task,
+using the DOM manipulation task source, that runs the following steps:
+<ol>
+  <li>Set {{state}} to {{inactive}} and stop gathering data.</li>
 
-      <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
-        <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
-      <li><a>Fire an event</a> named <a>stop</a> at <var>target</var></li>
-      <li><a>Fire an error event</a> named {{MediaRecorderErrorEvent}} at
-        <var>target</var>.</li>
-    </ol>
-  </li>
+  <li>Let <var>blob</var> be the {{Blob}} of collected data so far and
+  let <var>target</var> be the MediaRecorder context object</li>
+
+  <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
+  <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
+
+  <li><a>Fire an event</a> named <a>stop</a> at <var>target</var></li>
+
+  <li><a>Fire an error event</a> named <var>event</var> at
+  <var>target</var>.</li>
 </ol>
 
 <div class="note">
-  The UA may set platform-specific limits, such as those for the minimum and
-  maximum {{Blob}} size that it will support, or the number of
-  {{MediaStreamTrack}}s it will record at once. It will signal a fatal error if
-  these limits are exceeded.
+  The UA MAY set platform-specific limits, e.g. for the minimum and maximum
+  {{Blob}} size that it will support, or the number of {{MediaStreamTrack}}s it
+  will record at once. It will signal a fatal error if these limits are
+  exceeded.
 </div>
 
 ## MediaRecorderErrorEvent ## {#errorevent-section}
