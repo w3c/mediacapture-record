@@ -208,8 +208,8 @@ interface MediaRecorder : EventTarget {
       runs the following steps:
       <ol>
         <li>Set {{state}} to {{inactive}}.</li>
-        <li><a>Fire an error event</a> named {{SecurityError}} at
-        <var>target</var>.</li>
+        <li><a>Fire an error event</a> named <a>error</a> with a
+        {{SecurityError}} at <var>target</var>.</li>
         <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
         <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
         <li><a>Fire an event</a> named <a>stop</a> at <var>target</var>.</li>
@@ -222,8 +222,8 @@ interface MediaRecorder : EventTarget {
       following steps:
       <ol>
         <li>Set {{state}} to {{inactive}}.</li>
-        <li><a>Fire an error event</a> named {{UnknownError}} at
-        <var>target</var>.</li>
+        <li><a>Fire an error event</a> named <a>error</a> with an
+        {{UnknownError}} at <var>target</var>.</li>
         <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
         <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
         <li><a>Fire an event</a> named <a>stop</a> at <var>target</var>.</li>
@@ -583,8 +583,8 @@ using the DOM manipulation task source, that runs the following steps:
 
   <li><a>Fire an event</a> named <a>stop</a> at <var>target</var></li>
 
-  <li><a>Fire an error event</a> named {{UnknownError}} at <var>target</var>.
-  </li>
+  <li><a>Fire an error event</a> named <a>error</a> with an {{UnknownError}} at
+   <var>target</var>.</li>
 </ol>
 
 <div class="note">
