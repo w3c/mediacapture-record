@@ -583,8 +583,8 @@ using the DOM manipulation task source, that runs the following steps:
 
   <li><a>Fire an event</a> named <a>stop</a> at <var>target</var></li>
 
-  <li><a>Fire an error event</a> named <var>event</var> at
-  <var>target</var>.</li>
+  <li><a>Fire an error event</a> named {{UnknownError}} at <var>target</var>.
+  </li>
 </ol>
 
 <div class="note">
