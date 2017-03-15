@@ -36,7 +36,7 @@ git config user.email "miguelecasassanchez@gmail.com"
 
 # Commit the "changes", i.e. the new version.
 # The delta will show diffs between new and old versions.
-git add .
+git add -f MediaRecorder.html
 git commit -m "Deploy to GitHub Pages: ${SHA}"
 
 # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
