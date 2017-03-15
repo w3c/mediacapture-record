@@ -1,0 +1,16 @@
+language: python
+python:
+  - "2.7"
+install:
+  - pip install pygments lxml setuptools --upgrade
+  - git clone https://github.com/tabatkins/bikeshed.git
+  - pip install --editable $PWD/bikeshed
+  - bikeshed update
+script:
+  - bikeshed spec MediaRecorder.bs MediaRecorder.html
+  - bash ./deploy.sh
+env:
+  global:
+  # Fingerprint: 6c:24:70:c3:90:9c:4a:e1:c1:40:26:15:32:bb:d6:cd
+  - ENCRYPTION_LABEL: "0db318b944cb"
+  - COMMIT_AUTHOR_EMAIL: "miguelecasassanchez@gmail.com"

@@ -3,6 +3,7 @@
 build
 support
 webrtc-respec-ci
+deploy_key
 MediaRecorder.diff.html
 MediaRecorder.orig.html
 MediaRecorder.orig.txt
