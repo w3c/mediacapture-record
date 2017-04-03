@@ -4,6 +4,7 @@ Repository: mediacapture-record
 Group: mediacapture
 Status: ED
 ED: https://w3c.github.io/mediacapture-record/
+TR: https://www.w3.org/TR/mediastream-recording/
 Shortname: mediastream-recording
 Level: 1
 Editor: Miguel Casas-Sanchez, w3cid 82825, Google Inc., mcasas@google.com
