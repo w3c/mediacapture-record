@@ -7,7 +7,7 @@ install:
   - pip install --editable $PWD/bikeshed
   - bikeshed update
 script:
-  - bikeshed spec MediaRecorder.bs MediaRecorder.html
+  - bikeshed --force spec MediaRecorder.bs MediaRecorder.html
   - bash ./deploy.sh
 env:
   global:
