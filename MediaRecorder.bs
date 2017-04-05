@@ -500,7 +500,7 @@ enum RecordingState {
 };
 </pre>
 
-### Values ### {##recordingstate-values}
+### Values ### {#recordingstate-values}
 
 <dl class="domintro">
   <dt><dfn enum-value for="RecordingState"><code>inactive</code></dfn></dt>
@@ -596,7 +596,7 @@ the {{MediaRecorderErrorEvent}} interface with the
 {{MediaRecorderErrorEvent/error}} attribute set to <var>error</var>, must be
 created and
 <a href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched</a> at
-the given target.</p>
+the given target.
 
 <pre class="idl">
 dictionary MediaRecorderErrorEventInit : EventInit {
