@@ -6,7 +6,6 @@ Status: ED
 ED: https://w3c.github.io/mediacapture-record/
 TR: https://www.w3.org/TR/mediastream-recording/
 Shortname: mediastream-recording
-Level: 1
 Editor: Miguel Casas-Sanchez, w3cid 82825, Google Inc., mcasas@google.com
 Former Editor: Jim Barnett, w3cid 34604, Genesis
 Former Editor: Travis Leithead, w3cid 40117, Microsoft Corp., travis.leithead@microsoft.com
@@ -501,7 +500,7 @@ enum RecordingState {
 };
 </pre>
 
-### Values ### {##recordingstate-values}
+### Values ### {#recordingstate-values}
 
 <dl class="domintro">
   <dt><dfn enum-value for="RecordingState"><code>inactive</code></dfn></dt>
@@ -597,7 +596,7 @@ the {{MediaRecorderErrorEvent}} interface with the
 {{MediaRecorderErrorEvent/error}} attribute set to <var>error</var>, must be
 created and
 <a href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched</a> at
-the given target.</p>
+the given target.
 
 <pre class="idl">
 dictionary MediaRecorderErrorEventInit : EventInit {
