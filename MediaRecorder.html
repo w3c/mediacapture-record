@@ -1183,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version b734e371910e25ac23b774dca3dea5cfc7b7fc0b" name="generator">
+  <meta content="Bikeshed version 81c00a31d8c468599cf8337dd150a8be9a2b4e5d" name="generator">
   <link href="https://www.w3.org/TR/mediastream-recording/" rel="canonical">
 <style>
 table {
@@ -1448,7 +1448,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Recording</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-04-03">3 April 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-04-10">10 April 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1485,8 +1485,7 @@ pre.idl.highlight { color: #708090; }
 	It is provided for discussion only and may change at any moment.
 	Its publication here does not imply endorsement of its contents by W3C.
 	Don’t cite this document other than as work in progress. </p>
-   <p> If you wish to make comments regarding this document, please <a href="mediacapture-record/issues/new">file an issue on the specification repository</a> or send them to <a href="mailto:public-device-apis@w3.org>public-device-apis@w3.org</a>
-	(<a href=" mailtoU0003Apublic-device-apis-requestU00040w3.orgU0003Fsubject="subscribe&quot;">subscribe</a>, <a href="https://lists.w3.org/Archives/Public/public-device-apis/">archives</a>). </p>
+   <p> If you wish to make comments regarding this document, please <a href="mediacapture-record/issues/new">file an issue on the specification repository</a> or send them to <a href="mailto:public-media-capture@w3.org">public-media-capture@w3.org</a> (<a href="mailto:public-media-capture-request@w3.org?subject=subscribe">subscribe</a>, <a href="https://lists.w3.org/Archives/Public/public-media-capture/">archives</a>). </p>
    <p> This document was produced by the <a href="https://www.w3.org/2009/dap/">Device and Sensors Working Group</a> and the <a href="https://www.w3.org/2011/04/webrtc/">Web Real-Time Communications Working Group</a>. </p>
    <p> This document was produced by groups operating under
   the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>.
@@ -1516,7 +1515,7 @@ pre.idl.highlight { color: #708090; }
       <li>
        <a href="#recordingstate"><span class="secno">2.6</span> <span class="content">RecordingState</span></a>
        <ol class="toc">
-        <li><a href="##recordingstate-values"><span class="secno">2.6.1</span> <span class="content">Values</span></a>
+        <li><a href="#recordingstate-values"><span class="secno">2.6.1</span> <span class="content">Values</span></a>
        </ol>
      </ol>
     <li>
@@ -1919,7 +1918,7 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
   <a class="s idl-code" data-link-type="enum-value" href="#dom-recordingstate-paused" id="ref-for-dom-recordingstate-paused-2">"paused"</a>
 };
 </pre>
-   <h4 class="heading settled" data-level="2.6.1" id="#recordingstate-values"><span class="secno">2.6.1. </span><span class="content">Values</span><a class="self-link" href="#%23recordingstate-values"></a></h4>
+   <h4 class="heading settled" data-level="2.6.1" id="recordingstate-values"><span class="secno">2.6.1. </span><span class="content">Values</span><a class="self-link" href="#recordingstate-values"></a></h4>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="RecordingState" data-dfn-type="enum-value" data-export="" id="dom-recordingstate-inactive"><code>inactive</code></dfn>
     <dd>Recording is not occuring: Either it has not been started or it has been
@@ -1982,7 +1981,6 @@ stated) and is not cancelable (except where otherwise stated), and which uses
 the <code class="idl"><a data-link-type="idl" href="#mediarecordererrorevent" id="ref-for-mediarecordererrorevent-4">MediaRecorderErrorEvent</a></code> interface with the <code class="idl"><a data-link-type="idl" href="#dom-mediarecordererrorevent-error" id="ref-for-dom-mediarecordererrorevent-error-1">error</a></code> attribute set to <var>error</var>, must be
 created and <a href="https://dom.spec.whatwg.org/#concept-event-dispatch">dispatched</a> at
 the given target.</p>
-   <p></p>
 <pre class="idl highlight def"><span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-mediarecordererroreventinit">MediaRecorderErrorEventInit</dfn> : <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#dictdef-eventinit">EventInit</a> {
   <span class="kt">required</span> <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a> <a class="nv idl-code" data-link-type="dict-member" data-type="DOMException " href="#dom-mediarecordererroreventinit-error" id="ref-for-dom-mediarecordererroreventinit-error-1">error</a>;
 };
