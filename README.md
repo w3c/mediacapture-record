@@ -1,11 +1,14 @@
 
-# MediaStream Recording API  [![Build Status](https://travis-ci.org/w3c/mediacapture-record.svg?branch=master)](https://travis-ci.org/w3c/mediacapture-record)
+# MediaStream Recording API  [![Build Status](https://travis-ci.org/w3c/mediacapture-record.svg?branch=master)](https://travis-ci.org/w3c/mediacapture-record)  <a href="https://www.irccloud.com/invite?channel=%23media-capture&amp;hostname=irc.freenode.net&amp;port=6697&amp;ssl=1" target="_blank"><img src="https://img.shields.io/badge/IRC-%23media--capture-1e72ff.svg?style=plastic"  height="20"></a> <a href="https://www.irccloud.com/invite?channel=%23webrtc&amp;hostname=irc.w3.org&amp;port=6667" target="_blank"><img src="https://img.shields.io/badge/IRC-%23webrtc-1e72ff.svg?style=plastic"  height="20"></a>
 
-This is the repository for the W3C [MediaStream Recording](https://w3c.github.io/mediacapture-record/MediaRecorder.html) specification.
+This document specifies methods for live recording of video and audio, local and remote.
 
-The implementation status in the different browsers can be found in the [caniuse](http://caniuse.com/#feat=mediarecorder) entry.
+Specification and Samples
+-------------
+* [Media Recording (a.k.a. MediaStream Recording) Specification](https://w3c.github.io/mediacapture-record/MediaRecorder.html), including code samples.
+* Implementation status in the different browsers: [caniuse](http://caniuse.com/#feat=mediarecorder).
+* [Hardware accelerated support in Chromium](https://github.com/miguelao/mediacapture-record-implementation-status/blob/master/chromium.md)
 
-An informative listing of the **hardware accelerated support in Chromium** can be found [here](https://github.com/miguelao/mediacapture-record-implementation-status/blob/master/chromium.md)
 
 You're welcome to contribute! Let's make the Web rock our socks off!
 
