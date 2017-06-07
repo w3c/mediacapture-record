@@ -6,10 +6,12 @@ Status: ED
 ED: https://w3c.github.io/mediacapture-record/
 TR: https://www.w3.org/TR/mediastream-recording/
 Shortname: mediastream-recording
+Level: 1
 Editor: Miguel Casas-Sanchez, w3cid 82825, Google Inc., mcasas@google.com
 Former Editor: Jim Barnett, w3cid 34604, Genesis
 Former Editor: Travis Leithead, w3cid 40117, Microsoft Corp., travis.leithead@microsoft.com
 Abstract: This document defines a recording API for use with {{MediaStream}}s.
+Previous Version: https://www.w3.org/TR/2017/WD-mediastream-recording-20170405/
 
 !Participate: <a href="https://lists.w3.org/Archives/Public/public-media-capture/">Mailing list</a>
 !Participate: <a href="https://github.com/w3c/mediacapture-record">GitHub repo</a> (<a href="https://github.com/w3c/mediacapture-record/issues/new">new issue</a>, <a href="https://github.com/w3c/mediacapture-record/issues">open issues</a>)
