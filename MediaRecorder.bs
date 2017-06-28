@@ -543,7 +543,7 @@ enum RecordingState {
   <dt><dfn attribute for="BlobEvent"><code>timecode</code></dfn></dt>
   <dd>The difference between the timestamp of the first chunk in
   {{BlobEvent/data}} and the timestamp of the first chunk in the first
-  {{BlobEvent}} produced by this recorder.  Note that the {{BlobEvent/timecode}}
+  {{BlobEvent}} produced by this recorder as a {{DOMHighResTimeStamp}} [[!HR-TIME]].  Note that the {{BlobEvent/timecode}}
   in the first produced {{BlobEvent}} does not need to be zero.
   </dd>
 
@@ -867,7 +867,7 @@ type: interface; text: DOMString; url: https://heycam.github.io/webidl/#idl-DOMS
 </pre>
 
 <pre class="anchors">
-type: interface; text: DOMHighResTimeStamp; url: https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp;
+type: interface; text: DOMHighResTimeStamp; url: https://www.w3.org/TR/hr-time/#dom-domhighrestimestamp;
 </pre>
 
 <pre class="anchors">
