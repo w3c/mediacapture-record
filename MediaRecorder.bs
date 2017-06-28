@@ -43,7 +43,7 @@ table td, table th {
 This API attempts to make basic recording very simple, while still allowing for
 more complex use cases. In the simplest case, the application instantiates a
 {{MediaRecorder}} object, calls {{start()}} and then calls {{stop()}} or waits
-for the {{MediaStreamTrack}}(s) to be ended. The contents of the recording will
+for the {{MediaStreamTrack}}(s) [[!GETUSERMEDIA]] to be ended. The contents of the recording will
 be made available in the platform's default encoding via the {{ondataavailable}}
 event.  Functions are available to query the platform's available set of
 encodings, and to select the desired ones if the author wishes. The application
@@ -124,7 +124,7 @@ interface MediaRecorder : EventTarget {
 
 <dl class="domintro">
   <dt><dfn attribute for="MediaRecorder"><code>stream</code></dfn></dt>
-  <dd>The {{MediaStream}} to be recorded.</dd>
+  <dd>The {{MediaStream}} [[!GETUSERMEDIA]] to be recorded.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>mimeType</code></dfn></dt>
   <dd>The MIME type [[!RFC2046]] that has been selected as the container
@@ -543,7 +543,7 @@ enum RecordingState {
   <dt><dfn attribute for="BlobEvent"><code>timecode</code></dfn></dt>
   <dd>The difference between the timestamp of the first chunk in
   {{BlobEvent/data}} and the timestamp of the first chunk in the first
-  {{BlobEvent}} produced by this recorder.  Note that the {{BlobEvent/timecode}}
+  {{BlobEvent}} produced by this recorder as a {{DOMHighResTimeStamp}} [[!HR-TIME]].  Note that the {{BlobEvent/timecode}}
   in the first produced {{BlobEvent}} does not need to be zero.
   </dd>
 
@@ -867,7 +867,7 @@ type: interface; text: DOMString; url: https://heycam.github.io/webidl/#idl-DOMS
 </pre>
 
 <pre class="anchors">
-type: interface; text: DOMHighResTimeStamp; url: https://www.w3.org/TR/hr-time-2/#dom-domhighrestimestamp;
+type: interface; text: DOMHighResTimeStamp; url: https://www.w3.org/TR/hr-time/#dom-domhighrestimestamp;
 </pre>
 
 <pre class="anchors">
