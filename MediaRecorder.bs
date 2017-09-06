@@ -197,10 +197,9 @@ interface MediaRecorder : EventTarget {
 
     <li>Set {{state}} to {{recording}}, and run the following steps in parallel:
     <ol>
-      <li>Once media becomes available from one or more of the
-      {{MediaRecorder/stream}}'s tracks, start gathering the data into a
-      {{Blob}} <var>blob</var> and queue a task, using the DOM manipulation task
-      source, to <a>fire an event</a> named <a>start</a> at <var>target</var>.
+      <li>Start gathering the data into a {{Blob}} <var>blob</var> and queue a
+      task, using the DOM manipulation task source, to <a>fire an event</a>
+      named <a>start</a> at <var>target</var>, then return <code>undefined</code>.
       </li>
 
       <li>If at any point the {{MediaRecorder/stream}}'s isolation properties
@@ -257,7 +256,6 @@ interface MediaRecorder : EventTarget {
 
     </ol>
     </li>
-    <li>return <code>undefined</code>.</li>
   </ol>
 
   <p>Note that {{stop()}}, {{requestData()}}, and {{pause()}} also affect the
