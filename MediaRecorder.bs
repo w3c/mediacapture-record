@@ -55,7 +55,8 @@ at regular intervals.
 # Media Recorder API # {#mediarecorder-api}
 
 <pre class="idl">
-[Constructor(MediaStream stream, optional MediaRecorderOptions options)]
+[Exposed=Window,
+ Constructor(MediaStream stream, optional MediaRecorderOptions options)]
 interface MediaRecorder : EventTarget {
   readonly attribute MediaStream stream;
   readonly attribute DOMString mimeType;
@@ -519,7 +520,7 @@ enum RecordingState {
 # Blob Event # {#blobevent-section}
 
 <pre class="idl">
-  [Constructor(DOMString type, BlobEventInit eventInitDict)]
+  [Exposed=Window, Constructor(DOMString type, BlobEventInit eventInitDict)]
   interface BlobEvent : Event {
     [SameObject] readonly attribute Blob data;
     readonly attribute DOMHighResTimeStamp timecode;
