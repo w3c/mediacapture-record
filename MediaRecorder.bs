@@ -311,11 +311,13 @@ interface MediaRecorder : EventTarget {
   When a {{MediaRecorder}} object&#8217;s {{stop()}} method is invoked, the UA
   MUST run the following steps:
   <ol>
-    <li>If {{state}} is {{inactive}} throw an {{InvalidStateError}}
-    {{DOMException}} and terminate these steps. Otherwise the UA MUST queue a
+    <li>If {{state}} is {{inactive}}, throw an {{InvalidStateError}}
+    {{DOMException}} and abort these steps.</li>
+
+    <li>Set {{state}} to {{inactive}}, and queue a
     task, using the DOM manipulation task source, that runs the following steps:
     <ol>
-      <li>Set {{state}} to {{inactive}} and stop gathering data.</li>
+      <li>Stop gathering data.</li>
       <li>Let <var>blob</var> be the Blob of collected data so far and
       let <var>target</var> be the MediaRecorder context object, then
       <a href="#to-fire-a-blob-event">fire a blob event</a> named
@@ -332,11 +334,12 @@ interface MediaRecorder : EventTarget {
   When a {{MediaRecorder}} object&#8217;s {{pause()}} method is invoked, the UA
   MUST run the following steps:
   <ol>
-    <li>If {{state}} is {{inactive}} throw an {{InvalidStateError}}
-    {{DOMException}} and terminate these steps. Otherwise the UA MUST queue a
+    <li>If {{state}} is {{inactive}}, throw an {{InvalidStateError}}
+    {{DOMException}} and abort these steps.</li>
+
+    <li>Set {{state}} to {{paused}}, and queue a
     task, using the DOM manipulation task source, that runs the following steps:
     <ol>
-      <li>Set {{state}} to {{paused}}.</li>
       <li>Stop gathering data into <var>blob</var> (but keep it
       available so that recording can be resumed in the future).</li>
       <li>Let <var>target</var> be the MediaRecorder context object.
@@ -352,11 +355,12 @@ interface MediaRecorder : EventTarget {
   When a {{MediaRecorder}} object&#8217;s {{resume()}} method is invoked, the
   UA MUST run the following steps:
   <ol>
-    <li>If {{state}} is {{inactive}} throw an {{InvalidStateError}}
-    {{DOMException}} and terminate these steps. Otherwise the UA MUST queue a
+    <li>If {{state}} is {{inactive}}, throw an {{InvalidStateError}}
+    {{DOMException}} and abort these steps.</li>
+
+    <li>Set {{state}} to {{recording}}, and queue a
     task, using the DOM manipulation task source, that runs the following steps:
     <ol>
-      <li>Set {{state}} to {{recording}}.</li>
       <li>Resume (or continue) gathering data into the current <var>blob</var>.
       </li>
       <li>Let <var>target</var> be the MediaRecorder context object. <a>Fire
