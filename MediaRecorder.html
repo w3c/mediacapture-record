@@ -1219,9 +1219,9 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 3d3d56b4350a4c381fdf2373ffcf534daaa9ba33" name="generator">
+  <meta content="Bikeshed version 08a3aa6cd90c2ebe41f3584121332afe3c71d780" name="generator">
   <link href="https://www.w3.org/TR/mediastream-recording/" rel="canonical">
-  <meta content="6d71ea36195b2af8e9a8296b58b7030c6e2db356" name="document-revision">
+  <meta content="864d846b4fff5ff215b8be5a80bfe8a75d2d2e18" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -1485,7 +1485,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Recording</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-11-07">7 November 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-12-14">14 December 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1721,6 +1721,8 @@ at regular intervals.</p>
    </dl>
    <h3 class="heading settled" data-level="2.3" id="mediarecorder-methods"><span class="secno">2.3. </span><span class="content">Methods</span><a class="self-link" href="#mediarecorder-methods"></a></h3>
    <dl class="domintro">
+    <div class="note" role="note"> For historical reasons, the following methods alter <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①">state</a></code> synchronously
+    and fire events asynchronously. </div>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="method" data-export data-lt="start(timeslice)|start()" id="dom-mediarecorder-start"><code>start(optional long timeslice)</code></dfn>
     <dd>
       When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder③">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-start" id="ref-for-dom-mediarecorder-start②">start()</a></code> method is invoked, the UA
@@ -1729,12 +1731,12 @@ at regular intervals.</p>
       <li>Let <var>target</var> be the MediaRecorder context object.
       <li>Let <var>timeslice</var> be the method’s first argument, if provided,
     or <code>undefined</code>. 
-      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①">state</a></code> is not <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive①">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException">DOMException</a></code> and abort these steps.
+      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state②">state</a></code> is not <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive①">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException">DOMException</a></code> and abort these steps.
       <li>If the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream②">stream</a></code>'s isolation properties disallow access
     from this <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder④">MediaRecorder</a></code>, throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror" id="ref-for-securityerror">SecurityError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException①">DOMException</a></code> and
     abort these steps.
       <li>
-       Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state②">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording">recording</a></code>, and run the following steps in parallel: 
+       Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state③">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording">recording</a></code>, and run the following steps in parallel: 
        <ol>
         <li>Start gathering the data into a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob②">Blob</a></code> <var>blob</var> and queue a
       task, using the DOM manipulation task source, to <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire">fire an event</a> named <a data-link-type="dfn" href="#start" id="ref-for-start①">start</a> at <var>target</var>, then return <code>undefined</code>. 
@@ -1745,7 +1747,7 @@ at regular intervals.</p>
       gathered, and queue a task, using the DOM manipulation task source, that
       runs the following steps: 
          <ol>
-          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state③">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive②">inactive</a></code>.
+          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state④">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive②">inactive</a></code>.
           <li><a data-link-type="dfn" href="#fire-an-error-event" id="ref-for-fire-an-error-event">Fire an error event</a> named <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror" id="ref-for-securityerror①">SecurityError</a></code> at <var>target</var>.
           <li><a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event">Fire a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable①">dataavailable</a> at <var>target</var> with <var>blob</var>.
           <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire①">Fire an event</a> named <a data-link-type="dfn" href="#stop" id="ref-for-stop①">stop</a> at <var>target</var>.
@@ -1755,7 +1757,7 @@ at regular intervals.</p>
       track set, the UA MUST immediately stop gathering data, discard any data that it has gathered,
       and queue a task, using the DOM manipulation task source, that runs the following steps: 
          <ol>
-          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state④">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive③">inactive</a></code>.
+          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑤">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive③">inactive</a></code>.
           <li><a data-link-type="dfn" href="#fire-an-error-event" id="ref-for-fire-an-error-event①">Fire an error event</a> named <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidmodificationerror" id="ref-for-invalidmodificationerror">InvalidModificationError</a></code> at <var>target</var>.
           <li><a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event①">Fire a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable②">dataavailable</a> at <var>target</var> with <var>blob</var>.
           <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire②">Fire an event</a> named <a data-link-type="dfn" href="#stop" id="ref-for-stop②">stop</a> at <var>target</var>.
@@ -1766,7 +1768,7 @@ at regular intervals.</p>
       queue a task, using the DOM manipulation task source, that runs the
       following steps: 
          <ol>
-          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑤">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive④">inactive</a></code>.
+          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑥">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive④">inactive</a></code>.
           <li><a data-link-type="dfn" href="#fire-an-error-event" id="ref-for-fire-an-error-event②">Fire an error event</a> named <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#unknownerror" id="ref-for-unknownerror">UnknownError</a></code> at <var>target</var>.
           <li><a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event②">Fire a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable③">dataavailable</a> at <var>target</var> with <var>blob</var>.
           <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire③">Fire an event</a> named <a data-link-type="dfn" href="#stop" id="ref-for-stop③">stop</a> at <var>target</var>.
@@ -1785,7 +1787,7 @@ at regular intervals.</p>
       queue a task, using the DOM manipulation task source, that runs the
       following steps: 
          <ol>
-          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑥">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑤">inactive</a></code>.
+          <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑦">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑤">inactive</a></code>.
           <li><a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event④">Fire a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable⑤">dataavailable</a> at <var>target</var> with <var>blob</var>.
           <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire④">Fire an event</a> named <a data-link-type="dfn" href="#stop" id="ref-for-stop④">stop</a> at <var>target</var>.
          </ol>
@@ -1822,11 +1824,12 @@ at regular intervals.</p>
       When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder⑥">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stop" id="ref-for-dom-mediarecorder-stop③">stop()</a></code> method is invoked, the UA
   MUST run the following steps: 
      <ol>
+      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑧">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑥">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror①">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException②">DOMException</a></code> and abort these steps.
       <li>
-       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑦">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑥">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror①">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException②">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
+       Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑨">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑦">inactive</a></code>, and queue a
     task, using the DOM manipulation task source, that runs the following steps: 
        <ol>
-        <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑧">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑦">inactive</a></code> and stop gathering data.
+        <li>Stop gathering data.
         <li>Let <var>blob</var> be the Blob of collected data so far and
       let <var>target</var> be the MediaRecorder context object, then <a href="#to-fire-a-blob-event" id="ref-for-to-fire-a-blob-event⑤">fire a blob event</a> named <a data-link-type="dfn" href="#dataavailable" id="ref-for-dataavailable⑥">dataavailable</a> at <var>target</var> with <var>blob</var>.
         <li><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire⑤">Fire an event</a> named <a data-link-type="dfn" href="#stop" id="ref-for-stop⑤">stop</a> at <var>target</var>.
@@ -1838,11 +1841,11 @@ at regular intervals.</p>
       When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder⑦">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-pause" id="ref-for-dom-mediarecorder-pause②">pause()</a></code> method is invoked, the UA
   MUST run the following steps: 
      <ol>
+      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①⓪">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑧">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror②">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException③">DOMException</a></code> and abort these steps.
       <li>
-       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑨">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑧">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror②">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException③">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
+       Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①①">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-paused" id="ref-for-dom-recordingstate-paused">paused</a></code>, and queue a
     task, using the DOM manipulation task source, that runs the following steps: 
        <ol>
-        <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①⓪">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-paused" id="ref-for-dom-recordingstate-paused">paused</a></code>.
         <li>Stop gathering data into <var>blob</var> (but keep it
       available so that recording can be resumed in the future).
         <li>Let <var>target</var> be the MediaRecorder context object. <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire⑥">Fire an event</a> named <a data-link-type="dfn" href="#pause" id="ref-for-pause①">pause</a> at <var>target</var>.
@@ -1854,11 +1857,11 @@ at regular intervals.</p>
       When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder⑧">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-resume" id="ref-for-dom-mediarecorder-resume①">resume()</a></code> method is invoked, the
   UA MUST run the following steps: 
      <ol>
+      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①②">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑨">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror③">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException④">DOMException</a></code> and abort these steps.
       <li>
-       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①①">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑨">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror③">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException④">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
+       Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①③">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording①">recording</a></code>, and queue a
     task, using the DOM manipulation task source, that runs the following steps: 
        <ol>
-        <li>Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①②">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording①">recording</a></code>.
         <li>Resume (or continue) gathering data into the current <var>blob</var>. 
         <li>Let <var>target</var> be the MediaRecorder context object. <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire⑦">Fire
       an event</a> named <a data-link-type="dfn" href="#resume" id="ref-for-resume①">resume</a> at <var>target</var>.
@@ -1871,7 +1874,7 @@ at regular intervals.</p>
   the UA MUST run the following steps: 
      <ol>
       <li>
-       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①③">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive①⓪">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror④">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException⑤">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
+       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①④">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive①⓪">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror④">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException⑤">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
     task, using the DOM manipulation task source, that runs the following steps: 
        <ol>
         <li>Let <var>blob</var> be the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑤">Blob</a></code> of collected data so far and
@@ -1928,7 +1931,7 @@ at regular intervals.</p>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="to-fire-a-blob-event">To fire a blob event</dfn> with a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑦">Blob</a></code> <var>blob</var> means to <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire⑧">fire an event</a> at <var>target</var> using a <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent">BlobEvent</a></code> with
 its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data①">data</a></code> attribute initialized to <var>blob</var>.</p>
    <div class="note" role="note"> Usually <var>blob</var> will be the data gathered by the UA after the
-  last transition to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording②">recording</a></code> <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①④">state</a></code>. </div>
+  last transition to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording②">recording</a></code> <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①⑤">state</a></code>. </div>
    <h3 class="heading settled" data-level="2.5" id="mediarecorderoptions-section"><span class="secno">2.5. </span><span class="content">MediaRecorderOptions</span><a class="self-link" href="#mediarecorderoptions-section"></a></h3>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-mediarecorderoptions"><code><c- g>MediaRecorderOptions</c-></code></dfn> {
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString④"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="DOMString " href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype①"><c- g>mimeType</c-></a>;
@@ -2561,7 +2564,7 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
    <dt id="biblio-dom">[DOM]
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-fileapi">[FileAPI]
-   <dd>Marijn Kruisselbrink. <a href="https://www.w3.org/TR/FileAPI/">File API</a>. 26 October 2017. WD. URL: <a href="https://www.w3.org/TR/FileAPI/">https://www.w3.org/TR/FileAPI/</a>
+   <dd>Marijn Kruisselbrink; Arun Ranganathan. <a href="https://www.w3.org/TR/FileAPI/">File API</a>. 6 November 2018. WD. URL: <a href="https://www.w3.org/TR/FileAPI/">https://www.w3.org/TR/FileAPI/</a>
    <dt id="biblio-getusermedia">[GETUSERMEDIA]
    <dd>Daniel Burnett; et al. <a href="https://www.w3.org/TR/mediacapture-streams/">Media Capture and Streams</a>. 3 October 2017. CR. URL: <a href="https://www.w3.org/TR/mediacapture-streams/">https://www.w3.org/TR/mediacapture-streams/</a>
    <dt id="biblio-hr-time">[HR-TIME]
@@ -2588,7 +2591,7 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
 <c- b>interface</c-> <a href="#mediarecorder"><code><c- g>MediaRecorder</c-></code></a> : <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#eventtarget" id="ref-for-eventtarget①"><c- n>EventTarget</c-></a> {
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#mediastream" id="ref-for-mediastream②①"><c- n>MediaStream</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="MediaStream" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream①⓪"><c- g>stream</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑨"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dom-mediarecorder-mimetype" id="ref-for-dom-mediarecorder-mimetype④"><c- g>mimeType</c-></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="#enumdef-recordingstate" id="ref-for-enumdef-recordingstate②"><c- n>RecordingState</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="RecordingState" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①⑤"><c- g>state</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="#enumdef-recordingstate" id="ref-for-enumdef-recordingstate②"><c- n>RecordingState</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="RecordingState" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①⑥"><c- g>state</c-></a>;
   <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler①③"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-mediarecorder-onstart" id="ref-for-dom-mediarecorder-onstart①"><c- g>onstart</c-></a>;
   <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler①②"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-mediarecorder-onstop" id="ref-for-dom-mediarecorder-onstop①"><c- g>onstop</c-></a>;
   <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler②①"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-mediarecorder-ondataavailable" id="ref-for-dom-mediarecorder-ondataavailable①①"><c- g>ondataavailable</c-></a>;
@@ -2690,8 +2693,8 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
    <b><a href="#dom-mediarecorder-state">#dom-mediarecorder-state</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediarecorder-state">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-state①">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-state②">(2)</a> <a href="#ref-for-dom-mediarecorder-state③">(3)</a> <a href="#ref-for-dom-mediarecorder-state④">(4)</a> <a href="#ref-for-dom-mediarecorder-state⑤">(5)</a> <a href="#ref-for-dom-mediarecorder-state⑥">(6)</a> <a href="#ref-for-dom-mediarecorder-state⑦">(7)</a> <a href="#ref-for-dom-mediarecorder-state⑧">(8)</a> <a href="#ref-for-dom-mediarecorder-state⑨">(9)</a> <a href="#ref-for-dom-mediarecorder-state①⓪">(10)</a> <a href="#ref-for-dom-mediarecorder-state①①">(11)</a> <a href="#ref-for-dom-mediarecorder-state①②">(12)</a> <a href="#ref-for-dom-mediarecorder-state①③">(13)</a>
-    <li><a href="#ref-for-dom-mediarecorder-state①④">2.4. Data handling</a>
+    <li><a href="#ref-for-dom-mediarecorder-state①">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-state②">(2)</a> <a href="#ref-for-dom-mediarecorder-state③">(3)</a> <a href="#ref-for-dom-mediarecorder-state④">(4)</a> <a href="#ref-for-dom-mediarecorder-state⑤">(5)</a> <a href="#ref-for-dom-mediarecorder-state⑥">(6)</a> <a href="#ref-for-dom-mediarecorder-state⑦">(7)</a> <a href="#ref-for-dom-mediarecorder-state⑧">(8)</a> <a href="#ref-for-dom-mediarecorder-state⑨">(9)</a> <a href="#ref-for-dom-mediarecorder-state①⓪">(10)</a> <a href="#ref-for-dom-mediarecorder-state①①">(11)</a> <a href="#ref-for-dom-mediarecorder-state①②">(12)</a> <a href="#ref-for-dom-mediarecorder-state①③">(13)</a> <a href="#ref-for-dom-mediarecorder-state①④">(14)</a>
+    <li><a href="#ref-for-dom-mediarecorder-state①⑤">2.4. Data handling</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-onstart">
