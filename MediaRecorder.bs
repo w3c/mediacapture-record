@@ -315,8 +315,7 @@ interface MediaRecorder : EventTarget {
   When a {{MediaRecorder}} object&#8217;s {{stop()}} method is invoked, the UA
   MUST run the following steps:
   <ol>
-    <li>If {{state}} is {{inactive}}, throw an {{InvalidStateError}}
-    {{DOMException}} and abort these steps.</li>
+    <li>If {{state}} is {{inactive}}, abort these steps.</li>
 
     <li>Set {{state}} to {{inactive}}, and queue a
     task, using the DOM manipulation task source, that runs the following steps:
