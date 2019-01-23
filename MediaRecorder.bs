@@ -13,7 +13,7 @@ Former Editor: Travis Leithead, w3cid 40117, Microsoft Corp., travis.leithead@mi
 Abstract: This document defines a recording API for use with {{MediaStream}}s.
 Previous Version: https://www.w3.org/TR/2017/WD-mediastream-recording-20170405/
 
-!Participate: <a href="https://lists.w3.org/Archives/Public/public-media-capture/">Mailing list</a>
+!Participate: <a href="https://lists.w3.org/Archives/Public/public-webrtc/">Mailing list</a>
 !Participate: <a href="https://github.com/w3c/mediacapture-record">GitHub repo</a> (<a href="https://github.com/w3c/mediacapture-record/issues/new">new issue</a>, <a href="https://github.com/w3c/mediacapture-record/issues">open issues</a>)
 
 !Implementation: <a href="http://caniuse.com/#feat=mediarecorder">Can I use Media Recording?</a>
