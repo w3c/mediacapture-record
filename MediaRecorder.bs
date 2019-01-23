@@ -196,7 +196,7 @@ interface MediaRecorder : EventTarget {
     <li>If {{state}} is not {{inactive}}, throw an {{InvalidStateError}}
     {{DOMException}} and abort these steps.</li>
 
-    <li>If the {{MediaRecorder/stream}}'s isolation properties disallow access
+    <li>If the {{MediaRecorder/stream}}'s <a>isolation properties</a> disallow access
     from this {{MediaRecorder}}, throw a {{SecurityError}} {{DOMException}} and
     abort these steps.</li>
 
@@ -207,7 +207,7 @@ interface MediaRecorder : EventTarget {
       named <a>start</a> at <var>target</var>, then return <code>undefined</code>.
       </li>
 
-      <li>If at any point the {{MediaRecorder/stream}}'s isolation properties
+      <li>If at any point the {{MediaRecorder/stream}}'s <a>isolation properties</a>
       change so that {{MediaRecorder}} is no longer allowed access to it, the
       UA MUST immediately stop gathering data, discard any data that it has
       gathered, and queue a task, using the DOM manipulation task source, that
@@ -236,7 +236,7 @@ interface MediaRecorder : EventTarget {
       </li>
 
       <li>If the UA at any point is unable to continue gathering data for
-      reasons other than isolation properties or stream track set, it MUST stop gathering data, and
+      reasons other than <a>isolation properties</a> or stream track set, it MUST stop gathering data, and
       queue a task, using the DOM manipulation task source, that runs the
       following steps:
       <ol>
@@ -724,7 +724,7 @@ specific type.
     </tr>
     <tr>
       <td>{{SecurityError}}</td>
-      <td>The isolation properties of the {{MediaStream}} do not allow the
+      <td>The <a>isolation properties</a> of the {{MediaStream}} do not allow the
       MediaRecorder access to it.</td>
     </tr>
   </tbody>
@@ -933,6 +933,8 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: enum-value; text: ended; url: idl-def-MediaStreamTrackState.ended
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: enum-value; text: live; url: idl-def-MediaStreamTrackState.live
+
+urlPrefix: https://www.w3.org/TR/webrtc-identity/#; type: dfn; text: isolation properties; url: isolated-media-streams
 </pre>
 
 <pre class="link-defaults">
@@ -942,4 +944,3 @@ spec: html
         text: in parallel
         text: incumbent settings object
 </pre>
-
