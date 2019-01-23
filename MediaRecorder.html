@@ -1221,7 +1221,7 @@ Possible extra rowspan handling
   </style>
   <meta content="Bikeshed version 9c6ae748322940994300e90a77c34437364b40a6" name="generator">
   <link href="https://www.w3.org/TR/mediastream-recording/" rel="canonical">
-  <meta content="47e0de785d4756bab0cd9aa5877693ee33b27c5d" name="document-revision">
+  <meta content="2792baf09f198991630e18d5e7fb4fbb950d4f99" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -1732,7 +1732,7 @@ at regular intervals.</p>
       <li>Let <var>timeslice</var> be the method’s first argument, if provided,
     or <code>undefined</code>. 
       <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state②">state</a></code> is not <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive①">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException">DOMException</a></code> and abort these steps.
-      <li>If the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream②">stream</a></code>'s isolation properties disallow access
+      <li>If the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream②">stream</a></code>'s <a data-link-type="dfn" href="https://www.w3.org/TR/webrtc-identity/#isolated-media-streams" id="ref-for-isolated-media-streams">isolation properties</a> disallow access
     from this <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder④">MediaRecorder</a></code>, throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror" id="ref-for-securityerror">SecurityError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException①">DOMException</a></code> and
     abort these steps.
       <li>
@@ -1741,8 +1741,7 @@ at regular intervals.</p>
         <li>Start gathering the data into a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob②">Blob</a></code> <var>blob</var> and queue a
       task, using the DOM manipulation task source, to <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire">fire an event</a> named <a data-link-type="dfn" href="#start" id="ref-for-start①">start</a> at <var>target</var>, then return <code>undefined</code>. 
         <li>
-         If at any point the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream③">stream</a></code>'s isolation properties
-      change so that <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder⑤">MediaRecorder</a></code> is no longer allowed access to it, the
+         If at any point the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream③">stream</a></code>'s <a data-link-type="dfn" href="https://www.w3.org/TR/webrtc-identity/#isolated-media-streams" id="ref-for-isolated-media-streams①">isolation properties</a> change so that <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder⑤">MediaRecorder</a></code> is no longer allowed access to it, the
       UA MUST immediately stop gathering data, discard any data that it has
       gathered, and queue a task, using the DOM manipulation task source, that
       runs the following steps: 
@@ -1764,7 +1763,7 @@ at regular intervals.</p>
          </ol>
         <li>
          If the UA at any point is unable to continue gathering data for
-      reasons other than isolation properties or stream track set, it MUST stop gathering data, and
+      reasons other than <a data-link-type="dfn" href="https://www.w3.org/TR/webrtc-identity/#isolated-media-streams" id="ref-for-isolated-media-streams②">isolation properties</a> or stream track set, it MUST stop gathering data, and
       queue a task, using the DOM manipulation task source, that runs the
       following steps: 
          <ol>
@@ -2115,7 +2114,7 @@ specific type.</p>
         additional information as possible in the <code>message</code> attribute. 
      <tr>
       <td><code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror" id="ref-for-securityerror②">SecurityError</a></code>
-      <td>The isolation properties of the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastream" id="ref-for-mediastream⑧">MediaStream</a></code> do not allow the
+      <td>The <a data-link-type="dfn" href="https://www.w3.org/TR/webrtc-identity/#isolated-media-streams" id="ref-for-isolated-media-streams③">isolation properties</a> of the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastream" id="ref-for-mediastream⑧">MediaStream</a></code> do not allow the
       MediaRecorder access to it.
    </table>
    <h2 class="heading settled" data-level="5" id="event-summary"><span class="secno">5. </span><span class="content">Event summary</span><a class="self-link" href="#event-summary"></a></h2>
