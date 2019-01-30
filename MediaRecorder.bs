@@ -807,6 +807,17 @@ causing jankiness and othermise memory exhaustion.
 UAs should take measures to avoid the encoding and buffering process from
 exhausting the resources.
 
+## Fingerprinting ## {#fingerprinting}
+
+{{Active fingerprinting}} ...
+
+E.g. a UA might provide use of a certain hardware accelerator on a given
+platform (or generation thereof); this might help code triangulate the
+supporting device via {{isTypeSupported()}}.
+
+UAs should take measures to mitigate this fingerprinting surface increase by
+implementing functional dimensions...
+
 # Examples # {#examples}
 
 <div class="note">
