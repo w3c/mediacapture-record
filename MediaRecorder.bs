@@ -727,6 +727,11 @@ specific type.
       <td>The <a>isolation properties</a> of the {{MediaStream}} do not allow the
       MediaRecorder access to it.</td>
     </tr>
+    <tr>
+      <td>{{InvalidModificationError}}</td>
+      <td>The set of {{MediaStreamTrack}}s of the recoded {{MediaStream}} has
+      changed, preventing any further recording.</td>
+    </tr>
   </tbody>
 </table>
 
