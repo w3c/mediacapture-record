@@ -284,6 +284,13 @@ interface MediaRecorder : EventTarget {
   (because of {{timeslice}} or {{requestData()}}), the individual Blobs need not
   be playable, but the combination of all the Blobs from a completed recording
   MUST be playable.</p>
+  
+  <p>The UA MUST record {{MediaRecorder/stream}} in such a way that the original
+  video Track(s) width and height can be retrieved at playback time. The {{Blob}}
+  containing entire recording returned when the recording finishes or smaller 
+  buffers of data returned at regular intervals containing the combination of all 
+  the original video Track(s) width and height MUST playback the input video Track(s) 
+  width and height.</p>
 
   <p> If any Track within the {{MediaStream}} is {{muted}} or not {{enabled}} at
   any time, the UA will only record black frames or silence since that is the
