@@ -111,8 +111,7 @@ interface MediaRecorder : EventTarget {
         "False">&#10008;</span></td>
         <td class="prmOptTrue"><span role="img" aria-label=
         "True">&#10004;</span></td>
-        <td class="prmDesc">A dictionary of options to for the UA instructing
-        how the recording will take part.</td>
+        <td class="prmDesc">A dictionary of recording options.</td>
       </tr>
     </tbody>
   </table>
@@ -120,20 +119,15 @@ interface MediaRecorder : EventTarget {
   <dd algorithm="to construct a MediaRecorder">When the {{MediaRecorder()}}
   constructor is invoked, the User Agent MUST run the following steps:
   <ol>
-    <li>Let |recorder| be the newly constructed {{MediaRecorder}}.</li>
+    <li>Let |recorder| be a newly constructed {{MediaRecorder}} object.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/stream}} attribute to the
     constructor's first argument.</li>
     <li>Each {{MediaRecorder}} has an internal <dfn>constrainedMimeType</dfn>
     property that is initially set to the empty string.</li>
-    <li>If the constructor's second argument |options| is present, run the
-    following steps:
-    <ol>
-      <li>If |options|' {{MediaRecorderOptions/mimeType}} member is present, set
-      the [=constrainedMimeType=] internal property to the value of |options|'
-      {{MediaRecorderOptions/mimeType}} member.</li>
-    </ol>
-    </li>
-    <li>If invoking {{isTypeSupported()}} with the [=constrainedMimeType=]
+    <li>If the {{MediaRecorderOptions/mimeType}} member is present in the
+    constructor's second argument, set the [=constrainedMimeType=] internal
+    property to the value of {{MediaRecorderOptions/mimeType}}.</li>
+    <li>If invoking [$is type supported$] with the [=constrainedMimeType=]
     internal property as its argument returns false, throw a
     {{NotSupportedError}} {{DOMException}} and abort these steps.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/mimeType}} attribute to the
@@ -227,24 +221,33 @@ interface MediaRecorder : EventTarget {
     [=track set=].</li>
 
     <li>If the [=constrainedMimeType=] internal property specifies a media type,
-    container, or codec such that the User Agent cannot record a track in
-    |tracks| with it, throw a {{NotSupportedError}} {{DOMException}} and abort
-    these steps.</li>
+    container, or codec, then run the following sub steps:
+    <ol>
+      <li>Constrain the configuration of the MediaRecorder to the media type,
+      container, and codec specified in [=constrainedMimeType=].</li>
+      <li>For each track in |tracks|, if the User Agent cannot record the track
+      using the current configuration, then throw a {{NotSupportedError}}
+      {{DOMException}} and abort all steps.</li>
+    </ol>
+    </li>
 
-    <li>Set {{mimeType}} to the [=constrainedMimeType=] internal property,
-    extended by the media type, subtype and codecs parameter reflecting the
-    configuration used by the MediaRecorder to record all tracks in |tracks|.
-    The media type, subtype and any parameters in the [=constrainedMimeType=]
-    internal property, MUST NOT be changed. {{mimeType}} MAY be extended with
-    the profiles parameter [[RFC6381]] or further codec-specific parameters to
-    avoid ambiguity.</li>
+    <li>Let |extendedMimeType| be the value of the [=constrainedMimeType=]
+    internal property.</li>
+
+    <li>Modify |extendedMimeType| by adding media type, subtype and codecs
+    parameter reflecting the configuration used by the MediaRecorder to record
+    all tracks in |tracks|, if not already present. This MAY include the
+    profiles parameter [[RFC6381]] or further codec-specific parameters.</li>
+
+    <li>Set {{mimeType}} to |extendedMimeType|.</li>
 
     <li>Set {{state}} to {{recording}}, and run the following steps in parallel:
     <ol>
-      <li>Start recording all tracks in |tracks| and gather the data into a
-      {{Blob}} <var>blob</var> and queue a task, using the DOM manipulation task
-      source, to <a>fire an event</a> named <a>start</a> at <var>target</var>,
-      then return <code>undefined</code>.</li>
+      <li>Start recording all tracks in |tracks| using the {{MediaRecorder}}'s
+      current configuration, and gather the data into a {{Blob}} <var>blob</var>
+      and queue a task, using the DOM manipulation task source, to
+      <a>fire an event</a> named <a>start</a> at <var>target</var>, then return
+      <code>undefined</code>.</li>
 
       <li>If at any point the {{stream}}'s <a>isolation properties</a> change so
       that {{MediaRecorder}} is no longer allowed access to it, the UA MUST
@@ -458,26 +461,8 @@ interface MediaRecorder : EventTarget {
   {{MediaRecorder}} implementation is capable of recording {{Blob}} objects for
   the specified MIME type. Recording may still fail if sufficient resources are
   not available to support the concrete media encoding. When this method is
-  invoked, the User Agent must run the following steps:
-  <ol class="method-algorithm">
-    <li>If <code>type</code> is an empty string, then return true
-    (note that this case is essentially equivalent to leaving up to
-    the UA the choice of both container and codecs).</li>
-    <li>If <code>type</code> does not contain a valid MIME type
-    string, then return false.</li>
-    <li>If <code>type</code> contains a media type or media subtype
-    that the MediaRecorder does not support, then return false.</li>
-    <li>If <code>type</code> contains a media container that the
-    MediaRecorder does not support, then return false.</li>
-    <li>If <code>type</code> contains more than one audio codec, or more than
-    one video codec, then return false.</li>
-    <li>If <code>type</code> contains a codec that the MediaRecorder
-    does not support, then return false.</li>
-    <li>If the MediaRecorder does not support the specified
-    combination of media type/subtype, codecs and container then
-    return false.</li>
-    <li>Return true.</li>
-  </ol>
+  invoked, the User Agent must return the result of [$is type supported$],
+  given the method's first argument.
   <table class="parameters">
     <tbody>
       <tr>
@@ -500,6 +485,28 @@ interface MediaRecorder : EventTarget {
       </tr>
     </tbody>
   </table>
+  </dd>
+  <dd algorithm="is type supported">The <dfn abstract-op>is type supported</dfn>
+  algorithm consists of the following steps.
+  <ol>
+    <li>Let |type| be the algorithm's argument.</li>
+    <li>If |type| is an empty string, then return true (note that this case is
+    essentially equivalent to leaving up to the UA the choice of both container
+    and codecs).</li>
+    <li>If |type| does not contain a valid MIME type string, then return false.
+    </li>
+    <li>If |type| contains a media type or media subtype that the MediaRecorder
+    does not support, then return false.</li>
+    <li>If |type| contains a media container that the MediaRecorder does not
+    support, then return false.</li>
+    <li>If |type| contains more than one audio codec, or more than one video
+    codec, then return false.</li>
+    <li>If |type| contains a codec that the MediaRecorder does not support, then
+    return false.</li>
+    <li>If the MediaRecorder does not support the specified combination of media
+    type/subtype, codecs and container then return false.</li>
+    <li>Return true.</li>
+  </ol>
   </dd>
 </dl>
 
