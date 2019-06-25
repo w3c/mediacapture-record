@@ -122,16 +122,16 @@ interface MediaRecorder : EventTarget {
     <li>Let |recorder| be a newly constructed {{MediaRecorder}} object.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/stream}} attribute to the
     constructor's first argument.</li>
-    <li>Each {{MediaRecorder}} has an internal <dfn>constrainedMimeType</dfn>
-    property that is initially set to the empty string.</li>
+    <li>Let |recorder| have a <dfn>\[[constrainedMimeType]]</dfn> internal slot,
+    initialized to the empty string.</li>
     <li>If the {{MediaRecorderOptions/mimeType}} member is present in the
-    constructor's second argument, set the [=constrainedMimeType=] internal
-    property to the value of {{MediaRecorderOptions/mimeType}}.</li>
-    <li>If invoking [$is type supported$] with the [=constrainedMimeType=]
-    internal property as its argument returns false, throw a
+    constructor's second argument, set |recorder|'s [=[[constrainedMimeType]]=]
+    slot to the value of {{MediaRecorderOptions/mimeType}}.</li>
+    <li>If invoking [$is type supported$] with |recorder|'s
+    [=[[constrainedMimeType]]=] slot as its argument returns false, throw a
     {{NotSupportedError}} {{DOMException}} and abort these steps.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/mimeType}} attribute to the
-    [=constrainedMimeType=] internal property.</li>
+    value of |recorder|'s [=[[constrainedMimeType]]=] slot.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/state}} attribute to
     {{inactive}}.</li>
     <li>Return |recorder|.</li>
@@ -220,19 +220,20 @@ interface MediaRecorder : EventTarget {
     <li>Let |tracks| be the set of {{live}} tracks in the {{stream}}'s
     [=track set=].</li>
 
-    <li>If the [=constrainedMimeType=] internal property specifies a media type,
+    <li>If the [=[[constrainedMimeType]]=] slot specifies a media type,
     container, or codec, then run the following sub steps:
     <ol>
       <li>Constrain the configuration of the MediaRecorder to the media type,
-      container, and codec specified in [=constrainedMimeType=].</li>
+      container, and codec specified in the [=[[constrainedMimeType]]=]
+      slot.</li>
       <li>For each track in |tracks|, if the User Agent cannot record the track
       using the current configuration, then throw a {{NotSupportedError}}
       {{DOMException}} and abort all steps.</li>
     </ol>
     </li>
 
-    <li>Let |extendedMimeType| be the value of the [=constrainedMimeType=]
-    internal property.</li>
+    <li>Let |extendedMimeType| be the value of the [=[[constrainedMimeType]]=]
+    slot.</li>
 
     <li>Modify |extendedMimeType| by adding media type, subtype and codecs
     parameter reflecting the configuration used by the MediaRecorder to record
@@ -255,8 +256,8 @@ interface MediaRecorder : EventTarget {
       and queue a task, using the DOM manipulation task source, that runs the
       following steps:
       <ol>
-        <li>Set {{mimeType}} to the value of the [=constrainedMimeType=]
-        internal property.</li>
+        <li>Set {{mimeType}} to the value of the [=[[constrainedMimeType]]=]
+        slot.</li>
         <li>Set {{state}} to {{inactive}}.</li>
         <li><a>Fire an error event</a> named {{SecurityError}} at
         <var>target</var>.</li>
@@ -271,8 +272,8 @@ interface MediaRecorder : EventTarget {
       data that it has gathered, and queue a task, using the DOM manipulation
       task source, that runs the following steps:
       <ol>
-        <li>Set {{mimeType}} to the value of the [=constrainedMimeType=]
-        internal property.</li>
+        <li>Set {{mimeType}} to the value of the [=[[constrainedMimeType]]=]
+        slot.</li>
         <li>Set {{state}} to {{inactive}}.</li>
         <li><a>Fire an error event</a> named {{InvalidModificationError}} at
         <var>target</var>.</li>
@@ -287,8 +288,8 @@ interface MediaRecorder : EventTarget {
       it MUST stop gathering data, and queue a task, using the DOM manipulation
       task source, that runs the following steps:
       <ol>
-        <li>Set {{mimeType}} to the value of the [=constrainedMimeType=]
-        internal property.</li>
+        <li>Set {{mimeType}} to the value of the [=[[constrainedMimeType]]=]
+        slot.</li>
         <li>Set {{state}} to {{inactive}}.</li>
         <li><a>Fire an error event</a> named {{UnknownError}} at
         <var>target</var>.</li>
@@ -313,8 +314,8 @@ interface MediaRecorder : EventTarget {
       queue a task, using the DOM manipulation task source, that runs the
       following steps:
       <ol>
-        <li>Set {{mimeType}} to the value of the [=constrainedMimeType=]
-        internal property.</li>
+        <li>Set {{mimeType}} to the value of the [=[[constrainedMimeType]]=]
+        slot.</li>
         <li>Set {{state}} to {{inactive}}.</li>
         <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
         <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
@@ -367,8 +368,8 @@ interface MediaRecorder : EventTarget {
   MUST run the following steps:
   <ol>
     <li>If {{state}} is {{inactive}}, abort these steps.</li>
-    <li>Set {{mimeType}} to the value of the [=constrainedMimeType=]
-    internal property.</li>
+    <li>Set {{mimeType}} to the value of the [=[[constrainedMimeType]]=]
+    slot.</li>
     <li>Set {{state}} to {{inactive}}, and queue a
     task, using the DOM manipulation task source, that runs the following steps:
     <ol>
