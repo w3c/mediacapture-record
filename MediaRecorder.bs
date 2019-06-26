@@ -116,22 +116,22 @@ interface MediaRecorder : EventTarget {
     </tbody>
   </table>
   </dd>
-  <dd algorithm="to construct a MediaRecorder">When the {{MediaRecorder()}}
+  <dd>When the {{MediaRecorder()}}
   constructor is invoked, the User Agent MUST run the following steps:
   <ol>
     <li>Let |recorder| be a newly constructed {{MediaRecorder}} object.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/stream}} attribute to the
     constructor's first argument.</li>
-    <li>Let |recorder| have a <dfn>\[[constrainedMimeType]]</dfn> internal slot,
+    <li>Let |recorder| have a <dfn>\[[ConstrainedMimeType]]</dfn> internal slot,
     initialized to the empty string.</li>
-    <li>If the {{MediaRecorderOptions/mimeType}} member is present in the
-    constructor's second argument, set |recorder|'s [=[[constrainedMimeType]]=]
-    slot to the value of {{MediaRecorderOptions/mimeType}}.</li>
+    <li>Let |options| be the constructor's second argument.</li>
+    <li>Set |recorder|'s [=[[ConstrainedMimeType]]=] slot to the value of
+    |options|' {{MediaRecorderOptions/mimeType}} member, if it is present.</li>
     <li>If invoking [$is type supported$] with |recorder|'s
-    [=[[constrainedMimeType]]=] slot as its argument returns false, throw a
+    [=[[ConstrainedMimeType]]=] slot as its argument returns false, throw a
     {{NotSupportedError}} {{DOMException}} and abort these steps.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/mimeType}} attribute to the
-    value of |recorder|'s [=[[constrainedMimeType]]=] slot.</li>
+    value of |recorder|'s [=[[ConstrainedMimeType]]=] slot.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/state}} attribute to
     {{inactive}}.</li>
     <li>Return |recorder|.</li>
@@ -199,32 +199,34 @@ interface MediaRecorder : EventTarget {
     and fire events asynchronously.
   </div>
   <dt><dfn method for="MediaRecorder"><code>start(optional unsigned long timeslice)</code></dfn></dt>
-  <dd algorithm="to start a MediaRecorder">
+  <dd>
   When a {{MediaRecorder}} object&#8217;s {{start()}} method is invoked, the UA
   MUST run the following steps:
   <ol>
-    <li>Let <var>target</var> be the MediaRecorder context object.</li>
+    <li>Let |recorder| be the {{MediaRecorder}} object on which the method was
+    invoked.</li>
+
     <li>Let <var>timeslice</var> be the method's first argument, if provided,
     or <code>undefined</code>. </li>
 
-    <li>If {{state}} is not {{inactive}}, throw an {{InvalidStateError}}
-    {{DOMException}} and abort these steps.</li>
+    <li>If the value of |recorder|'s {{state}} attribute is not {{inactive}},
+    throw an {{InvalidStateError}} {{DOMException}} and abort these steps.</li>
 
-    <li>If the {{stream}}'s <a>isolation properties</a> disallow access
-    from this {{MediaRecorder}}, throw a {{SecurityError}} {{DOMException}} and
-    abort these steps.</li>
+    <li>If the <a>isolation properties</a> of |recorder|'s {{stream}} attribute
+    disallow access from |recorder|, throw a {{SecurityError}} {{DOMException}}
+    and abort these steps.</li>
 
-    <li>If the {{stream}} is {{inactive}}, throw a {{NotSupportedError}}
-    {{DOMException}} and abort these steps.</li>
+    <li>If |recorder|'s {{stream}} is {{inactive}}, throw a
+    {{NotSupportedError}} {{DOMException}} and abort these steps.</li>
 
-    <li>Let |tracks| be the set of {{live}} tracks in the {{stream}}'s
+    <li>Let |tracks| be the set of {{live}} tracks in |recorder|'s {{stream}}'s
     [=track set=].</li>
 
-    <li>If the [=[[constrainedMimeType]]=] slot specifies a media type,
+    <li>If the [=[[ConstrainedMimeType]]=] slot specifies a media type,
     container, or codec, then run the following sub steps:
     <ol>
-      <li>Constrain the configuration of the MediaRecorder to the media type,
-      container, and codec specified in the [=[[constrainedMimeType]]=]
+      <li>Constrain the configuration of |recorder| to the media type,
+      container, and codec specified in the [=[[ConstrainedMimeType]]=]
       slot.</li>
       <li>For each track in |tracks|, if the User Agent cannot record the track
       using the current configuration, then throw a {{NotSupportedError}}
@@ -232,22 +234,23 @@ interface MediaRecorder : EventTarget {
     </ol>
     </li>
 
-    <li>Let |extendedMimeType| be the value of the [=[[constrainedMimeType]]=]
-    slot.</li>
+    <li>Let |extendedMimeType| be the value of |recorder|'s
+    [=[[ConstrainedMimeType]]=] slot.</li>
 
     <li>Modify |extendedMimeType| by adding media type, subtype and codecs
     parameter reflecting the configuration used by the MediaRecorder to record
     all tracks in |tracks|, if not already present. This MAY include the
     profiles parameter [[RFC6381]] or further codec-specific parameters.</li>
 
-    <li>Set {{mimeType}} to |extendedMimeType|.</li>
+    <li>Set |recorder|'s {{mimeType}} attribute to |extendedMimeType|.</li>
 
-    <li>Set {{state}} to {{recording}}, and run the following steps in parallel:
+    <li>Set |recorder|'s {{state}} to {{recording}}, and run the following steps
+    in parallel:
     <ol>
       <li>Start recording all tracks in |tracks| using the {{MediaRecorder}}'s
       current configuration, and gather the data into a {{Blob}} <var>blob</var>
       and queue a task, using the DOM manipulation task source, to
-      <a>fire an event</a> named <a>start</a> at <var>target</var>, then return
+      <a>fire an event</a> named <a>start</a> at <var>recorder</var>, then return
       <code>undefined</code>.</li>
 
       <li>If at any point the {{stream}}'s <a>isolation properties</a> change so
@@ -256,14 +259,12 @@ interface MediaRecorder : EventTarget {
       and queue a task, using the DOM manipulation task source, that runs the
       following steps:
       <ol>
-        <li>Set {{mimeType}} to the value of the [=[[constrainedMimeType]]=]
-        slot.</li>
-        <li>Set {{state}} to {{inactive}}.</li>
+        <li>[$Reset the MediaRecorder$] with |recorder|.</li>
         <li><a>Fire an error event</a> named {{SecurityError}} at
-        <var>target</var>.</li>
+        <var>recorder</var>.</li>
         <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
-        <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
-        <li><a>Fire an event</a> named <a>stop</a> at <var>target</var>.</li>
+        <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
+        <li><a>Fire an event</a> named <a>stop</a> at <var>recorder</var>.</li>
       </ol>
       </li>
 
@@ -272,14 +273,12 @@ interface MediaRecorder : EventTarget {
       data that it has gathered, and queue a task, using the DOM manipulation
       task source, that runs the following steps:
       <ol>
-        <li>Set {{mimeType}} to the value of the [=[[constrainedMimeType]]=]
-        slot.</li>
-        <li>Set {{state}} to {{inactive}}.</li>
+        <li>[$Reset the MediaRecorder$] with |recorder|.</li>
         <li><a>Fire an error event</a> named {{InvalidModificationError}} at
-        <var>target</var>.</li>
+        <var>recorder</var>.</li>
         <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
-        <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
-        <li><a>Fire an event</a> named <a>stop</a> at <var>target</var>.</li>
+        <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
+        <li><a>Fire an event</a> named <a>stop</a> at <var>recorder</var>.</li>
       </ol>
       </li>
 
@@ -288,14 +287,12 @@ interface MediaRecorder : EventTarget {
       it MUST stop gathering data, and queue a task, using the DOM manipulation
       task source, that runs the following steps:
       <ol>
-        <li>Set {{mimeType}} to the value of the [=[[constrainedMimeType]]=]
-        slot.</li>
-        <li>Set {{state}} to {{inactive}}.</li>
+        <li>[$Reset the MediaRecorder$] with |recorder|.</li>
         <li><a>Fire an error event</a> named {{UnknownError}} at
-        <var>target</var>.</li>
+        <var>recorder</var>.</li>
         <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
-        <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
-        <li><a>Fire an event</a> named <a>stop</a> at <var>target</var>.</li>
+        <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
+        <li><a>Fire an event</a> named <a>stop</a> at <var>recorder</var>.</li>
       </ol>
       </li>
 
@@ -305,7 +302,7 @@ interface MediaRecorder : EventTarget {
       gathering data into a new {{Blob}} <var>blob</var>, and queue a task,
       using the DOM manipulation task source, that
       <a href="#to-fire-a-blob-event">fires a blob event</a> named
-      <a>dataavailable</a> at <var>target</var> with <var>blob</var>.
+      <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.
 
       Note that an <code>undefined</code> value of <var>timeslice</var> will
       be understood as the largest <code>long</code> value.</li>
@@ -314,13 +311,11 @@ interface MediaRecorder : EventTarget {
       queue a task, using the DOM manipulation task source, that runs the
       following steps:
       <ol>
-        <li>Set {{mimeType}} to the value of the [=[[constrainedMimeType]]=]
-        slot.</li>
-        <li>Set {{state}} to {{inactive}}.</li>
+        <li>[$Reset the MediaRecorder$] with |recorder|.</li>
         <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
-        <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
+        <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
         <li><a>Fire an event</a> named <a>stop</a> at
-        <var>target</var>.</li>
+        <var>recorder</var>.</li>
       </ol>
       </li>
 
@@ -340,6 +335,14 @@ interface MediaRecorder : EventTarget {
   <p> If any Track within the {{MediaStream}} is {{muted}} or not {{enabled}} at
   any time, the UA will only record black frames or silence since that is the
   content produced by the Track.</p>
+
+  <p>The <dfn abstract-op>Reset the MediaRecorder</dfn> algorithm given a
+  |recorder|, is as follows:</p>
+  <ol>
+    <li>Set |recorder|'s {{mimeType}} attribute to the value of the
+    [=[[ConstrainedMimeType]]=] slot.</li>
+    <li>Set |recorder|'s {{state}} attribute to {{inactive}}.</li>
+  </ol>
 
   <table class="parameters">
     <tbody>
@@ -367,18 +370,19 @@ interface MediaRecorder : EventTarget {
   When a {{MediaRecorder}} object&#8217;s {{stop()}} method is invoked, the UA
   MUST run the following steps:
   <ol>
-    <li>If {{state}} is {{inactive}}, abort these steps.</li>
-    <li>Set {{mimeType}} to the value of the [=[[constrainedMimeType]]=]
-    slot.</li>
-    <li>Set {{state}} to {{inactive}}, and queue a
-    task, using the DOM manipulation task source, that runs the following steps:
+    <li>Let |recorder| be the {{MediaRecorder}} object on which the method was
+    invoked.</li>
+    <li>If |recorder|'s {{state}} attribute is {{inactive}}, abort these
+    steps.</li>
+    <li>[$Reset the MediaRecorder$] with |recorder|.</li>
+    <li>Queue a task, using the DOM manipulation task source, that runs the
+    following steps:
     <ol>
       <li>Stop gathering data.</li>
-      <li>Let <var>blob</var> be the Blob of collected data so far and
-      let <var>target</var> be the MediaRecorder context object, then
+      <li>Let <var>blob</var> be the Blob of collected data so far, then
       <a href="#to-fire-a-blob-event">fire a blob event</a> named
-      <a>dataavailable</a> at <var>target</var> with <var>blob</var>.</li>
-      <li><a>Fire an event</a> named <a>stop</a> at <var>target</var>.</li>
+      <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
+      <li><a>Fire an event</a> named <a>stop</a> at <var>recorder</var>.</li>
     </ol>
     </li>
     <li>return <code>undefined</code>.</li>
