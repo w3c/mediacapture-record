@@ -128,6 +128,10 @@ interface MediaRecorder : EventTarget {
     <li>Let |recorder| be a newly constructed {{MediaRecorder}} object.</li>
     <li>Let |recorder| have a <dfn>\[[ConstrainedMimeType]]</dfn> internal slot,
     initialized to the empty string.</li>
+    <li>Let |recorder| have a <dfn>\[[ConstrainedBitsPerSecond]]</dfn> internal
+    slot, initialized to the value of |options|'
+    {{MediaRecorderOptions/bitsPerSecond}} member, if it is present, otherwise
+    <code>undefined</code>.</li>
     <li>Set |recorder|'s [=[[ConstrainedMimeType]]=] slot to the value of
     |options|' {{MediaRecorderOptions/mimeType}} member, if it is present.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/stream}} attribute to
@@ -136,6 +140,20 @@ interface MediaRecorder : EventTarget {
     value of |recorder|'s [=[[ConstrainedMimeType]]=] slot.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/state}} attribute to
     {{inactive}}.</li>
+    <li>Initialize |recorder|'s {{videoBitsPerSecond}} attribute to the value of
+    |options|' {{MediaRecorderOptions/videoBitsPerSecond}} member, if it is
+    present. Otherwise, choose a target value the User Agent deems reasonable
+    for video.</li>
+    <li>Initialize |recorder|'s {{audioBitsPerSecond}} attribute to the value of
+    |options|' {{MediaRecorderOptions/audioBitsPerSecond}} member, if it is
+    present. Otherwise, choose a target value the User Agent deems reasonable
+    for audio.</li>
+    <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
+    <code>undefined</code>, set |recorder|'s {{videoBitsPerSecond}} and
+    {{audioBitsPerSecond}} attributes to values the User Agent deems reasonable
+    for the respective media types, such that the sum of {{videoBitsPerSecond}}
+    and {{audioBitsPerSecond}} is close to the value of |recorder|'s
+    [=[[ConstrainedBitsPerSecond]]=] slot.</li>
     <li>Return |recorder|.</li>
   </ol></dd>
 </dl>
@@ -183,14 +201,10 @@ interface MediaRecorder : EventTarget {
   <dd>Called to handle a {{MediaRecorderErrorEvent}}.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>videoBitsPerSecond</code></dfn></dt>
-  <dd>The value of the Video encoding target bit rate that was passed to
-  the Platform (potentially truncated, rounded, etc), or the calculated
-  one if the user has specified {{bitsPerSecond}}.</dd>
+  <dd>The target bitrate used to encode video tracks.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>audioBitsPerSecond</code></dfn></dt>
-  <dd>The value of the Audio encoding target bit rate that was passed to
-  the Platform (potentially truncated, rounded, etc), or the calculated
-  one if the user has specified {{bitsPerSecond}}.</dd>
+  <dd>The target bitrate used to encode audio tracks.</dd>
 </dl>
 
 ## Methods ## {#mediarecorder-methods}
@@ -247,6 +261,27 @@ interface MediaRecorder : EventTarget {
     profiles parameter [[RFC6381]] or further codec-specific parameters.</li>
 
     <li>Set |recorder|'s {{mimeType}} attribute to |extendedMimeType|.</li>
+
+    <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
+    <code>undefined</code>, set |recorder|'s {{videoBitsPerSecond}} and
+    {{audioBitsPerSecond}} attributes to values the User Agent deems reasonable
+    for the respective media types, for recording all tracks in |tracks|, such
+    that the sum of {{videoBitsPerSecond}} and {{audioBitsPerSecond}} is close
+    to the value of |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot.</li>
+
+    <li>Let |videoBitrate| be the value of |recorder|'s {{videoBitsPerSecond}}
+    attribute, and constrain the configuration of |recorder| to target an
+    aggregate bitrate of |videoBitrate| bits per second for all video tracks
+    |recorder| will be recording. |videoBitrate| is a hint for the encoder and
+    the value might be surpassed, not achieved, or only be achieved over a long
+    period of time.</li>
+
+    <li>Let |audioBitrate| be the value of |recorder|'s {{audioBitsPerSecond}}
+    attribute, and constrain the configuration of |recorder| to target an
+    aggregate bitrate of |audioBitrate| bits per second for all audio tracks
+    |recorder| will be recording. |audioBitrate| is a hint for the encoder and
+    the value might be surpassed, not achieved, or only be achieved over a long
+    period of time.</li>
 
     <li>Set |recorder|'s {{state}} to {{recording}}, and run the following steps
     in parallel:
@@ -346,6 +381,12 @@ interface MediaRecorder : EventTarget {
     <li>Set |recorder|'s {{mimeType}} attribute to the value of the
     [=[[ConstrainedMimeType]]=] slot.</li>
     <li>Set |recorder|'s {{state}} attribute to {{inactive}}.</li>
+    <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
+    <code>undefined</code>, set |recorder|'s {{videoBitsPerSecond}} and
+    {{audioBitsPerSecond}} attributes to values the User Agent deems reasonable
+    for the respective media types, such that the sum of {{videoBitsPerSecond}}
+    and {{audioBitsPerSecond}} is close to the value of |recorder|'s
+    [=[[ConstrainedBitsPerSecond]]=] slot.</li>
   </ol>
 
   <table class="parameters">
@@ -557,23 +598,18 @@ dictionary MediaRecorderOptions {
 
   <dt><dfn dict-member for="MediaRecorderOptions"><code>audioBitsPerSecond</code></dfn></dt>
   <dd>Aggregate target bits per second for encoding of the Audio track(s), if
-  any. This is a hint for the encoder and the value might be surpassed, not
-  achieved, or only be achieved over a long period of time.</dd>
+  any.</dd>
 
   <dt><dfn dict-member for="MediaRecorderOptions"><code>videoBitsPerSecond</code></dfn></dt>
   <dd>Aggregate target bits per second for encoding of the Video track(s), if
-  any. This is a hint for the encoder and the value might be surpassed, not
-  achieved, or only be achieved over a long period of time.</dd>
+  any.</dd>
 
   <dt><dfn dict-member for="MediaRecorderOptions"><code>bitsPerSecond</code></dfn></dt>
   <dd> Aggregate target bits per second for encoding of all Video and Audio
-  Track(s) present. This parameter overrides either
+  Track(s) present. This member overrides either
   {{MediaRecorderOptions/audioBitsPerSecond}} or
   {{MediaRecorderOptions/videoBitsPerSecond}} if present, and might be
-  distributed among the present track encoders as the UA sees fit. This
-  parameter is a hint for the encoder(s) and the total value might be surpassed,
-  not achieved, or only be achieved over a long period of time.
-  </dd>
+  distributed among the present track encoders as the UA sees fit.</dd>
 </dl>
 
 
