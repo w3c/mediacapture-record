@@ -580,6 +580,7 @@ dictionary MediaRecorderOptions {
   unsigned long audioBitsPerSecond;
   unsigned long videoBitsPerSecond;
   unsigned long bitsPerSecond;
+  boolean audioConstantBitRate;
 };
 </pre>
 
@@ -610,6 +611,10 @@ dictionary MediaRecorderOptions {
   {{MediaRecorderOptions/audioBitsPerSecond}} or
   {{MediaRecorderOptions/videoBitsPerSecond}} if present, and might be
   distributed among the present track encoders as the UA sees fit.</dd>
+  
+  <dt><dfn dict-member for="MediaRecorderOptions"><code>audioConstantBitRate</code></dfn></dt>
+  <dd>Specifes that the Audio track(s) should be encoded at a constant bitrate instead of
+  an average or variable bitrate.</dd>
 </dl>
 
 
