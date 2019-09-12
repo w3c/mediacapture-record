@@ -71,6 +71,7 @@ interface MediaRecorder : EventTarget {
   readonly attribute unsigned long audioBitsPerSecond;
 
   void start(optional unsigned long timeslice);
+  Promise&lt;void&gt; replaceStream(MediaStream newStream);
   void stop();
   void pause();
   void resume();
@@ -408,6 +409,46 @@ interface MediaRecorder : EventTarget {
       </tr>
     </tbody>
   </table>
+  </dd>
+
+  <dt><dfn method for="MediaRecorder"><code>replaceStream(MediaStream newStream)</code></dfn></dt>
+  <dd>
+  When a {{MediaRecorder}} object&#8217;s {{replaceStream()}} method is invoked,
+  the UA MUST run the following steps:
+  <ol>
+    <li>Let |recorder| be the {{MediaRecorder}} object on which the method was
+    invoked.</li>
+    <li>Let |newStream| be the method's first argument.</li>
+    <li>Let |newTracks| be the set of {{live}} tracks in |newStream|'s
+    [=track set=].</li>
+    <li>Let |stream| be the value of |recorder|'s {{stream}} attribute.</li>
+    <li>Let |tracks| be the set of {{live}} tracks in |stream|'s
+    [=track set=].</li>
+    <li>If the number of audio tracks in |newTracks| is different than the
+    number of audio tracks in |tracks|, or the number of video tracks in
+    |newTracks| is different than the number of video tracks in |tracks|, return
+    a promise {{rejected}} with a newly created {{InvalidModificationError}} and
+    abort these steps.</li>
+    <li>Let |p| be a new promise and run the following steps in parallel:</li>
+    <ol>
+      <li>If data is currently being gathered, replace the source stream being
+      gathered to be |newStream|, recording from |newTracks| instead of the
+      previous stream and tracks. See {{play()}} for details on what to do with
+      the stream and tracks being recorded (such as what to do if the recorded
+      stream's [=track set=] is modified) and stop listening for these things on
+      the stream no longer being recorded.</li>
+      <div class="note">This replaces the source of frames being gathered and
+      should be a seamless operation.</div>
+      <li>Queue a task, using the DOM manipulation task source, that runs the
+      following steps:</li>
+      <ol>
+        <li>Set |recorder|'s {{MediaRecorder/stream}} attribute to
+        |newStream|.</li>
+        <li>Resolve |p| with <code>undefined</code>.</li>
+      </ol>
+    </ol>
+    <li>return |p|.</li>
+  </ol>
   </dd>
 
   <dt><dfn method for="MediaRecorder"><code>stop()</code></dfn></dt>
