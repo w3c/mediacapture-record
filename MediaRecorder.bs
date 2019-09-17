@@ -58,7 +58,7 @@ at regular intervals.
 [Exposed=Window,
  Constructor(MediaStream stream, optional MediaRecorderOptions options)]
 interface MediaRecorder : EventTarget {
-  readonly attribute MediaStream stream;
+  attribute MediaStream stream;
   readonly attribute DOMString mimeType;
   readonly attribute RecordingState state;
   attribute EventHandler onstart;
@@ -71,6 +71,7 @@ interface MediaRecorder : EventTarget {
   readonly attribute unsigned long audioBitsPerSecond;
 
   void start(optional unsigned long timeslice);
+  void replaceTrack(MediaStreamTrack track, MediaStreamTrack withTrack);
   void stop();
   void pause();
   void resume();
@@ -101,8 +102,8 @@ interface MediaRecorder : EventTarget {
         "False">&#10008;</span></td>
         <td class="prmOptFalse"><span role="img" aria-label=
         "False">&#10008;</span></td>
-        <td class="prmDesc">The {{MediaStream}} to be recorded. This will
-        be the value of the {{MediaRecorder/stream}} attribute.</td>
+        <td class="prmDesc">The {{MediaStream}} to be recorded. This
+        can be changed later using the {{MediaRecorder/stream}} attribute.</td>
       </tr>
       <tr>
         <td class="prmName">options</td>
@@ -126,6 +127,8 @@ interface MediaRecorder : EventTarget {
     {{MediaRecorderOptions/mimeType}} member as its argument returns false,
     throw a {{NotSupportedError}} {{DOMException}} and abort these steps.</li>
     <li>Let |recorder| be a newly constructed {{MediaRecorder}} object.</li>
+    <li>Let |recorder| have a <dfn>\[[Tracks]]</dfn> internal slot, initialized
+    to an empty list.</li>
     <li>Let |recorder| have a <dfn>\[[ConstrainedMimeType]]</dfn> internal slot,
     initialized to the empty string.</li>
     <li>Let |recorder| have a <dfn>\[[ConstrainedBitsPerSecond]]</dfn> internal
@@ -162,7 +165,8 @@ interface MediaRecorder : EventTarget {
 
 <dl class="domintro">
   <dt><dfn attribute for="MediaRecorder"><code>stream</code></dfn></dt>
-  <dd>The {{MediaStream}} [[!GETUSERMEDIA]] to be recorded.</dd>
+  <dd>The {{MediaStream}} [[!GETUSERMEDIA]] to be examined for tracks to record
+  when the {{start()}} method is invoked.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>mimeType</code></dfn></dt>
   <dd>The MIME type [[!RFC2046]] used by the {{MediaRecorder}} object.
@@ -233,9 +237,9 @@ interface MediaRecorder : EventTarget {
     <li>If the value of |recorder|'s {{state}} attribute is not {{inactive}},
     throw an {{InvalidStateError}} {{DOMException}} and abort these steps.</li>
 
-    <li>If the <a>isolation properties</a> of |stream| disallow access from
-    |recorder|, throw a {{SecurityError}} {{DOMException}} and abort these
-    steps.</li>
+    <li>For each track, |track|, in |tracks|, if the <a>isolation properties</a>
+    of |track| disallow access from |recorder|, throw a {{SecurityError}}
+    {{DOMException}} and abort these steps.</li>
 
     <li>If |stream| is {{inactive}}, throw a {{NotSupportedError}}
     {{DOMException}} and abort these steps.</li>
@@ -283,6 +287,8 @@ interface MediaRecorder : EventTarget {
     the value might be surpassed, not achieved, or only be achieved over a long
     period of time.</li>
 
+    <li>Set |recorder|'s [=[[Tracks]]=] slot to |tracks|.</li>
+
     <li>Set |recorder|'s {{state}} to {{recording}}, and run the following steps
     in parallel:
     <ol>
@@ -292,11 +298,11 @@ interface MediaRecorder : EventTarget {
       <a>fire an event</a> named <a>start</a> at <var>recorder</var>, then return
       <code>undefined</code>.</li>
 
-      <li>If at any point |stream|'s <a>isolation properties</a> change so
-      that {{MediaRecorder}} is no longer allowed access to it, the UA MUST
-      immediately stop gathering data, discard any data that it has gathered,
-      and queue a task, using the DOM manipulation task source, that runs the
-      following steps:
+      <li>If at any point, the <a>isolation properties</a> of a track being
+      recorded change so that {{MediaRecorder}} is no longer allowed access a
+      track, the UA MUST immediately stop gathering all data, discard any data
+      that it has gathered, and queue a task, using the DOM manipulation task
+      source, that runs the following steps:
       <ol>
         <li>[$Inactivate the recorder$] with |recorder|.</li>
         <li><a>Fire an error event</a> named {{SecurityError}} at
@@ -307,24 +313,10 @@ interface MediaRecorder : EventTarget {
       </ol>
       </li>
 
-      <li>If at any point, a track is added to or removed from |stream|'s
-      [=track set=], the UA MUST immediately stop gathering data, discard any
-      data that it has gathered, and queue a task, using the DOM manipulation
-      task source, that runs the following steps:
-      <ol>
-        <li>[$Inactivate the recorder$] with |recorder|.</li>
-        <li><a>Fire an error event</a> named {{InvalidModificationError}} at
-        <var>recorder</var>.</li>
-        <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
-        <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
-        <li><a>Fire an event</a> named <a>stop</a> at <var>recorder</var>.</li>
-      </ol>
-      </li>
-
       <li>If the UA at any point is unable to continue gathering data for
-      reasons other than <a>isolation properties</a> or |stream|'s
-      [=track set=], it MUST stop gathering data, and queue a task, using the
-      DOM manipulation task source, that runs the following steps:
+      reasons other than <a>isolation properties</a>, it MUST stop gathering
+      data, and queue a task, using the DOM manipulation task source, that runs
+      the following steps:
       <ol>
         <li>[$Inactivate the recorder$] with |recorder|.</li>
         <li><a>Fire an error event</a> named {{UnknownError}} at
@@ -365,15 +357,14 @@ interface MediaRecorder : EventTarget {
   <p>Note that {{stop()}}, {{requestData()}}, and {{pause()}} also affect the
   recording behavior.</p>
 
-  <p>The UA MUST record {{MediaRecorder/stream}} in such a way that the original
-  Tracks can be retrieved at playback time. When multiple {{Blob}}s are returned
+  <p>The UA MUST record track in such a way that they can be retrieved
+  individually at playback time. When multiple {{Blob}}s are returned
   (because of {{timeslice}} or {{requestData()}}), the individual Blobs need not
   be playable, but the combination of all the Blobs from a completed recording
   MUST be playable.</p>
 
-  <p> If any Track within the {{MediaStream}} is {{muted}} or not {{enabled}} at
-  any time, the UA will only record black frames or silence since that is the
-  content produced by the Track.</p>
+  <p>Any time a track is {{muted}} or not {{enabled}}, the UA will only record
+  black frames or silence since that is the content produced by the track.</p>
 
   <p>The <dfn abstract-op>Inactivate the recorder</dfn> algorithm given a
   |recorder|, is as follows:</p>
@@ -408,6 +399,42 @@ interface MediaRecorder : EventTarget {
       </tr>
     </tbody>
   </table>
+  </dd>
+
+  <dt><dfn method for="MediaRecorder"><code>replaceTrack(MediaStreamTrack track, MediaStreamTrack withTrack)</code></dfn></dt>
+  <dd>
+  When a {{MediaRecorder}} object&#8217;s {{replaceTrack()}} method is invoked,
+  the UA MUST run the following steps:
+  <ol>
+    <li>Let |recorder| be the {{MediaRecorder}} object on which the method was
+    invoked.</li>
+    <li>Let |track| be the method's first argument.</li>
+    <li>Let |withTrack| be the method's second argument.</li>
+    <li>If |recorder|'s {{state}} is {{inactive}}, throw an
+    {{InvalidStateError}} {{DOMException}} and abort these steps.</li>
+    <li>If |track| is not found in |recorder|'s [=[[Tracks]]=], throw a
+    {{NotFoundError}} {{DOMException}} and abort these steps.</li>
+    <li>If |track| is {{ended}}, or |withTrack|'s {{kind}} differs from
+    |track|'s {{kind}}, then throw a {{InvalidModificationError}}
+    {{DOMException}} and abort these steps.</li>
+    <li>If the <a>isolation properties</a> of |track| or |withTrack| disallow
+    access from |recorder|, throw a {{SecurityError}} {{DOMException}} and abort
+    these steps.</li>
+    <li>If the User Agent cannot record |withTrack| in place of |track| using
+    the current configuration, then throw a {{NotSupportedError}}
+    {{DOMException}} and abort these steps.</li>
+    <li>Let |session| be the ongoing recording session corresponding to the
+    first occurance of |track| in |recorder|'s [=[[Tracks]]=].</li>
+    <li>Replace the first occurance of |track| in |recorder|'s [=[[Tracks]]=]
+    with |withTrack|.</li>
+    <li>return <code>undefined</code>, and run the remaining step in parallel.
+    </li>
+    <li>For |session|, instantly switch to recording |withTrack| in place of
+    |track|.
+    <div class="note">This replaces the source of frames being gathered and
+    SHOULD be a seamless operation.</div>
+    </li>
+  </ol>
   </dd>
 
   <dt><dfn method for="MediaRecorder"><code>stop()</code></dfn></dt>
@@ -821,13 +848,13 @@ specific type.
     </tr>
     <tr>
       <td>{{SecurityError}}</td>
-      <td>The <a>isolation properties</a> of the {{MediaStream}} do not allow the
-      MediaRecorder access to it.</td>
+      <td>The <a>isolation properties</a> of one of the  {{MediaStreamTrack}}s
+      do not allow the MediaRecorder access to it.</td>
     </tr>
     <tr>
       <td>{{InvalidModificationError}}</td>
-      <td>The set of {{MediaStreamTrack}}s of the recoded {{MediaStream}} has
-      changed, preventing any further recording.</td>
+      <td>An attempt to replace a {{MediaStreamTrack}} being recorded with a
+      track of a different {{kind}} was prevented.</td>
     </tr>
   </tbody>
 </table>
