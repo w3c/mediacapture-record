@@ -121,19 +121,17 @@ interface MediaRecorder : EventTarget {
   <ol>
     <li>Let |stream| be the constructor's first argument.</li>
     <li>Let |options| be the constructor's second argument.</li>
-    <li>If {{MediaRecorderOptions/mimeType}} is present in |options|, and
-    invoking [$is type supported$] with |options|'
+    <li>If invoking [$is type supported$] with |options|'
     {{MediaRecorderOptions/mimeType}} member as its argument returns false,
     throw a {{NotSupportedError}} {{DOMException}} and abort these steps.</li>
     <li>Let |recorder| be a newly constructed {{MediaRecorder}} object.</li>
     <li>Let |recorder| have a <dfn>\[[ConstrainedMimeType]]</dfn> internal slot,
-    initialized to the empty string.</li>
+    initialized to the value of |options|' {{MediaRecorderOptions/mimeType}}
+    member.</li>
     <li>Let |recorder| have a <dfn>\[[ConstrainedBitsPerSecond]]</dfn> internal
     slot, initialized to the value of |options|'
     {{MediaRecorderOptions/bitsPerSecond}} member, if it is present, otherwise
     <code>undefined</code>.</li>
-    <li>Set |recorder|'s [=[[ConstrainedMimeType]]=] slot to the value of
-    |options|' {{MediaRecorderOptions/mimeType}} member, if it is present.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/stream}} attribute to
     |stream|.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/mimeType}} attribute to the
@@ -576,7 +574,7 @@ its {{BlobEvent/data}} attribute initialized to <var>blob</var>.
 
 <pre class="idl">
 dictionary MediaRecorderOptions {
-  DOMString mimeType;
+  DOMString mimeType = "";
   unsigned long audioBitsPerSecond;
   unsigned long videoBitsPerSecond;
   unsigned long bitsPerSecond;
