@@ -1219,9 +1219,9 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 5a2c04fbf9f3418b378c5d733b60fe6fc575091b" name="generator">
+  <meta content="Bikeshed version e86d5b1b47a216fa66165c234892adc259212183" name="generator">
   <link href="https://www.w3.org/TR/mediastream-recording/" rel="canonical">
-  <meta content="e17767b15e7b898341876277bede944d5ceaf305" name="document-revision">
+  <meta content="a942879eee5f6d5d9d042317f39a83d1bd2b9f40" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -1496,7 +1496,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Recording</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-08-02">2 August 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-09-26">26 September 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1693,18 +1693,16 @@ at regular intervals.</p>
      <ol>
       <li>Let <var>stream</var> be the constructor’s first argument.
       <li>Let <var>options</var> be the constructor’s second argument.
-      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype">mimeType</a></code> is present in <var>options</var>, and
-    invoking <a data-link-type="abstract-op" href="#abstract-opdef-is-type-supported" id="ref-for-abstract-opdef-is-type-supported">is type supported</a> with <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype①">mimeType</a></code> member as its argument returns false,
+      <li>If invoking <a data-link-type="abstract-op" href="#abstract-opdef-is-type-supported" id="ref-for-abstract-opdef-is-type-supported">is type supported</a> with <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype">mimeType</a></code> member as its argument returns false,
     throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notsupportederror" id="ref-for-notsupportederror">NotSupportedError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException">DOMException</a></code> and abort these steps.
       <li>Let <var>recorder</var> be a newly constructed <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder①">MediaRecorder</a></code> object.
       <li>Let <var>recorder</var> have a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="constrainedmimetype">[[ConstrainedMimeType]]</dfn> internal slot,
-    initialized to the empty string.
+    initialized to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype①">mimeType</a></code> member.
       <li>Let <var>recorder</var> have a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="constrainedbitspersecond">[[ConstrainedBitsPerSecond]]</dfn> internal
     slot, initialized to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond">bitsPerSecond</a></code> member, if it is present, otherwise <code>undefined</code>.
-      <li>Set <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype">[[ConstrainedMimeType]]</a> slot to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype②">mimeType</a></code> member, if it is present.
       <li>Initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream②">stream</a></code> attribute to <var>stream</var>.
       <li>Initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-mimetype" id="ref-for-dom-mediarecorder-mimetype①">mimeType</a></code> attribute to the
-    value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype①">[[ConstrainedMimeType]]</a> slot.
+    value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype">[[ConstrainedMimeType]]</a> slot.
       <li>Initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①">state</a></code> attribute to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive">inactive</a></code>.
       <li>Initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond①">videoBitsPerSecond</a></code> attribute to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond">videoBitsPerSecond</a></code> member, if it is
     present. Otherwise, choose a target value the User Agent deems reasonable
@@ -1770,17 +1768,17 @@ at regular intervals.</p>
     throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException①">DOMException</a></code> and abort these steps.
       <li>If the <a data-link-type="dfn" href="https://www.w3.org/TR/webrtc-identity/#isolated-media-streams" id="ref-for-isolated-media-streams">isolation properties</a> of <var>stream</var> disallow access from <var>recorder</var>, throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror" id="ref-for-securityerror">SecurityError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException②">DOMException</a></code> and abort these
     steps.
-      <li>If <var>stream</var> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive②">inactive</a></code>, throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notsupportederror" id="ref-for-notsupportederror①">NotSupportedError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException③">DOMException</a></code> and abort these steps.
+      <li>If <var>stream</var> is <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#stream-inactive" id="ref-for-stream-inactive">inactive</a>, throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notsupportederror" id="ref-for-notsupportederror①">NotSupportedError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException③">DOMException</a></code> and abort these steps.
       <li>
-       If the <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype②">[[ConstrainedMimeType]]</a> slot specifies a media type,
+       If the <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype①">[[ConstrainedMimeType]]</a> slot specifies a media type,
     container, or codec, then run the following sub steps: 
        <ol>
         <li>Constrain the configuration of <var>recorder</var> to the media type,
-      container, and codec specified in the <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype③">[[ConstrainedMimeType]]</a> slot.
+      container, and codec specified in the <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype②">[[ConstrainedMimeType]]</a> slot.
         <li>For each track in <var>tracks</var>, if the User Agent cannot record the track
       using the current configuration, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notsupportederror" id="ref-for-notsupportederror②">NotSupportedError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException④">DOMException</a></code> and abort all steps.
        </ol>
-      <li>Let <var>extendedMimeType</var> be the value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype④">[[ConstrainedMimeType]]</a> slot.
+      <li>Let <var>extendedMimeType</var> be the value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype③">[[ConstrainedMimeType]]</a> slot.
       <li>Modify <var>extendedMimeType</var> by adding media type, subtype and codecs
     parameter reflecting the configuration used by the MediaRecorder to record
     all tracks in <var>tracks</var>, if not already present. This MAY include the
@@ -1868,8 +1866,8 @@ at regular intervals.</p>
   content produced by the Track.</p>
      <p>The <dfn class="dfn-paneled" data-dfn-type="abstract-op" data-export id="abstract-opdef-inactivate-the-recorder">Inactivate the recorder</dfn> algorithm given a <var>recorder</var>, is as follows:</p>
      <ol>
-      <li>Set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-mimetype" id="ref-for-dom-mediarecorder-mimetype④">mimeType</a></code> attribute to the value of the <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype⑤">[[ConstrainedMimeType]]</a> slot.
-      <li>Set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑤">state</a></code> attribute to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive③">inactive</a></code>.
+      <li>Set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-mimetype" id="ref-for-dom-mediarecorder-mimetype④">mimeType</a></code> attribute to the value of the <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype④">[[ConstrainedMimeType]]</a> slot.
+      <li>Set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑤">state</a></code> attribute to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive②">inactive</a></code>.
       <li>If <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond④">[[ConstrainedBitsPerSecond]]</a> slot is not <code>undefined</code>, set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond⑦">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond⑦">audioBitsPerSecond</a></code> attributes to values the User Agent deems reasonable
     for the respective media types, such that the sum of <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond⑧">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond⑧">audioBitsPerSecond</a></code> is close to the value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond⑤">[[ConstrainedBitsPerSecond]]</a> slot.
      </ol>
@@ -1896,7 +1894,7 @@ at regular intervals.</p>
      <ol>
       <li>Let <var>recorder</var> be the <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder⑨">MediaRecorder</a></code> object on which the method was
     invoked.
-      <li>If <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑥">state</a></code> attribute is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive④">inactive</a></code>, abort these
+      <li>If <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑥">state</a></code> attribute is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive③">inactive</a></code>, abort these
     steps.
       <li><a data-link-type="abstract-op" href="#abstract-opdef-inactivate-the-recorder" id="ref-for-abstract-opdef-inactivate-the-recorder④">Inactivate the recorder</a> with <var>recorder</var>.
       <li>
@@ -1914,7 +1912,7 @@ at regular intervals.</p>
       When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder①⓪">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-pause" id="ref-for-dom-mediarecorder-pause②">pause()</a></code> method is invoked, the UA
   MUST run the following steps: 
      <ol>
-      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑦">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑤">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror①">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException⑤">DOMException</a></code> and abort these steps.
+      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑦">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive④">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror①">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException⑤">DOMException</a></code> and abort these steps.
       <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑧">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-paused" id="ref-for-dom-recordingstate-paused">paused</a></code>, abort these steps.
       <li>
        Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑨">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-paused" id="ref-for-dom-recordingstate-paused①">paused</a></code>, and queue a
@@ -1931,7 +1929,7 @@ at regular intervals.</p>
       When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder①①">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-resume" id="ref-for-dom-mediarecorder-resume①">resume()</a></code> method is invoked, the
   UA MUST run the following steps: 
      <ol>
-      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①⓪">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑥">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror②">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException⑥">DOMException</a></code> and abort these steps.
+      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①⓪">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑤">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror②">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException⑥">DOMException</a></code> and abort these steps.
       <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①①">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording①">recording</a></code>, abort these steps.
       <li>
        Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①②">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording②">recording</a></code>, and queue a
@@ -1949,7 +1947,7 @@ at regular intervals.</p>
   the UA MUST run the following steps: 
      <ol>
       <li>
-       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①③">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑦">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror③">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException⑦">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
+       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①③">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑥">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror③">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException⑦">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
     task, using the DOM manipulation task source, that runs the following steps: 
        <ol>
         <li>Let <var>blob</var> be the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑤">Blob</a></code> of collected data so far and
@@ -2013,7 +2011,7 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
   last transition to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording③">recording</a></code> <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①④">state</a></code>. </div>
    <h3 class="heading settled" data-level="2.5" id="mediarecorderoptions-section"><span class="secno">2.5. </span><span class="content">MediaRecorderOptions</span><a class="self-link" href="#mediarecorderoptions-section"></a></h3>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-mediarecorderoptions"><code><c- g>MediaRecorderOptions</c-></code></dfn> {
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString④"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="DOMString " href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype③"><c- g>mimeType</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString④"><c- b>DOMString</c-></a> <a class="idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype②"><c- g>mimeType</c-></a> = "";
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑤"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond①"><c- g>audioBitsPerSecond</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑥"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond①"><c- g>videoBitsPerSecond</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑦"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond①"><c- g>bitsPerSecond</c-></a>;
@@ -2021,11 +2019,11 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
 </pre>
    <h4 class="heading settled" data-level="2.5.1" id="mediarecorderoptions-members"><span class="secno">2.5.1. </span><span class="content">Members</span><a class="self-link" href="#mediarecorderoptions-members"></a></h4>
    <dl class="domintro">
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-mimetype"><code>mimeType</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑤">DOMString</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-mimetype"><code>mimeType</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑤">DOMString</a>, defaulting to <code>""</code></span>
     <dd>
      The container and codec format(s) <a data-link-type="biblio" href="#biblio-rfc2046">[RFC2046]</a> for the recording, which
   may include any parameters that are defined for the format. 
-     <div class="note" role="note"> <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype④">mimeType</a></code> specifies the media
+     <div class="note" role="note"> <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype③">mimeType</a></code> specifies the media
   type and container format for the recording via a type/subtype
   combination, with the codecs and/or profiles parameters <a data-link-type="biblio" href="#biblio-rfc6381">[RFC6381]</a> specified where ambiguity might arise. Individual codecs might have
   further optional or mandatory specific parameters. </div>
@@ -2042,7 +2040,7 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
    </dl>
    <h3 class="heading settled" data-level="2.6" id="recordingstate"><span class="secno">2.6. </span><span class="content">RecordingState</span><a class="self-link" href="#recordingstate"></a></h3>
 <pre class="idl highlight def"><c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-recordingstate"><code><c- g>RecordingState</c-></code></dfn> {
-  <a class="idl-code" data-link-type="enum-value" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑧"><c- s>"inactive"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑦"><c- s>"inactive"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording④"><c- s>"recording"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-recordingstate-paused" id="ref-for-dom-recordingstate-paused②"><c- s>"paused"</c-></a>
 };
@@ -2639,7 +2637,7 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
    <dt id="biblio-dom">[DOM]
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-fileapi">[FileAPI]
-   <dd>Marijn Kruisselbrink; Arun Ranganathan. <a href="https://www.w3.org/TR/FileAPI/">File API</a>. 31 May 2019. WD. URL: <a href="https://www.w3.org/TR/FileAPI/">https://www.w3.org/TR/FileAPI/</a>
+   <dd>Marijn Kruisselbrink; Arun Ranganathan. <a href="https://www.w3.org/TR/FileAPI/">File API</a>. 11 September 2019. WD. URL: <a href="https://www.w3.org/TR/FileAPI/">https://www.w3.org/TR/FileAPI/</a>
    <dt id="biblio-getusermedia">[GETUSERMEDIA]
    <dd>Daniel Burnett; et al. <a href="https://www.w3.org/TR/mediacapture-streams/">Media Capture and Streams</a>. 2 July 2019. CR. URL: <a href="https://www.w3.org/TR/mediacapture-streams/">https://www.w3.org/TR/mediacapture-streams/</a>
    <dt id="biblio-hr-time">[HR-TIME]
@@ -2686,14 +2684,14 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
 };
 
 <c- b>dictionary</c-> <a href="#dictdef-mediarecorderoptions"><code><c- g>MediaRecorderOptions</c-></code></a> {
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString④①"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="DOMString " href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype③①"><c- g>mimeType</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString④①"><c- b>DOMString</c-></a> <a class="idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype②①"><c- g>mimeType</c-></a> = "";
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑤①"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond①①"><c- g>audioBitsPerSecond</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑥①"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond①①"><c- g>videoBitsPerSecond</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑦①"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond①①"><c- g>bitsPerSecond</c-></a>;
 };
 
 <c- b>enum</c-> <a href="#enumdef-recordingstate"><code><c- g>RecordingState</c-></code></a> {
-  <a class="idl-code" data-link-type="enum-value" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑧①"><c- s>"inactive"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑦①"><c- s>"inactive"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording④①"><c- s>"recording"</c-></a>,
   <a class="idl-code" data-link-type="enum-value" href="#dom-recordingstate-paused" id="ref-for-dom-recordingstate-paused②①"><c- s>"paused"</c-></a>
 };
@@ -2749,8 +2747,8 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
   <aside class="dfn-panel" data-for="constrainedmimetype">
    <b><a href="#constrainedmimetype">#constrainedmimetype</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-constrainedmimetype">2.1. Constructors</a> <a href="#ref-for-constrainedmimetype①">(2)</a>
-    <li><a href="#ref-for-constrainedmimetype②">2.3. Methods</a> <a href="#ref-for-constrainedmimetype③">(2)</a> <a href="#ref-for-constrainedmimetype④">(3)</a> <a href="#ref-for-constrainedmimetype⑤">(4)</a>
+    <li><a href="#ref-for-constrainedmimetype">2.1. Constructors</a>
+    <li><a href="#ref-for-constrainedmimetype①">2.3. Methods</a> <a href="#ref-for-constrainedmimetype②">(2)</a> <a href="#ref-for-constrainedmimetype③">(3)</a> <a href="#ref-for-constrainedmimetype④">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="constrainedbitspersecond">
@@ -2918,9 +2916,9 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
   <aside class="dfn-panel" data-for="dom-mediarecorderoptions-mimetype">
    <b><a href="#dom-mediarecorderoptions-mimetype">#dom-mediarecorderoptions-mimetype</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorderoptions-mimetype①">(2)</a> <a href="#ref-for-dom-mediarecorderoptions-mimetype②">(3)</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype③">2.5. MediaRecorderOptions</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype④">2.5.1. Members</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorderoptions-mimetype①">(2)</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype②">2.5. MediaRecorderOptions</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype③">2.5.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorderoptions-audiobitspersecond">
@@ -2957,8 +2955,8 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
    <b><a href="#dom-recordingstate-inactive">#dom-recordingstate-inactive</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-recordingstate-inactive">2.1. Constructors</a>
-    <li><a href="#ref-for-dom-recordingstate-inactive①">2.3. Methods</a> <a href="#ref-for-dom-recordingstate-inactive②">(2)</a> <a href="#ref-for-dom-recordingstate-inactive③">(3)</a> <a href="#ref-for-dom-recordingstate-inactive④">(4)</a> <a href="#ref-for-dom-recordingstate-inactive⑤">(5)</a> <a href="#ref-for-dom-recordingstate-inactive⑥">(6)</a> <a href="#ref-for-dom-recordingstate-inactive⑦">(7)</a>
-    <li><a href="#ref-for-dom-recordingstate-inactive⑧">2.6. RecordingState</a>
+    <li><a href="#ref-for-dom-recordingstate-inactive①">2.3. Methods</a> <a href="#ref-for-dom-recordingstate-inactive②">(2)</a> <a href="#ref-for-dom-recordingstate-inactive③">(3)</a> <a href="#ref-for-dom-recordingstate-inactive④">(4)</a> <a href="#ref-for-dom-recordingstate-inactive⑤">(5)</a> <a href="#ref-for-dom-recordingstate-inactive⑥">(6)</a>
+    <li><a href="#ref-for-dom-recordingstate-inactive⑦">2.6. RecordingState</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-recordingstate-recording">
