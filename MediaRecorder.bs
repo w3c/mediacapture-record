@@ -342,7 +342,7 @@ interface MediaRecorder : EventTarget {
       <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.
 
       Note that an <code>undefined</code> value of <var>timeslice</var> will
-      be understood as the largest <code>long</code> value.</li>
+      be understood as the largest <code>unsigned long</code> value.</li>
 
       <li>If all recorded tracks become {{ended}}, then stop gathering data, and
       queue a task, using the DOM manipulation task source, that runs the
@@ -398,7 +398,7 @@ interface MediaRecorder : EventTarget {
       </tr>
       <tr>
         <td class="prmName">timeslice</td>
-        <td class="prmType"><code>long</code></td>
+        <td class="prmType"><code>unsigned long</code></td>
         <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
         <td class="prmOptTrue"><span role="img" aria-label="True">&#10004;</span></td>
         <td class="prmDesc">The minimum number of milliseconds of data
