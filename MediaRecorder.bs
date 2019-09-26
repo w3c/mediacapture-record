@@ -71,7 +71,7 @@ interface MediaRecorder : EventTarget {
   readonly attribute unsigned long audioBitsPerSecond;
 
   void start(optional unsigned long timeslice);
-  void replaceTrack(MediaStreamTrack track, MediaStreamTrack withTrack);
+  Promise&lt;void&gt; replaceTrack(MediaStreamTrack track, MediaStreamTrack withTrack);
   void stop();
   void pause();
   void resume();
@@ -129,6 +129,10 @@ interface MediaRecorder : EventTarget {
     <li>Let |recorder| be a newly constructed {{MediaRecorder}} object.</li>
     <li>Let |recorder| have a <dfn>\[[Tracks]]</dfn> internal slot, initialized
     to an empty list.</li>
+    <li>Let |recorder| have a <dfn>\[[ReplaceAtOnceList]]</dfn> internal slot,
+    initialized to an empty list.</li>
+    <li>Let |recorder| have a <dfn>\[[ReplacePromise]]</dfn> internal slot,
+    initialized to <code>null</code>.</li>
     <li>Let |recorder| have a <dfn>\[[ConstrainedMimeType]]</dfn> internal slot,
     initialized to the empty string.</li>
     <li>Let |recorder| have a <dfn>\[[ConstrainedBitsPerSecond]]</dfn> internal
@@ -410,30 +414,55 @@ interface MediaRecorder : EventTarget {
     invoked.</li>
     <li>Let |track| be the method's first argument.</li>
     <li>Let |withTrack| be the method's second argument.</li>
-    <li>If |recorder|'s {{state}} is {{inactive}}, throw an
-    {{InvalidStateError}} {{DOMException}} and abort these steps.</li>
-    <li>If |track| is not found in |recorder|'s [=[[Tracks]]=], throw a
-    {{NotFoundError}} {{DOMException}} and abort these steps.</li>
-    <li>If |track| is {{ended}}, or |withTrack|'s {{kind}} differs from
-    |track|'s {{kind}}, then throw a {{InvalidModificationError}}
-    {{DOMException}} and abort these steps.</li>
-    <li>If the <a>isolation properties</a> of |track| or |withTrack| disallow
-    access from |recorder|, throw a {{SecurityError}} {{DOMException}} and abort
+    <li>If |recorder|'s {{state}} is {{inactive}}, return a promise rejected
+    with a newly created {{InvalidStateError}} {{DOMException}} and abort these
+    steps.</li>
+    <li>If |track| is not found in |recorder|'s [=[[Tracks]]=], return a promise
+    rejected with a newly created {{NotFoundError}} {{DOMException}} and abort
     these steps.</li>
+    <li>If |track| is {{ended}}, or |withTrack|'s {{kind}} differs from
+    |track|'s {{kind}}, then return a promise rejected with a newly created
+    {{InvalidModificationError}} {{DOMException}} and abort these steps.</li>
+    <li>If the <a>isolation properties</a> of |track| or |withTrack| disallow
+    access from |recorder|, return a promise rejected with a newly created
+    {{SecurityError}} {{DOMException}} and abort these steps.</li>
     <li>If the User Agent cannot record |withTrack| in place of |track| using
-    the current configuration, then throw a {{NotSupportedError}}
-    {{DOMException}} and abort these steps.</li>
+    the current configuration, then return a promise rejected with a newly
+    created {{NotSupportedError}} {{DOMException}} and abort these steps.</li>
     <li>Let |session| be the ongoing recording session corresponding to the
     first occurance of |track| in |recorder|'s [=[[Tracks]]=].</li>
     <li>Replace the first occurance of |track| in |recorder|'s [=[[Tracks]]=]
     with |withTrack|.</li>
-    <li>return <code>undefined</code>, and run the remaining step in parallel.
+    <li>Add |session| and |withTrack| as a pair to the list in |recorder|'s
+    [=[[ReplaceAtOnceList]]=] slot.</li>
+    <li>If |recorder|'s [=[[ReplacePromise]]=] slot is not <code>null</code>,
+    return it, and abort these steps.</li>
+    <li>Let |p| be a new promise.</li>
+    <li>Set |recorder|'s [=[[ReplacePromise]]=] slot to |p|, and queue
+    a task, using the DOM manipulation task source, that runs the following
+    steps:</li>
+    <ol>
+      <li>If |recorder|'s {{state}} attribute is {{inactive}}, resolve |p|, and
+      abort these steps.</li>
+      <li>Let |replaceList| be |recorder|'s [=[[ReplaceAtOnceList]]=], and set
+      |recorder|'s [=[[ReplaceAtOnceList]]=] to an empty list.</li>
+      <li>Set |recorder|'s [=[[ReplacePromise]]=] slot to <code>null</code>, and
+      run the remaining steps in parallel:</li>
+      <li>For each recording |session| and |withTrack| pair in |replaceList|,
+      instantly switch |session| to recording |withTrack| in place of what
+      |session| is currently recording.
+      <div class="note">This replaces the source of frames being gathered and
+      SHOULD be a seamless operation. This SHOULD happen at the same time for
+      all sessions in |recorder|'s [=[[ReplaceAtOnceList]]=].</div>
+      </li>
+      <li>Resolve |p|.
+      <div class="note">|p| MUST NOT be rejected for any reason, since track
+      replacement is observably synchronous in the API by calling |replaceTrack|
+      multiple times. The promise exists to simplify learning when replaced
+      tracks can be stopped without impacting the recording.</div></li>
+    </ol>
     </li>
-    <li>For |session|, instantly switch to recording |withTrack| in place of
-    |track|.
-    <div class="note">This replaces the source of frames being gathered and
-    SHOULD be a seamless operation.</div>
-    </li>
+    <li>return |p|.</li>
   </ol>
   </dd>
 
