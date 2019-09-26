@@ -258,7 +258,16 @@ interface MediaRecorder : EventTarget {
     <li>Modify |extendedMimeType| by adding media type, subtype and codecs
     parameter reflecting the configuration used by the MediaRecorder to record
     all tracks in |tracks|, if not already present. This MAY include the
-    profiles parameter [[RFC6381]] or further codec-specific parameters.</li>
+    profiles parameter [[RFC6381]] or further codec-specific parameters. If
+    |extendedMimeType| did not already have a codec specified, the User Agent
+    MAY defer deciding which codec and parameters to use until recording has
+    started, in which case |extendedMimeType| will be missing this
+    information.</li>
+    <div class="note">
+      Deferring configurating which codec to use allows the User Agent to make
+      optimizations based on the source of the track. The mimeType is guaranteed
+      to be contain codec and parameter information when "onstart" fires.
+    </div>
 
     <li>Set |recorder|'s {{mimeType}} attribute to |extendedMimeType|.</li>
 
@@ -286,11 +295,30 @@ interface MediaRecorder : EventTarget {
     <li>Set |recorder|'s {{state}} to {{recording}}, and run the following steps
     in parallel:
     <ol>
-      <li>Start recording all tracks in |tracks| using the {{MediaRecorder}}'s
-      current configuration, and gather the data into a {{Blob}} <var>blob</var>
-      and queue a task, using the DOM manipulation task source, to
-      <a>fire an event</a> named <a>start</a> at <var>recorder</var>, then return
-      <code>undefined</code>.</li>
+      <li>As soon as data is available on all tracks in |tracks|, if the
+      |recorder|'s current configuration does not already specify the codec and
+      parameters to use, the User Agent MUST specify this. The User Agent MAY
+      take the content of the first frame into account when making this
+      decision. The User Agent MUST then start recording with the configuration
+      and gather the data into a {{Blob}} <var>blob</var>. As soon as recording
+      starts, queue a task, using the DOM manipulation task source, to run the
+      following steps:
+      <ol>
+        <li>Set |recorder|'s {{mimeType}} to reflect the current
+        configuration, including codec and parameter information.</li>
+        <li><a>Fire an event</a> named <a>start</a> at <var>recorder</var>, then
+        return <code>undefined</code>.</li>
+      </ol>
+      <div class="note">
+        By looking at the content of the tracks when recording start, the User
+        Agent could take frame information into account such as if the video is
+        high or low resolution. If the MediaStreamTrack is a remote track
+        sourced from an RTCPeerConnection, the User Agent is allowed to pick the
+        same codec that the source RTP stream uses, which may allow the User
+        Agent to avoid the cost of re-encoding by recording the raw encoded
+        frames.
+      </div>
+      </li>
 
       <li>If at any point |stream|'s <a>isolation properties</a> change so
       that {{MediaRecorder}} is no longer allowed access to it, the UA MUST
