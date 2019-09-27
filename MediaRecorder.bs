@@ -255,9 +255,9 @@ interface MediaRecorder : EventTarget {
     <li>Let |extendedMimeType| be the value of |recorder|'s
     [=[[ConstrainedMimeType]]=] slot.</li>
 
-    <li>If |extendedMimeType| is empty, the User Agent MUST modify it by adding
-    media type, subtype and codecs parameter reflecting the configuration used
-    by the MediaRecorder to record all tracks in |tracks|, if not already
+    <li>If |extendedMimeType| is not empty, the User Agent MUST modify it by
+    adding media type, subtype and codecs parameter reflecting the configuration
+    used by the MediaRecorder to record all tracks in |tracks|, if not already
     present. This MAY include the profiles parameter [[RFC6381]] or further
     codec-specific parameters.</li>
     <div class="note">
@@ -310,11 +310,11 @@ interface MediaRecorder : EventTarget {
       </ol>
       <div class="note">
         By looking at the content of the tracks when recording start, the User
-        Agent could take frame information into account. If the MediaStreamTrack
-        is a remote track sourced from an RTCPeerConnection, the User Agent is
-        allowed to pick the same codec that the source RTP stream uses, which
-        may allow the User Agent to avoid the cost of re-encoding by recording
-        the raw encoded frames.
+        Agent could take frame information into account. For example, if the
+        MediaStreamTrack is a remote track sourced from an RTCPeerConnection,
+        the User Agent is allowed to pick the same codec that the source RTP
+        stream uses, which may allow the User Agent to avoid the cost of
+        re-encoding by recording the raw encoded frames.
       </div>
       </li>
 
