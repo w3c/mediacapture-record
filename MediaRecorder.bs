@@ -252,23 +252,6 @@ interface MediaRecorder : EventTarget {
     </ol>
     </li>
 
-    <li>Let |extendedMimeType| be the value of |recorder|'s
-    [=[[ConstrainedMimeType]]=] slot.</li>
-
-    <li>If |extendedMimeType| is not empty, the User Agent MUST modify it by
-    adding media type, subtype and codecs parameter reflecting the configuration
-    used by the MediaRecorder to record all tracks in |tracks|, if not already
-    present. This MAY include the profiles parameter [[RFC6381]] or further
-    codec-specific parameters.</li>
-    <div class="note">
-      In the case that |extendedMimeType| is empty, the mimeType will be updated
-      when "onstart" fires. This allows the User Agent to defer configurating
-      which codec to use until the tracks deliver frames. This allows the User
-      Agent to make optimizations based on the source of the track.
-    </div>
-
-    <li>Set |recorder|'s {{mimeType}} attribute to |extendedMimeType|.</li>
-
     <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
     <code>undefined</code>, set |recorder|'s {{videoBitsPerSecond}} and
     {{audioBitsPerSecond}} attributes to values the User Agent deems reasonable
@@ -293,18 +276,18 @@ interface MediaRecorder : EventTarget {
     <li>Set |recorder|'s {{state}} to {{recording}}, and run the following steps
     in parallel:
     <ol>
-      <li>As soon as data is available on all tracks in |tracks|, if the
-      |recorder|'s current configuration does not already specify the codecs to
-      use, the User Agent MUST specify this. The User Agent MAY take the content
-      of the first frame into account when making this decision. The User Agent
-      MUST then start recording with the configuration and gather the data into
-      a {{Blob}} <var>blob</var>. As soon as recording starts, queue a task,
-      using the DOM manipulation task source, to run the following steps:
+      <li>As soon as data is available on all tracks in |tracks|, the User Agent
+      MUST specify the |recorder|'s configuration for recording the tracks, if
+      not already specified. The User Agent MAY take the content of the first
+      frame into account when making this decision. The User Agent MUST then
+      start recording with this configuration and gather the data into a
+      {{Blob}} <var>blob</var>. As soon as recording starts, queue a task, using
+      the DOM manipulation task source, to run the following steps:
       <ol>
-        <li>Set |recorder|'s {{mimeType}} to reflect the current
-        configuration, including media type, subtype and codecs parameter. This
-        MAY include the profiles parameters [[RFC6381]] or further
-        codec-specific parameters.</li>
+        <li>Set |recorder|'s {{mimeType}} to reflect the configuration,
+        including media type, subtype and codecs parameter. This MAY include the
+        profiles parameters [[RFC6381]] or further codec-specific
+        parameters.</li>
         <li><a>Fire an event</a> named <a>start</a> at <var>recorder</var>, then
         return <code>undefined</code>.</li>
       </ol>
