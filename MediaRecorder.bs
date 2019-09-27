@@ -255,18 +255,16 @@ interface MediaRecorder : EventTarget {
     <li>Let |extendedMimeType| be the value of |recorder|'s
     [=[[ConstrainedMimeType]]=] slot.</li>
 
-    <li>Modify |extendedMimeType| by adding media type, subtype and codecs
-    parameter reflecting the configuration used by the MediaRecorder to record
-    all tracks in |tracks|, if not already present. This MAY include the
-    profiles parameter [[RFC6381]] or further codec-specific parameters. If
-    |extendedMimeType| did not already have a codec specified, the User Agent
-    MAY defer deciding which codec and parameters to use until recording has
-    started, in which case |extendedMimeType| will be missing this
-    information.</li>
+    <li>If |extendedMimeType| is empty, the User Agent MUST modify it by adding
+    media type, subtype and codecs parameter reflecting the configuration used
+    by the MediaRecorder to record all tracks in |tracks|, if not already
+    present. This MAY include the profiles parameter [[RFC6381]] or further
+    codec-specific parameters.</li>
     <div class="note">
-      Deferring configurating which codec to use allows the User Agent to make
-      optimizations based on the source of the track. The mimeType is guaranteed
-      to be contain codec and parameter information when "onstart" fires.
+      In the case that |extendedMimeType| is empty, the mimeType will be updated
+      when "onstart" fires. This allows the User Agent to defer configurating
+      which codec to use until the tracks deliver frames. This allows the User
+      Agent to make optimizations based on the source of the track.
     </div>
 
     <li>Set |recorder|'s {{mimeType}} attribute to |extendedMimeType|.</li>
@@ -296,27 +294,27 @@ interface MediaRecorder : EventTarget {
     in parallel:
     <ol>
       <li>As soon as data is available on all tracks in |tracks|, if the
-      |recorder|'s current configuration does not already specify the codec and
-      parameters to use, the User Agent MUST specify this. The User Agent MAY
-      take the content of the first frame into account when making this
-      decision. The User Agent MUST then start recording with the configuration
-      and gather the data into a {{Blob}} <var>blob</var>. As soon as recording
-      starts, queue a task, using the DOM manipulation task source, to run the
-      following steps:
+      |recorder|'s current configuration does not already specify the codecs to
+      use, the User Agent MUST specify this. The User Agent MAY take the content
+      of the first frame into account when making this decision. The User Agent
+      MUST then start recording with the configuration and gather the data into
+      a {{Blob}} <var>blob</var>. As soon as recording starts, queue a task,
+      using the DOM manipulation task source, to run the following steps:
       <ol>
         <li>Set |recorder|'s {{mimeType}} to reflect the current
-        configuration, including codec and parameter information.</li>
+        configuration, including media type, subtype and codecs parameter. This
+        MAY include the profiles parameters [[RFC6381]] or further
+        codec-specific parameters.</li>
         <li><a>Fire an event</a> named <a>start</a> at <var>recorder</var>, then
         return <code>undefined</code>.</li>
       </ol>
       <div class="note">
         By looking at the content of the tracks when recording start, the User
-        Agent could take frame information into account such as if the video is
-        high or low resolution. If the MediaStreamTrack is a remote track
-        sourced from an RTCPeerConnection, the User Agent is allowed to pick the
-        same codec that the source RTP stream uses, which may allow the User
-        Agent to avoid the cost of re-encoding by recording the raw encoded
-        frames.
+        Agent could take frame information into account. If the MediaStreamTrack
+        is a remote track sourced from an RTCPeerConnection, the User Agent is
+        allowed to pick the same codec that the source RTP stream uses, which
+        may allow the User Agent to avoid the cost of re-encoding by recording
+        the raw encoded frames.
       </div>
       </li>
 
