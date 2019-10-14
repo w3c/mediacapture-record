@@ -276,7 +276,7 @@ interface MediaRecorder : EventTarget {
     <li>Set |recorder|'s {{state}} to {{recording}}, and run the following steps
     in parallel:
     <ol>
-      <li>The User Agent MUST decide the |recorder|'s configuration for
+      <li>Let the User Agent specify the |recorder|'s configuration for
       recording all the tracks in |tracks|, given its current constraints. If
       track data is available, the User Agent MAY take the content into account
       when making this decision as long as this does not violate how the
