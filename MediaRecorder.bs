@@ -276,23 +276,24 @@ interface MediaRecorder : EventTarget {
     <li>Set |recorder|'s {{state}} to {{recording}}, and run the following steps
     in parallel:
     <ol>
-      <li>Let the User Agent specify the |recorder|'s configuration for
-      recording all the tracks in |tracks|, given its current constraints. If
-      track data is available, the User Agent MAY take the content into account
-      when making this decision as long as this does not violate how the
-      configuration has previously been constrained (see earlier steps).</li>
-      <div class="note">
-        By looking at the content of the tracks when recording start, the User
-        Agent could take frame information into account. For example, if the
-        MediaStreamTrack is a remote track sourced from an RTCPeerConnection,
-        the User Agent is allowed to pick the same codec that the source RTP
-        stream uses, which may allow the User Agent to avoid the cost of
-        re-encoding by recording the raw encoded frames.
-      </div>
       <li>Start recording all tracks in |tracks| using the |recorder|'s current
-      configuration and gather the data into a {{Blob}} <var>blob</var>. As soon
-      as recording starts, queue a task, using the DOM manipulation task source,
-      to run the following steps:
+      configuration and gather the data into a {{Blob}} <var>blob</var>. If the
+      codec or container has not yet been specified, the User Agent specifies
+      it. The User Agent MAY take the sources of the |tracks| into account when
+      making this decision as long as it does not violate the current
+      configuration.
+      <div class="note">
+        By looking at the sources of the tracks in |tracks| when recording
+        starts, the User Agent could choose a configuration that avoids
+        re-encoding track content. For example, if the MediaStreamTrack is a
+        remote track sourced from an RTCPeerConnection, the User Agent could
+        pick the same codec as is used for the MediaStreamTrack's RTP stream,
+        should it be known. However, if the codec of the RTP stream changes
+        while recording the User Agent have to be prepared to re-encode it to
+        avoid interruptions.
+      </div>
+      Queue a task, using the DOM manipulation task source, to run the following
+      steps:
       <ol>
         <li>Let |extendedMimeType| be the value of |recorder|'s
         [=[[ConstrainedMimeType]]=] slot.</li>
