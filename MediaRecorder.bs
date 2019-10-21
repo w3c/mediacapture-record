@@ -289,7 +289,7 @@ interface MediaRecorder : EventTarget {
         remote track sourced from an RTCPeerConnection, the User Agent could
         pick the same codec as is used for the MediaStreamTrack's RTP stream,
         should it be known. However, if the codec of the RTP stream changes
-        while recording the User Agent have to be prepared to re-encode it to
+        while recording the User Agent has to be prepared to re-encode it to
         avoid interruptions.
       </div>
       Queue a task, using the DOM manipulation task source, to run the following
