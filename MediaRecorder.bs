@@ -278,10 +278,10 @@ interface MediaRecorder : EventTarget {
     <ol>
       <li>Start recording all tracks in |tracks| using the |recorder|'s current
       configuration and gather the data into a {{Blob}} <var>blob</var>. If the
-      codec or container has not yet been specified, the User Agent specifies
-      it. The User Agent MAY take the sources of the |tracks| into account when
-      making this decision as long as it does not violate the current
-      configuration.
+      container and codecs to use for the recording have not yet been fully
+      specified, the User Agent specifies them in |recorder|'s current
+      configuration. The User Agent MAY take the sources of the tracks in
+      |tracks| into account when deciding which container and codecs to use.
       <div class="note">
         By looking at the sources of the tracks in |tracks| when recording
         starts, the User Agent could choose a configuration that avoids
