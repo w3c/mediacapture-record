@@ -250,16 +250,6 @@ interface MediaRecorder : EventTarget {
     </ol>
     </li>
 
-    <li>Let |extendedMimeType| be the value of |recorder|'s
-    [=[[ConstrainedMimeType]]=] slot.</li>
-
-    <li>Modify |extendedMimeType| by adding media type, subtype and codecs
-    parameter reflecting the configuration used by the MediaRecorder to record
-    all tracks in |tracks|, if not already present. This MAY include the
-    profiles parameter [[RFC6381]] or further codec-specific parameters.</li>
-
-    <li>Set |recorder|'s {{mimeType}} attribute to |extendedMimeType|.</li>
-
     <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
     <code>undefined</code>, set |recorder|'s {{videoBitsPerSecond}} and
     {{audioBitsPerSecond}} attributes to values the User Agent deems reasonable
@@ -284,11 +274,37 @@ interface MediaRecorder : EventTarget {
     <li>Set |recorder|'s {{state}} to {{recording}}, and run the following steps
     in parallel:
     <ol>
-      <li>Start recording all tracks in |tracks| using the {{MediaRecorder}}'s
-      current configuration, and gather the data into a {{Blob}} <var>blob</var>
-      and queue a task, using the DOM manipulation task source, to
-      <a>fire an event</a> named <a>start</a> at <var>recorder</var>, then return
-      <code>undefined</code>.</li>
+      <li>If the container and codecs to use for the recording have not yet been
+      fully specified, the User Agent specifies them in |recorder|'s current
+      configuration. The User Agent MAY take the sources of the tracks in
+      |tracks| into account when deciding which container and codecs to
+      use.
+      <div class="note">
+        By looking at the sources of the tracks in |tracks| when recording
+        starts, the User Agent could choose a configuration that avoids
+        re-encoding track content. For example, if the MediaStreamTrack is a
+        remote track sourced from an RTCPeerConnection, the User Agent could
+        pick the same codec as is used for the MediaStreamTrack's RTP stream,
+        should it be known. However, if the codec of the RTP stream changes
+        while recording, the User Agent has to be prepared to re-encode it to
+        avoid interruptions.
+      </div>
+      </li>
+      <li>Start recording all tracks in |tracks| using the |recorder|'s current
+      configuration and gather the data into a {{Blob}} <var>blob</var>. Queue a
+      task, using the DOM manipulation task source, to run the following steps:
+      <ol>
+        <li>Let |extendedMimeType| be the value of |recorder|'s
+        [=[[ConstrainedMimeType]]=] slot.</li>
+        <li>Modify |extendedMimeType| by adding media type, subtype and codecs
+        parameter reflecting the configuration used by the MediaRecorder to
+        record all tracks in |tracks|, if not already present. This MAY include
+        the profiles parameter [[RFC6381]] or further codec-specific
+        parameters.</li>
+        <li>Set |recorder|'s {{mimeType}} attribute to |extendedMimeType|.</li>
+        <li><a>Fire an event</a> named <a>start</a> at |recorder|.</li>
+      </ol>
+      </li>
 
       <li>If at any point |stream|'s <a>isolation properties</a> change so
       that {{MediaRecorder}} is no longer allowed access to it, the UA MUST
