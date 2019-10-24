@@ -276,12 +276,11 @@ interface MediaRecorder : EventTarget {
     <li>Set |recorder|'s {{state}} to {{recording}}, and run the following steps
     in parallel:
     <ol>
-      <li>Start recording all tracks in |tracks| using the |recorder|'s current
-      configuration and gather the data into a {{Blob}} <var>blob</var>. If the
-      container and codecs to use for the recording have not yet been fully
-      specified, the User Agent specifies them in |recorder|'s current
+      <li>If the container and codecs to use for the recording have not yet been
+      fully specified, the User Agent specifies them in |recorder|'s current
       configuration. The User Agent MAY take the sources of the tracks in
-      |tracks| into account when deciding which container and codecs to use.
+      |tracks| into account when deciding which container and codecs to
+      use.
       <div class="note">
         By looking at the sources of the tracks in |tracks| when recording
         starts, the User Agent could choose a configuration that avoids
@@ -289,11 +288,13 @@ interface MediaRecorder : EventTarget {
         remote track sourced from an RTCPeerConnection, the User Agent could
         pick the same codec as is used for the MediaStreamTrack's RTP stream,
         should it be known. However, if the codec of the RTP stream changes
-        while recording the User Agent has to be prepared to re-encode it to
+        while recording, the User Agent has to be prepared to re-encode it to
         avoid interruptions.
       </div>
-      Queue a task, using the DOM manipulation task source, to run the following
-      steps:
+      </li>
+      <li>Start recording all tracks in |tracks| using the |recorder|'s current
+      configuration and gather the data into a {{Blob}} <var>blob</var>. Queue a
+      task, using the DOM manipulation task source, to run the following steps:
       <ol>
         <li>Let |extendedMimeType| be the value of |recorder|'s
         [=[[ConstrainedMimeType]]=] slot.</li>
