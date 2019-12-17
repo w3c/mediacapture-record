@@ -580,7 +580,8 @@ dictionary MediaRecorderOptions {
   unsigned long audioBitsPerSecond;
   unsigned long videoBitsPerSecond;
   unsigned long bitsPerSecond;
-  boolean audioConstantBitsPerSecond;
+  BitrateMode audioBitrateMode;
+  BitrateMode videoBitrateMode;
 };
 </pre>
 
@@ -612,11 +613,32 @@ dictionary MediaRecorderOptions {
   {{MediaRecorderOptions/videoBitsPerSecond}} if present, and might be
   distributed among the present track encoders as the UA sees fit.</dd>
   
-  <dt><dfn dict-member for="MediaRecorderOptions"><code>audioConstantBitsPerSecond</code></dfn></dt>
-  <dd>Specifes that the Audio track(s) should be encoded at a constant bitrate instead of
-  an average or variable bitrate.</dd>
+  <dt><dfn dict-member for="MediaRecorderOptions"><code>audioBitrateMode</code></dfn></dt>
+  <dd>Specifes the {{BitrateMode}} that should be used to encode the Audio track(s).</dd>
+
+  <dt><dfn dict-member for="MediaRecorderOptions"><code>videoBitrateMode</code></dfn></dt>
+  <dd>Specifes the {{BitrateMode}} that should be used to encode the Video track(s).</dd>
 </dl>
 
+## BitrateMode ## {#bitratemode}
+
+<pre class="idl">
+enum BitrateMode {
+  "cbr",
+  "vbr"
+};
+</pre>
+
+### Values ### {#bitratemode-values}
+
+<dl class="domintro">
+  <dt><dfn enum-value for="BitrateMode"><code>cbr</code></dfn></dt>
+  <dd>Encode at a constant bitrate.</dd>
+
+  <dt><dfn enum-value for="BitrateMode"><code>vbr</code></dfn></dt>
+  <dd>Encode using a variable bitrate, allowing more space to be used for complex signals
+  and less space for less complex signals.</dd>
+</dl>
 
 ## RecordingState ## {#recordingstate}
 
