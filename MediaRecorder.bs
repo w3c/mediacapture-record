@@ -580,8 +580,8 @@ dictionary MediaRecorderOptions {
   unsigned long audioBitsPerSecond;
   unsigned long videoBitsPerSecond;
   unsigned long bitsPerSecond;
-  BitrateMode audioBitrateMode;
-  BitrateMode videoBitrateMode;
+  BitrateMode audioBitrateMode = "vbr";
+  BitrateMode videoBitrateMode = "vbr";
 };
 </pre>
 
