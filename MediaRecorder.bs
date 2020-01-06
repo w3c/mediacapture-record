@@ -69,6 +69,8 @@ interface MediaRecorder : EventTarget {
   attribute EventHandler onerror;
   readonly attribute unsigned long videoBitsPerSecond;
   readonly attribute unsigned long audioBitsPerSecond;
+  readonly attribute BitrateMode videoBitrateMode;
+  readonly attribute BitrateMode audioBitrateMode;
 
   void start(optional unsigned long timeslice);
   void stop();
@@ -154,6 +156,18 @@ interface MediaRecorder : EventTarget {
     for the respective media types, such that the sum of {{videoBitsPerSecond}}
     and {{audioBitsPerSecond}} is close to the value of |recorder|'s
     [=[[ConstrainedBitsPerSecond]]=] slot.</li>
+    <li>If |recorder| supports the {{BitrateMode}} specified by the value of
+    |options|' {{MediaRecorderOptions/videoBitrateMode}} member,
+    then initialize |recorder|'s {{videoBitrateMode}} attribute to the value of
+    |options|' {{MediaRecorderOptions/videoBitrateMode}} member,
+    else initialize |recorder|'s {{videoBitrateMode}} attribute to the value
+    "vbr".</li>
+    <li>If |recorder| supports the {{BitrateMode}} specified by the value of
+    |options|' {{MediaRecorderOptions/audioBitrateMode}} member,
+    then initialize |recorder|'s {{audioBitrateMode}} attribute to the value of
+    |options|' {{MediaRecorderOptions/audioBitrateMode}} member,
+    else initialize |recorder|'s {{audioBitrateMode}} attribute to the value
+    "vbr".</li>
     <li>Return |recorder|.</li>
   </ol></dd>
 </dl>
@@ -205,6 +219,12 @@ interface MediaRecorder : EventTarget {
 
   <dt><dfn attribute for="MediaRecorder"><code>audioBitsPerSecond</code></dfn></dt>
   <dd>The target bitrate used to encode audio tracks.</dd>
+
+  <dt><dfn attribute for="MediaRecorder"><code>videoBitrateMode</code></dfn></dt>
+  <dd>The {{BitrateMode}} used to encode video tracks.</dd>
+
+  <dt><dfn attribute for="MediaRecorder"><code>audioBitrateMode</code></dfn></dt>
+  <dd>The {{BitrateMode}} used to encode audio tracks.</dd>
 </dl>
 
 ## Methods ## {#mediarecorder-methods}
@@ -282,6 +302,14 @@ interface MediaRecorder : EventTarget {
     |recorder| will be recording. |audioBitrate| is a hint for the encoder and
     the value might be surpassed, not achieved, or only be achieved over a long
     period of time.</li>
+
+    <li>Constrain the configuration of |recorder| to encode using the
+    {{BitrateMode}} specified by the value of |recorder|'s {{videoBitrateMode}}
+    attribute for all video tracks |recorder| will be recording.</li>
+
+    <li>Constrain the configuration of |recorder| to encode using the
+    {{BitrateMode}} specified by the value of |recorder|'s {{audioBitrateMode}}
+    attribute for all audio tracks |recorder| will be recording.</li>
 
     <li>Set |recorder|'s {{state}} to {{recording}}, and run the following steps
     in parallel:
