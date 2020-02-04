@@ -251,16 +251,9 @@ interface MediaRecorder : EventTarget {
     {{DOMException}} and abort these steps.</li>
 
     <li>If the [=[[ConstrainedMimeType]]=] slot specifies a media type,
-    container, or codec, then run the following sub steps:
-    <ol>
-      <li>Constrain the configuration of |recorder| to the media type,
-      container, and codec specified in the [=[[ConstrainedMimeType]]=]
-      slot.</li>
-      <li>For each track in |tracks|, if the User Agent cannot record the track
-      using the current configuration, then throw a {{NotSupportedError}}
-      {{DOMException}} and abort all steps.</li>
-    </ol>
-    </li>
+    container, or codec, then constrain the configuration of |recorder| to the
+    media type, container, and codec specified in the [=[[ConstrainedMimeType]]=]
+    slot.</li>
 
     <li>Let |extendedMimeType| be the value of |recorder|'s
     [=[[ConstrainedMimeType]]=] slot.</li>
@@ -296,6 +289,10 @@ interface MediaRecorder : EventTarget {
     <li>Constrain the configuration of |recorder| to encode using the
     {{BitrateMode}} specified by the value of |recorder|'s {{audioBitrateMode}}
     attribute for all audio tracks |recorder| will be recording.</li>
+
+    <li>For each track in |tracks|, if the User Agent cannot record the track
+    using the current configuration, then throw a {{NotSupportedError}}
+    {{DOMException}} and abort these steps.</li>
 
     <li>Set |recorder|'s {{state}} to {{recording}}, and run the following steps
     in parallel:
