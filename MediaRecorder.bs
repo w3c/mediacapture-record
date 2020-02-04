@@ -69,7 +69,6 @@ interface MediaRecorder : EventTarget {
   attribute EventHandler onerror;
   readonly attribute unsigned long videoBitsPerSecond;
   readonly attribute unsigned long audioBitsPerSecond;
-  readonly attribute BitrateMode videoBitrateMode;
   readonly attribute BitrateMode audioBitrateMode;
 
   void start(optional unsigned long timeslice);
@@ -157,12 +156,6 @@ interface MediaRecorder : EventTarget {
     and {{audioBitsPerSecond}} is close to the value of |recorder|'s
     [=[[ConstrainedBitsPerSecond]]=] slot.</li>
     <li>If |recorder| supports the {{BitrateMode}} specified by the value of
-    |options|' {{MediaRecorderOptions/videoBitrateMode}} member,
-    then initialize |recorder|'s {{videoBitrateMode}} attribute to the value of
-    |options|' {{MediaRecorderOptions/videoBitrateMode}} member,
-    else initialize |recorder|'s {{videoBitrateMode}} attribute to the value
-    "vbr".</li>
-    <li>If |recorder| supports the {{BitrateMode}} specified by the value of
     |options|' {{MediaRecorderOptions/audioBitrateMode}} member,
     then initialize |recorder|'s {{audioBitrateMode}} attribute to the value of
     |options|' {{MediaRecorderOptions/audioBitrateMode}} member,
@@ -219,9 +212,6 @@ interface MediaRecorder : EventTarget {
 
   <dt><dfn attribute for="MediaRecorder"><code>audioBitsPerSecond</code></dfn></dt>
   <dd>The target bitrate used to encode audio tracks.</dd>
-
-  <dt><dfn attribute for="MediaRecorder"><code>videoBitrateMode</code></dfn></dt>
-  <dd>The {{BitrateMode}} used to encode video tracks.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>audioBitrateMode</code></dfn></dt>
   <dd>The {{BitrateMode}} used to encode audio tracks.</dd>
@@ -302,10 +292,6 @@ interface MediaRecorder : EventTarget {
     |recorder| will be recording. |audioBitrate| is a hint for the encoder and
     the value might be surpassed, not achieved, or only be achieved over a long
     period of time.</li>
-
-    <li>Constrain the configuration of |recorder| to encode using the
-    {{BitrateMode}} specified by the value of |recorder|'s {{videoBitrateMode}}
-    attribute for all video tracks |recorder| will be recording.</li>
 
     <li>Constrain the configuration of |recorder| to encode using the
     {{BitrateMode}} specified by the value of |recorder|'s {{audioBitrateMode}}
@@ -609,7 +595,6 @@ dictionary MediaRecorderOptions {
   unsigned long videoBitsPerSecond;
   unsigned long bitsPerSecond;
   BitrateMode audioBitrateMode = "vbr";
-  BitrateMode videoBitrateMode = "vbr";
 };
 </pre>
 
@@ -643,9 +628,6 @@ dictionary MediaRecorderOptions {
   
   <dt><dfn dict-member for="MediaRecorderOptions"><code>audioBitrateMode</code></dfn></dt>
   <dd>Specifes the {{BitrateMode}} that should be used to encode the Audio track(s).</dd>
-
-  <dt><dfn dict-member for="MediaRecorderOptions"><code>videoBitrateMode</code></dfn></dt>
-  <dd>Specifes the {{BitrateMode}} that should be used to encode the Video track(s).</dd>
 </dl>
 
 ## BitrateMode ## {#bitratemode}
