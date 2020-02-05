@@ -56,7 +56,7 @@ at regular intervals.
 
 <pre class="idl">
 [Exposed=Window,
- Constructor(MediaStream stream, optional MediaRecorderOptions options)]
+ Constructor(MediaStream stream, optional MediaRecorderOptions options = {})]
 interface MediaRecorder : EventTarget {
   readonly attribute MediaStream stream;
   readonly attribute DOMString mimeType;
@@ -84,7 +84,7 @@ interface MediaRecorder : EventTarget {
 ## Constructors ## {#mediarecorder-constructor}
 
 <dl class="domintro">
-  <dt><dfn constructor for="MediaRecorder"><code>MediaRecorder(MediaStream stream, optional MediaRecorderOptions options)</code></dfn></dt>
+  <dt><dfn constructor for="MediaRecorder"><code>MediaRecorder(MediaStream stream, optional MediaRecorderOptions options = {})</code></dfn></dt>
   <dd>
   <table class="parameters">
     <tbody>
