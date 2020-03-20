@@ -319,7 +319,7 @@ interface MediaRecorder : EventTarget {
 
       <li>If at any point |stream|'s <a>isolation properties</a> change so
       that {{MediaRecorder}} is no longer allowed access to it, the UA MUST
-      immediately stop gathering data, discard any data that it has gathered,
+      stop gathering data, discard any data that it has gathered,
       and queue a task, using the DOM manipulation task source, that runs the
       following steps:
       <ol>
@@ -333,9 +333,8 @@ interface MediaRecorder : EventTarget {
       </li>
 
       <li>If at any point, a track is added to or removed from |stream|'s
-      [=track set=], the UA MUST immediately stop gathering data, discard any
-      data that it has gathered, and queue a task, using the DOM manipulation
-      task source, that runs the following steps:
+      [=track set=], the UA MUST stop gathering data, and queue a task,
+      using the DOM manipulation task source, that runs the following steps:
       <ol>
         <li>[$Inactivate the recorder$] with |recorder|.</li>
         <li><a>Fire an error event</a> named {{InvalidModificationError}} at
