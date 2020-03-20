@@ -1230,7 +1230,7 @@ Possible extra rowspan handling
   </style>
   <meta content="Bikeshed version 8a606cd39d36033b27400c47ffcf6a695f400519" name="generator">
   <link href="https://www.w3.org/TR/mediastream-recording/" rel="canonical">
-  <meta content="c7f3e54b675123929fc0c6e9e1b78866003e89cc" name="document-revision">
+  <meta content="37732026724533ba00346db4bf60a27b2676c05d" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -1612,6 +1612,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      <a href="#privacy-and-security"><span class="secno">6</span> <span class="content">Privacy and Security Considerations</span></a>
      <ol class="toc">
       <li><a href="#resource-exhaustion"><span class="secno">6.1</span> <span class="content">Resource exhaustion</span></a>
+      <li><a href="#fingerprinting"><span class="secno">6.2</span> <span class="content">Fingerprinting</span></a>
      </ol>
     <li>
      <a href="#examples"><span class="secno">7</span> <span class="content">Examples</span></a>
@@ -1726,10 +1727,10 @@ at regular intervals.</p>
     present. Otherwise, choose a target value the User Agent deems reasonable
     for audio.
       <li>If <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond">[[ConstrainedBitsPerSecond]]</a> slot is not <code>undefined</code>, set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond①">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond①">audioBitsPerSecond</a></code> attributes to values the User Agent deems reasonable
-    for the respective media types, such that the sum of <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond②">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond②">audioBitsPerSecond</a></code> is close to the value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond①">[[ConstrainedBitsPerSecond]]</a> slot.
+    for the respective media types, such that the sum of <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond②">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond②">audioBitsPerSecond</a></code> is close to the value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond①">[[ConstrainedBitsPerSecond]]</a> slot.
       <li>If <var>recorder</var> supports the <code class="idl"><a data-link-type="idl" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode①">BitrateMode</a></code> specified by the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode">audioBitrateMode</a></code> member,
-    then initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitratemode" id="ref-for-dom-mediarecorder-audiobitratemode①">audioBitrateMode</a></code> attribute to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode①">audioBitrateMode</a></code> member,
-    else initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitratemode" id="ref-for-dom-mediarecorder-audiobitratemode②">audioBitrateMode</a></code> attribute to the value
+    then initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode①">audioBitrateMode</a></code> attribute to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode②">audioBitrateMode</a></code> member,
+    else initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode③">audioBitrateMode</a></code> attribute to the value
     "vbr".
       <li>Return <var>recorder</var>.
      </ol>
@@ -1793,24 +1794,23 @@ at regular intervals.</p>
       <li>If the <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype①">[[ConstrainedMimeType]]</a> slot specifies a media type,
     container, or codec, then constrain the configuration of <var>recorder</var> to the
     media type, container, and codec specified in the <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype②">[[ConstrainedMimeType]]</a> slot.
-      <li>If <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond②">[[ConstrainedBitsPerSecond]]</a> slot is not <code>undefined</code>, set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond③">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond②">audioBitsPerSecond</a></code> attributes to values the User Agent deems reasonable
+      <li>If <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond②">[[ConstrainedBitsPerSecond]]</a> slot is not <code>undefined</code>, set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond③">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond③">audioBitsPerSecond</a></code> attributes to values the User Agent deems reasonable
     for the respective media types, for recording all tracks in <var>tracks</var>, such
-    that the sum of <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond④">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond③">audioBitsPerSecond</a></code> is close
+    that the sum of <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond④">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond④">audioBitsPerSecond</a></code> is close
     to the value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond③">[[ConstrainedBitsPerSecond]]</a> slot.
-      <li>Let <var>videoBitrate</var> be the value of <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond②">videoBitsPerSecond</a></code> attribute, and constrain the configuration of <var>recorder</var> to target an
+      <li>Let <var>videoBitrate</var> be the value of <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond②">videoBitsPerSecond</a></code> attribute, and constrain the configuration of <var>recorder</var> to target an
     aggregate bitrate of <var>videoBitrate</var> bits per second for all video tracks <var>recorder</var> will be recording. <var>videoBitrate</var> is a hint for the encoder and
     the value might be surpassed, not achieved, or only be achieved over a long
     period of time.
-      <li>Let <var>audioBitrate</var> be the value of <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond③">audioBitsPerSecond</a></code> attribute, and constrain the configuration of <var>recorder</var> to target an
+      <li>Let <var>audioBitrate</var> be the value of <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond②">audioBitsPerSecond</a></code> attribute, and constrain the configuration of <var>recorder</var> to target an
     aggregate bitrate of <var>audioBitrate</var> bits per second for all audio tracks <var>recorder</var> will be recording. <var>audioBitrate</var> is a hint for the encoder and
     the value might be surpassed, not achieved, or only be achieved over a long
     period of time.
-      <li>Constrain the configuration of <var>recorder</var> to encode using the <code class="idl"><a data-link-type="idl" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode④">BitrateMode</a></code> specified by the value of <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode②">audioBitrateMode</a></code> attribute for all audio tracks <var>recorder</var> will be recording.
+      <li>Constrain the configuration of <var>recorder</var> to encode using the <code class="idl"><a data-link-type="idl" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode④">BitrateMode</a></code> specified by the value of <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode④">audioBitrateMode</a></code> attribute for all audio tracks <var>recorder</var> will be recording.
       <li>For each track in <var>tracks</var>, if the User Agent cannot record the track
     using the current configuration, then throw a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notsupportederror" id="ref-for-notsupportederror②">NotSupportedError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException④">DOMException</a></code> and abort these steps.
       <li>
-       Set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state④">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording">recording</a></code>, and run the following steps
-    in parallel: 
+       Set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state④">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording">recording</a></code>, and run the following steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel">in parallel</a>: 
        <ol>
         <li>
          If the container and codecs to use for the recording have not yet been
@@ -1905,8 +1905,8 @@ at regular intervals.</p>
      <ol>
       <li>Set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype②">mimeType</a></code> attribute to the value of the <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype④">[[ConstrainedMimeType]]</a> slot.
       <li>Set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑤">state</a></code> attribute to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive②">inactive</a></code>.
-      <li>If <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond④">[[ConstrainedBitsPerSecond]]</a> slot is not <code>undefined</code>, set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond⑤">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond④">audioBitsPerSecond</a></code> attributes to values the User Agent deems reasonable
-    for the respective media types, such that the sum of <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond③">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond④">audioBitsPerSecond</a></code> is close to the value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond⑤">[[ConstrainedBitsPerSecond]]</a> slot.
+      <li>If <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond④">[[ConstrainedBitsPerSecond]]</a> slot is not <code>undefined</code>, set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond⑤">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond③">audioBitsPerSecond</a></code> attributes to values the User Agent deems reasonable
+    for the respective media types, such that the sum of <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond③">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond④">audioBitsPerSecond</a></code> is close to the value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond⑤">[[ConstrainedBitsPerSecond]]</a> slot.
      </ol>
      <table class="parameters">
       <tbody>
@@ -2050,9 +2050,9 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-mediarecorderoptions"><code><c- g>MediaRecorderOptions</c-></code></dfn> {
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString④"><c- b>DOMString</c-></a> <a class="idl-code" data-default="&quot;&quot;" data-link-type="dict-member" data-type="DOMString " href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype③"><c- g>mimeType</c-></a> = "";
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑤"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond⑤"><c- g>audioBitsPerSecond</c-></a>;
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑥"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond⑥"><c- g>videoBitsPerSecond</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑥"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond④"><c- g>videoBitsPerSecond</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑦"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond①"><c- g>bitsPerSecond</c-></a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode⑤"><c- n>BitrateMode</c-></a> <a class="idl-code" data-default="&quot;vbr&quot;" data-link-type="dict-member" data-type="BitrateMode " href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode③"><c- g>audioBitrateMode</c-></a> = "vbr";
+  <a class="n" data-link-type="idl-name" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode⑤"><c- n>BitrateMode</c-></a> <a class="idl-code" data-default="&quot;vbr&quot;" data-link-type="dict-member" data-type="BitrateMode " href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode⑤"><c- g>audioBitrateMode</c-></a> = "vbr";
 };
 </pre>
    <h4 class="heading settled" data-level="2.5.1" id="mediarecorderoptions-members"><span class="secno">2.5.1. </span><span class="content">Members</span><a class="self-link" href="#mediarecorderoptions-members"></a></h4>
@@ -2073,7 +2073,7 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
   any.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-bitspersecond"><code>bitsPerSecond</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long①⓪">unsigned long</a></span>
     <dd> Aggregate target bits per second for encoding of all Video and Audio
-  Track(s) present. This member overrides either <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond⑥">audioBitsPerSecond</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond⑦">videoBitsPerSecond</a></code> if present, and might be
+  Track(s) present. This member overrides either <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond⑥">audioBitsPerSecond</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond⑤">videoBitsPerSecond</a></code> if present, and might be
   distributed among the present track encoders as the UA sees fit.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-audiobitratemode"><code>audioBitrateMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode⑥">BitrateMode</a>, defaulting to <code>"vbr"</code></span>
     <dd>Specifes the <code class="idl"><a data-link-type="idl" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode⑦">BitrateMode</a></code> that should be used to encode the Audio track(s).
@@ -2296,9 +2296,36 @@ large a time slice parameter can force the UA to buffer a large amount of data,
 causing jankiness and othermise memory exhaustion.</p>
    <p>UAs should take measures to avoid the encoding and buffering process from
 exhausting the resources.</p>
+   <h3 class="heading settled" data-level="6.2" id="fingerprinting"><span class="secno">6.2. </span><span class="content">Fingerprinting</span><a class="self-link" href="#fingerprinting"></a></h3>
+   <p><code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder①⑧">MediaRecorder</a></code> provides information regarding the supported video and audio
+MIME types via the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-istypesupported" id="ref-for-dom-mediarecorder-istypesupported①">isTypeSupported()</a></code> method. It will also select the most
+appropriate codec and bandwidth allocation combination when these are not
+defined in the <code class="idl"><a data-link-type="idl" href="#dictdef-mediarecorderoptions" id="ref-for-dictdef-mediarecorderoptions②">MediaRecorderOptions</a></code>, and make this information available via
+the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-type" id="ref-for-dfn-type①">type</a></code> attribute of the <code>event</code>’s' <code>data</code> received in <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-ondataavailable" id="ref-for-dom-mediarecorder-ondataavailable②">ondataavailable</a></code>. It will also try to honour the <code class="idl"><a data-link-type="idl" href="#dictdef-mediarecorderoptions" id="ref-for-dictdef-mediarecorderoptions③">MediaRecorderOptions</a></code> if specified.</p>
+   <p>A malicious website could try to use this information for <a data-link-type="dfn" href="https://www.w3.org/TR/fingerprinting-guidance/#dfn-active-fingerprinting" id="ref-for-dfn-active-fingerprinting">active
+fingerprinting</a> in a number of ways, e.g. it might try to</p>
+   <ul>
+    <li data-md>
+     <p>Infer the device and hardware characteristics or determine the operating
+  system vendor and/or version differences by means of identifying the user
+  agent capabilities: a UA might provide use of a certain codec and/or hardware
+  encoding accelerator only on a given platform (or generation thereof), or
+  those might have a resolution/frame rate limit, making it vulnerable to
+  fingerprinting.</p>
+    <li data-md>
+     <p>Infer any of the above by statistical measurements of system performance: e.g.
+  the UA might provide different by-default bandwidth allocations depending on
+  the hardware capabilities, or the UA could try measuring the system load when
+  encoding different resolutions of certain input vectors.</p>
+   </ul>
+   <p>The UAs should take measures to mitigate this <a data-link-type="dfn" href="https://www.w3.org/TR/fingerprinting-guidance/#dfn-fingerprinting-surface" id="ref-for-dfn-fingerprinting-surface">fingerprinting surface</a> increase by e.g. implementing broad support for a given codec or MIME type and
+not making it dependent on e.g. architecture or hardware revisions nor OS/
+version support, to prevent device/hardware characteristics inference through
+browser functionality. The UA should also take steps for making the default
+values that limit the amount and identifiability of the UA capabilities.</p>
    <h2 class="heading settled" data-level="7" id="examples"><span class="secno">7. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <div class="note" role="note"> Slightly modified versions of these examples can be found in e.g. <a href="https://codepen.io/collection/XjkNbN/">this codepen collection</a>. </div>
-   <h3 class="heading settled" data-level="7.1" id="example1"><span class="secno">7.1. </span><span class="content">Check for <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder①⑧">MediaRecorder</a></code> and content types</span><a class="self-link" href="#example1"></a></h3>
+   <h3 class="heading settled" data-level="7.1" id="example1"><span class="secno">7.1. </span><span class="content">Check for <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder①⑨">MediaRecorder</a></code> and content types</span><a class="self-link" href="#example1"></a></h3>
    <p>This example checks if the implementation supports a few popular codec/container
 combinations.</p>
    <div class="note" role="note"> The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/edqNab?editors=0010">this codepen</a> with minimal modifications. </div>
@@ -2324,7 +2351,7 @@ combinations.</p>
    <h3 class="heading settled" data-level="7.2" id="example2"><span class="secno">7.2. </span><span class="content">Recording webcam video and audio</span><a class="self-link" href="#example2"></a></h3>
    <p>This example captures an video+audio <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastream" id="ref-for-mediastream①⓪">MediaStream</a></code> using <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#dom-mediadevices-getusermedia" id="ref-for-dom-mediadevices-getusermedia">getUserMedia()</a></code>,
 plugs it into a <code>&lt;video></code> tag and tries to record it,
-retrieving the recorded chunks via the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-ondataavailable" id="ref-for-dom-mediarecorder-ondataavailable②">ondataavailable</a></code> event.  Note that the
+retrieving the recorded chunks via the <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-ondataavailable" id="ref-for-dom-mediarecorder-ondataavailable③">ondataavailable</a></code> event.  Note that the
 recording will go on forever until either MediaRecorder is <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stop" id="ref-for-dom-mediarecorder-stop④">stop()</a></code>ed or all
 the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack" id="ref-for-mediastreamtrack③">MediaStreamTrack</a></code>s of the recorded <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastream" id="ref-for-mediastream①①">MediaStream</a></code> are <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaStreamTrackState.ended" id="ref-for-idl-def-MediaStreamTrackState.ended①">ended</a></code>.</p>
    <div class="note" role="note"> The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/wzVMJb?editors=0010">this codepen</a> with minimal modifications. </div>
@@ -2552,6 +2579,7 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
    <a href="https://w3c.github.io/FileAPI/#dfn-type">https://w3c.github.io/FileAPI/#dfn-type</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dfn-type">3.2. Attributes</a>
+    <li><a href="#ref-for-dfn-type①">6.2. Fingerprinting</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-eventhandler">
@@ -2559,6 +2587,12 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
    <ul>
     <li><a href="#ref-for-eventhandler">2. Media Recorder API</a> <a href="#ref-for-eventhandler①">(2)</a> <a href="#ref-for-eventhandler②">(3)</a> <a href="#ref-for-eventhandler③">(4)</a> <a href="#ref-for-eventhandler④">(5)</a> <a href="#ref-for-eventhandler⑤">(6)</a>
     <li><a href="#ref-for-eventhandler⑥">2.2. Attributes</a> <a href="#ref-for-eventhandler⑦">(2)</a> <a href="#ref-for-eventhandler⑧">(3)</a> <a href="#ref-for-eventhandler⑨">(4)</a> <a href="#ref-for-eventhandler①⓪">(5)</a> <a href="#ref-for-eventhandler①①">(6)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-in-parallel">
+   <a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-in-parallel">2.3. Methods</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-secure-contexts">
@@ -2677,6 +2711,7 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-eventhandler" style="color:initial">EventHandler</span>
+     <li><span class="dfn-paneled" id="term-for-in-parallel" style="color:initial">in parallel</span>
     </ul>
    <li>
     <a data-link-type="biblio">[secure-contexts]</a> defines the following terms:
@@ -2802,7 +2837,8 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
     <li><a href="#ref-for-mediarecorder①⑤">5. Event summary</a>
     <li><a href="#ref-for-mediarecorder①⑥">6. Privacy and Security Considerations</a>
     <li><a href="#ref-for-mediarecorder①⑦">6.1. Resource exhaustion</a>
-    <li><a href="#ref-for-mediarecorder①⑧">7.1. Check for MediaRecorder and content types</a>
+    <li><a href="#ref-for-mediarecorder①⑧">6.2. Fingerprinting</a>
+    <li><a href="#ref-for-mediarecorder①⑨">7.1. Check for MediaRecorder and content types</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-start-timeslice-timeslice">
@@ -2877,7 +2913,8 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
    <ul>
     <li><a href="#ref-for-dom-mediarecorder-ondataavailable">1. Overview</a>
     <li><a href="#ref-for-dom-mediarecorder-ondataavailable①">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-ondataavailable②">7.2. Recording webcam video and audio</a>
+    <li><a href="#ref-for-dom-mediarecorder-ondataavailable②">6.2. Fingerprinting</a>
+    <li><a href="#ref-for-dom-mediarecorder-ondataavailable③">7.2. Recording webcam video and audio</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-onpause">
@@ -2902,23 +2939,22 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
    <b><a href="#dom-mediarecorder-videobitspersecond">#dom-mediarecorder-videobitspersecond</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediarecorder-videobitspersecond">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-videobitspersecond①">2.1. Constructors</a>
-    <li><a href="#ref-for-dom-mediarecorder-videobitspersecond②">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-videobitspersecond③">(2)</a>
+    <li><a href="#ref-for-dom-mediarecorder-videobitspersecond①">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorder-videobitspersecond②">(2)</a>
+    <li><a href="#ref-for-dom-mediarecorder-videobitspersecond③">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-videobitspersecond④">(2)</a> <a href="#ref-for-dom-mediarecorder-videobitspersecond⑤">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-audiobitspersecond">
    <b><a href="#dom-mediarecorder-audiobitspersecond">#dom-mediarecorder-audiobitspersecond</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediarecorder-audiobitspersecond">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-audiobitspersecond①">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorder-audiobitspersecond②">(2)</a>
-    <li><a href="#ref-for-dom-mediarecorder-audiobitspersecond③">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-audiobitspersecond④">(2)</a>
+    <li><a href="#ref-for-dom-mediarecorder-audiobitspersecond①">2.1. Constructors</a>
+    <li><a href="#ref-for-dom-mediarecorder-audiobitspersecond②">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-audiobitspersecond③">(2)</a> <a href="#ref-for-dom-mediarecorder-audiobitspersecond④">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-audiobitratemode">
    <b><a href="#dom-mediarecorder-audiobitratemode">#dom-mediarecorder-audiobitratemode</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediarecorder-audiobitratemode">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-audiobitratemode①">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorder-audiobitratemode②">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorder-start">
@@ -2971,6 +3007,7 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
    <b><a href="#dom-mediarecorder-istypesupported">#dom-mediarecorder-istypesupported</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediarecorder-istypesupported">2. Media Recorder API</a>
+    <li><a href="#ref-for-dom-mediarecorder-istypesupported①">6.2. Fingerprinting</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="abstract-opdef-is-type-supported">
@@ -2992,6 +3029,7 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
    <ul>
     <li><a href="#ref-for-dictdef-mediarecorderoptions">2. Media Recorder API</a>
     <li><a href="#ref-for-dictdef-mediarecorderoptions①">2.1. Constructors</a>
+    <li><a href="#ref-for-dictdef-mediarecorderoptions②">6.2. Fingerprinting</a> <a href="#ref-for-dictdef-mediarecorderoptions③">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorderoptions-mimetype">
@@ -3006,8 +3044,8 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
   <aside class="dfn-panel" data-for="dom-mediarecorderoptions-audiobitspersecond">
    <b><a href="#dom-mediarecorderoptions-audiobitspersecond">#dom-mediarecorderoptions-audiobitspersecond</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond①">(2)</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond②">2.3. Methods</a> <a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond③">(2)</a> <a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond④">(3)</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond①">(2)</a> <a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond②">(3)</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond③">2.3. Methods</a> <a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond④">(2)</a>
     <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond⑤">2.5. MediaRecorderOptions</a>
     <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond⑥">2.5.1. Members</a>
    </ul>
@@ -3015,10 +3053,10 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
   <aside class="dfn-panel" data-for="dom-mediarecorderoptions-videobitspersecond">
    <b><a href="#dom-mediarecorderoptions-videobitspersecond">#dom-mediarecorderoptions-videobitspersecond</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorderoptions-videobitspersecond①">(2)</a> <a href="#ref-for-dom-mediarecorderoptions-videobitspersecond②">(3)</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond③">2.3. Methods</a> <a href="#ref-for-dom-mediarecorderoptions-videobitspersecond④">(2)</a> <a href="#ref-for-dom-mediarecorderoptions-videobitspersecond⑤">(3)</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond⑥">2.5. MediaRecorderOptions</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond⑦">2.5.1. Members</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorderoptions-videobitspersecond①">(2)</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond②">2.3. Methods</a> <a href="#ref-for-dom-mediarecorderoptions-videobitspersecond③">(2)</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond④">2.5. MediaRecorderOptions</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond⑤">2.5.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediarecorderoptions-bitspersecond">
@@ -3031,9 +3069,9 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
   <aside class="dfn-panel" data-for="dom-mediarecorderoptions-audiobitratemode">
    <b><a href="#dom-mediarecorderoptions-audiobitratemode">#dom-mediarecorderoptions-audiobitratemode</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitratemode">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorderoptions-audiobitratemode①">(2)</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitratemode②">2.3. Methods</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitratemode③">2.5. MediaRecorderOptions</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitratemode">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorderoptions-audiobitratemode①">(2)</a> <a href="#ref-for-dom-mediarecorderoptions-audiobitratemode②">(3)</a> <a href="#ref-for-dom-mediarecorderoptions-audiobitratemode③">(4)</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitratemode④">2.3. Methods</a>
+    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitratemode⑤">2.5. MediaRecorderOptions</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="enumdef-bitratemode">
