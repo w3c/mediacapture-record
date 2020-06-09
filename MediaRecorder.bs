@@ -907,7 +907,7 @@ The following additional events fire on {{MediaRecorder}} objects:
     <tr>
       <td><dfn>dataavailable</dfn></td>
       <td>{{BlobEvent}}</td>
-      <td>The UA generates this even to return data to the application. The
+      <td>The UA generates this event to return data to the application. The
       {{BlobEvent/data}} attribute of this event contains a {{Blob}} of recorded
       data.</td>
     </tr>
@@ -951,7 +951,7 @@ workload, e.g. encoding large frame resolutions and/or framerates.
 {{MediaRecorder}} can be configured to hold on to the encoded data for a certain
 period of time upon {{start()}} by means of the {{timeslice}} parameter. Too
 large a time slice parameter can force the UA to buffer a large amount of data,
-causing jankiness and othermise memory exhaustion.
+causing jankiness and otherwise memory exhaustion.
 
 UAs should take measures to avoid the encoding and buffering process from
 exhausting the resources.
@@ -1056,7 +1056,7 @@ with minimal modifications.
 
       var recorder = null;
       try {
-        recorder = new MediaRecorder(stream, {mimeType : "video/webm"});
+        recorder = new MediaRecorder(stream, {mimeType: "video/webm"});
       } catch (e) {
         console.error('Exception while creating MediaRecorder: ' + e);
         return;
@@ -1070,7 +1070,7 @@ with minimal modifications.
       recorder.start(100);
     }
 
-    navigator.mediaDevices.getUserMedia({video: true , audio: true})
+    navigator.mediaDevices.getUserMedia({video: true, audio: true})
         .then(gotMedia)
         .catch(e => { console.error('getUserMedia() failed: ' + e); });
   &lt;/script>
