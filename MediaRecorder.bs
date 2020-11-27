@@ -18,6 +18,7 @@ Previous Version: https://www.w3.org/TR/2017/WD-mediastream-recording-20170405/
 
 !Implementation: <a href="http://caniuse.com/#feat=mediarecorder">Can I use Media Recording?</a>
 !Implementation: <a href="https://github.com/miguelao/mediacapture-record-implementation-status/blob/master/chromium.md">Chromium Encode Acceleration Support</a>
+Boilerplate: omit conformance
 </pre>
 
 <style>
