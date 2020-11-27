@@ -18,4 +18,5 @@ jobs:
           # Please use the URL that's appropriate for your working group!
           W3C_WG_DECISION_URL: "https://lists.w3.org/Archives/Public/public-webrtc/2016Mar/0031.html"
           VALIDATE_LINKS: false
-
+          # validator doesn't recognized color-scheme css property atm
+          VALIDATE_MARKUP: false
