@@ -186,11 +186,11 @@ interface MediaRecorder : EventTarget {
 
 ## Methods ## {#mediarecorder-methods}
 
-<dl class="domintro">
   <div class="note">
     For historical reasons, the following methods alter {{state}} synchronously
     and fire events asynchronously.
   </div>
+<dl class="domintro">
   <dt><dfn method for="MediaRecorder"><code>start(optional unsigned long timeslice)</code></dfn></dt>
   <dd>
   When a {{MediaRecorder}} object&#8217;s {{start()}} method is invoked, the UA
