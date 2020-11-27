@@ -139,25 +139,25 @@ interface MediaRecorder : EventTarget {
     value of |recorder|'s [=[[ConstrainedMimeType]]=] slot.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/state}} attribute to
     {{inactive}}.</li>
-    <li>Initialize |recorder|'s {{videoBitsPerSecond}} attribute to the value of
+    <li>Initialize |recorder|'s {{MediaRecorder/videoBitsPerSecond}} attribute to the value of
     |options|' {{MediaRecorderOptions/videoBitsPerSecond}} member, if it is
     present. Otherwise, choose a target value the User Agent deems reasonable
     for video.</li>
-    <li>Initialize |recorder|'s {{audioBitsPerSecond}} attribute to the value of
+    <li>Initialize |recorder|'s {{MediaRecorder/audioBitsPerSecond}} attribute to the value of
     |options|' {{MediaRecorderOptions/audioBitsPerSecond}} member, if it is
     present. Otherwise, choose a target value the User Agent deems reasonable
     for audio.</li>
     <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
-    <code>undefined</code>, set |recorder|'s {{videoBitsPerSecond}} and
-    {{audioBitsPerSecond}} attributes to values the User Agent deems reasonable
-    for the respective media types, such that the sum of {{videoBitsPerSecond}}
-    and {{audioBitsPerSecond}} is close to the value of |recorder|'s
+    <code>undefined</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
+    {{MediaRecorder/audioBitsPerSecond}} attributes to values the User Agent deems reasonable
+    for the respective media types, such that the sum of {{MediaRecorder/videoBitsPerSecond}}
+    and {{MediaRecorder/audioBitsPerSecond}} is close to the value of |recorder|'s
     [=[[ConstrainedBitsPerSecond]]=] slot.</li>
     <li>If |recorder| supports the {{BitrateMode}} specified by the value of
     |options|' {{MediaRecorderOptions/audioBitrateMode}} member,
-    then initialize |recorder|'s {{audioBitrateMode}} attribute to the value of
+    then initialize |recorder|'s {{MediaRecorder/audioBitrateMode}} attribute to the value of
     |options|' {{MediaRecorderOptions/audioBitrateMode}} member,
-    else initialize |recorder|'s {{audioBitrateMode}} attribute to the value
+    else initialize |recorder|'s {{MediaRecorder/audioBitrateMode}} attribute to the value
     "vbr".</li>
     <li>Return |recorder|.</li>
   </ol></dd>
@@ -233,7 +233,7 @@ interface MediaRecorder : EventTarget {
     <li>Let <var>timeslice</var> be the method's first argument, if provided,
     or <code>undefined</code>. </li>
 
-    <li>Let |stream| be the value of |recorder|'s {{stream}} attribute.</li>
+    <li>Let |stream| be the value of |recorder|'s {{MediaRecorder/stream}} attribute.</li>
 
     <li>Let |tracks| be the set of {{live}} tracks in |stream|'s
     [=track set=].</li>
@@ -254,20 +254,20 @@ interface MediaRecorder : EventTarget {
     slot.</li>
 
     <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
-    <code>undefined</code>, set |recorder|'s {{videoBitsPerSecond}} and
-    {{audioBitsPerSecond}} attributes to values the User Agent deems reasonable
+    <code>undefined</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
+    {{MediaRecorder/audioBitsPerSecond}} attributes to values the User Agent deems reasonable
     for the respective media types, for recording all tracks in |tracks|, such
-    that the sum of {{videoBitsPerSecond}} and {{audioBitsPerSecond}} is close
+    that the sum of {{MediaRecorder/videoBitsPerSecond}} and {{MediaRecorder/audioBitsPerSecond}} is close
     to the value of |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot.</li>
 
-    <li>Let |videoBitrate| be the value of |recorder|'s {{videoBitsPerSecond}}
+    <li>Let |videoBitrate| be the value of |recorder|'s {{MediaRecorder/videoBitsPerSecond}}
     attribute, and constrain the configuration of |recorder| to target an
     aggregate bitrate of |videoBitrate| bits per second for all video tracks
     |recorder| will be recording. |videoBitrate| is a hint for the encoder and
     the value might be surpassed, not achieved, or only be achieved over a long
     period of time.</li>
 
-    <li>Let |audioBitrate| be the value of |recorder|'s {{audioBitsPerSecond}}
+    <li>Let |audioBitrate| be the value of |recorder|'s {{MediaRecorder/audioBitsPerSecond}}
     attribute, and constrain the configuration of |recorder| to target an
     aggregate bitrate of |audioBitrate| bits per second for all audio tracks
     |recorder| will be recording. |audioBitrate| is a hint for the encoder and
@@ -275,7 +275,7 @@ interface MediaRecorder : EventTarget {
     period of time.</li>
 
     <li>Constrain the configuration of |recorder| to encode using the
-    {{BitrateMode}} specified by the value of |recorder|'s {{audioBitrateMode}}
+    {{BitrateMode}} specified by the value of |recorder|'s {{MediaRecorder/audioBitrateMode}}
     attribute for all audio tracks |recorder| will be recording.</li>
 
     <li>For each track in |tracks|, if the User Agent cannot record the track
@@ -312,7 +312,7 @@ interface MediaRecorder : EventTarget {
         record all tracks in |tracks|, if not already present. This MAY include
         the profiles parameter [[RFC6381]] or further codec-specific
         parameters.</li>
-        <li>Set |recorder|'s {{mimeType}} attribute to |extendedMimeType|.</li>
+        <li>Set |recorder|'s {{MediaRecorder/mimeType}} attribute to |extendedMimeType|.</li>
         <li><a>Fire an event</a> named <a>start</a> at |recorder|.</li>
       </ol>
       </li>
@@ -402,14 +402,14 @@ interface MediaRecorder : EventTarget {
   <p>The <dfn abstract-op>Inactivate the recorder</dfn> algorithm given a
   |recorder|, is as follows:</p>
   <ol>
-    <li>Set |recorder|'s {{mimeType}} attribute to the value of the
+    <li>Set |recorder|'s {{MediaRecorder/mimeType}} attribute to the value of the
     [=[[ConstrainedMimeType]]=] slot.</li>
     <li>Set |recorder|'s {{state}} attribute to {{inactive}}.</li>
     <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
-    <code>undefined</code>, set |recorder|'s {{videoBitsPerSecond}} and
-    {{audioBitsPerSecond}} attributes to values the User Agent deems reasonable
-    for the respective media types, such that the sum of {{videoBitsPerSecond}}
-    and {{audioBitsPerSecond}} is close to the value of |recorder|'s
+    <code>undefined</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
+    {{MediaRecorder/audioBitsPerSecond}} attributes to values the User Agent deems reasonable
+    for the respective media types, such that the sum of {{MediaRecorder/videoBitsPerSecond}}
+    and {{MediaRecorder/audioBitsPerSecond}} is close to the value of |recorder|'s
     [=[[ConstrainedBitsPerSecond]]=] slot.</li>
   </ol>
 
@@ -939,9 +939,9 @@ The following additional events fire on {{MediaRecorder}} objects:
 <em>This section is non-normative</em>.
 
 Given that the source of data for {{MediaRecorder}} is always going to be a
-{{stream}}, a large part of the security is essentially offloaded onto the
+{{MediaStream}}, a large part of the security is essentially offloaded onto the
 [[GETUSERMEDIA]] and its "Privacy and Security Consideration" Section. In
-particular, the source {{stream}} is assumed to be coming from a
+particular, the source {{MediaStream}} is assumed to be coming from a
 <a>secure context</a>.
 
 ## Resource exhaustion ## {#resource-exhaustion}
