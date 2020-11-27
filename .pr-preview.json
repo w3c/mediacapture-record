@@ -1,0 +1,8 @@
+{
+  "src_file": "MediaRecorder.bs",
+  "type": "bikeshed",
+  "params": {
+    "force": 1
+  }
+}
+
