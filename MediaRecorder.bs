@@ -86,38 +86,6 @@ interface MediaRecorder : EventTarget {
 
 <dl class="domintro">
   <dt><dfn constructor for="MediaRecorder"><code>MediaRecorder(MediaStream stream, optional MediaRecorderOptions options = {})</code></dfn></dt>
-  <dd>
-  <table class="parameters">
-    <tbody>
-      <tr>
-        <th>Parameter</th>
-        <th>Type</th>
-        <th>Nullable</th>
-        <th>Optional</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td class="prmName">stream</td>
-        <td class="prmType">{{MediaStream}}</td>
-        <td class="prmNullFalse"><span role="img" aria-label=
-        "False">&#10008;</span></td>
-        <td class="prmOptFalse"><span role="img" aria-label=
-        "False">&#10008;</span></td>
-        <td class="prmDesc">The {{MediaStream}} to be recorded. This will
-        be the value of the {{MediaRecorder/stream}} attribute.</td>
-      </tr>
-      <tr>
-        <td class="prmName">options</td>
-        <td class="prmType">{{MediaRecorderOptions}}</td>
-        <td class="prmNullFalse"><span role="img" aria-label=
-        "False">&#10008;</span></td>
-        <td class="prmOptTrue"><span role="img" aria-label=
-        "True">&#10004;</span></td>
-        <td class="prmDesc">A dictionary of recording options.</td>
-      </tr>
-    </tbody>
-  </table>
-  </dd>
   <dd>When the {{MediaRecorder()}}
   constructor is invoked, the User Agent MUST run the following steps:
   <ol>
@@ -414,25 +382,6 @@ interface MediaRecorder : EventTarget {
     [=[[ConstrainedBitsPerSecond]]=] slot.</li>
   </ol>
 
-  <table class="parameters">
-    <tbody>
-      <tr>
-        <th>Parameter</th>
-        <th>Type</th>
-        <th>Nullable</th>
-        <th>Optional</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td class="prmName">timeslice</td>
-        <td class="prmType"><code>unsigned long</code></td>
-        <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
-        <td class="prmOptTrue"><span role="img" aria-label="True">&#10004;</span></td>
-        <td class="prmDesc">The minimum number of milliseconds of data
-        to return in a single Blob.</td>
-      </tr>
-    </tbody>
-  </table>
   </dd>
 
   <dt><dfn method for="MediaRecorder"><code>stop()</code></dfn></dt>
@@ -538,28 +487,6 @@ interface MediaRecorder : EventTarget {
   not available to support the concrete media encoding. When this method is
   invoked, the User Agent must return the result of [$is type supported$],
   given the method's first argument.
-  <table class="parameters">
-    <tbody>
-      <tr>
-        <th>Parameter</th>
-        <th>Type</th>
-        <th>Nullable</th>
-        <th>Optional</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td class="prmName">type</td>
-        <td class="prmType">{{DOMString}}</td>
-        <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
-        <td class="prmOptFalse"><span role="img" aria-label="False">&#10008;</span></td>
-        <td class="prmDesc">
-          A <a href="https://tools.ietf.org/html/rfc2046">MIME Type</a>,
-          including parameters when needed, specifying a container and/or
-          codec formats for recording.
-        </td>
-      </tr>
-    </tbody>
-  </table>
   </dd>
   <dd algorithm="is type supported">The <dfn abstract-op>is type supported</dfn>
   algorithm consists of the following steps.
@@ -789,31 +716,6 @@ interface MediaRecorderErrorEvent : Event {
   <dd>
   Constructs a new {{MediaRecorderErrorEvent}}.
 
-  <table class="parameters">
-    <tbody>
-      <tr>
-        <th>Parameter</th>
-        <th>Type</th>
-        <th>Nullable</th>
-        <th>Optional</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td class="prmName">type</td>
-        <td class="prmType">{{DOMString}}</td>
-        <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
-        <td class="prmOptFalse"><span role="img" aria-label="False">&#10008;</span></td>
-        <td class="prmDesc"></td>
-      </tr>
-      <tr>
-        <td class="prmName">eventInitDict</td>
-        <td class="prmType">{{MediaRecorderErrorEventInit}}</td>
-        <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
-        <td class="prmOptFalse"><span role="img" aria-label="False">&#10008;</span></td>
-        <td class="prmDesc"></td>
-      </tr>
-    </tbody>
-  </table>
 
   </dd>
 </dl>
