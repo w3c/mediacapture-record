@@ -1,5 +1,5 @@
 
-# MediaStream Recording API  [![Build Status](https://travis-ci.org/w3c/mediacapture-record.svg?branch=master)](https://travis-ci.org/w3c/mediacapture-record)  <a href="https://www.irccloud.com/invite?channel=%23media-capture&amp;hostname=irc.freenode.net&amp;port=6697&amp;ssl=1" target="_blank"><img src="https://img.shields.io/badge/IRC-%23media--capture-1e72ff.svg?style=plastic"  height="20"></a> <a href="https://www.irccloud.com/invite?channel=%23webrtc&amp;hostname=irc.w3.org&amp;port=6667" target="_blank"><img src="https://img.shields.io/badge/IRC-%23webrtc-1e72ff.svg?style=plastic"  height="20"></a>
+# MediaStream Recording API  [![Actions Status](https://github.com/w3c/mediacapture-record/workflows/Auto-publish/badge.svg)](https://github.com/{user}/{repo}/actions)  <a href="https://www.irccloud.com/invite?channel=%23webrtc&amp;hostname=irc.w3.org&amp;port=6667" target="_blank"><img src="https://img.shields.io/badge/IRC-%23webrtc-1e72ff.svg?style=plastic"  height="20"></a>
 
 This document specifies methods for live recording of video and audio, local and remote.
 
