@@ -186,21 +186,21 @@ interface MediaRecorder : EventTarget {
   </dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>onstart</code></dfn></dt>
-  <dd>Called to handle the <a>start</a> event.</dd>
+  <dd>Called to handle the <a event>start</a> event.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>onstop</code></dfn></dt>
-  <dd>Called to handle the <a>stop</a> event.</dd>
+  <dd>Called to handle the <a event>stop</a> event.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>ondataavailable</code></dfn></dt>
-  <dd>Called to handle the <a>dataavailable</a> event. The {{Blob}} of recorded
+  <dd>Called to handle the <a event>dataavailable</a> event. The {{Blob}} of recorded
   data is contained in this event and can be accessed via its {{BlobEvent/data}}
   attribute.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>onpause</code></dfn></dt>
-  <dd>Called to handle the <a>pause</a> event.</dd>
+  <dd>Called to handle the <a event>pause</a> event.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>onresume</code></dfn></dt>
-  <dd>Called to handle the <a>resume</a> event.</dd>
+  <dd>Called to handle the <a event>resume</a> event.</dd>
 
   <dt><dfn attribute for="MediaRecorder"><code>onerror</code></dfn></dt>
   <dd>Called to handle a {{MediaRecorderErrorEvent}}.</dd>
@@ -313,7 +313,7 @@ interface MediaRecorder : EventTarget {
         the profiles parameter [[RFC6381]] or further codec-specific
         parameters.</li>
         <li>Set |recorder|'s {{MediaRecorder/mimeType}} attribute to |extendedMimeType|.</li>
-        <li><a>Fire an event</a> named <a>start</a> at |recorder|.</li>
+        <li><a>Fire an event</a> named <a event>start</a> at |recorder|.</li>
       </ol>
       </li>
 
@@ -327,8 +327,8 @@ interface MediaRecorder : EventTarget {
         <li><a>Fire an error event</a> named {{SecurityError}} at
         <var>recorder</var>.</li>
         <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
-        <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
-        <li><a>Fire an event</a> named <a>stop</a> at <var>recorder</var>.</li>
+        <a event>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
+        <li><a>Fire an event</a> named <a event>stop</a> at <var>recorder</var>.</li>
       </ol>
       </li>
 
@@ -340,8 +340,8 @@ interface MediaRecorder : EventTarget {
         <li><a>Fire an error event</a> named {{InvalidModificationError}} at
         <var>recorder</var>.</li>
         <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
-        <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
-        <li><a>Fire an event</a> named <a>stop</a> at <var>recorder</var>.</li>
+        <a event>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
+        <li><a>Fire an event</a> named <a event>stop</a> at <var>recorder</var>.</li>
       </ol>
       </li>
 
@@ -354,8 +354,8 @@ interface MediaRecorder : EventTarget {
         <li><a>Fire an error event</a> named {{UnknownError}} at
         <var>recorder</var>.</li>
         <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
-        <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
-        <li><a>Fire an event</a> named <a>stop</a> at <var>recorder</var>.</li>
+        <a event>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
+        <li><a>Fire an event</a> named <a event>stop</a> at <var>recorder</var>.</li>
       </ol>
       </li>
 
@@ -365,7 +365,7 @@ interface MediaRecorder : EventTarget {
       gathering data into a new {{Blob}} <var>blob</var>, and queue a task,
       using the DOM manipulation task source, that
       <a href="#to-fire-a-blob-event">fires a blob event</a> named
-      <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.
+      <a event>dataavailable</a> at <var>recorder</var> with <var>blob</var>.
 
       Note that an <code>undefined</code> value of <var>timeslice</var> will
       be understood as the largest <code>unsigned long</code> value.</li>
@@ -376,8 +376,8 @@ interface MediaRecorder : EventTarget {
       <ol>
         <li>[$Inactivate the recorder$] with |recorder|.</li>
         <li><a href="#to-fire-a-blob-event">Fire a blob event</a> named
-        <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
-        <li><a>Fire an event</a> named <a>stop</a> at
+        <a event>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
+        <li><a>Fire an event</a> named <a event>stop</a> at
         <var>recorder</var>.</li>
       </ol>
       </li>
@@ -450,8 +450,8 @@ interface MediaRecorder : EventTarget {
       <li>Stop gathering data.</li>
       <li>Let <var>blob</var> be the Blob of collected data so far, then
       <a href="#to-fire-a-blob-event">fire a blob event</a> named
-      <a>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
-      <li><a>Fire an event</a> named <a>stop</a> at <var>recorder</var>.</li>
+      <a event>dataavailable</a> at <var>recorder</var> with <var>blob</var>.</li>
+      <li><a>Fire an event</a> named <a event>stop</a> at <var>recorder</var>.</li>
     </ol>
     </li>
     <li>return <code>undefined</code>.</li>
@@ -474,7 +474,7 @@ interface MediaRecorder : EventTarget {
       <li>Stop gathering data into <var>blob</var> (but keep it
       available so that recording can be resumed in the future).</li>
       <li>Let <var>target</var> be the MediaRecorder context object.
-      <a>Fire an event</a> named <a>pause</a> at <var>target</var>.</li>
+      <a>Fire an event</a> named <a event>pause</a> at <var>target</var>.</li>
     </ol>
     </li>
     <li>return <code>undefined</code>.</li>
@@ -516,7 +516,7 @@ interface MediaRecorder : EventTarget {
       <li>Let <var>blob</var> be the {{Blob}} of collected data so far and
       let <var>target</var> be the {{MediaRecorder}} context object, then
       <a href="#to-fire-a-blob-event">fire a blob event</a> named
-      <a>dataavailable</a> at <var>target</var> with <var>blob</var>.
+      <a event>dataavailable</a> at <var>target</var> with <var>blob</var>.
       (Note that <var>blob</var> will be empty if no data has been gathered
       yet.)</li>
 
@@ -748,7 +748,7 @@ that the call is made. In all other cases the UA will <a>fire an event</a> named
 when the error occurs, let <var>blob</var> be the {{Blob}} of collected data so
 far; after raising the error, the UA will <a href="#to-fire-a-blob-event">fire a
 dataavailable event</a> with <var>blob</var>; immediately after the UA will then
-<a>fire an event</a> named <code>stop</code>.
+<a>fire an event</a> named <a event>stop</a>.
 The UA may set platform-specific limits, such as those for the minimum and
 maximum {{Blob}} size that it will support, or the number of
 {{MediaStreamTrack}}s it will record at once.
@@ -897,34 +897,34 @@ The following additional events fire on {{MediaRecorder}} objects:
   </thead>
   <tbody>
     <tr>
-      <td><dfn>start</dfn></td>
+      <td><dfn event for=MediaRecorder>start</dfn></td>
       <td>{{Event}}</td>
       <td>The UA has started recording data from the MediaStream.</td>
     </tr>
     <tr>
-      <td><dfn>stop</dfn></td>
+      <td><dfn event for=MediaRecorder>stop</dfn></td>
       <td>{{Event}}</td>
       <td>The UA has stopped recording data from the MediaStream.</td>
     </tr>
     <tr>
-      <td><dfn>dataavailable</dfn></td>
+      <td><dfn event for=MediaRecorder>dataavailable</dfn></td>
       <td>{{BlobEvent}}</td>
       <td>The UA generates this event to return data to the application. The
       {{BlobEvent/data}} attribute of this event contains a {{Blob}} of recorded
       data.</td>
     </tr>
     <tr>
-      <td><dfn>pause</dfn></td>
+      <td><dfn event for=MediaRecorder>pause</dfn></td>
       <td>{{Event}}</td>
       <td>The UA has paused recording data from the MediaStream.</td>
     </tr>
     <tr>
-      <td><dfn>resume</dfn></td>
+      <td><dfn event for=MediaRecorder>resume</dfn></td>
       <td>{{Event}}</td>
       <td>The UA has resumed recording data from the MediaStream.</td>
     </tr>
     <tr>
-      <td><dfn>error</dfn></td>
+      <td><dfn event for=MediaRecorder>error</dfn></td>
       <td>{{MediaRecorderErrorEvent}}</td>
       <td>An error has occurred, e.g. out of memory or a modification to
       the {{MediaRecorder/stream}} has occurred that makes it impossible to
