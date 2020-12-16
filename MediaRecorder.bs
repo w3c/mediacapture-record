@@ -125,7 +125,7 @@ interface MediaRecorder : EventTarget {
     then initialize |recorder|'s {{MediaRecorder/audioBitrateMode}} attribute to the value of
     |options|' {{MediaRecorderOptions/audioBitrateMode}} member,
     else initialize |recorder|'s {{MediaRecorder/audioBitrateMode}} attribute to the value
-    "vbr".</li>
+    "variable".</li>
     <li>Return |recorder|.</li>
   </ol></dd>
 </dl>
@@ -530,7 +530,7 @@ dictionary MediaRecorderOptions {
   unsigned long audioBitsPerSecond;
   unsigned long videoBitsPerSecond;
   unsigned long bitsPerSecond;
-  BitrateMode audioBitrateMode = "vbr";
+  BitrateMode audioBitrateMode = "variable";
 };
 </pre>
 
@@ -570,18 +570,18 @@ dictionary MediaRecorderOptions {
 
 <pre class="idl">
 enum BitrateMode {
-  "cbr",
-  "vbr"
+  "constant",
+  "variable"
 };
 </pre>
 
 ### Values ### {#bitratemode-values}
 
 <dl class="domintro">
-  <dt><dfn enum-value for="BitrateMode"><code>cbr</code></dfn></dt>
+  <dt><dfn enum-value for="BitrateMode"><code>constant</code></dfn></dt>
   <dd>Encode at a constant bitrate.</dd>
 
-  <dt><dfn enum-value for="BitrateMode"><code>vbr</code></dfn></dt>
+  <dt><dfn enum-value for="BitrateMode"><code>variable</code></dfn></dt>
   <dd>Encode using a variable bitrate, allowing more space to be used for complex signals
   and less space for less complex signals.</dd>
 </dl>
