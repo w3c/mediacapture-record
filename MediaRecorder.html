@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
   <meta content="Bikeshed version c5172e83, updated Fri Nov 20 15:35:20 2020 -0800" name="generator">
   <link href="https://www.w3.org/TR/mediastream-recording/" rel="canonical">
-  <meta content="081eda8fd0e6f21eed83d69f3da176bf15abf19d" name="document-revision">
+  <meta content="5f712b8fe32f7416891d5c5f196d2235f9f4dd22" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -596,7 +596,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Recording</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-11-27">27 November 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-12-16">16 December 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -796,7 +796,7 @@ at regular intervals.</p>
       <li>If <var>recorder</var> supports the <code class="idl"><a data-link-type="idl" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode①">BitrateMode</a></code> specified by the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode">audioBitrateMode</a></code> member,
     then initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitratemode" id="ref-for-dom-mediarecorder-audiobitratemode①">audioBitrateMode</a></code> attribute to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode①">audioBitrateMode</a></code> member,
     else initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitratemode" id="ref-for-dom-mediarecorder-audiobitratemode②">audioBitrateMode</a></code> attribute to the value
-    "vbr".
+    "variable".
       <li>Return <var>recorder</var>.
      </ol>
    </dl>
@@ -1082,7 +1082,7 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑤"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond①"><c- g>audioBitsPerSecond</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑥"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond①"><c- g>videoBitsPerSecond</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑦"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond①"><c- g>bitsPerSecond</c-></a>;
-  <a data-link-type="idl-name" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode⑤"><c- n>BitrateMode</c-></a> <a class="idl-code" data-default="&quot;vbr&quot;" data-link-type="dict-member" data-type="BitrateMode " href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode②"><c- g>audioBitrateMode</c-></a> = "vbr";
+  <a data-link-type="idl-name" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode⑤"><c- n>BitrateMode</c-></a> <a class="idl-code" data-default="&quot;variable&quot;" data-link-type="dict-member" data-type="BitrateMode " href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode②"><c- g>audioBitrateMode</c-></a> = "variable";
 };
 </pre>
    <h4 class="heading settled" data-level="2.5.1" id="mediarecorderoptions-members"><span class="secno">2.5.1. </span><span class="content">Members</span><a class="self-link" href="#mediarecorderoptions-members"></a></h4>
@@ -1105,20 +1105,20 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
     <dd> Aggregate target bits per second for encoding of all Video and Audio
   Track(s) present. This member overrides either <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond②">audioBitsPerSecond</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond②">videoBitsPerSecond</a></code> if present, and might be
   distributed among the present track encoders as the UA sees fit.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-audiobitratemode"><code>audioBitrateMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode⑥">BitrateMode</a>, defaulting to <code>"vbr"</code></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-audiobitratemode"><code>audioBitrateMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode⑥">BitrateMode</a>, defaulting to <code>"variable"</code></span>
     <dd>Specifes the <code class="idl"><a data-link-type="idl" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode⑦">BitrateMode</a></code> that should be used to encode the Audio track(s).
    </dl>
    <h3 class="heading settled" data-level="2.6" id="bitratemode"><span class="secno">2.6. </span><span class="content">BitrateMode</span><a class="self-link" href="#bitratemode"></a></h3>
 <pre class="idl highlight def"><c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-bitratemode"><code><c- g>BitrateMode</c-></code></dfn> {
-  <a class="idl-code" data-link-type="enum-value" href="#dom-bitratemode-cbr" id="ref-for-dom-bitratemode-cbr"><c- s>"cbr"</c-></a>,
-  <a class="idl-code" data-link-type="enum-value" href="#dom-bitratemode-vbr" id="ref-for-dom-bitratemode-vbr"><c- s>"vbr"</c-></a>
+  <a class="idl-code" data-link-type="enum-value" href="#dom-bitratemode-constant" id="ref-for-dom-bitratemode-constant"><c- s>"constant"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-bitratemode-variable" id="ref-for-dom-bitratemode-variable"><c- s>"variable"</c-></a>
 };
 </pre>
    <h4 class="heading settled" data-level="2.6.1" id="bitratemode-values"><span class="secno">2.6.1. </span><span class="content">Values</span><a class="self-link" href="#bitratemode-values"></a></h4>
    <dl class="domintro">
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BitrateMode" data-dfn-type="enum-value" data-export data-lt="&quot;cbr&quot;|cbr" id="dom-bitratemode-cbr"><code>cbr</code></dfn>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BitrateMode" data-dfn-type="enum-value" data-export data-lt="&quot;constant&quot;|constant" id="dom-bitratemode-constant"><code>constant</code></dfn>
     <dd>Encode at a constant bitrate.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BitrateMode" data-dfn-type="enum-value" data-export data-lt="&quot;vbr&quot;|vbr" id="dom-bitratemode-vbr"><code>vbr</code></dfn>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BitrateMode" data-dfn-type="enum-value" data-export data-lt="&quot;variable&quot;|variable" id="dom-bitratemode-variable"><code>variable</code></dfn>
     <dd>Encode using a variable bitrate, allowing more space to be used for complex signals
   and less space for less complex signals.
    </dl>
@@ -1425,8 +1425,8 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
    <li><a href="#blobevent">BlobEvent</a><span>, in §3</span>
    <li><a href="#dictdef-blobeventinit">BlobEventInit</a><span>, in §3.3</span>
    <li><a href="#dom-blobevent-blobevent">BlobEvent(type, eventInitDict)</a><span>, in §3.1</span>
-   <li><a href="#dom-bitratemode-cbr">"cbr"</a><span>, in §2.6.1</span>
-   <li><a href="#dom-bitratemode-cbr">cbr</a><span>, in §2.6.1</span>
+   <li><a href="#dom-bitratemode-constant">"constant"</a><span>, in §2.6.1</span>
+   <li><a href="#dom-bitratemode-constant">constant</a><span>, in §2.6.1</span>
    <li><a href="#constrainedbitspersecond">[[ConstrainedBitsPerSecond]]</a><span>, in §2.1</span>
    <li><a href="#constrainedmimetype">[[ConstrainedMimeType]]</a><span>, in §2.1</span>
    <li><a href="#dom-mediarecorder-mediarecorder">constructor(stream)</a><span>, in §2.1</span>
@@ -1500,8 +1500,8 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
      <li><a href="#dom-blobevent-timecode">attribute for BlobEvent</a><span>, in §3.2</span>
      <li><a href="#dom-blobeventinit-timecode">dict-member for BlobEventInit</a><span>, in §3.3.1</span>
     </ul>
-   <li><a href="#dom-bitratemode-vbr">"vbr"</a><span>, in §2.6.1</span>
-   <li><a href="#dom-bitratemode-vbr">vbr</a><span>, in §2.6.1</span>
+   <li><a href="#dom-bitratemode-variable">"variable"</a><span>, in §2.6.1</span>
+   <li><a href="#dom-bitratemode-variable">variable</a><span>, in §2.6.1</span>
    <li>
     videoBitsPerSecond
     <ul>
@@ -1780,12 +1780,12 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-audiobitspersecond"><c- g>audioBitsPerSecond</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videobitspersecond"><c- g>videoBitsPerSecond</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-bitspersecond"><c- g>bitsPerSecond</c-></a>;
-  <a data-link-type="idl-name" href="#enumdef-bitratemode"><c- n>BitrateMode</c-></a> <a class="idl-code" data-default="&quot;vbr&quot;" data-link-type="dict-member" data-type="BitrateMode " href="#dom-mediarecorderoptions-audiobitratemode"><c- g>audioBitrateMode</c-></a> = "vbr";
+  <a data-link-type="idl-name" href="#enumdef-bitratemode"><c- n>BitrateMode</c-></a> <a class="idl-code" data-default="&quot;variable&quot;" data-link-type="dict-member" data-type="BitrateMode " href="#dom-mediarecorderoptions-audiobitratemode"><c- g>audioBitrateMode</c-></a> = "variable";
 };
 
 <c- b>enum</c-> <a href="#enumdef-bitratemode"><code><c- g>BitrateMode</c-></code></a> {
-  <a class="idl-code" data-link-type="enum-value" href="#dom-bitratemode-cbr"><c- s>"cbr"</c-></a>,
-  <a class="idl-code" data-link-type="enum-value" href="#dom-bitratemode-vbr"><c- s>"vbr"</c-></a>
+  <a class="idl-code" data-link-type="enum-value" href="#dom-bitratemode-constant"><c- s>"constant"</c-></a>,
+  <a class="idl-code" data-link-type="enum-value" href="#dom-bitratemode-variable"><c- s>"variable"</c-></a>
 };
 
 <c- b>enum</c-> <a href="#enumdef-recordingstate"><code><c- g>RecordingState</c-></code></a> {
@@ -2072,16 +2072,16 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
     <li><a href="#ref-for-enumdef-bitratemode⑥">2.5.1. Members</a> <a href="#ref-for-enumdef-bitratemode⑦">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="dom-bitratemode-cbr">
-   <b><a href="#dom-bitratemode-cbr">#dom-bitratemode-cbr</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="dom-bitratemode-constant">
+   <b><a href="#dom-bitratemode-constant">#dom-bitratemode-constant</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-bitratemode-cbr">2.6. BitrateMode</a>
+    <li><a href="#ref-for-dom-bitratemode-constant">2.6. BitrateMode</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="dom-bitratemode-vbr">
-   <b><a href="#dom-bitratemode-vbr">#dom-bitratemode-vbr</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="dom-bitratemode-variable">
+   <b><a href="#dom-bitratemode-variable">#dom-bitratemode-variable</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-bitratemode-vbr">2.6. BitrateMode</a>
+    <li><a href="#ref-for-dom-bitratemode-variable">2.6. BitrateMode</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="enumdef-recordingstate">
