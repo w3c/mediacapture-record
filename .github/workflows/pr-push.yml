@@ -22,3 +22,4 @@ jobs:
           W3C_NOTIFICATIONS_CC: dom@w3.org
           W3C_BUILD_OVERRIDE: |
             status: WD
+            previous-version: https://www.w3.org/TR/2020/WD-mediastream-recording-20201201/
