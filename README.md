@@ -15,7 +15,7 @@ You're welcome to contribute! Let's make the Web rock our socks off!
 Notes on bikeshedding :bicyclist:
 --------------
 
-Branch `gh-pages` is automatically updated from `master` branch upon commit.
+Branch `gh-pages` is automatically updated from `main` branch upon commit.
 
 During development it's often a good idea to try and render `MediaRecorder.bs`
 locally, for that, and using the online compiler:

@@ -2,12 +2,12 @@ name: Auto-publish
 on:
   pull_request: {}
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   main:
     name: Build, Validate and Deploy
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: w3c/spec-prod@v2
@@ -22,4 +22,4 @@ jobs:
           W3C_NOTIFICATIONS_CC: dom@w3.org
           W3C_BUILD_OVERRIDE: |
             status: WD
-            previous-version: https://www.w3.org/TR/2020/WD-mediastream-recording-20201201/
+            previous-version: https://www.w3.org/TR/2021/WD-mediastream-recording-20210208/
