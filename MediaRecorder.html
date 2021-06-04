@@ -5,9 +5,9 @@
   <title>MediaStream Recording</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version c5172e83, updated Fri Nov 20 15:35:20 2020 -0800" name="generator">
+  <meta content="Bikeshed version 800b43329, updated Tue May 25 14:13:32 2021 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediastream-recording/" rel="canonical">
-  <meta content="d348eafd9ac37bf46596797126f5aceb41b80c81" name="document-revision">
+  <meta content="471c1ce73a352758fcb97bc1e949dec2f40aa136" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -131,9 +131,9 @@ pre .property::before, pre .property::after {
     --ins-bg: transparent;
 
     --a-normal-text: #034575;
-    --a-normal-underline: #707070;
+    --a-normal-underline: #bbb;
     --a-visited-text: var(--a-normal-text);
-    --a-visited-underline: #bbb;
+    --a-visited-underline: #707070;
     --a-hover-bg: rgba(75%, 75%, 75%, .25);
     --a-active-text: #c00;
     --a-active-underline: #c00;
@@ -596,7 +596,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Recording</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-02-05">5 February 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-06-04">4 June 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -615,7 +615,6 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      <dt>Participate:
      <dd><a href="https://lists.w3.org/Archives/Public/public-webrtc/">Mailing list</a>
      <dd><a href="https://github.com/w3c/mediacapture-record">GitHub repo</a> (<a href="https://github.com/w3c/mediacapture-record/issues/new">new issue</a>, <a href="https://github.com/w3c/mediacapture-record/issues">open issues</a>)
-     <dd>
      <dt>Implementation:
      <dd><a href="http://caniuse.com/#feat=mediarecorder">Can I use Media Recording?</a>
      <dd><a href="https://github.com/miguelao/mediacapture-record-implementation-status/blob/master/chromium.md">Chromium Encode Acceleration Support</a>
@@ -1261,7 +1260,7 @@ specific type.</p>
      <tr>
       <th>Event name
       <th>Interface
-      <th><a href="https://dom.spec.whatwg.org/#concept-event-fire" id="termref-for-">Fired </a> when...
+      <th><a href="https://dom.spec.whatwg.org/#concept-event-fire" id="termref-for-concept-event-fire">Fired </a> when...
     <tbody>
      <tr>
       <td><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="event" data-export id="eventdef-mediarecorder-start"><code>start</code></dfn>
@@ -1391,7 +1390,7 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
       recordedChunks<c- p>.</c->push<c- p>(</c->event<c- p>.</c->data<c- p>);</c->
     <c- p>};</c->
 
-    recorder<c- p>.</c->start<c- p>(</c-><c- mi>100</c-><c- p>);</c->
+    recorder<c- p>.</c->start<c- p>(</c-><c- mf>100</c-><c- p>);</c->
   <c- p>}</c->
 
   navigator<c- p>.</c->mediaDevices<c- p>.</c->getUserMedia<c- p>({</c->video<c- o>:</c-> <c- kc>true</c-><c- p>,</c-> audio<c- o>:</c-> <c- kc>true</c-><c- p>})</c->
@@ -1535,7 +1534,7 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
     <li><a href="#ref-for-concept-event-fire">2.3. Methods</a> <a href="#ref-for-concept-event-fire①">(2)</a> <a href="#ref-for-concept-event-fire②">(3)</a> <a href="#ref-for-concept-event-fire③">(4)</a> <a href="#ref-for-concept-event-fire④">(5)</a> <a href="#ref-for-concept-event-fire⑤">(6)</a> <a href="#ref-for-concept-event-fire⑥">(7)</a> <a href="#ref-for-concept-event-fire⑦">(8)</a>
     <li><a href="#ref-for-concept-event-fire⑧">2.4. Data handling</a>
     <li><a href="#ref-for-concept-event-fire⑨">4.1. General principles</a> <a href="#ref-for-concept-event-fire①⓪">(2)</a>
-    <li><a href="#termref-for-">5. Event summary</a>
+    <li><a href="#termref-for-concept-event-fire">5. Event summary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-fetch-resume">
@@ -1732,22 +1731,22 @@ the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediac
    <dt id="biblio-fetch">[FETCH]
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/">Fetch Standard</a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-fileapi">[FileAPI]
-   <dd>Marijn Kruisselbrink; Arun Ranganathan. <a href="https://www.w3.org/TR/FileAPI/">File API</a>. 11 September 2019. WD. URL: <a href="https://www.w3.org/TR/FileAPI/">https://www.w3.org/TR/FileAPI/</a>
+   <dd>Marijn Kruisselbrink; Arun Ranganathan. <a href="https://www.w3.org/TR/FileAPI/">File API</a>. 27 April 2021. WD. URL: <a href="https://www.w3.org/TR/FileAPI/">https://www.w3.org/TR/FileAPI/</a>
    <dt id="biblio-getusermedia">[GETUSERMEDIA]
-   <dd>Cullen Jennings; et al. <a href="https://www.w3.org/TR/mediacapture-streams/">Media Capture and Streams</a>. 4 November 2020. CR. URL: <a href="https://www.w3.org/TR/mediacapture-streams/">https://www.w3.org/TR/mediacapture-streams/</a>
+   <dd>Cullen Jennings; et al. <a href="https://www.w3.org/TR/mediacapture-streams/">Media Capture and Streams</a>. 1 June 2021. CR. URL: <a href="https://www.w3.org/TR/mediacapture-streams/">https://www.w3.org/TR/mediacapture-streams/</a>
    <dt id="biblio-hr-time">[HR-TIME]
-   <dd>Ilya Grigorik. <a href="https://www.w3.org/TR/hr-time-2/">High Resolution Time Level 2</a>. 21 November 2019. REC. URL: <a href="https://www.w3.org/TR/hr-time-2/">https://www.w3.org/TR/hr-time-2/</a>
+   <dd>Yoav Weiss; et al. <a href="https://www.w3.org/TR/hr-time-3/">High Resolution Time</a>. 24 March 2021. WD. URL: <a href="https://www.w3.org/TR/hr-time-3/">https://www.w3.org/TR/hr-time-3/</a>
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-rfc2046">[RFC2046]
-   <dd>N. Freed; N. Borenstein. <a href="https://tools.ietf.org/html/rfc2046">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types</a>. November 1996. Draft Standard. URL: <a href="https://tools.ietf.org/html/rfc2046">https://tools.ietf.org/html/rfc2046</a>
+   <dd>N. Freed; N. Borenstein. <a href="https://datatracker.ietf.org/doc/html/rfc2046">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types</a>. November 1996. Draft Standard. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2046">https://datatracker.ietf.org/doc/html/rfc2046</a>
    <dt id="biblio-webidl">[WebIDL]
    <dd>Boris Zbarsky. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 15 December 2016. ED. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
    <dt id="biblio-rfc6381">[RFC6381]
-   <dd>R. Gellens; D. Singer; P. Frojdh. <a href="https://tools.ietf.org/html/rfc6381">The 'Codecs' and 'Profiles' Parameters for "Bucket" Media Types</a>. August 2011. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc6381">https://tools.ietf.org/html/rfc6381</a>
+   <dd>R. Gellens; D. Singer; P. Frojdh. <a href="https://datatracker.ietf.org/doc/html/rfc6381">The 'Codecs' and 'Profiles' Parameters for "Bucket" Media Types</a>. August 2011. Proposed Standard. URL: <a href="https://datatracker.ietf.org/doc/html/rfc6381">https://datatracker.ietf.org/doc/html/rfc6381</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
@@ -2344,7 +2343,7 @@ document.body.addEventListener("click", function(e) {
             }
         }
         function getVarName(el) {
-            return el.textContent.replace(/(\s| )+/, " ").trim();
+            return el.textContent.replace(/(\s|\xa0)+/, " ").trim();
         }
         function chooseHighlightIndex(algoName, varName) {
             let indexes = null;
