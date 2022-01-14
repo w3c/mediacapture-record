@@ -2,6 +2,8 @@ name: Auto-publish
 on:
   pull_request: {}
   push:
+    paths:
+      - MediaRecorder.bs
     branches: [main]
 
 jobs:
