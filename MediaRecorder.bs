@@ -669,8 +669,7 @@ dictionary BlobEventInit {
 <em>This section is non-normative.</em>
 
 The UA will throw a {{DOMException}} when the error can be detected at the time
-that the call is made. In all other cases the UA will <a>fire an event</a> named
-{{ErrorEvent}}.  If recording has been started and not yet stopped
+that the call is made. In all other cases the UA will <a>fire an error event</a>.  If recording has been started and not yet stopped
 when the error occurs, let <var>blob</var> be the {{Blob}} of collected data so
 far; after raising the error, the UA will <a data-lt="fire a blob event">fire a
 dataavailable event</a> with <var>blob</var>; immediately after the UA will then
@@ -680,27 +679,9 @@ maximum {{Blob}} size that it will support, or the number of
 {{MediaStreamTrack}}s it will record at once.
 It will signal a fatal error if these limits are exceeded.
 
-## Error eventsMediaRecorderErrorEvent ## {#errorevent-section}
+## Error events ## {#errorevent-section}
 
-To <dfn>fire an error event</dfn>
-named <var>e</var> with a {{DOMException}} named <var>error</var> means that an
-event with the name <var>e</var>, which does not bubble (except where otherwise
-stated) and is not cancelable (except where otherwise stated), and which uses
-the {{ErrorEvent}} interface with the
-{{ErrorEvent/error}} attribute set to <var>error</var>, must be
-created and [=dispatch|dispatch=] at
-the given target.
-
-The {{DOMException}} causing the error that triggered the event may provide
-an explanatory message about the error circumstances
-in its {{DOMException/message}} attribute.
-
-  <div class="note">
-  If an implementation places non-standard properties on {{DOMException}},
-  exposing e.g. stack traces or error line numbers, these are encouraged to
-  point to whichever method call most closely identifies the run-time operation
-  that caused the error, e.g. {{start()}}.
-  </div>
+To <dfn>fire an error event</dfn> means to [= fire an event =] using {{ErrorEvent}} as <var ignore>eventConstructor</var>.
 
 ## Exception Summary ## {#exception-summary}
 
