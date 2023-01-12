@@ -247,11 +247,13 @@ interface MediaRecorder : EventTarget {
 
     <li>Let |videoKeyFrameInterval| be the value of |recorder|'s internal
     [=[[VideoKeyFrameInterval]]=] slot if defined, and configure the video encoder to
-    target key frame generation with the interval. If the value isn't defined, the
-    User Agent will emit key frames as it deems fit for the purpose.
+    target key frame generation with the interval, meaning the User Agent SHOULD
+    encode a key frame on the next frame after this interval has passed since the
+    last key frame. If |videoKeyFrameInterval| isn't defined, the User Agent will
+    emit key frames as it deems fit.
     |videoKeyFrameInterval| is a hint for the video encoder and the actual
     intervals in the recording might be surpassed or not achieved. Note also that
-    encoders might make independent decisions when to emit key frames.</li>
+    encoders will make independent decisions about when to emit key frames.</li>
 
     <li>Constrain the configuration of |recorder| to encode using the
     {{BitrateMode}} specified by the value of |recorder|'s {{MediaRecorder/audioBitrateMode}}
