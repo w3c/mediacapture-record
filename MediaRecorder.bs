@@ -98,11 +98,15 @@ interface MediaRecorder : EventTarget {
     member.</li>
     <li>Let |recorder| have a <dfn>\[[ConstrainedBitsPerSecond]]</dfn> internal
     slot, initialized to the value of |options|'
-    {{MediaRecorderOptions/bitsPerSecond}} member, if it is present, otherwise
+    {{MediaRecorderOptions/bitsPerSecond}} member if it is present, otherwise
     <code>undefined</code>.</li>
-    <li>Let |recorder| have a <dfn>\[[VideoKeyFrameInterval]]</dfn> internal
+    <li>Let |recorder| have a <dfn>\[[VideoKeyFrameIntervalDuration]]</dfn> internal
     slot, initialized to the value of |options|'
-    {{MediaRecorderOptions/videoKeyFrameInterval}} member, if it is present, otherwise
+    {{MediaRecorderOptions/videoKeyFrameIntervalDuration}} member if it is present, otherwise
+    <code>undefined</code>.</li>
+    <li>Let |recorder| have a <dfn>\[[VideoKeyFrameIntervalCount]]</dfn> internal
+    slot, initialized to the value of |options|'
+    {{MediaRecorderOptions/videoKeyFrameIntervalCount}} member if it is present, otherwise
     <code>undefined</code>.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/stream}} attribute to
     |stream|.</li>
@@ -245,15 +249,24 @@ interface MediaRecorder : EventTarget {
     the value might be surpassed, not achieved, or only be achieved over a long
     period of time.</li>
 
-    <li>Let |videoKeyFrameInterval| be the value of |recorder|'s internal
-    [=[[VideoKeyFrameInterval]]=] slot if defined, and configure the video encoder to
-    target key frame generation with the interval, meaning the User Agent SHOULD
-    encode a key frame on the next frame after this interval has passed since the
-    last key frame. If |videoKeyFrameInterval| isn't defined, the User Agent will
-    emit key frames as it deems fit.
-    |videoKeyFrameInterval| is a hint for the video encoder and the actual
-    intervals in the recording might be surpassed or not achieved. Note also that
-    encoders will make independent decisions about when to emit key frames.</li>
+    <li>Let |videoKeyFrameIntervalDuration| be the value of |recorder|'s internal
+    [=[[VideoKeyFrameIntervalDuration]]=] slot if defined. Additionally let
+    |videoKeyFrameIntervalCount| be the value of |recorder|'s internal
+    [=[[VideoKeyFrameIntervalCount]]=] slot if defined.
+    If neither of the slots are defined, the User Agent may emit key frames as
+    it deems fit.
+    If only |videoKeyFrameIntervalDuration| is defined, the video encoder
+    SHOULD produce a keyframe on the first frame arriving after
+    |videoKeyFrameIntervalDuration| elapsed since the last key frame.
+    If only |videoKeyFrameIntervalCount| is defined, the video encoder
+    SHOULD produce a keyframe on the first frame arriving after
+    |videoKeyFrameIntervalCount| frames passed since the last key frame.
+    If both are defined, the video encoder SHOULD produce a keyframe on the
+    first frame arriving after both |videoKeyFrameIntervalDuration| elapsed AND
+    |videoKeyFrameIntervalCount| frames passed since the last key frame.
+
+    Note that encoders will sometimes make independent decisions about when to
+    emit key frames.</li>
 
     <li>Constrain the configuration of |recorder| to encode using the
     {{BitrateMode}} specified by the value of |recorder|'s {{MediaRecorder/audioBitrateMode}}
@@ -545,7 +558,8 @@ dictionary MediaRecorderOptions {
   unsigned long videoBitsPerSecond;
   unsigned long bitsPerSecond;
   BitrateMode audioBitrateMode = "variable";
-  DOMHighResTimeStamp videoKeyFrameInterval;
+  DOMHighResTimeStamp videoKeyFrameIntervalDuration;
+  unsigned long videoKeyFrameIntervalCount;
 };
 </pre>
 
@@ -580,9 +594,15 @@ dictionary MediaRecorderOptions {
   <dt><dfn dict-member for="MediaRecorderOptions"><code>audioBitrateMode</code></dfn></dt>
   <dd>Specifes the {{BitrateMode}} that should be used to encode the Audio track(s).</dd>
 
-  <dt><dfn dict-member for="MediaRecorderOptions"><code>videoKeyFrameInterval</code></dfn></dt>
-  <dd>Specifies the nominal interval between key frames in the encoded video stream.
-  If this value isn't specified, the UA will control key frame generation as it sees fit.</dd>
+  <dt><dfn dict-member for="MediaRecorderOptions"><code>videoKeyFrameIntervalDuration</code></dfn></dt>
+  <dd>Specifies the nominal interval in time between key frames in the encoded video stream.
+  The UA controls key frame generation considering this dictionary member as well as 
+  {{MediaRecorderOptions/videoKeyFrameIntervalCount}}.</dd>
+
+  <dt><dfn dict-member for="MediaRecorderOptions"><code>videoKeyFrameIntervalCount</code></dfn></dt>
+  <dd>Specifies the interval in number of frames between key frames in the encoded video stream.
+  The UA controls key frame generation considering this dictionary member as well as 
+  {{MediaRecorderOptions/videoKeyFrameIntervalDuration}}.</dd>
 </dl>
 
 ## BitrateMode ## {#bitratemode}
