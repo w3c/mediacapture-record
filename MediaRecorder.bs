@@ -250,20 +250,27 @@ interface MediaRecorder : EventTarget {
     period of time.</li>
 
     <li>Let |videoKeyFrameIntervalDuration| be the value of |recorder|'s internal
-    [=[[VideoKeyFrameIntervalDuration]]=] slot if defined. Additionally let
+    [=[[VideoKeyFrameIntervalDuration]]=] slot if defined, and let
     |videoKeyFrameIntervalCount| be the value of |recorder|'s internal
-    [=[[VideoKeyFrameIntervalCount]]=] slot if defined.
-    If neither of the slots are defined, the User Agent may emit key frames as
-    it deems fit.
-    If only |videoKeyFrameIntervalDuration| is defined, the video encoder
-    SHOULD produce a keyframe on the first frame arriving after
-    |videoKeyFrameIntervalDuration| elapsed since the last key frame.
-    If only |videoKeyFrameIntervalCount| is defined, the video encoder
-    SHOULD produce a keyframe on the first frame arriving after
-    |videoKeyFrameIntervalCount| frames passed since the last key frame.
-    If both are defined, the video encoder SHOULD produce a keyframe on the
-    first frame arriving after both |videoKeyFrameIntervalDuration| elapsed AND
-    |videoKeyFrameIntervalCount| frames passed since the last key frame.
+    [=[[VideoKeyFrameIntervalCount]]=] slot if defined. The UA SHOULD constrain the
+    configuration of |recorder| so that the video encoders follow the below rules:
+
+    <ol>
+    <li>If neither of the slots are defined, the User Agent may emit key frames as
+    it deems fit.</li>
+
+    <li>If only |videoKeyFrameIntervalDuration| is defined, the video encoder
+    produces a keyframe on the first frame arriving after |videoKeyFrameIntervalDuration|
+    seconds elapsed since the last key frame.</li>
+
+    <li>If only |videoKeyFrameIntervalCount| is defined, the video encoder produces a keyframe
+    on the first frame arriving after |videoKeyFrameIntervalCount| frames passed
+    since the last key frame.</li>
+
+    <li>If both are defined, the video encoder produces a keyframe on the first frame arriving after
+    both |videoKeyFrameIntervalDuration| seconds elapsed AND at least |videoKeyFrameIntervalCount|
+    frames passed since the last key frame.</li>
+    </ol>
 
     Note that encoders will sometimes make independent decisions about when to
     emit key frames.</li>
