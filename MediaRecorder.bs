@@ -123,7 +123,7 @@ interface MediaRecorder : EventTarget {
     present. Otherwise, choose a target value the User Agent deems reasonable
     for audio.</li>
     <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
-    <code>undefined</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
+    <code>null</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
     {{MediaRecorder/audioBitsPerSecond}} attributes to values the User Agent deems reasonable
     for the respective media types, such that the sum of {{MediaRecorder/videoBitsPerSecond}}
     and {{MediaRecorder/audioBitsPerSecond}} is close to the value of |recorder|'s
@@ -228,8 +228,8 @@ interface MediaRecorder : EventTarget {
     media type, container, and codec specified in the [=[[ConstrainedMimeType]]=]
     slot.</li>
 
-    <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
-    <code>undefined</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
+    <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is
+    <code>null</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
     {{MediaRecorder/audioBitsPerSecond}} attributes to values the User Agent deems reasonable
     for the respective media types, for recording all tracks in |tracks|, such
     that the sum of {{MediaRecorder/videoBitsPerSecond}} and {{MediaRecorder/audioBitsPerSecond}} is close
@@ -253,24 +253,25 @@ interface MediaRecorder : EventTarget {
     |recorder|.[=[[VideoKeyFrameIntervalDuration]]=], and let
     |videoKeyFrameIntervalCount| be
     |recorder|.[=[[VideoKeyFrameIntervalCount]]=]. The UA SHOULD constrain the
-    configuration of |recorder| so that the video encoders follow the below rules:
+    configuration of |recorder| so that the video encoder follows the below rules:
 
-    <ol>
-    <li>If neither of the slots are defined, the User Agent may emit key frames as
-    it deems fit.</li>
-
-    <li>If only |videoKeyFrameIntervalDuration| is defined, the video encoder
-    produces a keyframe on the first frame arriving after |videoKeyFrameIntervalDuration|
+    <ul>
+    <li>If |videoKeyFrameIntervalDuration| is not <code>null</code> and |videoKeyFrameIntervalCount| is <code>null</code>,
+    the video encoder produces a keyframe on the first frame arriving after |videoKeyFrameIntervalDuration|
     seconds elapsed since the last key frame.</li>
 
-    <li>If only |videoKeyFrameIntervalCount| is defined, the video encoder produces a keyframe
-    on the first frame arriving after |videoKeyFrameIntervalCount| frames passed
-    since the last key frame.</li>
+    <li>If |videoKeyFrameIntervalCount| is not <code>null</code> and |videoKeyFrameIntervalDuration| is <code>null</code>,
+    the video encoder produces a keyframe on the first frame arriving after |videoKeyFrameIntervalCount|
+    frames passed since the last key frame.</li>
 
-    <li>If both are defined, the video encoder produces a keyframe on the first frame arriving after
+    <li>If |videoKeyFrameIntervalDuration| and |videoKeyFrameIntervalCount| are both not <code>null</code>,
+    the video encoder produces a keyframe on the first frame arriving after
     both |videoKeyFrameIntervalDuration| seconds elapsed AND at least |videoKeyFrameIntervalCount|
     frames passed since the last key frame.</li>
-    </ol>
+
+    <li>If both |videoKeyFrameIntervalDuration| and |videoKeyFrameIntervalCount| are <code>null</code>,
+    the User Agent may emit key frames as it deems fit.</li>
+    </ul>
 
     Note that encoders will sometimes make independent decisions about when to
     emit key frames.</li>
