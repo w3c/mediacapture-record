@@ -249,10 +249,10 @@ interface MediaRecorder : EventTarget {
     the value might be surpassed, not achieved, or only be achieved over a long
     period of time.</li>
 
-    <li>Let |videoKeyFrameIntervalDuration| be the value of |recorder|'s internal
-    [=[[VideoKeyFrameIntervalDuration]]=] slot if defined, and let
-    |videoKeyFrameIntervalCount| be the value of |recorder|'s internal
-    [=[[VideoKeyFrameIntervalCount]]=] slot if defined. The UA SHOULD constrain the
+    <li>Let |videoKeyFrameIntervalDuration| be
+    |recorder|.[=[[VideoKeyFrameIntervalDuration]]=], and let
+    |videoKeyFrameIntervalCount| be
+    |recorder|.[=[[VideoKeyFrameIntervalCount]]=]. The UA SHOULD constrain the
     configuration of |recorder| so that the video encoders follow the below rules:
 
     <ol>
