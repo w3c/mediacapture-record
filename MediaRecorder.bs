@@ -228,7 +228,7 @@ interface MediaRecorder : EventTarget {
     media type, container, and codec specified in the [=[[ConstrainedMimeType]]=]
     slot.</li>
 
-    <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is
+    <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
     <code>null</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
     {{MediaRecorder/audioBitsPerSecond}} attributes to values the User Agent deems reasonable
     for the respective media types, for recording all tracks in |tracks|, such
