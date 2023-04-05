@@ -99,15 +99,15 @@ interface MediaRecorder : EventTarget {
     <li>Let |recorder| have a <dfn>\[[ConstrainedBitsPerSecond]]</dfn> internal
     slot, initialized to the value of |options|'
     {{MediaRecorderOptions/bitsPerSecond}} member if it is present, otherwise
-    <code>undefined</code>.</li>
+    <code>null</code>.</li>
     <li>Let |recorder| have a <dfn>\[[VideoKeyFrameIntervalDuration]]</dfn> internal
     slot, initialized to the value of |options|'
     {{MediaRecorderOptions/videoKeyFrameIntervalDuration}} member if it is present, otherwise
-    <code>undefined</code>.</li>
+    <code>null</code>.</li>
     <li>Let |recorder| have a <dfn>\[[VideoKeyFrameIntervalCount]]</dfn> internal
     slot, initialized to the value of |options|'
     {{MediaRecorderOptions/videoKeyFrameIntervalCount}} member if it is present, otherwise
-    <code>undefined</code>.</li>
+    <code>null</code>.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/stream}} attribute to
     |stream|.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/mimeType}} attribute to the
