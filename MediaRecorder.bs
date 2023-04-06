@@ -254,7 +254,6 @@ interface MediaRecorder : EventTarget {
     |videoKeyFrameIntervalCount| be
     |recorder|.[=[[VideoKeyFrameIntervalCount]]=]. The UA SHOULD constrain the
     configuration of |recorder| so that the video encoder follows the below rules:
-
     <ul>
     <li>If |videoKeyFrameIntervalDuration| is not <code>null</code> and |videoKeyFrameIntervalCount| is <code>null</code>,
     the video encoder produces a keyframe on the first frame arriving after |videoKeyFrameIntervalDuration|
@@ -264,10 +263,8 @@ interface MediaRecorder : EventTarget {
     the video encoder produces a keyframe on the first frame arriving after |videoKeyFrameIntervalCount|
     frames passed since the last key frame.</li>
 
-    <li>If |videoKeyFrameIntervalDuration| and |videoKeyFrameIntervalCount| are both not <code>null</code>,
-    the video encoder produces a keyframe on the first frame arriving after
-    both |videoKeyFrameIntervalDuration| seconds elapsed AND at least |videoKeyFrameIntervalCount|
-    frames passed since the last key frame.</li>
+    <li>If both |videoKeyFrameIntervalDuration| and |videoKeyFrameIntervalCount| are not <code>null</code>,
+    the UA may ignore either.</li>
 
     <li>If both |videoKeyFrameIntervalDuration| and |videoKeyFrameIntervalCount| are <code>null</code>,
     the User Agent may emit key frames as it deems fit.</li>
