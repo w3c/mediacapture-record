@@ -872,7 +872,7 @@ with minimal modifications.
 
 ## Recording webcam video and audio ## {#example2}
 
-This example captures an video+audio {{MediaStream}} using {{getUserMedia()}},
+This example captures an video+audio {{MediaStream}} using {{MediaDevices/getUserMedia()}},
 plugs it into a <code>&lt;video&gt;</code> tag and tries to record it,
 retrieving the recorded chunks via the {{ondataavailable}} event.  Note that the
 recording will go on forever until either MediaRecorder is {{stop()}}ed or all
@@ -930,54 +930,16 @@ The <code>recordedChunks</code> can be saved to a file using e.g. the function
 </div>
 
 
-
-
-
 <pre class="anchors">
-type: interface; text: DOMString; url: https://heycam.github.io/webidl/#idl-DOMString; spec: webidl
-</pre>
-
-<pre class="anchors">
-type: interface; text: DOMHighResTimeStamp; url: https://www.w3.org/TR/hr-time/#dom-domhighrestimestamp;
-</pre>
-
-<pre class="anchors">
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStream; url: mediastream
-
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: track set; url: track-set
-
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: inactive; url: stream-inactive
-
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStreamTrack; url: mediastreamtrack
-
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: onmute; url: dom-mediastreamtrack-onmute
-
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getUserMedia(); url: dom-mediadevices-getusermedia
-
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: muted; url: dom-mediastreamtrack-muted
-
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: enabled; url: dom-mediastreamtrack-enabled
-
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: kind; url: dom-mediastreamtrack-kind
-
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: enum-value; text: ended; url: idl-def-MediaStreamTrackState.ended
-
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: enum-value; text: live; url: idl-def-MediaStreamTrackState.live
-
 urlPrefix: https://www.w3.org/TR/webrtc-identity/#; type: dfn; text: isolation properties; url: isolated-media-streams
-</pre>
-
-<pre class="anchors">
 urlPrefix: https://www.w3.org/TR/fingerprinting-guidance/#
     type: dfn
         text: active fingerprinting; url: dfn-active-fingerprinting
-        text: fingerprinting surface; url: dfn-fingerprinting-surface
 </pre>
 
 <pre class="link-defaults">
-spec: html
-    type: dfn
-        text: allowed to show a popup
-        text: in parallel
-        text: incumbent settings object
+spec:mediacapture-streams; type:enum-value; text:ended
+spec:mediacapture-streams; type:attribute; text:muted
+spec:mediacapture-streams; type:attribute; text:enabled
 </pre>
