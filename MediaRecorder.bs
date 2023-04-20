@@ -257,7 +257,7 @@ interface MediaRecorder : EventTarget {
     <ul>
     <li>If |videoKeyFrameIntervalDuration| is not <code>null</code> and |videoKeyFrameIntervalCount| is <code>null</code>,
     the video encoder produces a keyframe on the first frame arriving after |videoKeyFrameIntervalDuration|
-    seconds elapsed since the last key frame.</li>
+    milliseconds elapsed since the last key frame.</li>
 
     <li>If |videoKeyFrameIntervalCount| is not <code>null</code> and |videoKeyFrameIntervalDuration| is <code>null</code>,
     the video encoder produces a keyframe on the first frame arriving after |videoKeyFrameIntervalCount|
