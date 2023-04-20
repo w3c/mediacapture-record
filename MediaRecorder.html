@@ -6,9 +6,9 @@
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
+  <meta content="Bikeshed version bf22245b8, updated Tue Apr 18 15:53:37 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediastream-recording/" rel="canonical">
-  <meta content="5d543204a25b1cb485ec14d1cce9aaa2c7725ef8" name="document-revision">
+  <meta content="4b579242f5c6490ef9c3c67b77c3beb914ea0ae3" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -236,8 +236,7 @@ figcaption:not(.no-marker)::before {
     position: absolute;
     z-index: 35;
     width: 20em;
-    min-width: min-content;
-    max-width: 300px;
+    width: 300px;
     height: auto;
     max-height: 500px;
     overflow: auto;
@@ -254,8 +253,15 @@ figcaption:not(.no-marker)::before {
 .dfn-panel a { color: var(--dfnpanel-text); }
 .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
 .dfn-panel > b + b { margin-top: 0.25em; }
-.dfn-panel ul { padding: 0; }
-.dfn-panel li { list-style: inside; }
+.dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
+.dfn-panel li a {
+    white-space: pre;
+    display: inline-block;
+    max-width: calc(300px - 1.5em - 1em);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .dfn-panel.activated {
     display: inline-block;
     position: fixed;
@@ -266,7 +272,7 @@ figcaption:not(.no-marker)::before {
     max-height: 30vh;
 }
 
-.dfn-paneled { cursor: pointer; }
+.dfn-paneled[role="button"] { cursor: pointer; }
 </style>
 <style>/* style-issues */
 a[href].issue-return {
@@ -411,16 +417,15 @@ c-[vi] { color: #0077aa } /* Name.Variable.Instance */
 c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 </style>
 <style>/* style-var-click-highlighting */
-
-    var { cursor: pointer; }
-    var.selected0 { background-color: #F4D200; box-shadow: 0 0 0 2px #F4D200; }
-    var.selected1 { background-color: #FF87A2; box-shadow: 0 0 0 2px #FF87A2; }
-    var.selected2 { background-color: #96E885; box-shadow: 0 0 0 2px #96E885; }
-    var.selected3 { background-color: #3EEED2; box-shadow: 0 0 0 2px #3EEED2; }
-    var.selected4 { background-color: #EACFB6; box-shadow: 0 0 0 2px #EACFB6; }
-    var.selected5 { background-color: #82DDFF; box-shadow: 0 0 0 2px #82DDFF; }
-    var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
-    </style>
+var { cursor: pointer; }
+var.selected0 { background-color: #F4D200; box-shadow: 0 0 0 2px #F4D200; }
+var.selected1 { background-color: #FF87A2; box-shadow: 0 0 0 2px #FF87A2; }
+var.selected2 { background-color: #96E885; box-shadow: 0 0 0 2px #96E885; }
+var.selected3 { background-color: #3EEED2; box-shadow: 0 0 0 2px #3EEED2; }
+var.selected4 { background-color: #EACFB6; box-shadow: 0 0 0 2px #EACFB6; }
+var.selected5 { background-color: #82DDFF; box-shadow: 0 0 0 2px #82DDFF; }
+var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
+</style>
 <style>/* style-darkmode */
 
 @media (prefers-color-scheme: dark) {
@@ -617,7 +622,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Recording</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-04-14">14 April 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-04-20">20 April 2023</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -796,7 +801,11 @@ at regular intervals.</p>
       <li>Let <var>recorder</var> have a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="constrainedmimetype">[[ConstrainedMimeType]]</dfn> internal slot,
     initialized to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-mimetype" id="ref-for-dom-mediarecorderoptions-mimetype①">mimeType</a></code> member.
       <li>Let <var>recorder</var> have a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="constrainedbitspersecond">[[ConstrainedBitsPerSecond]]</dfn> internal
-    slot, initialized to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond">bitsPerSecond</a></code> member, if it is present, otherwise <code>undefined</code>.
+    slot, initialized to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond">bitsPerSecond</a></code> member if it is present, otherwise <code>null</code>.
+      <li>Let <var>recorder</var> have a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="videokeyframeintervalduration">[[VideoKeyFrameIntervalDuration]]</dfn> internal
+    slot, initialized to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videokeyframeintervalduration" id="ref-for-dom-mediarecorderoptions-videokeyframeintervalduration">videoKeyFrameIntervalDuration</a></code> member if it is present, otherwise <code>null</code>.
+      <li>Let <var>recorder</var> have a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="videokeyframeintervalcount">[[VideoKeyFrameIntervalCount]]</dfn> internal
+    slot, initialized to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videokeyframeintervalcount" id="ref-for-dom-mediarecorderoptions-videokeyframeintervalcount">videoKeyFrameIntervalCount</a></code> member if it is present, otherwise <code>null</code>.
       <li>Initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-stream" id="ref-for-dom-mediarecorder-stream①">stream</a></code> attribute to <var>stream</var>.
       <li>Initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-mimetype" id="ref-for-dom-mediarecorder-mimetype①">mimeType</a></code> attribute to the
     value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype">[[ConstrainedMimeType]]</a> slot.
@@ -807,7 +816,7 @@ at regular intervals.</p>
       <li>Initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond①">audioBitsPerSecond</a></code> attribute to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond">audioBitsPerSecond</a></code> member, if it is
     present. Otherwise, choose a target value the User Agent deems reasonable
     for audio.
-      <li>If <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond">[[ConstrainedBitsPerSecond]]</a> slot is not <code>undefined</code>, set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond②">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond②">audioBitsPerSecond</a></code> attributes to values the User Agent deems reasonable
+      <li>If <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond">[[ConstrainedBitsPerSecond]]</a> slot is not <code>null</code>, set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond②">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond②">audioBitsPerSecond</a></code> attributes to values the User Agent deems reasonable
     for the respective media types, such that the sum of <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond③">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond③">audioBitsPerSecond</a></code> is close to the value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond①">[[ConstrainedBitsPerSecond]]</a> slot.
       <li>If <var>recorder</var> supports the <code class="idl"><a data-link-type="idl" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode①">BitrateMode</a></code> specified by the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode">audioBitrateMode</a></code> member,
     then initialize <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitratemode" id="ref-for-dom-mediarecorder-audiobitratemode①">audioBitrateMode</a></code> attribute to the value of <var>options</var>’ <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode①">audioBitrateMode</a></code> member,
@@ -875,7 +884,7 @@ at regular intervals.</p>
       <li>If the <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype①">[[ConstrainedMimeType]]</a> slot specifies a media type,
     container, or codec, then constrain the configuration of <var>recorder</var> to the
     media type, container, and codec specified in the <a data-link-type="dfn" href="#constrainedmimetype" id="ref-for-constrainedmimetype②">[[ConstrainedMimeType]]</a> slot.
-      <li>If <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond②">[[ConstrainedBitsPerSecond]]</a> slot is not <code>undefined</code>, set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond④">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond④">audioBitsPerSecond</a></code> attributes to values the User Agent deems reasonable
+      <li>If <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond②">[[ConstrainedBitsPerSecond]]</a> slot is not <code>null</code>, set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond④">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond④">audioBitsPerSecond</a></code> attributes to values the User Agent deems reasonable
     for the respective media types, for recording all tracks in <var>tracks</var>, such
     that the sum of <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-videobitspersecond" id="ref-for-dom-mediarecorder-videobitspersecond⑤">videoBitsPerSecond</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitspersecond" id="ref-for-dom-mediarecorder-audiobitspersecond⑤">audioBitsPerSecond</a></code> is close
     to the value of <var>recorder</var>’s <a data-link-type="dfn" href="#constrainedbitspersecond" id="ref-for-constrainedbitspersecond③">[[ConstrainedBitsPerSecond]]</a> slot.
@@ -887,6 +896,22 @@ at regular intervals.</p>
     aggregate bitrate of <var>audioBitrate</var> bits per second for all audio tracks <var>recorder</var> will be recording. <var>audioBitrate</var> is a hint for the encoder and
     the value might be surpassed, not achieved, or only be achieved over a long
     period of time.
+      <li>
+       Let <var>videoKeyFrameIntervalDuration</var> be <var>recorder</var>.<a data-link-type="dfn" href="#videokeyframeintervalduration" id="ref-for-videokeyframeintervalduration">[[VideoKeyFrameIntervalDuration]]</a>, and let <var>videoKeyFrameIntervalCount</var> be <var>recorder</var>.<a data-link-type="dfn" href="#videokeyframeintervalcount" id="ref-for-videokeyframeintervalcount">[[VideoKeyFrameIntervalCount]]</a>. The UA SHOULD constrain the
+    configuration of <var>recorder</var> so that the video encoder follows the below rules: 
+       <ul>
+        <li>If <var>videoKeyFrameIntervalDuration</var> is not <code>null</code> and <var>videoKeyFrameIntervalCount</var> is <code>null</code>,
+    the video encoder produces a keyframe on the first frame arriving after <var>videoKeyFrameIntervalDuration</var> milliseconds elapsed since the last key frame.
+        <li>If <var>videoKeyFrameIntervalCount</var> is not <code>null</code> and <var>videoKeyFrameIntervalDuration</var> is <code>null</code>,
+    the video encoder produces a keyframe on the first frame arriving after <var>videoKeyFrameIntervalCount</var> frames passed since the last key frame.
+        <li>If both <var>videoKeyFrameIntervalDuration</var> and <var>videoKeyFrameIntervalCount</var> are not <code>null</code>,
+    the UA may ignore either.
+        <li>If both <var>videoKeyFrameIntervalDuration</var> and <var>videoKeyFrameIntervalCount</var> are <code>null</code>,
+    the User Agent may emit key frames as it deems fit.
+       </ul>
+       <p>Note that encoders will sometimes make independent decisions about when to
+    emit key frames.</p>
+      <p></p>
       <li>Constrain the configuration of <var>recorder</var> to encode using the <code class="idl"><a data-link-type="idl" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode④">BitrateMode</a></code> specified by the value of <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitratemode" id="ref-for-dom-mediarecorder-audiobitratemode③">audioBitrateMode</a></code> attribute for all audio tracks <var>recorder</var> will be recording.
       <li>For each track in <var>tracks</var>, if the User Agent cannot record the track
     using the current configuration, then throw a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notsupportederror" id="ref-for-notsupportederror②">NotSupportedError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException④">DOMException</a></code> and abort these steps.
@@ -1099,6 +1124,8 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑥"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond①"><c- g>videoBitsPerSecond</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑦"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-bitspersecond" id="ref-for-dom-mediarecorderoptions-bitspersecond①"><c- g>bitsPerSecond</c-></a>;
   <a data-link-type="idl-name" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode⑤"><c- n>BitrateMode</c-></a> <a class="idl-code" data-default="&quot;variable&quot;" data-link-type="dict-member" data-type="BitrateMode " href="#dom-mediarecorderoptions-audiobitratemode" id="ref-for-dom-mediarecorderoptions-audiobitratemode②"><c- g>audioBitrateMode</c-></a> = "variable";
+  <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp"><c- n>DOMHighResTimeStamp</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="DOMHighResTimeStamp " href="#dom-mediarecorderoptions-videokeyframeintervalduration" id="ref-for-dom-mediarecorderoptions-videokeyframeintervalduration①"><c- g>videoKeyFrameIntervalDuration</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑧"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videokeyframeintervalcount" id="ref-for-dom-mediarecorderoptions-videokeyframeintervalcount①"><c- g>videoKeyFrameIntervalCount</c-></a>;
 };
 </pre>
    <h4 class="heading settled" data-level="2.5.1" id="mediarecorderoptions-members"><span class="secno">2.5.1. </span><span class="content">Members</span><a class="self-link" href="#mediarecorderoptions-members"></a></h4>
@@ -1111,18 +1138,24 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
   type and container format for the recording via a type/subtype
   combination, with the codecs and/or profiles parameters <a data-link-type="biblio" href="#biblio-rfc6381" title="The &apos;Codecs&apos; and &apos;Profiles&apos; Parameters for &quot;Bucket&quot; Media Types">[RFC6381]</a> specified where ambiguity might arise. Individual codecs might have
   further optional or mandatory specific parameters. </div>
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-audiobitspersecond"><code>audioBitsPerSecond</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑧">unsigned long</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-audiobitspersecond"><code>audioBitsPerSecond</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑨">unsigned long</a></span>
     <dd>Aggregate target bits per second for encoding of the Audio track(s), if
   any.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-videobitspersecond"><code>videoBitsPerSecond</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long⑨">unsigned long</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-videobitspersecond"><code>videoBitsPerSecond</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long①⓪">unsigned long</a></span>
     <dd>Aggregate target bits per second for encoding of the Video track(s), if
   any.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-bitspersecond"><code>bitsPerSecond</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long①⓪">unsigned long</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-bitspersecond"><code>bitsPerSecond</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long①①">unsigned long</a></span>
     <dd> Aggregate target bits per second for encoding of all Video and Audio
   Track(s) present. This member overrides either <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-audiobitspersecond" id="ref-for-dom-mediarecorderoptions-audiobitspersecond②">audioBitsPerSecond</a></code> or <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videobitspersecond" id="ref-for-dom-mediarecorderoptions-videobitspersecond②">videoBitsPerSecond</a></code> if present, and might be
   distributed among the present track encoders as the UA sees fit.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-audiobitratemode"><code>audioBitrateMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode⑥">BitrateMode</a>, defaulting to <code>"variable"</code></span>
     <dd>Specifes the <code class="idl"><a data-link-type="idl" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode⑦">BitrateMode</a></code> that should be used to encode the Audio track(s).
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-videokeyframeintervalduration"><code>videoKeyFrameIntervalDuration</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp①">DOMHighResTimeStamp</a></span>
+    <dd>Specifies the nominal interval in time between key frames in the encoded video stream.
+  The UA controls key frame generation considering this dictionary member as well as <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videokeyframeintervalcount" id="ref-for-dom-mediarecorderoptions-videokeyframeintervalcount②">videoKeyFrameIntervalCount</a></code>.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorderOptions" data-dfn-type="dict-member" data-export id="dom-mediarecorderoptions-videokeyframeintervalcount"><code>videoKeyFrameIntervalCount</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long①②">unsigned long</a></span>
+    <dd>Specifies the interval in number of frames between key frames in the encoded video stream.
+  The UA controls key frame generation considering this dictionary member as well as <code class="idl"><a data-link-type="idl" href="#dom-mediarecorderoptions-videokeyframeintervalduration" id="ref-for-dom-mediarecorderoptions-videokeyframeintervalduration②">videoKeyFrameIntervalDuration</a></code>.
    </dl>
    <h3 class="heading settled" data-level="2.6" id="bitratemode"><span class="secno">2.6. </span><span class="content">BitrateMode</span><a class="self-link" href="#bitratemode"></a></h3>
 <pre class="idl highlight def"><c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-bitratemode"><code><c- g>BitrateMode</c-></code></dfn> {
@@ -1160,7 +1193,7 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="blobevent"><code><c- g>BlobEvent</c-></code></dfn> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#event" id="ref-for-event"><c- n>Event</c-></a> {
   <a class="idl-code" data-link-type="constructor" href="#dom-blobevent-blobevent" id="ref-for-dom-blobevent-blobevent"><c- g>constructor</c-></a>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString⑤"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="BlobEvent/BlobEvent(type, eventInitDict), BlobEvent/constructor(type, eventInitDict)" data-dfn-type="argument" data-export id="dom-blobevent-blobevent-type-eventinitdict-type"><code><c- g>type</c-></code><a class="self-link" href="#dom-blobevent-blobevent-type-eventinitdict-type"></a></dfn>, <a data-link-type="idl-name" href="#dictdef-blobeventinit" id="ref-for-dictdef-blobeventinit"><c- n>BlobEventInit</c-></a> <dfn class="idl-code" data-dfn-for="BlobEvent/BlobEvent(type, eventInitDict), BlobEvent/constructor(type, eventInitDict)" data-dfn-type="argument" data-export id="dom-blobevent-blobevent-type-eventinitdict-eventinitdict"><code><c- g>eventInitDict</c-></code><a class="self-link" href="#dom-blobevent-blobevent-type-eventinitdict-eventinitdict"></a></dfn>);
   [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject" id="ref-for-SameObject"><c- g>SameObject</c-></a>] <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑧"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="Blob" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data②"><c- g>data</c-></a>;
-  <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp"><c- n>DOMHighResTimeStamp</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMHighResTimeStamp" href="#dom-blobevent-timecode" id="ref-for-dom-blobevent-timecode"><c- g>timecode</c-></a>;
+  <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp②"><c- n>DOMHighResTimeStamp</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMHighResTimeStamp" href="#dom-blobevent-timecode" id="ref-for-dom-blobevent-timecode"><c- g>timecode</c-></a>;
 };
 </pre>
    <h3 class="heading settled" data-level="3.1" id="blobevent-constructor"><span class="secno">3.1. </span><span class="content">Constructors</span><a class="self-link" href="#blobevent-constructor"></a></h3>
@@ -1173,20 +1206,20 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEvent" data-dfn-type="attribute" data-export id="dom-blobevent-data"><code>data</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑨">Blob</a>, readonly</span>
     <dd>The encoded <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob①⓪">Blob</a></code> whose <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-type" id="ref-for-dfn-type">type</a></code> attribute indicates the
   encoding of the blob data. 
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEvent" data-dfn-type="attribute" data-export id="dom-blobevent-timecode"><code>timecode</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp①">DOMHighResTimeStamp</a>, readonly</span>
-    <dd>The difference between the timestamp of the first chunk in <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data③">data</a></code> and the timestamp of the first chunk in the first <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent①">BlobEvent</a></code> produced by this recorder as a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp②">DOMHighResTimeStamp</a></code> <a data-link-type="biblio" href="#biblio-hr-time" title="High Resolution Time">[HR-TIME]</a>.  Note that the <code class="idl"><a data-link-type="idl" href="#dom-blobevent-timecode" id="ref-for-dom-blobevent-timecode①">timecode</a></code> in the first produced <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent②">BlobEvent</a></code> does not need to be zero. 
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEvent" data-dfn-type="attribute" data-export id="dom-blobevent-timecode"><code>timecode</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp③">DOMHighResTimeStamp</a>, readonly</span>
+    <dd>The difference between the timestamp of the first chunk in <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref-for-dom-blobevent-data③">data</a></code> and the timestamp of the first chunk in the first <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent①">BlobEvent</a></code> produced by this recorder as a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp④">DOMHighResTimeStamp</a></code> <a data-link-type="biblio" href="#biblio-hr-time" title="High Resolution Time">[HR-TIME]</a>.  Note that the <code class="idl"><a data-link-type="idl" href="#dom-blobevent-timecode" id="ref-for-dom-blobevent-timecode①">timecode</a></code> in the first produced <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent②">BlobEvent</a></code> does not need to be zero. 
    </dl>
    <h3 class="heading settled" data-level="3.3" id="blobeventinit"><span class="secno">3.3. </span><span class="content">BlobEventInit</span><a class="self-link" href="#blobeventinit"></a></h3>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-blobeventinit"><code><c- g>BlobEventInit</c-></code></dfn> {
   <c- b>required</c-> <a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob①①"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="Blob " href="#dom-blobeventinit-data" id="ref-for-dom-blobeventinit-data"><c- g>data</c-></a>;
-  <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp③"><c- n>DOMHighResTimeStamp</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="DOMHighResTimeStamp " href="#dom-blobeventinit-timecode" id="ref-for-dom-blobeventinit-timecode"><c- g>timecode</c-></a>;
+  <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp⑤"><c- n>DOMHighResTimeStamp</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="DOMHighResTimeStamp " href="#dom-blobeventinit-timecode" id="ref-for-dom-blobeventinit-timecode"><c- g>timecode</c-></a>;
 };
 </pre>
    <h4 class="heading settled" data-level="3.3.1" id="blobeventinit-members"><span class="secno">3.3.1. </span><span class="content">Members</span><a class="self-link" href="#blobeventinit-members"></a></h4>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEventInit" data-dfn-type="dict-member" data-export id="dom-blobeventinit-data"><code>data</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob①②">Blob</a></span>
     <dd>A <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob①③">Blob</a></code> object containing the data to deliver via <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent③">BlobEvent</a></code>.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEventInit" data-dfn-type="dict-member" data-export id="dom-blobeventinit-timecode"><code>timecode</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp④">DOMHighResTimeStamp</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="BlobEventInit" data-dfn-type="dict-member" data-export id="dom-blobeventinit-timecode"><code>timecode</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp⑥">DOMHighResTimeStamp</a></span>
     <dd>The timecode to be used in initializing <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent④">BlobEvent</a></code>.
    </dl>
    <h2 class="heading settled" data-level="4" id="error-handling"><span class="secno">4. </span><span class="content">Error handling</span><a class="self-link" href="#error-handling"></a></h2>
@@ -1238,7 +1271,7 @@ specific type.</p>
      <tr>
       <th>Event name
       <th>Interface
-      <th><a href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-15045c15505e025cd6b6d0f134b7c986">Fired </a> when...
+      <th><a href="https://dom.spec.whatwg.org/#concept-event-fire" id="f95f167f0">Fired </a> when...
     <tbody>
      <tr>
       <td><dfn class="dfn-paneled idl-code" data-dfn-for="MediaRecorder" data-dfn-type="event" data-export id="eventdef-mediarecorder-start"><code>start</code></dfn>
@@ -1471,336 +1504,83 @@ the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediac
      <li><a href="#dom-mediarecorder-videobitspersecond">attribute for MediaRecorder</a><span>, in § 2.2</span>
      <li><a href="#dom-mediarecorderoptions-videobitspersecond">dict-member for MediaRecorderOptions</a><span>, in § 2.5.1</span>
     </ul>
+   <li><a href="#videokeyframeintervalcount">[[VideoKeyFrameIntervalCount]]</a><span>, in § 2.1</span>
+   <li><a href="#dom-mediarecorderoptions-videokeyframeintervalcount">videoKeyFrameIntervalCount</a><span>, in § 2.5.1</span>
+   <li><a href="#videokeyframeintervalduration">[[VideoKeyFrameIntervalDuration]]</a><span>, in § 2.1</span>
+   <li><a href="#dom-mediarecorderoptions-videokeyframeintervalduration">videoKeyFrameIntervalDuration</a><span>, in § 2.5.1</span>
   </ul>
-  <aside aria-labelledby="infopaneltitle-for-440a3a8550f27dbef01b921622a2849f" class="dfn-panel" data-for="440a3a8550f27dbef01b921622a2849f" id="infopanel-for-440a3a8550f27dbef01b921622a2849f">
-   <span id="infopaneltitle-for-440a3a8550f27dbef01b921622a2849f" style="display:none">Info about the 'active fingerprinting' external reference.</span><a href="https://www.w3.org/TR/fingerprinting-guidance/#dfn-active-fingerprinting">https://www.w3.org/TR/fingerprinting-guidance/#dfn-active-fingerprinting</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dfn-active-fingerprinting">6.2. Fingerprinting</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-ea99ae565fafa30bf265b3c5bb274401" class="dfn-panel" data-for="ea99ae565fafa30bf265b3c5bb274401" id="infopanel-for-ea99ae565fafa30bf265b3c5bb274401">
-   <span id="infopaneltitle-for-ea99ae565fafa30bf265b3c5bb274401" style="display:none">Info about the 'inactive' external reference.</span><a href="https://www.w3.org/TR/mediacapture-streams/#stream-inactive">https://www.w3.org/TR/mediacapture-streams/#stream-inactive</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-stream-inactive">2.3. Methods</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-e33ac09771812272a4853fa9df8a04ea" class="dfn-panel" data-for="e33ac09771812272a4853fa9df8a04ea" id="infopanel-for-e33ac09771812272a4853fa9df8a04ea">
-   <span id="infopaneltitle-for-e33ac09771812272a4853fa9df8a04ea" style="display:none">Info about the 'isolation properties' external reference.</span><a href="https://www.w3.org/TR/webrtc-identity/#isolated-media-streams">https://www.w3.org/TR/webrtc-identity/#isolated-media-streams</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-isolated-media-streams">2.3. Methods</a> <a href="#ref-for-isolated-media-streams①">(2)</a> <a href="#ref-for-isolated-media-streams②">(3)</a>
-    <li><a href="#ref-for-isolated-media-streams③">4.3. Exception Summary</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-316772b0029bcc028521d2db08fd3717" class="dfn-panel" data-for="316772b0029bcc028521d2db08fd3717" id="infopanel-for-316772b0029bcc028521d2db08fd3717">
-   <span id="infopaneltitle-for-316772b0029bcc028521d2db08fd3717" style="display:none">Info about the 'Event' external reference.</span><a href="https://dom.spec.whatwg.org/#event">https://dom.spec.whatwg.org/#event</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-event">3. Blob Event</a>
-    <li><a href="#ref-for-event①">5. Event summary</a> <a href="#ref-for-event②">(2)</a> <a href="#ref-for-event③">(3)</a> <a href="#ref-for-event④">(4)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-a6aa66e0075314e8eefa4e662cb40fbb" class="dfn-panel" data-for="a6aa66e0075314e8eefa4e662cb40fbb" id="infopanel-for-a6aa66e0075314e8eefa4e662cb40fbb">
-   <span id="infopaneltitle-for-a6aa66e0075314e8eefa4e662cb40fbb" style="display:none">Info about the 'EventTarget' external reference.</span><a href="https://dom.spec.whatwg.org/#eventtarget">https://dom.spec.whatwg.org/#eventtarget</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-eventtarget">2. Media Recorder API</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-15045c15505e025cd6b6d0f134b7c986" class="dfn-panel" data-for="15045c15505e025cd6b6d0f134b7c986" id="infopanel-for-15045c15505e025cd6b6d0f134b7c986">
-   <span id="infopaneltitle-for-15045c15505e025cd6b6d0f134b7c986" style="display:none">Info about the 'fire an event' external reference.</span><a href="https://dom.spec.whatwg.org/#concept-event-fire">https://dom.spec.whatwg.org/#concept-event-fire</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-event-fire">2.3. Methods</a> <a href="#ref-for-concept-event-fire①">(2)</a> <a href="#ref-for-concept-event-fire②">(3)</a> <a href="#ref-for-concept-event-fire③">(4)</a> <a href="#ref-for-concept-event-fire④">(5)</a> <a href="#ref-for-concept-event-fire⑤">(6)</a> <a href="#ref-for-concept-event-fire⑥">(7)</a> <a href="#ref-for-concept-event-fire⑦">(8)</a>
-    <li><a href="#ref-for-concept-event-fire⑧">2.4. Data handling</a>
-    <li><a href="#ref-for-concept-event-fire⑨">4.1. General principles</a>
-    <li><a href="#ref-for-15045c15505e025cd6b6d0f134b7c986">5. Event summary</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-24159c791274bff589d40ceac1f9d0ff" class="dfn-panel" data-for="24159c791274bff589d40ceac1f9d0ff" id="infopanel-for-24159c791274bff589d40ceac1f9d0ff">
-   <span id="infopaneltitle-for-24159c791274bff589d40ceac1f9d0ff" style="display:none">Info about the 'resumed' external reference.</span><a href="https://fetch.spec.whatwg.org/#concept-fetch-resume">https://fetch.spec.whatwg.org/#concept-fetch-resume</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-fetch-resume">2.3. Methods</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-881ec0d5093da41de02778af72e8496c" class="dfn-panel" data-for="881ec0d5093da41de02778af72e8496c" id="infopanel-for-881ec0d5093da41de02778af72e8496c">
-   <span id="infopaneltitle-for-881ec0d5093da41de02778af72e8496c" style="display:none">Info about the 'Blob' external reference.</span><a href="https://w3c.github.io/FileAPI/#dfn-Blob">https://w3c.github.io/FileAPI/#dfn-Blob</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dfn-Blob">1. Overview</a>
-    <li><a href="#ref-for-dfn-Blob①">2.2. Attributes</a>
-    <li><a href="#ref-for-dfn-Blob②">2.3. Methods</a> <a href="#ref-for-dfn-Blob③">(2)</a> <a href="#ref-for-dfn-Blob④">(3)</a> <a href="#ref-for-dfn-Blob⑤">(4)</a> <a href="#ref-for-dfn-Blob⑥">(5)</a>
-    <li><a href="#ref-for-dfn-Blob⑦">2.4. Data handling</a>
-    <li><a href="#ref-for-dfn-Blob⑧">3. Blob Event</a>
-    <li><a href="#ref-for-dfn-Blob⑨">3.2. Attributes</a> <a href="#ref-for-dfn-Blob①⓪">(2)</a>
-    <li><a href="#ref-for-dfn-Blob①①">3.3. BlobEventInit</a>
-    <li><a href="#ref-for-dfn-Blob①②">3.3.1. Members</a> <a href="#ref-for-dfn-Blob①③">(2)</a>
-    <li><a href="#ref-for-dfn-Blob①④">4.1. General principles</a> <a href="#ref-for-dfn-Blob①⑤">(2)</a>
-    <li><a href="#ref-for-dfn-Blob①⑥">5. Event summary</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-f7081366b4772d18aefa3db823f45861" class="dfn-panel" data-for="f7081366b4772d18aefa3db823f45861" id="infopanel-for-f7081366b4772d18aefa3db823f45861">
-   <span id="infopaneltitle-for-f7081366b4772d18aefa3db823f45861" style="display:none">Info about the 'type' external reference.</span><a href="https://w3c.github.io/FileAPI/#dfn-type">https://w3c.github.io/FileAPI/#dfn-type</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dfn-type">3.2. Attributes</a>
-    <li><a href="#ref-for-dfn-type①">6.2. Fingerprinting</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-0199c38ecfb382a307b8c6861e8b0fa7" class="dfn-panel" data-for="0199c38ecfb382a307b8c6861e8b0fa7" id="infopanel-for-0199c38ecfb382a307b8c6861e8b0fa7">
-   <span id="infopaneltitle-for-0199c38ecfb382a307b8c6861e8b0fa7" style="display:none">Info about the 'fingerprinting surface' external reference.</span><a href="https://w3c.github.io/fingerprinting-guidance/#dfn-fingerprinting-surface">https://w3c.github.io/fingerprinting-guidance/#dfn-fingerprinting-surface</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dfn-fingerprinting-surface">6.2. Fingerprinting</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-84d6e74a32a28162c52eee326fe1bd8b" class="dfn-panel" data-for="84d6e74a32a28162c52eee326fe1bd8b" id="infopanel-for-84d6e74a32a28162c52eee326fe1bd8b">
-   <span id="infopaneltitle-for-84d6e74a32a28162c52eee326fe1bd8b" style="display:none">Info about the 'MediaStream' external reference.</span><a href="https://w3c.github.io/mediacapture-main/#dom-mediastream">https://w3c.github.io/mediacapture-main/#dom-mediastream</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediastream">Unnumbered Section</a>
-    <li><a href="#ref-for-dom-mediastream①">2. Media Recorder API</a> <a href="#ref-for-dom-mediastream②">(2)</a>
-    <li><a href="#ref-for-dom-mediastream③">2.2. Attributes</a> <a href="#ref-for-dom-mediastream④">(2)</a>
-    <li><a href="#ref-for-dom-mediastream⑤">2.3. Methods</a>
-    <li><a href="#ref-for-dom-mediastream⑥">4.3. Exception Summary</a> <a href="#ref-for-dom-mediastream⑦">(2)</a>
-    <li><a href="#ref-for-dom-mediastream⑧">6. Privacy and Security Considerations</a> <a href="#ref-for-dom-mediastream⑨">(2)</a>
-    <li><a href="#ref-for-dom-mediastream①⓪">7.2. Recording webcam video and audio</a> <a href="#ref-for-dom-mediastream①①">(2)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-084e04016dd179bec71e0192f72becac" class="dfn-panel" data-for="084e04016dd179bec71e0192f72becac" id="infopanel-for-084e04016dd179bec71e0192f72becac">
-   <span id="infopaneltitle-for-084e04016dd179bec71e0192f72becac" style="display:none">Info about the 'MediaStreamTrack' external reference.</span><a href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack">https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediastreamtrack">1. Overview</a>
-    <li><a href="#ref-for-dom-mediastreamtrack①">4.1. General principles</a>
-    <li><a href="#ref-for-dom-mediastreamtrack②">4.3. Exception Summary</a>
-    <li><a href="#ref-for-dom-mediastreamtrack③">7.2. Recording webcam video and audio</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-4dfac0f4df651b5a8cc4251391a27db6" class="dfn-panel" data-for="4dfac0f4df651b5a8cc4251391a27db6" id="infopanel-for-4dfac0f4df651b5a8cc4251391a27db6">
-   <span id="infopaneltitle-for-4dfac0f4df651b5a8cc4251391a27db6" style="display:none">Info about the 'enabled' external reference.</span><a href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-enabled">https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-enabled</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediastreamtrack-enabled">2.3. Methods</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-f6d11612cbc96535f548316633b3000c" class="dfn-panel" data-for="f6d11612cbc96535f548316633b3000c" id="infopanel-for-f6d11612cbc96535f548316633b3000c">
-   <span id="infopaneltitle-for-f6d11612cbc96535f548316633b3000c" style="display:none">Info about the 'ended' external reference.</span><a href="https://w3c.github.io/mediacapture-main/#idl-def-MediaStreamTrackState.ended">https://w3c.github.io/mediacapture-main/#idl-def-MediaStreamTrackState.ended</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-def-MediaStreamTrackState.ended">2.3. Methods</a>
-    <li><a href="#ref-for-idl-def-MediaStreamTrackState.ended①">7.2. Recording webcam video and audio</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-a5c997709107966a34a6accb830fc421" class="dfn-panel" data-for="a5c997709107966a34a6accb830fc421" id="infopanel-for-a5c997709107966a34a6accb830fc421">
-   <span id="infopaneltitle-for-a5c997709107966a34a6accb830fc421" style="display:none">Info about the 'getUserMedia()' external reference.</span><a href="https://w3c.github.io/mediacapture-main/#dom-mediadevices-getusermedia">https://w3c.github.io/mediacapture-main/#dom-mediadevices-getusermedia</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediadevices-getusermedia">7.2. Recording webcam video and audio</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-8853eba697954a2995955522a33303ab" class="dfn-panel" data-for="8853eba697954a2995955522a33303ab" id="infopanel-for-8853eba697954a2995955522a33303ab">
-   <span id="infopaneltitle-for-8853eba697954a2995955522a33303ab" style="display:none">Info about the 'live' external reference.</span><a href="https://w3c.github.io/mediacapture-main/#idl-def-MediaStreamTrackState.live">https://w3c.github.io/mediacapture-main/#idl-def-MediaStreamTrackState.live</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-def-MediaStreamTrackState.live">2.3. Methods</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dcc7f7ad9b936645dae5ba56fa2dd9e4" class="dfn-panel" data-for="dcc7f7ad9b936645dae5ba56fa2dd9e4" id="infopanel-for-dcc7f7ad9b936645dae5ba56fa2dd9e4">
-   <span id="infopaneltitle-for-dcc7f7ad9b936645dae5ba56fa2dd9e4" style="display:none">Info about the 'muted' external reference.</span><a href="https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-muted">https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-muted</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediastreamtrack-muted">2.3. Methods</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-cf100caaafd17d695542fa7067dce5e8" class="dfn-panel" data-for="cf100caaafd17d695542fa7067dce5e8" id="infopanel-for-cf100caaafd17d695542fa7067dce5e8">
-   <span id="infopaneltitle-for-cf100caaafd17d695542fa7067dce5e8" style="display:none">Info about the 'track set' external reference.</span><a href="https://w3c.github.io/mediacapture-main/#dfn-track-set">https://w3c.github.io/mediacapture-main/#dfn-track-set</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dfn-track-set">2.3. Methods</a> <a href="#ref-for-dfn-track-set①">(2)</a> <a href="#ref-for-dfn-track-set②">(3)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-0527034ee7070fda15ffa50c34dbbc63" class="dfn-panel" data-for="0527034ee7070fda15ffa50c34dbbc63" id="infopanel-for-0527034ee7070fda15ffa50c34dbbc63">
-   <span id="infopaneltitle-for-0527034ee7070fda15ffa50c34dbbc63" style="display:none">Info about the 'DOMHighResTimeStamp' external reference.</span><a href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp">https://w3c.github.io/hr-time/#dom-domhighrestimestamp</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-domhighrestimestamp">3. Blob Event</a>
-    <li><a href="#ref-for-dom-domhighrestimestamp①">3.2. Attributes</a> <a href="#ref-for-dom-domhighrestimestamp②">(2)</a>
-    <li><a href="#ref-for-dom-domhighrestimestamp③">3.3. BlobEventInit</a>
-    <li><a href="#ref-for-dom-domhighrestimestamp④">3.3.1. Members</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-1467f077ae5ddc39a4e0ab0fb5853cd9" class="dfn-panel" data-for="1467f077ae5ddc39a4e0ab0fb5853cd9" id="infopanel-for-1467f077ae5ddc39a4e0ab0fb5853cd9">
-   <span id="infopaneltitle-for-1467f077ae5ddc39a4e0ab0fb5853cd9" style="display:none">Info about the 'ErrorEvent' external reference.</span><a href="https://html.spec.whatwg.org/multipage/webappapis.html#errorevent">https://html.spec.whatwg.org/multipage/webappapis.html#errorevent</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-errorevent">2.2. Attributes</a>
-    <li><a href="#ref-for-errorevent①">4.2. Error events</a>
-    <li><a href="#ref-for-errorevent②">5. Event summary</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-716703f1068cc638b4235f83154eff6c" class="dfn-panel" data-for="716703f1068cc638b4235f83154eff6c" id="infopanel-for-716703f1068cc638b4235f83154eff6c">
-   <span id="infopaneltitle-for-716703f1068cc638b4235f83154eff6c" style="display:none">Info about the 'EventHandler' external reference.</span><a href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-eventhandler">2. Media Recorder API</a> <a href="#ref-for-eventhandler①">(2)</a> <a href="#ref-for-eventhandler②">(3)</a> <a href="#ref-for-eventhandler③">(4)</a> <a href="#ref-for-eventhandler④">(5)</a> <a href="#ref-for-eventhandler⑤">(6)</a>
-    <li><a href="#ref-for-eventhandler⑥">2.2. Attributes</a> <a href="#ref-for-eventhandler⑦">(2)</a> <a href="#ref-for-eventhandler⑧">(3)</a> <a href="#ref-for-eventhandler⑨">(4)</a> <a href="#ref-for-eventhandler①⓪">(5)</a> <a href="#ref-for-eventhandler①①">(6)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-3a2763fcaa6bc82693554cf36780c0dd" class="dfn-panel" data-for="3a2763fcaa6bc82693554cf36780c0dd" id="infopanel-for-3a2763fcaa6bc82693554cf36780c0dd">
-   <span id="infopaneltitle-for-3a2763fcaa6bc82693554cf36780c0dd" style="display:none">Info about the 'in parallel' external reference.</span><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-in-parallel">2.3. Methods</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-613400696de3e8f8a5001430db03abe8" class="dfn-panel" data-for="613400696de3e8f8a5001430db03abe8" id="infopanel-for-613400696de3e8f8a5001430db03abe8">
-   <span id="infopaneltitle-for-613400696de3e8f8a5001430db03abe8" style="display:none">Info about the 'secure context' external reference.</span><a href="https://html.spec.whatwg.org/multipage/webappapis.html#secure-context">https://html.spec.whatwg.org/multipage/webappapis.html#secure-context</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-secure-context">6. Privacy and Security Considerations</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-0ab204fb9cc9a746edaff83c0db0740a" class="dfn-panel" data-for="0ab204fb9cc9a746edaff83c0db0740a" id="infopanel-for-0ab204fb9cc9a746edaff83c0db0740a">
-   <span id="infopaneltitle-for-0ab204fb9cc9a746edaff83c0db0740a" style="display:none">Info about the 'DOMException' external reference.</span><a href="https://webidl.spec.whatwg.org/#idl-DOMException">https://webidl.spec.whatwg.org/#idl-DOMException</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-DOMException">2.1. Constructors</a>
-    <li><a href="#ref-for-idl-DOMException①">2.3. Methods</a> <a href="#ref-for-idl-DOMException②">(2)</a> <a href="#ref-for-idl-DOMException③">(3)</a> <a href="#ref-for-idl-DOMException④">(4)</a> <a href="#ref-for-idl-DOMException⑤">(5)</a> <a href="#ref-for-idl-DOMException⑥">(6)</a> <a href="#ref-for-idl-DOMException⑦">(7)</a>
-    <li><a href="#ref-for-idl-DOMException⑧">4.1. General principles</a>
-    <li><a href="#ref-for-idl-DOMException⑨">4.3. Exception Summary</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-d0f238a61de9310f1738a214749fab18" class="dfn-panel" data-for="d0f238a61de9310f1738a214749fab18" id="infopanel-for-d0f238a61de9310f1738a214749fab18">
-   <span id="infopaneltitle-for-d0f238a61de9310f1738a214749fab18" style="display:none">Info about the 'DOMString' external reference.</span><a href="https://webidl.spec.whatwg.org/#idl-DOMString">https://webidl.spec.whatwg.org/#idl-DOMString</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-DOMString">2. Media Recorder API</a> <a href="#ref-for-idl-DOMString①">(2)</a>
-    <li><a href="#ref-for-idl-DOMString②">2.2. Attributes</a>
-    <li><a href="#ref-for-idl-DOMString③">2.5. MediaRecorderOptions</a>
-    <li><a href="#ref-for-idl-DOMString④">2.5.1. Members</a>
-    <li><a href="#ref-for-idl-DOMString⑤">3. Blob Event</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dde049eb112f043fc45407ec0d4cb457" class="dfn-panel" data-for="dde049eb112f043fc45407ec0d4cb457" id="infopanel-for-dde049eb112f043fc45407ec0d4cb457">
-   <span id="infopaneltitle-for-dde049eb112f043fc45407ec0d4cb457" style="display:none">Info about the 'Exposed' external reference.</span><a href="https://webidl.spec.whatwg.org/#Exposed">https://webidl.spec.whatwg.org/#Exposed</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-Exposed">2. Media Recorder API</a>
-    <li><a href="#ref-for-Exposed①">3. Blob Event</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-153343972687752b6534c28bd811972c" class="dfn-panel" data-for="153343972687752b6534c28bd811972c" id="infopanel-for-153343972687752b6534c28bd811972c">
-   <span id="infopaneltitle-for-153343972687752b6534c28bd811972c" style="display:none">Info about the 'InvalidModificationError' external reference.</span><a href="https://webidl.spec.whatwg.org/#invalidmodificationerror">https://webidl.spec.whatwg.org/#invalidmodificationerror</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-invalidmodificationerror">2.3. Methods</a>
-    <li><a href="#ref-for-invalidmodificationerror①">4.3. Exception Summary</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-e2a06375a2fb70c61a8b4cd0abe9d4f1" class="dfn-panel" data-for="e2a06375a2fb70c61a8b4cd0abe9d4f1" id="infopanel-for-e2a06375a2fb70c61a8b4cd0abe9d4f1">
-   <span id="infopaneltitle-for-e2a06375a2fb70c61a8b4cd0abe9d4f1" style="display:none">Info about the 'InvalidStateError' external reference.</span><a href="https://webidl.spec.whatwg.org/#invalidstateerror">https://webidl.spec.whatwg.org/#invalidstateerror</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-invalidstateerror">2.3. Methods</a> <a href="#ref-for-invalidstateerror①">(2)</a> <a href="#ref-for-invalidstateerror②">(3)</a> <a href="#ref-for-invalidstateerror③">(4)</a>
-    <li><a href="#ref-for-invalidstateerror④">4.3. Exception Summary</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-c0194e44e6b2e643055f42ba786d0a3a" class="dfn-panel" data-for="c0194e44e6b2e643055f42ba786d0a3a" id="infopanel-for-c0194e44e6b2e643055f42ba786d0a3a">
-   <span id="infopaneltitle-for-c0194e44e6b2e643055f42ba786d0a3a" style="display:none">Info about the 'NotSupportedError' external reference.</span><a href="https://webidl.spec.whatwg.org/#notsupportederror">https://webidl.spec.whatwg.org/#notsupportederror</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-notsupportederror">2.1. Constructors</a>
-    <li><a href="#ref-for-notsupportederror①">2.3. Methods</a> <a href="#ref-for-notsupportederror②">(2)</a>
-    <li><a href="#ref-for-notsupportederror③">4.3. Exception Summary</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-f572762cd4679aeacd36722d99d2b741" class="dfn-panel" data-for="f572762cd4679aeacd36722d99d2b741" id="infopanel-for-f572762cd4679aeacd36722d99d2b741">
-   <span id="infopaneltitle-for-f572762cd4679aeacd36722d99d2b741" style="display:none">Info about the 'SameObject' external reference.</span><a href="https://webidl.spec.whatwg.org/#SameObject">https://webidl.spec.whatwg.org/#SameObject</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-SameObject">3. Blob Event</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-bfd589348b877ef78380edc0886321f0" class="dfn-panel" data-for="bfd589348b877ef78380edc0886321f0" id="infopanel-for-bfd589348b877ef78380edc0886321f0">
-   <span id="infopaneltitle-for-bfd589348b877ef78380edc0886321f0" style="display:none">Info about the 'SecurityError' external reference.</span><a href="https://webidl.spec.whatwg.org/#securityerror">https://webidl.spec.whatwg.org/#securityerror</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-securityerror">2.3. Methods</a> <a href="#ref-for-securityerror①">(2)</a>
-    <li><a href="#ref-for-securityerror②">4.3. Exception Summary</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-7451f6933516d80f8b562e59981dbe79" class="dfn-panel" data-for="7451f6933516d80f8b562e59981dbe79" id="infopanel-for-7451f6933516d80f8b562e59981dbe79">
-   <span id="infopaneltitle-for-7451f6933516d80f8b562e59981dbe79" style="display:none">Info about the 'UnknownError' external reference.</span><a href="https://webidl.spec.whatwg.org/#unknownerror">https://webidl.spec.whatwg.org/#unknownerror</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-unknownerror">2.3. Methods</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-f8062b07e25ed0281f5cbfb9a54070b4" class="dfn-panel" data-for="f8062b07e25ed0281f5cbfb9a54070b4" id="infopanel-for-f8062b07e25ed0281f5cbfb9a54070b4">
-   <span id="infopaneltitle-for-f8062b07e25ed0281f5cbfb9a54070b4" style="display:none">Info about the 'boolean' external reference.</span><a href="https://webidl.spec.whatwg.org/#idl-boolean">https://webidl.spec.whatwg.org/#idl-boolean</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-boolean">2. Media Recorder API</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-cee863f1f2ec91066cfb7f5d309d59dc" class="dfn-panel" data-for="cee863f1f2ec91066cfb7f5d309d59dc" id="infopanel-for-cee863f1f2ec91066cfb7f5d309d59dc">
-   <span id="infopaneltitle-for-cee863f1f2ec91066cfb7f5d309d59dc" style="display:none">Info about the 'undefined' external reference.</span><a href="https://webidl.spec.whatwg.org/#idl-undefined">https://webidl.spec.whatwg.org/#idl-undefined</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-undefined">2. Media Recorder API</a> <a href="#ref-for-idl-undefined①">(2)</a> <a href="#ref-for-idl-undefined②">(3)</a> <a href="#ref-for-idl-undefined③">(4)</a> <a href="#ref-for-idl-undefined④">(5)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-03fa8b99cc63b35d2e7dcadb686676f1" class="dfn-panel" data-for="03fa8b99cc63b35d2e7dcadb686676f1" id="infopanel-for-03fa8b99cc63b35d2e7dcadb686676f1">
-   <span id="infopaneltitle-for-03fa8b99cc63b35d2e7dcadb686676f1" style="display:none">Info about the 'unsigned long' external reference.</span><a href="https://webidl.spec.whatwg.org/#idl-unsigned-long">https://webidl.spec.whatwg.org/#idl-unsigned-long</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-idl-unsigned-long">2. Media Recorder API</a> <a href="#ref-for-idl-unsigned-long①">(2)</a> <a href="#ref-for-idl-unsigned-long②">(3)</a>
-    <li><a href="#ref-for-idl-unsigned-long③">2.2. Attributes</a> <a href="#ref-for-idl-unsigned-long④">(2)</a>
-    <li><a href="#ref-for-idl-unsigned-long⑤">2.5. MediaRecorderOptions</a> <a href="#ref-for-idl-unsigned-long⑥">(2)</a> <a href="#ref-for-idl-unsigned-long⑦">(3)</a>
-    <li><a href="#ref-for-idl-unsigned-long⑧">2.5.1. Members</a> <a href="#ref-for-idl-unsigned-long⑨">(2)</a> <a href="#ref-for-idl-unsigned-long①⓪">(3)</a>
-   </ul>
-  </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
     <a data-link-type="biblio">[]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="440a3a8550f27dbef01b921622a2849f">active fingerprinting</span>
-     <li><span class="dfn-paneled" id="ea99ae565fafa30bf265b3c5bb274401">inactive</span>
-     <li><span class="dfn-paneled" id="e33ac09771812272a4853fa9df8a04ea">isolation properties</span>
+     <li><span class="dfn-paneled" id="6777aaf6">active fingerprinting</span>
+     <li><span class="dfn-paneled" id="95042a38">inactive</span>
+     <li><span class="dfn-paneled" id="d211886f">isolation properties</span>
     </ul>
    <li>
     <a data-link-type="biblio">[DOM]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="316772b0029bcc028521d2db08fd3717">Event</span>
-     <li><span class="dfn-paneled" id="a6aa66e0075314e8eefa4e662cb40fbb">EventTarget</span>
-     <li><span class="dfn-paneled" id="15045c15505e025cd6b6d0f134b7c986">fire an event</span>
+     <li><span class="dfn-paneled" id="129bdae8">Event</span>
+     <li><span class="dfn-paneled" id="2bc0cdf4">EventTarget</span>
+     <li><span class="dfn-paneled" id="5fd23811">fire an event</span>
     </ul>
    <li>
     <a data-link-type="biblio">[FETCH]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="24159c791274bff589d40ceac1f9d0ff">resumed</span>
+     <li><span class="dfn-paneled" id="851a073b">resumed</span>
     </ul>
    <li>
     <a data-link-type="biblio">[FileAPI]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="881ec0d5093da41de02778af72e8496c">Blob</span>
-     <li><span class="dfn-paneled" id="f7081366b4772d18aefa3db823f45861">type</span>
+     <li><span class="dfn-paneled" id="b7d73f5b">Blob</span>
+     <li><span class="dfn-paneled" id="e303c02d">type</span>
     </ul>
    <li>
     <a data-link-type="biblio">[FINGERPRINTING-GUIDANCE]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="0199c38ecfb382a307b8c6861e8b0fa7">fingerprinting surface</span>
+     <li><span class="dfn-paneled" id="836b9827">fingerprinting surface</span>
     </ul>
    <li>
     <a data-link-type="biblio">[GETUSERMEDIA]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="84d6e74a32a28162c52eee326fe1bd8b">MediaStream</span>
-     <li><span class="dfn-paneled" id="084e04016dd179bec71e0192f72becac">MediaStreamTrack</span>
-     <li><span class="dfn-paneled" id="4dfac0f4df651b5a8cc4251391a27db6">enabled</span>
-     <li><span class="dfn-paneled" id="f6d11612cbc96535f548316633b3000c">ended</span>
-     <li><span class="dfn-paneled" id="a5c997709107966a34a6accb830fc421">getUserMedia()</span>
-     <li><span class="dfn-paneled" id="8853eba697954a2995955522a33303ab">live</span>
-     <li><span class="dfn-paneled" id="dcc7f7ad9b936645dae5ba56fa2dd9e4">muted</span>
-     <li><span class="dfn-paneled" id="cf100caaafd17d695542fa7067dce5e8">track set</span>
+     <li><span class="dfn-paneled" id="d9520ae8">MediaStream</span>
+     <li><span class="dfn-paneled" id="bc1e4fa1">MediaStreamTrack</span>
+     <li><span class="dfn-paneled" id="15bac70a">enabled</span>
+     <li><span class="dfn-paneled" id="14b3fcce">ended</span>
+     <li><span class="dfn-paneled" id="eca80770">getUserMedia()</span>
+     <li><span class="dfn-paneled" id="84017020">live</span>
+     <li><span class="dfn-paneled" id="2cf6d842">muted</span>
+     <li><span class="dfn-paneled" id="a8fc6d46">track set</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HR-TIME]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="0527034ee7070fda15ffa50c34dbbc63">DOMHighResTimeStamp</span>
+     <li><span class="dfn-paneled" id="0e9f636b">DOMHighResTimeStamp</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="1467f077ae5ddc39a4e0ab0fb5853cd9">ErrorEvent</span>
-     <li><span class="dfn-paneled" id="716703f1068cc638b4235f83154eff6c">EventHandler</span>
-     <li><span class="dfn-paneled" id="3a2763fcaa6bc82693554cf36780c0dd">in parallel</span>
-     <li><span class="dfn-paneled" id="613400696de3e8f8a5001430db03abe8">secure context</span>
+     <li><span class="dfn-paneled" id="ccfe986b">ErrorEvent</span>
+     <li><span class="dfn-paneled" id="f0951476">EventHandler</span>
+     <li><span class="dfn-paneled" id="a72449dd">in parallel</span>
+     <li><span class="dfn-paneled" id="65181da8">secure context</span>
     </ul>
    <li>
     <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="0ab204fb9cc9a746edaff83c0db0740a">DOMException</span>
-     <li><span class="dfn-paneled" id="d0f238a61de9310f1738a214749fab18">DOMString</span>
-     <li><span class="dfn-paneled" id="dde049eb112f043fc45407ec0d4cb457">Exposed</span>
-     <li><span class="dfn-paneled" id="153343972687752b6534c28bd811972c">InvalidModificationError</span>
-     <li><span class="dfn-paneled" id="e2a06375a2fb70c61a8b4cd0abe9d4f1">InvalidStateError</span>
-     <li><span class="dfn-paneled" id="c0194e44e6b2e643055f42ba786d0a3a">NotSupportedError</span>
-     <li><span class="dfn-paneled" id="f572762cd4679aeacd36722d99d2b741">SameObject</span>
-     <li><span class="dfn-paneled" id="bfd589348b877ef78380edc0886321f0">SecurityError</span>
-     <li><span class="dfn-paneled" id="7451f6933516d80f8b562e59981dbe79">UnknownError</span>
-     <li><span class="dfn-paneled" id="f8062b07e25ed0281f5cbfb9a54070b4">boolean</span>
-     <li><span class="dfn-paneled" id="cee863f1f2ec91066cfb7f5d309d59dc">undefined</span>
-     <li><span class="dfn-paneled" id="03fa8b99cc63b35d2e7dcadb686676f1">unsigned long</span>
+     <li><span class="dfn-paneled" id="dca2de17">DOMException</span>
+     <li><span class="dfn-paneled" id="8855a9aa">DOMString</span>
+     <li><span class="dfn-paneled" id="889e932f">Exposed</span>
+     <li><span class="dfn-paneled" id="cae6bf57">InvalidModificationError</span>
+     <li><span class="dfn-paneled" id="797018a7">InvalidStateError</span>
+     <li><span class="dfn-paneled" id="3182eb71">NotSupportedError</span>
+     <li><span class="dfn-paneled" id="a5c91173">SameObject</span>
+     <li><span class="dfn-paneled" id="c3e881ef">SecurityError</span>
+     <li><span class="dfn-paneled" id="81dd847b">UnknownError</span>
+     <li><span class="dfn-paneled" id="5372cca8">boolean</span>
+     <li><span class="dfn-paneled" id="5f90bbfb">undefined</span>
+     <li><span class="dfn-paneled" id="e97a9688">unsigned long</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -1862,6 +1642,8 @@ the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediac
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videobitspersecond"><c- g>videoBitsPerSecond</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-bitspersecond"><c- g>bitsPerSecond</c-></a>;
   <a data-link-type="idl-name" href="#enumdef-bitratemode"><c- n>BitrateMode</c-></a> <a class="idl-code" data-default="&quot;variable&quot;" data-link-type="dict-member" data-type="BitrateMode " href="#dom-mediarecorderoptions-audiobitratemode"><c- g>audioBitrateMode</c-></a> = "variable";
+  <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp"><c- n>DOMHighResTimeStamp</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="DOMHighResTimeStamp " href="#dom-mediarecorderoptions-videokeyframeintervalduration"><c- g>videoKeyFrameIntervalDuration</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-mediarecorderoptions-videokeyframeintervalcount"><c- g>videoKeyFrameIntervalCount</c-></a>;
 };
 
 <c- b>enum</c-> <a href="#enumdef-bitratemode"><code><c- g>BitrateMode</c-></code></a> {
@@ -1888,410 +1670,68 @@ the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediac
 };
 
 </pre>
-  <aside aria-labelledby="infopaneltitle-for-mediarecorder" class="dfn-panel" data-for="mediarecorder" id="infopanel-for-mediarecorder">
-   <span id="infopaneltitle-for-mediarecorder" style="display:none">Info about the 'MediaRecorder' definition.</span><b><a href="#mediarecorder">#mediarecorder</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-mediarecorder">1. Overview</a>
-    <li><a href="#ref-for-mediarecorder①">2.1. Constructors</a>
-    <li><a href="#ref-for-mediarecorder②">2.2. Attributes</a> <a href="#ref-for-mediarecorder③">(2)</a>
-    <li><a href="#ref-for-mediarecorder④">2.3. Methods</a> <a href="#ref-for-mediarecorder⑤">(2)</a> <a href="#ref-for-mediarecorder⑥">(3)</a> <a href="#ref-for-mediarecorder⑦">(4)</a> <a href="#ref-for-mediarecorder⑧">(5)</a> <a href="#ref-for-mediarecorder⑨">(6)</a> <a href="#ref-for-mediarecorder①⓪">(7)</a> <a href="#ref-for-mediarecorder①①">(8)</a> <a href="#ref-for-mediarecorder①②">(9)</a> <a href="#ref-for-mediarecorder①③">(10)</a> <a href="#ref-for-mediarecorder①④">(11)</a>
-    <li><a href="#ref-for-mediarecorder①⑤">5. Event summary</a>
-    <li><a href="#ref-for-mediarecorder①⑥">6. Privacy and Security Considerations</a>
-    <li><a href="#ref-for-mediarecorder①⑦">6.1. Resource exhaustion</a>
-    <li><a href="#ref-for-mediarecorder①⑧">6.2. Fingerprinting</a>
-    <li><a href="#ref-for-mediarecorder①⑨">7.1. Check for MediaRecorder and content types</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-start-timeslice-timeslice" class="dfn-panel" data-for="dom-mediarecorder-start-timeslice-timeslice" id="infopanel-for-dom-mediarecorder-start-timeslice-timeslice">
-   <span id="infopaneltitle-for-dom-mediarecorder-start-timeslice-timeslice" style="display:none">Info about the 'timeslice' definition.</span><b><a href="#dom-mediarecorder-start-timeslice-timeslice">#dom-mediarecorder-start-timeslice-timeslice</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-start-timeslice-timeslice">2.3. Methods</a>
-    <li><a href="#ref-for-dom-mediarecorder-start-timeslice-timeslice①">6.1. Resource exhaustion</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-mediarecorder" class="dfn-panel" data-for="dom-mediarecorder-mediarecorder" id="infopanel-for-dom-mediarecorder-mediarecorder">
-   <span id="infopaneltitle-for-dom-mediarecorder-mediarecorder" style="display:none">Info about the 'MediaRecorder(MediaStream stream, optional MediaRecorderOptions options = {})' definition.</span><b><a href="#dom-mediarecorder-mediarecorder">#dom-mediarecorder-mediarecorder</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-mediarecorder">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-mediarecorder①">2.1. Constructors</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-constrainedmimetype" class="dfn-panel" data-for="constrainedmimetype" id="infopanel-for-constrainedmimetype">
-   <span id="infopaneltitle-for-constrainedmimetype" style="display:none">Info about the '[[ConstrainedMimeType]]' definition.</span><b><a href="#constrainedmimetype">#constrainedmimetype</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-constrainedmimetype">2.1. Constructors</a>
-    <li><a href="#ref-for-constrainedmimetype①">2.3. Methods</a> <a href="#ref-for-constrainedmimetype②">(2)</a> <a href="#ref-for-constrainedmimetype③">(3)</a> <a href="#ref-for-constrainedmimetype④">(4)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-constrainedbitspersecond" class="dfn-panel" data-for="constrainedbitspersecond" id="infopanel-for-constrainedbitspersecond">
-   <span id="infopaneltitle-for-constrainedbitspersecond" style="display:none">Info about the '[[ConstrainedBitsPerSecond]]' definition.</span><b><a href="#constrainedbitspersecond">#constrainedbitspersecond</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-constrainedbitspersecond">2.1. Constructors</a> <a href="#ref-for-constrainedbitspersecond①">(2)</a>
-    <li><a href="#ref-for-constrainedbitspersecond②">2.3. Methods</a> <a href="#ref-for-constrainedbitspersecond③">(2)</a> <a href="#ref-for-constrainedbitspersecond④">(3)</a> <a href="#ref-for-constrainedbitspersecond⑤">(4)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-stream" class="dfn-panel" data-for="dom-mediarecorder-stream" id="infopanel-for-dom-mediarecorder-stream">
-   <span id="infopaneltitle-for-dom-mediarecorder-stream" style="display:none">Info about the 'stream' definition.</span><b><a href="#dom-mediarecorder-stream">#dom-mediarecorder-stream</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-stream">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-stream①">2.1. Constructors</a>
-    <li><a href="#ref-for-dom-mediarecorder-stream②">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-stream③">(2)</a>
-    <li><a href="#ref-for-dom-mediarecorder-stream④">5. Event summary</a> <a href="#ref-for-dom-mediarecorder-stream⑤">(2)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-mimetype" class="dfn-panel" data-for="dom-mediarecorder-mimetype" id="infopanel-for-dom-mediarecorder-mimetype">
-   <span id="infopaneltitle-for-dom-mediarecorder-mimetype" style="display:none">Info about the 'mimeType' definition.</span><b><a href="#dom-mediarecorder-mimetype">#dom-mediarecorder-mimetype</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-mimetype">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-mimetype①">2.1. Constructors</a>
-    <li><a href="#ref-for-dom-mediarecorder-mimetype②">2.2. Attributes</a>
-    <li><a href="#ref-for-dom-mediarecorder-mimetype③">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-mimetype④">(2)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-state" class="dfn-panel" data-for="dom-mediarecorder-state" id="infopanel-for-dom-mediarecorder-state">
-   <span id="infopaneltitle-for-dom-mediarecorder-state" style="display:none">Info about the 'state' definition.</span><b><a href="#dom-mediarecorder-state">#dom-mediarecorder-state</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-state">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-state①">2.1. Constructors</a>
-    <li><a href="#ref-for-dom-mediarecorder-state②">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-state③">(2)</a> <a href="#ref-for-dom-mediarecorder-state④">(3)</a> <a href="#ref-for-dom-mediarecorder-state⑤">(4)</a> <a href="#ref-for-dom-mediarecorder-state⑥">(5)</a> <a href="#ref-for-dom-mediarecorder-state⑦">(6)</a> <a href="#ref-for-dom-mediarecorder-state⑧">(7)</a> <a href="#ref-for-dom-mediarecorder-state⑨">(8)</a> <a href="#ref-for-dom-mediarecorder-state①⓪">(9)</a> <a href="#ref-for-dom-mediarecorder-state①①">(10)</a> <a href="#ref-for-dom-mediarecorder-state①②">(11)</a> <a href="#ref-for-dom-mediarecorder-state①③">(12)</a>
-    <li><a href="#ref-for-dom-mediarecorder-state①④">2.4. Data handling</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-onstart" class="dfn-panel" data-for="dom-mediarecorder-onstart" id="infopanel-for-dom-mediarecorder-onstart">
-   <span id="infopaneltitle-for-dom-mediarecorder-onstart" style="display:none">Info about the 'onstart' definition.</span><b><a href="#dom-mediarecorder-onstart">#dom-mediarecorder-onstart</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-onstart">2. Media Recorder API</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-onstop" class="dfn-panel" data-for="dom-mediarecorder-onstop" id="infopanel-for-dom-mediarecorder-onstop">
-   <span id="infopaneltitle-for-dom-mediarecorder-onstop" style="display:none">Info about the 'onstop' definition.</span><b><a href="#dom-mediarecorder-onstop">#dom-mediarecorder-onstop</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-onstop">2. Media Recorder API</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-ondataavailable" class="dfn-panel" data-for="dom-mediarecorder-ondataavailable" id="infopanel-for-dom-mediarecorder-ondataavailable">
-   <span id="infopaneltitle-for-dom-mediarecorder-ondataavailable" style="display:none">Info about the 'ondataavailable' definition.</span><b><a href="#dom-mediarecorder-ondataavailable">#dom-mediarecorder-ondataavailable</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-ondataavailable">1. Overview</a>
-    <li><a href="#ref-for-dom-mediarecorder-ondataavailable①">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-ondataavailable②">6.2. Fingerprinting</a>
-    <li><a href="#ref-for-dom-mediarecorder-ondataavailable③">7.2. Recording webcam video and audio</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-onpause" class="dfn-panel" data-for="dom-mediarecorder-onpause" id="infopanel-for-dom-mediarecorder-onpause">
-   <span id="infopaneltitle-for-dom-mediarecorder-onpause" style="display:none">Info about the 'onpause' definition.</span><b><a href="#dom-mediarecorder-onpause">#dom-mediarecorder-onpause</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-onpause">2. Media Recorder API</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-onresume" class="dfn-panel" data-for="dom-mediarecorder-onresume" id="infopanel-for-dom-mediarecorder-onresume">
-   <span id="infopaneltitle-for-dom-mediarecorder-onresume" style="display:none">Info about the 'onresume' definition.</span><b><a href="#dom-mediarecorder-onresume">#dom-mediarecorder-onresume</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-onresume">2. Media Recorder API</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-onerror" class="dfn-panel" data-for="dom-mediarecorder-onerror" id="infopanel-for-dom-mediarecorder-onerror">
-   <span id="infopaneltitle-for-dom-mediarecorder-onerror" style="display:none">Info about the 'onerror' definition.</span><b><a href="#dom-mediarecorder-onerror">#dom-mediarecorder-onerror</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-onerror">2. Media Recorder API</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-videobitspersecond" class="dfn-panel" data-for="dom-mediarecorder-videobitspersecond" id="infopanel-for-dom-mediarecorder-videobitspersecond">
-   <span id="infopaneltitle-for-dom-mediarecorder-videobitspersecond" style="display:none">Info about the 'videoBitsPerSecond' definition.</span><b><a href="#dom-mediarecorder-videobitspersecond">#dom-mediarecorder-videobitspersecond</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-videobitspersecond">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-videobitspersecond①">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorder-videobitspersecond②">(2)</a> <a href="#ref-for-dom-mediarecorder-videobitspersecond③">(3)</a>
-    <li><a href="#ref-for-dom-mediarecorder-videobitspersecond④">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-videobitspersecond⑤">(2)</a> <a href="#ref-for-dom-mediarecorder-videobitspersecond⑥">(3)</a> <a href="#ref-for-dom-mediarecorder-videobitspersecond⑦">(4)</a> <a href="#ref-for-dom-mediarecorder-videobitspersecond⑧">(5)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-audiobitspersecond" class="dfn-panel" data-for="dom-mediarecorder-audiobitspersecond" id="infopanel-for-dom-mediarecorder-audiobitspersecond">
-   <span id="infopaneltitle-for-dom-mediarecorder-audiobitspersecond" style="display:none">Info about the 'audioBitsPerSecond' definition.</span><b><a href="#dom-mediarecorder-audiobitspersecond">#dom-mediarecorder-audiobitspersecond</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-audiobitspersecond">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-audiobitspersecond①">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorder-audiobitspersecond②">(2)</a> <a href="#ref-for-dom-mediarecorder-audiobitspersecond③">(3)</a>
-    <li><a href="#ref-for-dom-mediarecorder-audiobitspersecond④">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-audiobitspersecond⑤">(2)</a> <a href="#ref-for-dom-mediarecorder-audiobitspersecond⑥">(3)</a> <a href="#ref-for-dom-mediarecorder-audiobitspersecond⑦">(4)</a> <a href="#ref-for-dom-mediarecorder-audiobitspersecond⑧">(5)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-audiobitratemode" class="dfn-panel" data-for="dom-mediarecorder-audiobitratemode" id="infopanel-for-dom-mediarecorder-audiobitratemode">
-   <span id="infopaneltitle-for-dom-mediarecorder-audiobitratemode" style="display:none">Info about the 'audioBitrateMode' definition.</span><b><a href="#dom-mediarecorder-audiobitratemode">#dom-mediarecorder-audiobitratemode</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-audiobitratemode">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-audiobitratemode①">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorder-audiobitratemode②">(2)</a>
-    <li><a href="#ref-for-dom-mediarecorder-audiobitratemode③">2.3. Methods</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-start" class="dfn-panel" data-for="dom-mediarecorder-start" id="infopanel-for-dom-mediarecorder-start">
-   <span id="infopaneltitle-for-dom-mediarecorder-start" style="display:none">Info about the 'start(optional unsigned long timeslice)' definition.</span><b><a href="#dom-mediarecorder-start">#dom-mediarecorder-start</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-start">1. Overview</a>
-    <li><a href="#ref-for-dom-mediarecorder-start①">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-start②">2.3. Methods</a>
-    <li><a href="#ref-for-dom-mediarecorder-start③">6.1. Resource exhaustion</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-abstract-opdef-inactivate-the-recorder" class="dfn-panel" data-for="abstract-opdef-inactivate-the-recorder" id="infopanel-for-abstract-opdef-inactivate-the-recorder">
-   <span id="infopaneltitle-for-abstract-opdef-inactivate-the-recorder" style="display:none">Info about the 'Inactivate the recorder' definition.</span><b><a href="#abstract-opdef-inactivate-the-recorder">#abstract-opdef-inactivate-the-recorder</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-abstract-opdef-inactivate-the-recorder">2.3. Methods</a> <a href="#ref-for-abstract-opdef-inactivate-the-recorder①">(2)</a> <a href="#ref-for-abstract-opdef-inactivate-the-recorder②">(3)</a> <a href="#ref-for-abstract-opdef-inactivate-the-recorder③">(4)</a> <a href="#ref-for-abstract-opdef-inactivate-the-recorder④">(5)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-stop" class="dfn-panel" data-for="dom-mediarecorder-stop" id="infopanel-for-dom-mediarecorder-stop">
-   <span id="infopaneltitle-for-dom-mediarecorder-stop" style="display:none">Info about the 'stop()' definition.</span><b><a href="#dom-mediarecorder-stop">#dom-mediarecorder-stop</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-stop">1. Overview</a>
-    <li><a href="#ref-for-dom-mediarecorder-stop①">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-stop②">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-stop③">(2)</a>
-    <li><a href="#ref-for-dom-mediarecorder-stop④">7.2. Recording webcam video and audio</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-pause" class="dfn-panel" data-for="dom-mediarecorder-pause" id="infopanel-for-dom-mediarecorder-pause">
-   <span id="infopaneltitle-for-dom-mediarecorder-pause" style="display:none">Info about the 'pause()' definition.</span><b><a href="#dom-mediarecorder-pause">#dom-mediarecorder-pause</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-pause">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-pause①">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-pause②">(2)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-resume" class="dfn-panel" data-for="dom-mediarecorder-resume" id="infopanel-for-dom-mediarecorder-resume">
-   <span id="infopaneltitle-for-dom-mediarecorder-resume" style="display:none">Info about the 'resume()' definition.</span><b><a href="#dom-mediarecorder-resume">#dom-mediarecorder-resume</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-resume">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-resume①">2.3. Methods</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-requestdata" class="dfn-panel" data-for="dom-mediarecorder-requestdata" id="infopanel-for-dom-mediarecorder-requestdata">
-   <span id="infopaneltitle-for-dom-mediarecorder-requestdata" style="display:none">Info about the 'requestData()' definition.</span><b><a href="#dom-mediarecorder-requestdata">#dom-mediarecorder-requestdata</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-requestdata">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-requestdata①">2.3. Methods</a> <a href="#ref-for-dom-mediarecorder-requestdata②">(2)</a> <a href="#ref-for-dom-mediarecorder-requestdata③">(3)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorder-istypesupported" class="dfn-panel" data-for="dom-mediarecorder-istypesupported" id="infopanel-for-dom-mediarecorder-istypesupported">
-   <span id="infopaneltitle-for-dom-mediarecorder-istypesupported" style="display:none">Info about the 'isTypeSupported(DOMString type)
-    ' definition.</span><b><a href="#dom-mediarecorder-istypesupported">#dom-mediarecorder-istypesupported</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorder-istypesupported">2. Media Recorder API</a>
-    <li><a href="#ref-for-dom-mediarecorder-istypesupported①">6.2. Fingerprinting</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-abstract-opdef-is-type-supported" class="dfn-panel" data-for="abstract-opdef-is-type-supported" id="infopanel-for-abstract-opdef-is-type-supported">
-   <span id="infopaneltitle-for-abstract-opdef-is-type-supported" style="display:none">Info about the 'is type supported' definition.</span><b><a href="#abstract-opdef-is-type-supported">#abstract-opdef-is-type-supported</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-abstract-opdef-is-type-supported">2.1. Constructors</a>
-    <li><a href="#ref-for-abstract-opdef-is-type-supported①">2.3. Methods</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-fire-a-blob-event" class="dfn-panel" data-for="fire-a-blob-event" id="infopanel-for-fire-a-blob-event">
-   <span id="infopaneltitle-for-fire-a-blob-event" style="display:none">Info about the 'fire a blob event' definition.</span><b><a href="#fire-a-blob-event">#fire-a-blob-event</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-fire-a-blob-event">2.3. Methods</a> <a href="#ref-for-fire-a-blob-event①">(2)</a> <a href="#ref-for-fire-a-blob-event②">(3)</a> <a href="#ref-for-fire-a-blob-event③">(4)</a> <a href="#ref-for-fire-a-blob-event④">(5)</a> <a href="#ref-for-fire-a-blob-event⑤">(6)</a> <a href="#ref-for-fire-a-blob-event⑥">(7)</a>
-    <li><a href="#ref-for-fire-a-blob-event⑦">4.1. General principles</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dictdef-mediarecorderoptions" class="dfn-panel" data-for="dictdef-mediarecorderoptions" id="infopanel-for-dictdef-mediarecorderoptions">
-   <span id="infopaneltitle-for-dictdef-mediarecorderoptions" style="display:none">Info about the 'MediaRecorderOptions' definition.</span><b><a href="#dictdef-mediarecorderoptions">#dictdef-mediarecorderoptions</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dictdef-mediarecorderoptions">2. Media Recorder API</a>
-    <li><a href="#ref-for-dictdef-mediarecorderoptions①">6.2. Fingerprinting</a> <a href="#ref-for-dictdef-mediarecorderoptions②">(2)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorderoptions-mimetype" class="dfn-panel" data-for="dom-mediarecorderoptions-mimetype" id="infopanel-for-dom-mediarecorderoptions-mimetype">
-   <span id="infopaneltitle-for-dom-mediarecorderoptions-mimetype" style="display:none">Info about the 'mimeType' definition.</span><b><a href="#dom-mediarecorderoptions-mimetype">#dom-mediarecorderoptions-mimetype</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorderoptions-mimetype①">(2)</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype②">2.5. MediaRecorderOptions</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-mimetype③">2.5.1. Members</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorderoptions-audiobitspersecond" class="dfn-panel" data-for="dom-mediarecorderoptions-audiobitspersecond" id="infopanel-for-dom-mediarecorderoptions-audiobitspersecond">
-   <span id="infopaneltitle-for-dom-mediarecorderoptions-audiobitspersecond" style="display:none">Info about the 'audioBitsPerSecond' definition.</span><b><a href="#dom-mediarecorderoptions-audiobitspersecond">#dom-mediarecorderoptions-audiobitspersecond</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond">2.1. Constructors</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond①">2.5. MediaRecorderOptions</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitspersecond②">2.5.1. Members</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorderoptions-videobitspersecond" class="dfn-panel" data-for="dom-mediarecorderoptions-videobitspersecond" id="infopanel-for-dom-mediarecorderoptions-videobitspersecond">
-   <span id="infopaneltitle-for-dom-mediarecorderoptions-videobitspersecond" style="display:none">Info about the 'videoBitsPerSecond' definition.</span><b><a href="#dom-mediarecorderoptions-videobitspersecond">#dom-mediarecorderoptions-videobitspersecond</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond">2.1. Constructors</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond①">2.5. MediaRecorderOptions</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-videobitspersecond②">2.5.1. Members</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorderoptions-bitspersecond" class="dfn-panel" data-for="dom-mediarecorderoptions-bitspersecond" id="infopanel-for-dom-mediarecorderoptions-bitspersecond">
-   <span id="infopaneltitle-for-dom-mediarecorderoptions-bitspersecond" style="display:none">Info about the 'bitsPerSecond' definition.</span><b><a href="#dom-mediarecorderoptions-bitspersecond">#dom-mediarecorderoptions-bitspersecond</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-bitspersecond">2.1. Constructors</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-bitspersecond①">2.5. MediaRecorderOptions</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-mediarecorderoptions-audiobitratemode" class="dfn-panel" data-for="dom-mediarecorderoptions-audiobitratemode" id="infopanel-for-dom-mediarecorderoptions-audiobitratemode">
-   <span id="infopaneltitle-for-dom-mediarecorderoptions-audiobitratemode" style="display:none">Info about the 'audioBitrateMode' definition.</span><b><a href="#dom-mediarecorderoptions-audiobitratemode">#dom-mediarecorderoptions-audiobitratemode</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitratemode">2.1. Constructors</a> <a href="#ref-for-dom-mediarecorderoptions-audiobitratemode①">(2)</a>
-    <li><a href="#ref-for-dom-mediarecorderoptions-audiobitratemode②">2.5. MediaRecorderOptions</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-enumdef-bitratemode" class="dfn-panel" data-for="enumdef-bitratemode" id="infopanel-for-enumdef-bitratemode">
-   <span id="infopaneltitle-for-enumdef-bitratemode" style="display:none">Info about the 'BitrateMode' definition.</span><b><a href="#enumdef-bitratemode">#enumdef-bitratemode</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-enumdef-bitratemode">2. Media Recorder API</a>
-    <li><a href="#ref-for-enumdef-bitratemode①">2.1. Constructors</a>
-    <li><a href="#ref-for-enumdef-bitratemode②">2.2. Attributes</a> <a href="#ref-for-enumdef-bitratemode③">(2)</a>
-    <li><a href="#ref-for-enumdef-bitratemode④">2.3. Methods</a>
-    <li><a href="#ref-for-enumdef-bitratemode⑤">2.5. MediaRecorderOptions</a>
-    <li><a href="#ref-for-enumdef-bitratemode⑥">2.5.1. Members</a> <a href="#ref-for-enumdef-bitratemode⑦">(2)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-bitratemode-constant" class="dfn-panel" data-for="dom-bitratemode-constant" id="infopanel-for-dom-bitratemode-constant">
-   <span id="infopaneltitle-for-dom-bitratemode-constant" style="display:none">Info about the 'constant' definition.</span><b><a href="#dom-bitratemode-constant">#dom-bitratemode-constant</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-bitratemode-constant">2.6. BitrateMode</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-bitratemode-variable" class="dfn-panel" data-for="dom-bitratemode-variable" id="infopanel-for-dom-bitratemode-variable">
-   <span id="infopaneltitle-for-dom-bitratemode-variable" style="display:none">Info about the 'variable' definition.</span><b><a href="#dom-bitratemode-variable">#dom-bitratemode-variable</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-bitratemode-variable">2.6. BitrateMode</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-enumdef-recordingstate" class="dfn-panel" data-for="enumdef-recordingstate" id="infopanel-for-enumdef-recordingstate">
-   <span id="infopaneltitle-for-enumdef-recordingstate" style="display:none">Info about the 'RecordingState' definition.</span><b><a href="#enumdef-recordingstate">#enumdef-recordingstate</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-enumdef-recordingstate">2. Media Recorder API</a>
-    <li><a href="#ref-for-enumdef-recordingstate①">2.2. Attributes</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-recordingstate-inactive" class="dfn-panel" data-for="dom-recordingstate-inactive" id="infopanel-for-dom-recordingstate-inactive">
-   <span id="infopaneltitle-for-dom-recordingstate-inactive" style="display:none">Info about the 'inactive' definition.</span><b><a href="#dom-recordingstate-inactive">#dom-recordingstate-inactive</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-recordingstate-inactive">2.1. Constructors</a>
-    <li><a href="#ref-for-dom-recordingstate-inactive①">2.3. Methods</a> <a href="#ref-for-dom-recordingstate-inactive②">(2)</a> <a href="#ref-for-dom-recordingstate-inactive③">(3)</a> <a href="#ref-for-dom-recordingstate-inactive④">(4)</a> <a href="#ref-for-dom-recordingstate-inactive⑤">(5)</a> <a href="#ref-for-dom-recordingstate-inactive⑥">(6)</a>
-    <li><a href="#ref-for-dom-recordingstate-inactive⑦">2.7. RecordingState</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-recordingstate-recording" class="dfn-panel" data-for="dom-recordingstate-recording" id="infopanel-for-dom-recordingstate-recording">
-   <span id="infopaneltitle-for-dom-recordingstate-recording" style="display:none">Info about the 'recording' definition.</span><b><a href="#dom-recordingstate-recording">#dom-recordingstate-recording</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-recordingstate-recording">2.3. Methods</a> <a href="#ref-for-dom-recordingstate-recording①">(2)</a> <a href="#ref-for-dom-recordingstate-recording②">(3)</a>
-    <li><a href="#ref-for-dom-recordingstate-recording③">2.4. Data handling</a>
-    <li><a href="#ref-for-dom-recordingstate-recording④">2.7. RecordingState</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-recordingstate-paused" class="dfn-panel" data-for="dom-recordingstate-paused" id="infopanel-for-dom-recordingstate-paused">
-   <span id="infopaneltitle-for-dom-recordingstate-paused" style="display:none">Info about the 'paused' definition.</span><b><a href="#dom-recordingstate-paused">#dom-recordingstate-paused</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-recordingstate-paused">2.3. Methods</a> <a href="#ref-for-dom-recordingstate-paused①">(2)</a>
-    <li><a href="#ref-for-dom-recordingstate-paused②">2.7. RecordingState</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-blobevent" class="dfn-panel" data-for="blobevent" id="infopanel-for-blobevent">
-   <span id="infopaneltitle-for-blobevent" style="display:none">Info about the 'BlobEvent' definition.</span><b><a href="#blobevent">#blobevent</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-blobevent">2.4. Data handling</a>
-    <li><a href="#ref-for-blobevent①">3.2. Attributes</a> <a href="#ref-for-blobevent②">(2)</a>
-    <li><a href="#ref-for-blobevent③">3.3.1. Members</a> <a href="#ref-for-blobevent④">(2)</a>
-    <li><a href="#ref-for-blobevent⑤">5. Event summary</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-blobevent-blobevent" class="dfn-panel" data-for="dom-blobevent-blobevent" id="infopanel-for-dom-blobevent-blobevent">
-   <span id="infopaneltitle-for-dom-blobevent-blobevent" style="display:none">Info about the 'BlobEvent(DOMString type, BlobEventInit eventInitDict)' definition.</span><b><a href="#dom-blobevent-blobevent">#dom-blobevent-blobevent</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-blobevent-blobevent">3. Blob Event</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-blobevent-data" class="dfn-panel" data-for="dom-blobevent-data" id="infopanel-for-dom-blobevent-data">
-   <span id="infopaneltitle-for-dom-blobevent-data" style="display:none">Info about the 'data' definition.</span><b><a href="#dom-blobevent-data">#dom-blobevent-data</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-blobevent-data">2.2. Attributes</a>
-    <li><a href="#ref-for-dom-blobevent-data①">2.4. Data handling</a>
-    <li><a href="#ref-for-dom-blobevent-data②">3. Blob Event</a>
-    <li><a href="#ref-for-dom-blobevent-data③">3.2. Attributes</a>
-    <li><a href="#ref-for-dom-blobevent-data④">5. Event summary</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-blobevent-timecode" class="dfn-panel" data-for="dom-blobevent-timecode" id="infopanel-for-dom-blobevent-timecode">
-   <span id="infopaneltitle-for-dom-blobevent-timecode" style="display:none">Info about the 'timecode' definition.</span><b><a href="#dom-blobevent-timecode">#dom-blobevent-timecode</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-blobevent-timecode">3. Blob Event</a>
-    <li><a href="#ref-for-dom-blobevent-timecode①">3.2. Attributes</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dictdef-blobeventinit" class="dfn-panel" data-for="dictdef-blobeventinit" id="infopanel-for-dictdef-blobeventinit">
-   <span id="infopaneltitle-for-dictdef-blobeventinit" style="display:none">Info about the 'BlobEventInit' definition.</span><b><a href="#dictdef-blobeventinit">#dictdef-blobeventinit</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dictdef-blobeventinit">3. Blob Event</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-blobeventinit-data" class="dfn-panel" data-for="dom-blobeventinit-data" id="infopanel-for-dom-blobeventinit-data">
-   <span id="infopaneltitle-for-dom-blobeventinit-data" style="display:none">Info about the 'data' definition.</span><b><a href="#dom-blobeventinit-data">#dom-blobeventinit-data</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-blobeventinit-data">3.3. BlobEventInit</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-dom-blobeventinit-timecode" class="dfn-panel" data-for="dom-blobeventinit-timecode" id="infopanel-for-dom-blobeventinit-timecode">
-   <span id="infopaneltitle-for-dom-blobeventinit-timecode" style="display:none">Info about the 'timecode' definition.</span><b><a href="#dom-blobeventinit-timecode">#dom-blobeventinit-timecode</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-blobeventinit-timecode">3.3. BlobEventInit</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-fire-an-error-event" class="dfn-panel" data-for="fire-an-error-event" id="infopanel-for-fire-an-error-event">
-   <span id="infopaneltitle-for-fire-an-error-event" style="display:none">Info about the 'fire an error event' definition.</span><b><a href="#fire-an-error-event">#fire-an-error-event</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-fire-an-error-event">2.3. Methods</a> <a href="#ref-for-fire-an-error-event①">(2)</a> <a href="#ref-for-fire-an-error-event②">(3)</a>
-    <li><a href="#ref-for-fire-an-error-event③">4.1. General principles</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-eventdef-mediarecorder-start" class="dfn-panel" data-for="eventdef-mediarecorder-start" id="infopanel-for-eventdef-mediarecorder-start">
-   <span id="infopaneltitle-for-eventdef-mediarecorder-start" style="display:none">Info about the 'start' definition.</span><b><a href="#eventdef-mediarecorder-start">#eventdef-mediarecorder-start</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-eventdef-mediarecorder-start">2.2. Attributes</a>
-    <li><a href="#ref-for-eventdef-mediarecorder-start①">2.3. Methods</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-eventdef-mediarecorder-stop" class="dfn-panel" data-for="eventdef-mediarecorder-stop" id="infopanel-for-eventdef-mediarecorder-stop">
-   <span id="infopaneltitle-for-eventdef-mediarecorder-stop" style="display:none">Info about the 'stop' definition.</span><b><a href="#eventdef-mediarecorder-stop">#eventdef-mediarecorder-stop</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-eventdef-mediarecorder-stop">2.2. Attributes</a>
-    <li><a href="#ref-for-eventdef-mediarecorder-stop①">2.3. Methods</a> <a href="#ref-for-eventdef-mediarecorder-stop②">(2)</a> <a href="#ref-for-eventdef-mediarecorder-stop③">(3)</a> <a href="#ref-for-eventdef-mediarecorder-stop④">(4)</a> <a href="#ref-for-eventdef-mediarecorder-stop⑤">(5)</a>
-    <li><a href="#ref-for-eventdef-mediarecorder-stop⑥">4.1. General principles</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-eventdef-mediarecorder-dataavailable" class="dfn-panel" data-for="eventdef-mediarecorder-dataavailable" id="infopanel-for-eventdef-mediarecorder-dataavailable">
-   <span id="infopaneltitle-for-eventdef-mediarecorder-dataavailable" style="display:none">Info about the 'dataavailable' definition.</span><b><a href="#eventdef-mediarecorder-dataavailable">#eventdef-mediarecorder-dataavailable</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-eventdef-mediarecorder-dataavailable">2.2. Attributes</a>
-    <li><a href="#ref-for-eventdef-mediarecorder-dataavailable①">2.3. Methods</a> <a href="#ref-for-eventdef-mediarecorder-dataavailable②">(2)</a> <a href="#ref-for-eventdef-mediarecorder-dataavailable③">(3)</a> <a href="#ref-for-eventdef-mediarecorder-dataavailable④">(4)</a> <a href="#ref-for-eventdef-mediarecorder-dataavailable⑤">(5)</a> <a href="#ref-for-eventdef-mediarecorder-dataavailable⑥">(6)</a> <a href="#ref-for-eventdef-mediarecorder-dataavailable⑦">(7)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-eventdef-mediarecorder-pause" class="dfn-panel" data-for="eventdef-mediarecorder-pause" id="infopanel-for-eventdef-mediarecorder-pause">
-   <span id="infopaneltitle-for-eventdef-mediarecorder-pause" style="display:none">Info about the 'pause' definition.</span><b><a href="#eventdef-mediarecorder-pause">#eventdef-mediarecorder-pause</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-eventdef-mediarecorder-pause">2.2. Attributes</a>
-    <li><a href="#ref-for-eventdef-mediarecorder-pause①">2.3. Methods</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-eventdef-mediarecorder-resume" class="dfn-panel" data-for="eventdef-mediarecorder-resume" id="infopanel-for-eventdef-mediarecorder-resume">
-   <span id="infopaneltitle-for-eventdef-mediarecorder-resume" style="display:none">Info about the 'resume' definition.</span><b><a href="#eventdef-mediarecorder-resume">#eventdef-mediarecorder-resume</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-eventdef-mediarecorder-resume">2.2. Attributes</a>
-   </ul>
-  </aside>
 <script>/* script-dfn-panel */
 "use strict";
 {
-    function queryAll(sel) {
-        return [].slice.call(document.querySelectorAll(sel));
+    const dfnsJson = window.dfnsJson || {};
+
+    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
+        return mk.aside({
+            class: "dfn-panel",
+            id: `infopanel-for-${dfnID}`,
+            "data-for": dfnID,
+            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
+            },
+            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
+                `Info about the '${dfnText}' ${external?"external":""} reference.`),
+            mk.a({href:url}, url),
+            mk.b({}, "Referenced in:"),
+            mk.ul({},
+                ...refSections.map(section=>
+                    mk.li({},
+                        ...section.refs.map((ref, refI)=>
+                            [
+                                mk.a({
+                                    href: `#${ref.id}`
+                                    },
+                                    (refI == 0) ? section.title : `(${refI + 1})`
+                                ),
+                                " ",
+                            ]
+                        ),
+                    ),
+                ),
+            ),
+        );
     }
 
-    // Add popup behavior to all dfns to show the corresponding dfn-panel.
-    var dfns = document.querySelectorAll('.dfn-paneled');
-    for (let dfn of dfns) { insertDfnPopupAction(dfn); }
+    function genAllDfnPanels() {
+        for(const panelData of Object.values(window.dfnpanelData)) {
+            const dfnID = panelData.dfnID;
+            const dfn = document.getElementById(dfnID);
+            if(!dfn) {
+                console.log(`Can't find dfn#${dfnID}.`, panelData);
+            } else {
+                const panel = genDfnPanel(panelData);
+                append(document.body, panel);
+                insertDfnPopupAction(dfn, panel)
+            }
+        }
+    }
 
-    document.body.addEventListener("click", (e) => {
-        // If not handled already, just hide all dfn panels.
-        hideAllDfnPanels();
-    });
+    document.addEventListener("DOMContentLoaded", ()=>{
+        genAllDfnPanels();
+
+        // Add popup behavior to all dfns to show the corresponding dfn-panel.
+        var dfns = queryAll('.dfn-paneled');
+        for(let dfn of dfns) { ; }
+
+        document.body.addEventListener("click", (e) => {
+            // If not handled already, just hide all dfn panels.
+            hideAllDfnPanels();
+        });
+    })
+
 
     function hideAllDfnPanels() {
         // Turn off any currently "on" or "activated" panels.
@@ -2341,52 +1781,336 @@ the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediac
         }
     }
 
-    function insertDfnPopupAction(dfn) {
+    function insertDfnPopupAction(dfn, dfnPanel) {
         // Find dfn panel
-        const dfnPanel = document.querySelector(`.dfn-panel[data-for='${dfn.id}']`);
-        if (dfnPanel) {
-            const panelWrapper = document.createElement('span');
-            panelWrapper.appendChild(dfnPanel);
-            panelWrapper.style.position = "relative";
-            panelWrapper.style.height = "0px";
-            dfn.insertAdjacentElement("afterend", panelWrapper);
-            dfn.setAttribute('role', 'button');
-            dfn.setAttribute('aria-expanded', 'false')
-            dfn.tabIndex = 0;
-            dfn.classList.add('has-dfn-panel');
-            dfn.addEventListener('click', (event) => {
-                showDfnPanel(dfnPanel, dfn);
+        const panelWrapper = document.createElement('span');
+        panelWrapper.appendChild(dfnPanel);
+        panelWrapper.style.position = "relative";
+        panelWrapper.style.height = "0px";
+        dfn.insertAdjacentElement("afterend", panelWrapper);
+        dfn.setAttribute('role', 'button');
+        dfn.setAttribute('aria-expanded', 'false')
+        dfn.tabIndex = 0;
+        dfn.classList.add('has-dfn-panel');
+        dfn.addEventListener('click', (event) => {
+            showDfnPanel(dfnPanel, dfn);
+            event.stopPropagation();
+        });
+        dfn.addEventListener('keypress', (event) => {
+            const kc = event.keyCode;
+            // 32->Space, 13->Enter
+            if(kc == 32 || kc == 13) {
+                toggleDfnPanel(dfnPanel, dfn);
                 event.stopPropagation();
-            });
-            dfn.addEventListener('keypress', (event) => {
-                const kc = event.keyCode;
-                // 32->Space, 13->Enter
-                if(kc == 32 || kc == 13) {
-                    toggleDfnPanel(dfnPanel, dfn);
-                    event.stopPropagation();
-                    event.preventDefault();
-                }
-            });
+                event.preventDefault();
+            }
+        });
 
-            dfnPanel.addEventListener('click', (event) => {
+        dfnPanel.addEventListener('click', (event) => {
+            if (event.target.nodeName == 'A') {
                 pinDfnPanel(dfnPanel);
+            }
+            event.stopPropagation();
+        });
+
+        dfnPanel.addEventListener('keydown', (event) => {
+            if(event.keyCode == 27) { // Escape key
+                hideDfnPanel(dfnPanel, dfn);
                 event.stopPropagation();
-            });
-
-            dfnPanel.addEventListener('keydown', (event) => {
-                if(event.keyCode == 27) { // Escape key
-                    hideDfnPanel(dfnPanel, dfn);
-                    event.stopPropagation();
-                    event.preventDefault();
-                }
-            })
-
-        } else {
-            console.log("Couldn't find .dfn-panel[data-for='" + dfn.id + "']");
-        }
+                event.preventDefault();
+            }
+        })
     }
 }
 </script>
+<script>/* script-dfn-panel-json */
+window.dfnpanelData = {};
+window.dfnpanelData['6777aaf6'] = {"dfnID": "6777aaf6", "url": "https://www.w3.org/TR/fingerprinting-guidance/#dfn-active-fingerprinting", "dfnText": "active fingerprinting", "refSections": [{"refs": [{"id": "ref-for-dfn-active-fingerprinting"}], "title": "6.2. Fingerprinting"}], "external": true};
+window.dfnpanelData['95042a38'] = {"dfnID": "95042a38", "url": "https://www.w3.org/TR/mediacapture-streams/#stream-inactive", "dfnText": "inactive", "refSections": [{"refs": [{"id": "ref-for-stream-inactive"}], "title": "2.3. Methods"}], "external": true};
+window.dfnpanelData['d211886f'] = {"dfnID": "d211886f", "url": "https://www.w3.org/TR/webrtc-identity/#isolated-media-streams", "dfnText": "isolation properties", "refSections": [{"refs": [{"id": "ref-for-isolated-media-streams"}, {"id": "ref-for-isolated-media-streams\u2460"}, {"id": "ref-for-isolated-media-streams\u2461"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-isolated-media-streams\u2462"}], "title": "4.3. Exception Summary"}], "external": true};
+window.dfnpanelData['129bdae8'] = {"dfnID": "129bdae8", "url": "https://dom.spec.whatwg.org/#event", "dfnText": "Event", "refSections": [{"refs": [{"id": "ref-for-event"}], "title": "3. Blob Event"}, {"refs": [{"id": "ref-for-event\u2460"}, {"id": "ref-for-event\u2461"}, {"id": "ref-for-event\u2462"}, {"id": "ref-for-event\u2463"}], "title": "5. Event summary"}], "external": true};
+window.dfnpanelData['2bc0cdf4'] = {"dfnID": "2bc0cdf4", "url": "https://dom.spec.whatwg.org/#eventtarget", "dfnText": "EventTarget", "refSections": [{"refs": [{"id": "ref-for-eventtarget"}], "title": "2. Media Recorder API"}], "external": true};
+window.dfnpanelData['5fd23811'] = {"dfnID": "5fd23811", "url": "https://dom.spec.whatwg.org/#concept-event-fire", "dfnText": "fire an event", "refSections": [{"refs": [{"id": "ref-for-concept-event-fire"}, {"id": "ref-for-concept-event-fire\u2460"}, {"id": "ref-for-concept-event-fire\u2461"}, {"id": "ref-for-concept-event-fire\u2462"}, {"id": "ref-for-concept-event-fire\u2463"}, {"id": "ref-for-concept-event-fire\u2464"}, {"id": "ref-for-concept-event-fire\u2465"}, {"id": "ref-for-concept-event-fire\u2466"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-concept-event-fire\u2467"}], "title": "2.4. Data handling"}, {"refs": [{"id": "ref-for-concept-event-fire\u2468"}], "title": "4.1. General principles"}, {"refs": [{"id": "f95f167f0"}], "title": "5. Event summary"}], "external": true};
+window.dfnpanelData['851a073b'] = {"dfnID": "851a073b", "url": "https://fetch.spec.whatwg.org/#concept-fetch-resume", "dfnText": "resumed", "refSections": [{"refs": [{"id": "ref-for-concept-fetch-resume"}], "title": "2.3. Methods"}], "external": true};
+window.dfnpanelData['b7d73f5b'] = {"dfnID": "b7d73f5b", "url": "https://w3c.github.io/FileAPI/#dfn-Blob", "dfnText": "Blob", "refSections": [{"refs": [{"id": "ref-for-dfn-Blob"}], "title": "1. Overview"}, {"refs": [{"id": "ref-for-dfn-Blob\u2460"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-dfn-Blob\u2461"}, {"id": "ref-for-dfn-Blob\u2462"}, {"id": "ref-for-dfn-Blob\u2463"}, {"id": "ref-for-dfn-Blob\u2464"}, {"id": "ref-for-dfn-Blob\u2465"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-dfn-Blob\u2466"}], "title": "2.4. Data handling"}, {"refs": [{"id": "ref-for-dfn-Blob\u2467"}], "title": "3. Blob Event"}, {"refs": [{"id": "ref-for-dfn-Blob\u2468"}, {"id": "ref-for-dfn-Blob\u2460\u24ea"}], "title": "3.2. Attributes"}, {"refs": [{"id": "ref-for-dfn-Blob\u2460\u2460"}], "title": "3.3. BlobEventInit"}, {"refs": [{"id": "ref-for-dfn-Blob\u2460\u2461"}, {"id": "ref-for-dfn-Blob\u2460\u2462"}], "title": "3.3.1. Members"}, {"refs": [{"id": "ref-for-dfn-Blob\u2460\u2463"}, {"id": "ref-for-dfn-Blob\u2460\u2464"}], "title": "4.1. General principles"}, {"refs": [{"id": "ref-for-dfn-Blob\u2460\u2465"}], "title": "5. Event summary"}], "external": true};
+window.dfnpanelData['e303c02d'] = {"dfnID": "e303c02d", "url": "https://w3c.github.io/FileAPI/#dfn-type", "dfnText": "type", "refSections": [{"refs": [{"id": "ref-for-dfn-type"}], "title": "3.2. Attributes"}, {"refs": [{"id": "ref-for-dfn-type\u2460"}], "title": "6.2. Fingerprinting"}], "external": true};
+window.dfnpanelData['836b9827'] = {"dfnID": "836b9827", "url": "https://w3c.github.io/fingerprinting-guidance/#dfn-fingerprinting-surface", "dfnText": "fingerprinting surface", "refSections": [{"refs": [{"id": "ref-for-dfn-fingerprinting-surface"}], "title": "6.2. Fingerprinting"}], "external": true};
+window.dfnpanelData['d9520ae8'] = {"dfnID": "d9520ae8", "url": "https://w3c.github.io/mediacapture-main/#dom-mediastream", "dfnText": "MediaStream", "refSections": [{"refs": [{"id": "ref-for-dom-mediastream"}], "title": "Unnumbered Section"}, {"refs": [{"id": "ref-for-dom-mediastream\u2460"}, {"id": "ref-for-dom-mediastream\u2461"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediastream\u2462"}, {"id": "ref-for-dom-mediastream\u2463"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-dom-mediastream\u2464"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-dom-mediastream\u2465"}, {"id": "ref-for-dom-mediastream\u2466"}], "title": "4.3. Exception Summary"}, {"refs": [{"id": "ref-for-dom-mediastream\u2467"}, {"id": "ref-for-dom-mediastream\u2468"}], "title": "6. Privacy and Security Considerations"}, {"refs": [{"id": "ref-for-dom-mediastream\u2460\u24ea"}, {"id": "ref-for-dom-mediastream\u2460\u2460"}], "title": "7.2. Recording webcam video and audio"}], "external": true};
+window.dfnpanelData['bc1e4fa1'] = {"dfnID": "bc1e4fa1", "url": "https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack", "dfnText": "MediaStreamTrack", "refSections": [{"refs": [{"id": "ref-for-dom-mediastreamtrack"}], "title": "1. Overview"}, {"refs": [{"id": "ref-for-dom-mediastreamtrack\u2460"}], "title": "4.1. General principles"}, {"refs": [{"id": "ref-for-dom-mediastreamtrack\u2461"}], "title": "4.3. Exception Summary"}, {"refs": [{"id": "ref-for-dom-mediastreamtrack\u2462"}], "title": "7.2. Recording webcam video and audio"}], "external": true};
+window.dfnpanelData['15bac70a'] = {"dfnID": "15bac70a", "url": "https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-enabled", "dfnText": "enabled", "refSections": [{"refs": [{"id": "ref-for-dom-mediastreamtrack-enabled"}], "title": "2.3. Methods"}], "external": true};
+window.dfnpanelData['14b3fcce'] = {"dfnID": "14b3fcce", "url": "https://w3c.github.io/mediacapture-main/#idl-def-MediaStreamTrackState.ended", "dfnText": "ended", "refSections": [{"refs": [{"id": "ref-for-idl-def-MediaStreamTrackState.ended"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-idl-def-MediaStreamTrackState.ended\u2460"}], "title": "7.2. Recording webcam video and audio"}], "external": true};
+window.dfnpanelData['eca80770'] = {"dfnID": "eca80770", "url": "https://w3c.github.io/mediacapture-main/#dom-mediadevices-getusermedia", "dfnText": "getUserMedia()", "refSections": [{"refs": [{"id": "ref-for-dom-mediadevices-getusermedia"}], "title": "7.2. Recording webcam video and audio"}], "external": true};
+window.dfnpanelData['84017020'] = {"dfnID": "84017020", "url": "https://w3c.github.io/mediacapture-main/#idl-def-MediaStreamTrackState.live", "dfnText": "live", "refSections": [{"refs": [{"id": "ref-for-idl-def-MediaStreamTrackState.live"}], "title": "2.3. Methods"}], "external": true};
+window.dfnpanelData['2cf6d842'] = {"dfnID": "2cf6d842", "url": "https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-muted", "dfnText": "muted", "refSections": [{"refs": [{"id": "ref-for-dom-mediastreamtrack-muted"}], "title": "2.3. Methods"}], "external": true};
+window.dfnpanelData['a8fc6d46'] = {"dfnID": "a8fc6d46", "url": "https://w3c.github.io/mediacapture-main/#dfn-track-set", "dfnText": "track set", "refSections": [{"refs": [{"id": "ref-for-dfn-track-set"}, {"id": "ref-for-dfn-track-set\u2460"}, {"id": "ref-for-dfn-track-set\u2461"}], "title": "2.3. Methods"}], "external": true};
+window.dfnpanelData['0e9f636b'] = {"dfnID": "0e9f636b", "url": "https://w3c.github.io/hr-time/#dom-domhighrestimestamp", "dfnText": "DOMHighResTimeStamp", "refSections": [{"refs": [{"id": "ref-for-dom-domhighrestimestamp"}], "title": "2.5. MediaRecorderOptions"}, {"refs": [{"id": "ref-for-dom-domhighrestimestamp\u2460"}], "title": "2.5.1. Members"}, {"refs": [{"id": "ref-for-dom-domhighrestimestamp\u2461"}], "title": "3. Blob Event"}, {"refs": [{"id": "ref-for-dom-domhighrestimestamp\u2462"}, {"id": "ref-for-dom-domhighrestimestamp\u2463"}], "title": "3.2. Attributes"}, {"refs": [{"id": "ref-for-dom-domhighrestimestamp\u2464"}], "title": "3.3. BlobEventInit"}, {"refs": [{"id": "ref-for-dom-domhighrestimestamp\u2465"}], "title": "3.3.1. Members"}], "external": true};
+window.dfnpanelData['ccfe986b'] = {"dfnID": "ccfe986b", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#errorevent", "dfnText": "ErrorEvent", "refSections": [{"refs": [{"id": "ref-for-errorevent"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-errorevent\u2460"}], "title": "4.2. Error events"}, {"refs": [{"id": "ref-for-errorevent\u2461"}], "title": "5. Event summary"}], "external": true};
+window.dfnpanelData['f0951476'] = {"dfnID": "f0951476", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler", "dfnText": "EventHandler", "refSections": [{"refs": [{"id": "ref-for-eventhandler"}, {"id": "ref-for-eventhandler\u2460"}, {"id": "ref-for-eventhandler\u2461"}, {"id": "ref-for-eventhandler\u2462"}, {"id": "ref-for-eventhandler\u2463"}, {"id": "ref-for-eventhandler\u2464"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-eventhandler\u2465"}, {"id": "ref-for-eventhandler\u2466"}, {"id": "ref-for-eventhandler\u2467"}, {"id": "ref-for-eventhandler\u2468"}, {"id": "ref-for-eventhandler\u2460\u24ea"}, {"id": "ref-for-eventhandler\u2460\u2460"}], "title": "2.2. Attributes"}], "external": true};
+window.dfnpanelData['a72449dd'] = {"dfnID": "a72449dd", "url": "https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel", "dfnText": "in parallel", "refSections": [{"refs": [{"id": "ref-for-in-parallel"}], "title": "2.3. Methods"}], "external": true};
+window.dfnpanelData['65181da8'] = {"dfnID": "65181da8", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#secure-context", "dfnText": "secure context", "refSections": [{"refs": [{"id": "ref-for-secure-context"}], "title": "6. Privacy and Security Considerations"}], "external": true};
+window.dfnpanelData['dca2de17'] = {"dfnID": "dca2de17", "url": "https://webidl.spec.whatwg.org/#idl-DOMException", "dfnText": "DOMException", "refSections": [{"refs": [{"id": "ref-for-idl-DOMException"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-idl-DOMException\u2460"}, {"id": "ref-for-idl-DOMException\u2461"}, {"id": "ref-for-idl-DOMException\u2462"}, {"id": "ref-for-idl-DOMException\u2463"}, {"id": "ref-for-idl-DOMException\u2464"}, {"id": "ref-for-idl-DOMException\u2465"}, {"id": "ref-for-idl-DOMException\u2466"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-idl-DOMException\u2467"}], "title": "4.1. General principles"}, {"refs": [{"id": "ref-for-idl-DOMException\u2468"}], "title": "4.3. Exception Summary"}], "external": true};
+window.dfnpanelData['8855a9aa'] = {"dfnID": "8855a9aa", "url": "https://webidl.spec.whatwg.org/#idl-DOMString", "dfnText": "DOMString", "refSections": [{"refs": [{"id": "ref-for-idl-DOMString"}, {"id": "ref-for-idl-DOMString\u2460"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-idl-DOMString\u2461"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-idl-DOMString\u2462"}], "title": "2.5. MediaRecorderOptions"}, {"refs": [{"id": "ref-for-idl-DOMString\u2463"}], "title": "2.5.1. Members"}, {"refs": [{"id": "ref-for-idl-DOMString\u2464"}], "title": "3. Blob Event"}], "external": true};
+window.dfnpanelData['889e932f'] = {"dfnID": "889e932f", "url": "https://webidl.spec.whatwg.org/#Exposed", "dfnText": "Exposed", "refSections": [{"refs": [{"id": "ref-for-Exposed"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-Exposed\u2460"}], "title": "3. Blob Event"}], "external": true};
+window.dfnpanelData['cae6bf57'] = {"dfnID": "cae6bf57", "url": "https://webidl.spec.whatwg.org/#invalidmodificationerror", "dfnText": "InvalidModificationError", "refSections": [{"refs": [{"id": "ref-for-invalidmodificationerror"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-invalidmodificationerror\u2460"}], "title": "4.3. Exception Summary"}], "external": true};
+window.dfnpanelData['797018a7'] = {"dfnID": "797018a7", "url": "https://webidl.spec.whatwg.org/#invalidstateerror", "dfnText": "InvalidStateError", "refSections": [{"refs": [{"id": "ref-for-invalidstateerror"}, {"id": "ref-for-invalidstateerror\u2460"}, {"id": "ref-for-invalidstateerror\u2461"}, {"id": "ref-for-invalidstateerror\u2462"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-invalidstateerror\u2463"}], "title": "4.3. Exception Summary"}], "external": true};
+window.dfnpanelData['3182eb71'] = {"dfnID": "3182eb71", "url": "https://webidl.spec.whatwg.org/#notsupportederror", "dfnText": "NotSupportedError", "refSections": [{"refs": [{"id": "ref-for-notsupportederror"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-notsupportederror\u2460"}, {"id": "ref-for-notsupportederror\u2461"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-notsupportederror\u2462"}], "title": "4.3. Exception Summary"}], "external": true};
+window.dfnpanelData['a5c91173'] = {"dfnID": "a5c91173", "url": "https://webidl.spec.whatwg.org/#SameObject", "dfnText": "SameObject", "refSections": [{"refs": [{"id": "ref-for-SameObject"}], "title": "3. Blob Event"}], "external": true};
+window.dfnpanelData['c3e881ef'] = {"dfnID": "c3e881ef", "url": "https://webidl.spec.whatwg.org/#securityerror", "dfnText": "SecurityError", "refSections": [{"refs": [{"id": "ref-for-securityerror"}, {"id": "ref-for-securityerror\u2460"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-securityerror\u2461"}], "title": "4.3. Exception Summary"}], "external": true};
+window.dfnpanelData['81dd847b'] = {"dfnID": "81dd847b", "url": "https://webidl.spec.whatwg.org/#unknownerror", "dfnText": "UnknownError", "refSections": [{"refs": [{"id": "ref-for-unknownerror"}], "title": "2.3. Methods"}], "external": true};
+window.dfnpanelData['5372cca8'] = {"dfnID": "5372cca8", "url": "https://webidl.spec.whatwg.org/#idl-boolean", "dfnText": "boolean", "refSections": [{"refs": [{"id": "ref-for-idl-boolean"}], "title": "2. Media Recorder API"}], "external": true};
+window.dfnpanelData['5f90bbfb'] = {"dfnID": "5f90bbfb", "url": "https://webidl.spec.whatwg.org/#idl-undefined", "dfnText": "undefined", "refSections": [{"refs": [{"id": "ref-for-idl-undefined"}, {"id": "ref-for-idl-undefined\u2460"}, {"id": "ref-for-idl-undefined\u2461"}, {"id": "ref-for-idl-undefined\u2462"}, {"id": "ref-for-idl-undefined\u2463"}], "title": "2. Media Recorder API"}], "external": true};
+window.dfnpanelData['e97a9688'] = {"dfnID": "e97a9688", "url": "https://webidl.spec.whatwg.org/#idl-unsigned-long", "dfnText": "unsigned long", "refSections": [{"refs": [{"id": "ref-for-idl-unsigned-long"}, {"id": "ref-for-idl-unsigned-long\u2460"}, {"id": "ref-for-idl-unsigned-long\u2461"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-idl-unsigned-long\u2462"}, {"id": "ref-for-idl-unsigned-long\u2463"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-idl-unsigned-long\u2464"}, {"id": "ref-for-idl-unsigned-long\u2465"}, {"id": "ref-for-idl-unsigned-long\u2466"}, {"id": "ref-for-idl-unsigned-long\u2467"}], "title": "2.5. MediaRecorderOptions"}, {"refs": [{"id": "ref-for-idl-unsigned-long\u2468"}, {"id": "ref-for-idl-unsigned-long\u2460\u24ea"}, {"id": "ref-for-idl-unsigned-long\u2460\u2460"}, {"id": "ref-for-idl-unsigned-long\u2460\u2461"}], "title": "2.5.1. Members"}], "external": true};
+window.dfnpanelData['mediarecorder'] = {"dfnID": "mediarecorder", "url": "#mediarecorder", "dfnText": "MediaRecorder", "refSections": [{"refs": [{"id": "ref-for-mediarecorder"}], "title": "1. Overview"}, {"refs": [{"id": "ref-for-mediarecorder\u2460"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-mediarecorder\u2461"}, {"id": "ref-for-mediarecorder\u2462"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-mediarecorder\u2463"}, {"id": "ref-for-mediarecorder\u2464"}, {"id": "ref-for-mediarecorder\u2465"}, {"id": "ref-for-mediarecorder\u2466"}, {"id": "ref-for-mediarecorder\u2467"}, {"id": "ref-for-mediarecorder\u2468"}, {"id": "ref-for-mediarecorder\u2460\u24ea"}, {"id": "ref-for-mediarecorder\u2460\u2460"}, {"id": "ref-for-mediarecorder\u2460\u2461"}, {"id": "ref-for-mediarecorder\u2460\u2462"}, {"id": "ref-for-mediarecorder\u2460\u2463"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-mediarecorder\u2460\u2464"}], "title": "5. Event summary"}, {"refs": [{"id": "ref-for-mediarecorder\u2460\u2465"}], "title": "6. Privacy and Security Considerations"}, {"refs": [{"id": "ref-for-mediarecorder\u2460\u2466"}], "title": "6.1. Resource exhaustion"}, {"refs": [{"id": "ref-for-mediarecorder\u2460\u2467"}], "title": "6.2. Fingerprinting"}, {"refs": [{"id": "ref-for-mediarecorder\u2460\u2468"}], "title": "7.1. Check for MediaRecorder and content types"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-start-timeslice-timeslice'] = {"dfnID": "dom-mediarecorder-start-timeslice-timeslice", "url": "#dom-mediarecorder-start-timeslice-timeslice", "dfnText": "timeslice", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-start-timeslice-timeslice"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-dom-mediarecorder-start-timeslice-timeslice\u2460"}], "title": "6.1. Resource exhaustion"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-mediarecorder'] = {"dfnID": "dom-mediarecorder-mediarecorder", "url": "#dom-mediarecorder-mediarecorder", "dfnText": "MediaRecorder(MediaStream stream, optional MediaRecorderOptions options = {})", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-mediarecorder"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-mediarecorder\u2460"}], "title": "2.1. Constructors"}], "external": false};
+window.dfnpanelData['constrainedmimetype'] = {"dfnID": "constrainedmimetype", "url": "#constrainedmimetype", "dfnText": "[[ConstrainedMimeType]]", "refSections": [{"refs": [{"id": "ref-for-constrainedmimetype"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-constrainedmimetype\u2460"}, {"id": "ref-for-constrainedmimetype\u2461"}, {"id": "ref-for-constrainedmimetype\u2462"}, {"id": "ref-for-constrainedmimetype\u2463"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['constrainedbitspersecond'] = {"dfnID": "constrainedbitspersecond", "url": "#constrainedbitspersecond", "dfnText": "[[ConstrainedBitsPerSecond]]", "refSections": [{"refs": [{"id": "ref-for-constrainedbitspersecond"}, {"id": "ref-for-constrainedbitspersecond\u2460"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-constrainedbitspersecond\u2461"}, {"id": "ref-for-constrainedbitspersecond\u2462"}, {"id": "ref-for-constrainedbitspersecond\u2463"}, {"id": "ref-for-constrainedbitspersecond\u2464"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['videokeyframeintervalduration'] = {"dfnID": "videokeyframeintervalduration", "url": "#videokeyframeintervalduration", "dfnText": "[[VideoKeyFrameIntervalDuration]]", "refSections": [{"refs": [{"id": "ref-for-videokeyframeintervalduration"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['videokeyframeintervalcount'] = {"dfnID": "videokeyframeintervalcount", "url": "#videokeyframeintervalcount", "dfnText": "[[VideoKeyFrameIntervalCount]]", "refSections": [{"refs": [{"id": "ref-for-videokeyframeintervalcount"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-stream'] = {"dfnID": "dom-mediarecorder-stream", "url": "#dom-mediarecorder-stream", "dfnText": "stream", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-stream"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-stream\u2460"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorder-stream\u2461"}, {"id": "ref-for-dom-mediarecorder-stream\u2462"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-dom-mediarecorder-stream\u2463"}, {"id": "ref-for-dom-mediarecorder-stream\u2464"}], "title": "5. Event summary"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-mimetype'] = {"dfnID": "dom-mediarecorder-mimetype", "url": "#dom-mediarecorder-mimetype", "dfnText": "mimeType", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-mimetype"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-mimetype\u2460"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorder-mimetype\u2461"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-dom-mediarecorder-mimetype\u2462"}, {"id": "ref-for-dom-mediarecorder-mimetype\u2463"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-state'] = {"dfnID": "dom-mediarecorder-state", "url": "#dom-mediarecorder-state", "dfnText": "state", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-state"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-state\u2460"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorder-state\u2461"}, {"id": "ref-for-dom-mediarecorder-state\u2462"}, {"id": "ref-for-dom-mediarecorder-state\u2463"}, {"id": "ref-for-dom-mediarecorder-state\u2464"}, {"id": "ref-for-dom-mediarecorder-state\u2465"}, {"id": "ref-for-dom-mediarecorder-state\u2466"}, {"id": "ref-for-dom-mediarecorder-state\u2467"}, {"id": "ref-for-dom-mediarecorder-state\u2468"}, {"id": "ref-for-dom-mediarecorder-state\u2460\u24ea"}, {"id": "ref-for-dom-mediarecorder-state\u2460\u2460"}, {"id": "ref-for-dom-mediarecorder-state\u2460\u2461"}, {"id": "ref-for-dom-mediarecorder-state\u2460\u2462"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-dom-mediarecorder-state\u2460\u2463"}], "title": "2.4. Data handling"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-onstart'] = {"dfnID": "dom-mediarecorder-onstart", "url": "#dom-mediarecorder-onstart", "dfnText": "onstart", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-onstart"}], "title": "2. Media Recorder API"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-onstop'] = {"dfnID": "dom-mediarecorder-onstop", "url": "#dom-mediarecorder-onstop", "dfnText": "onstop", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-onstop"}], "title": "2. Media Recorder API"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-ondataavailable'] = {"dfnID": "dom-mediarecorder-ondataavailable", "url": "#dom-mediarecorder-ondataavailable", "dfnText": "ondataavailable", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-ondataavailable"}], "title": "1. Overview"}, {"refs": [{"id": "ref-for-dom-mediarecorder-ondataavailable\u2460"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-ondataavailable\u2461"}], "title": "6.2. Fingerprinting"}, {"refs": [{"id": "ref-for-dom-mediarecorder-ondataavailable\u2462"}], "title": "7.2. Recording webcam video and audio"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-onpause'] = {"dfnID": "dom-mediarecorder-onpause", "url": "#dom-mediarecorder-onpause", "dfnText": "onpause", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-onpause"}], "title": "2. Media Recorder API"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-onresume'] = {"dfnID": "dom-mediarecorder-onresume", "url": "#dom-mediarecorder-onresume", "dfnText": "onresume", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-onresume"}], "title": "2. Media Recorder API"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-onerror'] = {"dfnID": "dom-mediarecorder-onerror", "url": "#dom-mediarecorder-onerror", "dfnText": "onerror", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-onerror"}], "title": "2. Media Recorder API"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-videobitspersecond'] = {"dfnID": "dom-mediarecorder-videobitspersecond", "url": "#dom-mediarecorder-videobitspersecond", "dfnText": "videoBitsPerSecond", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-videobitspersecond"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-videobitspersecond\u2460"}, {"id": "ref-for-dom-mediarecorder-videobitspersecond\u2461"}, {"id": "ref-for-dom-mediarecorder-videobitspersecond\u2462"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorder-videobitspersecond\u2463"}, {"id": "ref-for-dom-mediarecorder-videobitspersecond\u2464"}, {"id": "ref-for-dom-mediarecorder-videobitspersecond\u2465"}, {"id": "ref-for-dom-mediarecorder-videobitspersecond\u2466"}, {"id": "ref-for-dom-mediarecorder-videobitspersecond\u2467"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-audiobitspersecond'] = {"dfnID": "dom-mediarecorder-audiobitspersecond", "url": "#dom-mediarecorder-audiobitspersecond", "dfnText": "audioBitsPerSecond", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-audiobitspersecond"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-audiobitspersecond\u2460"}, {"id": "ref-for-dom-mediarecorder-audiobitspersecond\u2461"}, {"id": "ref-for-dom-mediarecorder-audiobitspersecond\u2462"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorder-audiobitspersecond\u2463"}, {"id": "ref-for-dom-mediarecorder-audiobitspersecond\u2464"}, {"id": "ref-for-dom-mediarecorder-audiobitspersecond\u2465"}, {"id": "ref-for-dom-mediarecorder-audiobitspersecond\u2466"}, {"id": "ref-for-dom-mediarecorder-audiobitspersecond\u2467"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-audiobitratemode'] = {"dfnID": "dom-mediarecorder-audiobitratemode", "url": "#dom-mediarecorder-audiobitratemode", "dfnText": "audioBitrateMode", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-audiobitratemode"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-audiobitratemode\u2460"}, {"id": "ref-for-dom-mediarecorder-audiobitratemode\u2461"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorder-audiobitratemode\u2462"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-start'] = {"dfnID": "dom-mediarecorder-start", "url": "#dom-mediarecorder-start", "dfnText": "start(optional unsigned long timeslice)", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-start"}], "title": "1. Overview"}, {"refs": [{"id": "ref-for-dom-mediarecorder-start\u2460"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-start\u2461"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-dom-mediarecorder-start\u2462"}], "title": "6.1. Resource exhaustion"}], "external": false};
+window.dfnpanelData['abstract-opdef-inactivate-the-recorder'] = {"dfnID": "abstract-opdef-inactivate-the-recorder", "url": "#abstract-opdef-inactivate-the-recorder", "dfnText": "Inactivate the recorder", "refSections": [{"refs": [{"id": "ref-for-abstract-opdef-inactivate-the-recorder"}, {"id": "ref-for-abstract-opdef-inactivate-the-recorder\u2460"}, {"id": "ref-for-abstract-opdef-inactivate-the-recorder\u2461"}, {"id": "ref-for-abstract-opdef-inactivate-the-recorder\u2462"}, {"id": "ref-for-abstract-opdef-inactivate-the-recorder\u2463"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-stop'] = {"dfnID": "dom-mediarecorder-stop", "url": "#dom-mediarecorder-stop", "dfnText": "stop()", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-stop"}], "title": "1. Overview"}, {"refs": [{"id": "ref-for-dom-mediarecorder-stop\u2460"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-stop\u2461"}, {"id": "ref-for-dom-mediarecorder-stop\u2462"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-dom-mediarecorder-stop\u2463"}], "title": "7.2. Recording webcam video and audio"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-pause'] = {"dfnID": "dom-mediarecorder-pause", "url": "#dom-mediarecorder-pause", "dfnText": "pause()", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-pause"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-pause\u2460"}, {"id": "ref-for-dom-mediarecorder-pause\u2461"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-resume'] = {"dfnID": "dom-mediarecorder-resume", "url": "#dom-mediarecorder-resume", "dfnText": "resume()", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-resume"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-resume\u2460"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-requestdata'] = {"dfnID": "dom-mediarecorder-requestdata", "url": "#dom-mediarecorder-requestdata", "dfnText": "requestData()", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-requestdata"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-requestdata\u2460"}, {"id": "ref-for-dom-mediarecorder-requestdata\u2461"}, {"id": "ref-for-dom-mediarecorder-requestdata\u2462"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['dom-mediarecorder-istypesupported'] = {"dfnID": "dom-mediarecorder-istypesupported", "url": "#dom-mediarecorder-istypesupported", "dfnText": "isTypeSupported(DOMString type)\n    ", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorder-istypesupported"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dom-mediarecorder-istypesupported\u2460"}], "title": "6.2. Fingerprinting"}], "external": false};
+window.dfnpanelData['abstract-opdef-is-type-supported'] = {"dfnID": "abstract-opdef-is-type-supported", "url": "#abstract-opdef-is-type-supported", "dfnText": "is type supported", "refSections": [{"refs": [{"id": "ref-for-abstract-opdef-is-type-supported"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-abstract-opdef-is-type-supported\u2460"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['fire-a-blob-event'] = {"dfnID": "fire-a-blob-event", "url": "#fire-a-blob-event", "dfnText": "fire a blob event", "refSections": [{"refs": [{"id": "ref-for-fire-a-blob-event"}, {"id": "ref-for-fire-a-blob-event\u2460"}, {"id": "ref-for-fire-a-blob-event\u2461"}, {"id": "ref-for-fire-a-blob-event\u2462"}, {"id": "ref-for-fire-a-blob-event\u2463"}, {"id": "ref-for-fire-a-blob-event\u2464"}, {"id": "ref-for-fire-a-blob-event\u2465"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-fire-a-blob-event\u2466"}], "title": "4.1. General principles"}], "external": false};
+window.dfnpanelData['dictdef-mediarecorderoptions'] = {"dfnID": "dictdef-mediarecorderoptions", "url": "#dictdef-mediarecorderoptions", "dfnText": "MediaRecorderOptions", "refSections": [{"refs": [{"id": "ref-for-dictdef-mediarecorderoptions"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-dictdef-mediarecorderoptions\u2460"}, {"id": "ref-for-dictdef-mediarecorderoptions\u2461"}], "title": "6.2. Fingerprinting"}], "external": false};
+window.dfnpanelData['dom-mediarecorderoptions-mimetype'] = {"dfnID": "dom-mediarecorderoptions-mimetype", "url": "#dom-mediarecorderoptions-mimetype", "dfnText": "mimeType", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorderoptions-mimetype"}, {"id": "ref-for-dom-mediarecorderoptions-mimetype\u2460"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorderoptions-mimetype\u2461"}], "title": "2.5. MediaRecorderOptions"}, {"refs": [{"id": "ref-for-dom-mediarecorderoptions-mimetype\u2462"}], "title": "2.5.1. Members"}], "external": false};
+window.dfnpanelData['dom-mediarecorderoptions-audiobitspersecond'] = {"dfnID": "dom-mediarecorderoptions-audiobitspersecond", "url": "#dom-mediarecorderoptions-audiobitspersecond", "dfnText": "audioBitsPerSecond", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorderoptions-audiobitspersecond"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorderoptions-audiobitspersecond\u2460"}], "title": "2.5. MediaRecorderOptions"}, {"refs": [{"id": "ref-for-dom-mediarecorderoptions-audiobitspersecond\u2461"}], "title": "2.5.1. Members"}], "external": false};
+window.dfnpanelData['dom-mediarecorderoptions-videobitspersecond'] = {"dfnID": "dom-mediarecorderoptions-videobitspersecond", "url": "#dom-mediarecorderoptions-videobitspersecond", "dfnText": "videoBitsPerSecond", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorderoptions-videobitspersecond"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorderoptions-videobitspersecond\u2460"}], "title": "2.5. MediaRecorderOptions"}, {"refs": [{"id": "ref-for-dom-mediarecorderoptions-videobitspersecond\u2461"}], "title": "2.5.1. Members"}], "external": false};
+window.dfnpanelData['dom-mediarecorderoptions-bitspersecond'] = {"dfnID": "dom-mediarecorderoptions-bitspersecond", "url": "#dom-mediarecorderoptions-bitspersecond", "dfnText": "bitsPerSecond", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorderoptions-bitspersecond"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorderoptions-bitspersecond\u2460"}], "title": "2.5. MediaRecorderOptions"}], "external": false};
+window.dfnpanelData['dom-mediarecorderoptions-audiobitratemode'] = {"dfnID": "dom-mediarecorderoptions-audiobitratemode", "url": "#dom-mediarecorderoptions-audiobitratemode", "dfnText": "audioBitrateMode", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorderoptions-audiobitratemode"}, {"id": "ref-for-dom-mediarecorderoptions-audiobitratemode\u2460"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorderoptions-audiobitratemode\u2461"}], "title": "2.5. MediaRecorderOptions"}], "external": false};
+window.dfnpanelData['dom-mediarecorderoptions-videokeyframeintervalduration'] = {"dfnID": "dom-mediarecorderoptions-videokeyframeintervalduration", "url": "#dom-mediarecorderoptions-videokeyframeintervalduration", "dfnText": "videoKeyFrameIntervalDuration", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorderoptions-videokeyframeintervalduration"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorderoptions-videokeyframeintervalduration\u2460"}], "title": "2.5. MediaRecorderOptions"}, {"refs": [{"id": "ref-for-dom-mediarecorderoptions-videokeyframeintervalduration\u2461"}], "title": "2.5.1. Members"}], "external": false};
+window.dfnpanelData['dom-mediarecorderoptions-videokeyframeintervalcount'] = {"dfnID": "dom-mediarecorderoptions-videokeyframeintervalcount", "url": "#dom-mediarecorderoptions-videokeyframeintervalcount", "dfnText": "videoKeyFrameIntervalCount", "refSections": [{"refs": [{"id": "ref-for-dom-mediarecorderoptions-videokeyframeintervalcount"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-mediarecorderoptions-videokeyframeintervalcount\u2460"}], "title": "2.5. MediaRecorderOptions"}, {"refs": [{"id": "ref-for-dom-mediarecorderoptions-videokeyframeintervalcount\u2461"}], "title": "2.5.1. Members"}], "external": false};
+window.dfnpanelData['enumdef-bitratemode'] = {"dfnID": "enumdef-bitratemode", "url": "#enumdef-bitratemode", "dfnText": "BitrateMode", "refSections": [{"refs": [{"id": "ref-for-enumdef-bitratemode"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-enumdef-bitratemode\u2460"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-enumdef-bitratemode\u2461"}, {"id": "ref-for-enumdef-bitratemode\u2462"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-enumdef-bitratemode\u2463"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-enumdef-bitratemode\u2464"}], "title": "2.5. MediaRecorderOptions"}, {"refs": [{"id": "ref-for-enumdef-bitratemode\u2465"}, {"id": "ref-for-enumdef-bitratemode\u2466"}], "title": "2.5.1. Members"}], "external": false};
+window.dfnpanelData['dom-bitratemode-constant'] = {"dfnID": "dom-bitratemode-constant", "url": "#dom-bitratemode-constant", "dfnText": "constant", "refSections": [{"refs": [{"id": "ref-for-dom-bitratemode-constant"}], "title": "2.6. BitrateMode"}], "external": false};
+window.dfnpanelData['dom-bitratemode-variable'] = {"dfnID": "dom-bitratemode-variable", "url": "#dom-bitratemode-variable", "dfnText": "variable", "refSections": [{"refs": [{"id": "ref-for-dom-bitratemode-variable"}], "title": "2.6. BitrateMode"}], "external": false};
+window.dfnpanelData['enumdef-recordingstate'] = {"dfnID": "enumdef-recordingstate", "url": "#enumdef-recordingstate", "dfnText": "RecordingState", "refSections": [{"refs": [{"id": "ref-for-enumdef-recordingstate"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-enumdef-recordingstate\u2460"}], "title": "2.2. Attributes"}], "external": false};
+window.dfnpanelData['dom-recordingstate-inactive'] = {"dfnID": "dom-recordingstate-inactive", "url": "#dom-recordingstate-inactive", "dfnText": "inactive", "refSections": [{"refs": [{"id": "ref-for-dom-recordingstate-inactive"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-dom-recordingstate-inactive\u2460"}, {"id": "ref-for-dom-recordingstate-inactive\u2461"}, {"id": "ref-for-dom-recordingstate-inactive\u2462"}, {"id": "ref-for-dom-recordingstate-inactive\u2463"}, {"id": "ref-for-dom-recordingstate-inactive\u2464"}, {"id": "ref-for-dom-recordingstate-inactive\u2465"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-dom-recordingstate-inactive\u2466"}], "title": "2.7. RecordingState"}], "external": false};
+window.dfnpanelData['dom-recordingstate-recording'] = {"dfnID": "dom-recordingstate-recording", "url": "#dom-recordingstate-recording", "dfnText": "recording", "refSections": [{"refs": [{"id": "ref-for-dom-recordingstate-recording"}, {"id": "ref-for-dom-recordingstate-recording\u2460"}, {"id": "ref-for-dom-recordingstate-recording\u2461"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-dom-recordingstate-recording\u2462"}], "title": "2.4. Data handling"}, {"refs": [{"id": "ref-for-dom-recordingstate-recording\u2463"}], "title": "2.7. RecordingState"}], "external": false};
+window.dfnpanelData['dom-recordingstate-paused'] = {"dfnID": "dom-recordingstate-paused", "url": "#dom-recordingstate-paused", "dfnText": "paused", "refSections": [{"refs": [{"id": "ref-for-dom-recordingstate-paused"}, {"id": "ref-for-dom-recordingstate-paused\u2460"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-dom-recordingstate-paused\u2461"}], "title": "2.7. RecordingState"}], "external": false};
+window.dfnpanelData['blobevent'] = {"dfnID": "blobevent", "url": "#blobevent", "dfnText": "BlobEvent", "refSections": [{"refs": [{"id": "ref-for-blobevent"}], "title": "2.4. Data handling"}, {"refs": [{"id": "ref-for-blobevent\u2460"}, {"id": "ref-for-blobevent\u2461"}], "title": "3.2. Attributes"}, {"refs": [{"id": "ref-for-blobevent\u2462"}, {"id": "ref-for-blobevent\u2463"}], "title": "3.3.1. Members"}, {"refs": [{"id": "ref-for-blobevent\u2464"}], "title": "5. Event summary"}], "external": false};
+window.dfnpanelData['dom-blobevent-blobevent'] = {"dfnID": "dom-blobevent-blobevent", "url": "#dom-blobevent-blobevent", "dfnText": "BlobEvent(DOMString type, BlobEventInit eventInitDict)", "refSections": [{"refs": [{"id": "ref-for-dom-blobevent-blobevent"}], "title": "3. Blob Event"}], "external": false};
+window.dfnpanelData['dom-blobevent-data'] = {"dfnID": "dom-blobevent-data", "url": "#dom-blobevent-data", "dfnText": "data", "refSections": [{"refs": [{"id": "ref-for-dom-blobevent-data"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-dom-blobevent-data\u2460"}], "title": "2.4. Data handling"}, {"refs": [{"id": "ref-for-dom-blobevent-data\u2461"}], "title": "3. Blob Event"}, {"refs": [{"id": "ref-for-dom-blobevent-data\u2462"}], "title": "3.2. Attributes"}, {"refs": [{"id": "ref-for-dom-blobevent-data\u2463"}], "title": "5. Event summary"}], "external": false};
+window.dfnpanelData['dom-blobevent-timecode'] = {"dfnID": "dom-blobevent-timecode", "url": "#dom-blobevent-timecode", "dfnText": "timecode", "refSections": [{"refs": [{"id": "ref-for-dom-blobevent-timecode"}], "title": "3. Blob Event"}, {"refs": [{"id": "ref-for-dom-blobevent-timecode\u2460"}], "title": "3.2. Attributes"}], "external": false};
+window.dfnpanelData['dictdef-blobeventinit'] = {"dfnID": "dictdef-blobeventinit", "url": "#dictdef-blobeventinit", "dfnText": "BlobEventInit", "refSections": [{"refs": [{"id": "ref-for-dictdef-blobeventinit"}], "title": "3. Blob Event"}], "external": false};
+window.dfnpanelData['dom-blobeventinit-data'] = {"dfnID": "dom-blobeventinit-data", "url": "#dom-blobeventinit-data", "dfnText": "data", "refSections": [{"refs": [{"id": "ref-for-dom-blobeventinit-data"}], "title": "3.3. BlobEventInit"}], "external": false};
+window.dfnpanelData['dom-blobeventinit-timecode'] = {"dfnID": "dom-blobeventinit-timecode", "url": "#dom-blobeventinit-timecode", "dfnText": "timecode", "refSections": [{"refs": [{"id": "ref-for-dom-blobeventinit-timecode"}], "title": "3.3. BlobEventInit"}], "external": false};
+window.dfnpanelData['fire-an-error-event'] = {"dfnID": "fire-an-error-event", "url": "#fire-an-error-event", "dfnText": "fire an error event", "refSections": [{"refs": [{"id": "ref-for-fire-an-error-event"}, {"id": "ref-for-fire-an-error-event\u2460"}, {"id": "ref-for-fire-an-error-event\u2461"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-fire-an-error-event\u2462"}], "title": "4.1. General principles"}], "external": false};
+window.dfnpanelData['eventdef-mediarecorder-start'] = {"dfnID": "eventdef-mediarecorder-start", "url": "#eventdef-mediarecorder-start", "dfnText": "start", "refSections": [{"refs": [{"id": "ref-for-eventdef-mediarecorder-start"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-eventdef-mediarecorder-start\u2460"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['eventdef-mediarecorder-stop'] = {"dfnID": "eventdef-mediarecorder-stop", "url": "#eventdef-mediarecorder-stop", "dfnText": "stop", "refSections": [{"refs": [{"id": "ref-for-eventdef-mediarecorder-stop"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-eventdef-mediarecorder-stop\u2460"}, {"id": "ref-for-eventdef-mediarecorder-stop\u2461"}, {"id": "ref-for-eventdef-mediarecorder-stop\u2462"}, {"id": "ref-for-eventdef-mediarecorder-stop\u2463"}, {"id": "ref-for-eventdef-mediarecorder-stop\u2464"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-eventdef-mediarecorder-stop\u2465"}], "title": "4.1. General principles"}], "external": false};
+window.dfnpanelData['eventdef-mediarecorder-dataavailable'] = {"dfnID": "eventdef-mediarecorder-dataavailable", "url": "#eventdef-mediarecorder-dataavailable", "dfnText": "dataavailable", "refSections": [{"refs": [{"id": "ref-for-eventdef-mediarecorder-dataavailable"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-eventdef-mediarecorder-dataavailable\u2460"}, {"id": "ref-for-eventdef-mediarecorder-dataavailable\u2461"}, {"id": "ref-for-eventdef-mediarecorder-dataavailable\u2462"}, {"id": "ref-for-eventdef-mediarecorder-dataavailable\u2463"}, {"id": "ref-for-eventdef-mediarecorder-dataavailable\u2464"}, {"id": "ref-for-eventdef-mediarecorder-dataavailable\u2465"}, {"id": "ref-for-eventdef-mediarecorder-dataavailable\u2466"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['eventdef-mediarecorder-pause'] = {"dfnID": "eventdef-mediarecorder-pause", "url": "#eventdef-mediarecorder-pause", "dfnText": "pause", "refSections": [{"refs": [{"id": "ref-for-eventdef-mediarecorder-pause"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-eventdef-mediarecorder-pause\u2460"}], "title": "2.3. Methods"}], "external": false};
+window.dfnpanelData['eventdef-mediarecorder-resume'] = {"dfnID": "eventdef-mediarecorder-resume", "url": "#eventdef-mediarecorder-resume", "dfnText": "resume", "refSections": [{"refs": [{"id": "ref-for-eventdef-mediarecorder-resume"}], "title": "2.2. Attributes"}], "external": false};</script>
+<script>/* script-dom-helper */
+function query(sel) { return document.querySelector(sel); }
+
+function queryAll(sel) { return [...document.querySelectorAll(sel)]; }
+
+function iter(obj) {
+	if(!obj) return [];
+	var it = obj[Symbol.iterator];
+	if(it) return it;
+	return Object.entries(obj);
+}
+
+function mk(tagname, attrs, ...children) {
+	const el = document.createElement(tagname);
+	for(const [k,v] of iter(attrs)) {
+		if(k.slice(0,3) == "_on") {
+			const eventName = k.slice(3);
+			el.addEventListener(eventName, v);
+		} else if(k[0] == "_") {
+			// property, not attribute
+			el[k.slice(1)] = v;
+		} else {
+			if(v === false || v == null) {
+        continue;
+      } else if(v === true) {
+        el.setAttribute(k, "");
+        continue;
+      } else {
+  			el.setAttribute(k, v);
+      }
+		}
+	}
+	append(el, children);
+	return el;
+}
+
+/* Create shortcuts for every known HTML element */
+[
+  "a",
+  "abbr",
+  "acronym",
+  "address",
+  "applet",
+  "area",
+  "article",
+  "aside",
+  "audio",
+  "b",
+  "base",
+  "basefont",
+  "bdo",
+  "big",
+  "blockquote",
+  "body",
+  "br",
+  "button",
+  "canvas",
+  "caption",
+  "center",
+  "cite",
+  "code",
+  "col",
+  "colgroup",
+  "datalist",
+  "dd",
+  "del",
+  "details",
+  "dfn",
+  "dialog",
+  "div",
+  "dl",
+  "dt",
+  "em",
+  "embed",
+  "fieldset",
+  "figcaption",
+  "figure",
+  "font",
+  "footer",
+  "form",
+  "frame",
+  "frameset",
+  "head",
+  "header",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "hr",
+  "html",
+  "i",
+  "iframe",
+  "img",
+  "input",
+  "ins",
+  "kbd",
+  "label",
+  "legend",
+  "li",
+  "link",
+  "main",
+  "map",
+  "mark",
+  "meta",
+  "meter",
+  "nav",
+  "nobr",
+  "noscript",
+  "object",
+  "ol",
+  "optgroup",
+  "option",
+  "output",
+  "p",
+  "param",
+  "pre",
+  "progress",
+  "q",
+  "s",
+  "samp",
+  "script",
+  "section",
+  "select",
+  "small",
+  "source",
+  "span",
+  "strike",
+  "strong",
+  "style",
+  "sub",
+  "summary",
+  "sup",
+  "table",
+  "tbody",
+  "td",
+  "template",
+  "textarea",
+  "tfoot",
+  "th",
+  "thead",
+  "time",
+  "title",
+  "tr",
+  "u",
+  "ul",
+  "var",
+  "video",
+  "wbr",
+  "xmp",
+].forEach(tagname=>{
+	mk[tagname] = (...args) => mk(tagname, ...args);
+});
+
+function* nodesFromChildList(children) {
+	for(const child of children.flat(Infinity)) {
+		if(child instanceof Node) {
+			yield child;
+		} else {
+			yield new Text(child);
+		}
+	}
+}
+function append(el, ...children) {
+	for(const child of nodesFromChildList(children)) {
+		if(el instanceof Node) el.appendChild(child);
+		else el.push(child);
+	}
+	return el;
+}
+
+function insertAfter(el, ...children) {
+	for(const child of nodesFromChildList(children)) {
+		el.parentNode.insertBefore(child, el.nextSibling);
+	}
+	return el;
+}
+
+function clearContents(el) {
+	el.innerHTML = "";
+	return el;
+}
+
+function parseHTML(markup) {
+	if(markup.toLowerCase().trim().indexOf('<!doctype') === 0) {
+		const doc = document.implementation.createHTMLDocument("");
+		doc.documentElement.innerHTML = markup;
+		return doc;
+	} else {
+		const el = mk.template({});
+		el.innerHTML = markup;
+		return el.content;
+	}
+}</script>
 <script>/* script-var-click-highlighting */
 
     "use strict";
@@ -2471,4 +2195,4 @@ the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediac
             return "selected" + index;
         }
     }
-    </script>
+</script>
