@@ -98,8 +98,16 @@ interface MediaRecorder : EventTarget {
     member.</li>
     <li>Let |recorder| have a <dfn>\[[ConstrainedBitsPerSecond]]</dfn> internal
     slot, initialized to the value of |options|'
-    {{MediaRecorderOptions/bitsPerSecond}} member, if it is present, otherwise
-    <code>undefined</code>.</li>
+    {{MediaRecorderOptions/bitsPerSecond}} member if it is present, otherwise
+    <code>null</code>.</li>
+    <li>Let |recorder| have a <dfn>\[[VideoKeyFrameIntervalDuration]]</dfn> internal
+    slot, initialized to the value of |options|'
+    {{MediaRecorderOptions/videoKeyFrameIntervalDuration}} member if it is present, otherwise
+    <code>null</code>.</li>
+    <li>Let |recorder| have a <dfn>\[[VideoKeyFrameIntervalCount]]</dfn> internal
+    slot, initialized to the value of |options|'
+    {{MediaRecorderOptions/videoKeyFrameIntervalCount}} member if it is present, otherwise
+    <code>null</code>.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/stream}} attribute to
     |stream|.</li>
     <li>Initialize |recorder|'s {{MediaRecorder/mimeType}} attribute to the
@@ -115,7 +123,7 @@ interface MediaRecorder : EventTarget {
     present. Otherwise, choose a target value the User Agent deems reasonable
     for audio.</li>
     <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
-    <code>undefined</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
+    <code>null</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
     {{MediaRecorder/audioBitsPerSecond}} attributes to values the User Agent deems reasonable
     for the respective media types, such that the sum of {{MediaRecorder/videoBitsPerSecond}}
     and {{MediaRecorder/audioBitsPerSecond}} is close to the value of |recorder|'s
@@ -221,7 +229,7 @@ interface MediaRecorder : EventTarget {
     slot.</li>
 
     <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
-    <code>undefined</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
+    <code>null</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
     {{MediaRecorder/audioBitsPerSecond}} attributes to values the User Agent deems reasonable
     for the respective media types, for recording all tracks in |tracks|, such
     that the sum of {{MediaRecorder/videoBitsPerSecond}} and {{MediaRecorder/audioBitsPerSecond}} is close
@@ -240,6 +248,30 @@ interface MediaRecorder : EventTarget {
     |recorder| will be recording. |audioBitrate| is a hint for the encoder and
     the value might be surpassed, not achieved, or only be achieved over a long
     period of time.</li>
+
+    <li>Let |videoKeyFrameIntervalDuration| be
+    |recorder|.[=[[VideoKeyFrameIntervalDuration]]=], and let
+    |videoKeyFrameIntervalCount| be
+    |recorder|.[=[[VideoKeyFrameIntervalCount]]=]. The UA SHOULD constrain the
+    configuration of |recorder| so that the video encoder follows the below rules:
+    <ul>
+    <li>If |videoKeyFrameIntervalDuration| is not <code>null</code> and |videoKeyFrameIntervalCount| is <code>null</code>,
+    the video encoder produces a keyframe on the first frame arriving after |videoKeyFrameIntervalDuration|
+    milliseconds elapsed since the last key frame.</li>
+
+    <li>If |videoKeyFrameIntervalCount| is not <code>null</code> and |videoKeyFrameIntervalDuration| is <code>null</code>,
+    the video encoder produces a keyframe on the first frame arriving after |videoKeyFrameIntervalCount|
+    frames passed since the last key frame.</li>
+
+    <li>If both |videoKeyFrameIntervalDuration| and |videoKeyFrameIntervalCount| are not <code>null</code>,
+    the UA may ignore either.</li>
+
+    <li>If both |videoKeyFrameIntervalDuration| and |videoKeyFrameIntervalCount| are <code>null</code>,
+    the User Agent may emit key frames as it deems fit.</li>
+    </ul>
+
+    Note that encoders will sometimes make independent decisions about when to
+    emit key frames.</li>
 
     <li>Constrain the configuration of |recorder| to encode using the
     {{BitrateMode}} specified by the value of |recorder|'s {{MediaRecorder/audioBitrateMode}}
@@ -531,6 +563,8 @@ dictionary MediaRecorderOptions {
   unsigned long videoBitsPerSecond;
   unsigned long bitsPerSecond;
   BitrateMode audioBitrateMode = "variable";
+  DOMHighResTimeStamp videoKeyFrameIntervalDuration;
+  unsigned long videoKeyFrameIntervalCount;
 };
 </pre>
 
@@ -564,6 +598,16 @@ dictionary MediaRecorderOptions {
   
   <dt><dfn dict-member for="MediaRecorderOptions"><code>audioBitrateMode</code></dfn></dt>
   <dd>Specifes the {{BitrateMode}} that should be used to encode the Audio track(s).</dd>
+
+  <dt><dfn dict-member for="MediaRecorderOptions"><code>videoKeyFrameIntervalDuration</code></dfn></dt>
+  <dd>Specifies the nominal interval in time between key frames in the encoded video stream.
+  The UA controls key frame generation considering this dictionary member as well as 
+  {{MediaRecorderOptions/videoKeyFrameIntervalCount}}.</dd>
+
+  <dt><dfn dict-member for="MediaRecorderOptions"><code>videoKeyFrameIntervalCount</code></dfn></dt>
+  <dd>Specifies the interval in number of frames between key frames in the encoded video stream.
+  The UA controls key frame generation considering this dictionary member as well as 
+  {{MediaRecorderOptions/videoKeyFrameIntervalDuration}}.</dd>
 </dl>
 
 ## BitrateMode ## {#bitratemode}
