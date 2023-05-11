@@ -6,9 +6,9 @@
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="Bikeshed version bf22245b8, updated Tue Apr 18 15:53:37 2023 -0700" name="generator">
+  <meta content="Bikeshed version 3383f409d, updated Fri Apr 28 15:49:22 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediastream-recording/" rel="canonical">
-  <meta content="4b579242f5c6490ef9c3c67b77c3beb914ea0ae3" name="document-revision">
+  <meta content="48e2abfad31d2e10ab6ba7652383de68cedff498" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -622,7 +622,7 @@ var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Recording</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-04-20">20 April 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-05-11">11 May 2023</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -905,7 +905,7 @@ at regular intervals.</p>
         <li>If <var>videoKeyFrameIntervalCount</var> is not <code>null</code> and <var>videoKeyFrameIntervalDuration</var> is <code>null</code>,
     the video encoder produces a keyframe on the first frame arriving after <var>videoKeyFrameIntervalCount</var> frames passed since the last key frame.
         <li>If both <var>videoKeyFrameIntervalDuration</var> and <var>videoKeyFrameIntervalCount</var> are not <code>null</code>,
-    the UA may ignore either.
+    then throw a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notsupportederror" id="ref-for-notsupportederror②">NotSupportedError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException④">DOMException</a></code> and abort these steps.
         <li>If both <var>videoKeyFrameIntervalDuration</var> and <var>videoKeyFrameIntervalCount</var> are <code>null</code>,
     the User Agent may emit key frames as it deems fit.
        </ul>
@@ -914,7 +914,7 @@ at regular intervals.</p>
       <p></p>
       <li>Constrain the configuration of <var>recorder</var> to encode using the <code class="idl"><a data-link-type="idl" href="#enumdef-bitratemode" id="ref-for-enumdef-bitratemode④">BitrateMode</a></code> specified by the value of <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-audiobitratemode" id="ref-for-dom-mediarecorder-audiobitratemode③">audioBitrateMode</a></code> attribute for all audio tracks <var>recorder</var> will be recording.
       <li>For each track in <var>tracks</var>, if the User Agent cannot record the track
-    using the current configuration, then throw a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notsupportederror" id="ref-for-notsupportederror②">NotSupportedError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException④">DOMException</a></code> and abort these steps.
+    using the current configuration, then throw a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notsupportederror" id="ref-for-notsupportederror③">NotSupportedError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException⑤">DOMException</a></code> and abort these steps.
       <li>
        Set <var>recorder</var>’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state④">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording">recording</a></code>, and run the following steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel">in parallel</a>: 
        <ol>
@@ -1038,7 +1038,7 @@ at regular intervals.</p>
       When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder⑨">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-pause" id="ref-for-dom-mediarecorder-pause②">pause()</a></code> method is invoked, the UA
   MUST run the following steps: 
      <ol>
-      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑦">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive④">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror①">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException⑤">DOMException</a></code> and abort these steps.
+      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑦">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive④">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror①">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException⑥">DOMException</a></code> and abort these steps.
       <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑧">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-paused" id="ref-for-dom-recordingstate-paused">paused</a></code>, abort these steps.
       <li>
        Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state⑨">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-paused" id="ref-for-dom-recordingstate-paused①">paused</a></code>, and queue a
@@ -1055,7 +1055,7 @@ at regular intervals.</p>
       When a <code class="idl"><a data-link-type="idl" href="#mediarecorder" id="ref-for-mediarecorder①⓪">MediaRecorder</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-resume" id="ref-for-dom-mediarecorder-resume①">resume()</a></code> method is invoked, the
   UA MUST run the following steps: 
      <ol>
-      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①⓪">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑤">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror②">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException⑥">DOMException</a></code> and abort these steps.
+      <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①⓪">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑤">inactive</a></code>, throw an <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror②">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException⑦">DOMException</a></code> and abort these steps.
       <li>If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①①">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording①">recording</a></code>, abort these steps.
       <li>
        Set <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①②">state</a></code> to <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-recording" id="ref-for-dom-recordingstate-recording②">recording</a></code>, and queue a
@@ -1073,7 +1073,7 @@ at regular intervals.</p>
   the UA MUST run the following steps: 
      <ol>
       <li>
-       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①③">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑥">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror③">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException⑦">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
+       If <code class="idl"><a data-link-type="idl" href="#dom-mediarecorder-state" id="ref-for-dom-mediarecorder-state①③">state</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-recordingstate-inactive" id="ref-for-dom-recordingstate-inactive⑥">inactive</a></code> throw an <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#invalidstateerror" id="ref-for-invalidstateerror③">InvalidStateError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException⑧">DOMException</a></code> and terminate these steps. Otherwise the UA MUST queue a
     task, using the DOM manipulation task source, that runs the following steps: 
        <ol>
         <li>Let <var>blob</var> be the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑤">Blob</a></code> of collected data so far and
@@ -1225,7 +1225,7 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
    <h2 class="heading settled" data-level="4" id="error-handling"><span class="secno">4. </span><span class="content">Error handling</span><a class="self-link" href="#error-handling"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="error-handling-principles"><span class="secno">4.1. </span><span class="content">General principles</span><a class="self-link" href="#error-handling-principles"></a></h3>
     <em>This section is non-normative.</em> 
-   <p>The UA will throw a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException⑧">DOMException</a></code> when the error can be detected at the time
+   <p>The UA will throw a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException⑨">DOMException</a></code> when the error can be detected at the time
 that the call is made. In all other cases the UA will <a data-link-type="dfn" href="#fire-an-error-event" id="ref-for-fire-an-error-event③">fire an error event</a>.  If recording has been started and not yet stopped
 when the error occurs, let <var>blob</var> be the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob①④">Blob</a></code> of collected data so
 far; after raising the error, the UA will <a data-link-type="dfn" href="#fire-a-blob-event" id="ref-for-fire-a-blob-event⑦">fire a
@@ -1236,7 +1236,7 @@ It will signal a fatal error if these limits are exceeded.</p>
    <h3 class="heading settled" data-level="4.2" id="errorevent-section"><span class="secno">4.2. </span><span class="content">Error events</span><a class="self-link" href="#errorevent-section"></a></h3>
    <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fire-an-error-event">fire an error event</dfn> means to [= fire an event =] using <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/webappapis.html#errorevent" id="ref-for-errorevent①">ErrorEvent</a></code> as <var>eventConstructor</var>.</p>
    <h3 class="heading settled" data-level="4.3" id="exception-summary"><span class="secno">4.3. </span><span class="content">Exception Summary</span><a class="self-link" href="#exception-summary"></a></h3>
-   <p>Each of the exceptions defined in this document is a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException⑨">DOMException</a></code> with a
+   <p>Each of the exceptions defined in this document is a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException①⓪">DOMException</a></code> with a
 specific type.</p>
    <table class="vert">
     <thead>
@@ -1250,7 +1250,7 @@ specific type.</p>
       or at a time when it is not allowed, or if a request is made on a
       source object that has been deleted or removed.
      <tr>
-      <td><code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notsupportederror" id="ref-for-notsupportederror③">NotSupportedError</a></code>
+      <td><code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#notsupportederror" id="ref-for-notsupportederror④">NotSupportedError</a></code>
       <td>An operation could not be performed because the MIME type was not
       supported or the set of tracks could not be recorded by the MIME type.
       User agents should provide as much additional information as possible in
@@ -1848,12 +1848,12 @@ window.dfnpanelData['ccfe986b'] = {"dfnID": "ccfe986b", "url": "https://html.spe
 window.dfnpanelData['f0951476'] = {"dfnID": "f0951476", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler", "dfnText": "EventHandler", "refSections": [{"refs": [{"id": "ref-for-eventhandler"}, {"id": "ref-for-eventhandler\u2460"}, {"id": "ref-for-eventhandler\u2461"}, {"id": "ref-for-eventhandler\u2462"}, {"id": "ref-for-eventhandler\u2463"}, {"id": "ref-for-eventhandler\u2464"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-eventhandler\u2465"}, {"id": "ref-for-eventhandler\u2466"}, {"id": "ref-for-eventhandler\u2467"}, {"id": "ref-for-eventhandler\u2468"}, {"id": "ref-for-eventhandler\u2460\u24ea"}, {"id": "ref-for-eventhandler\u2460\u2460"}], "title": "2.2. Attributes"}], "external": true};
 window.dfnpanelData['a72449dd'] = {"dfnID": "a72449dd", "url": "https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel", "dfnText": "in parallel", "refSections": [{"refs": [{"id": "ref-for-in-parallel"}], "title": "2.3. Methods"}], "external": true};
 window.dfnpanelData['65181da8'] = {"dfnID": "65181da8", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#secure-context", "dfnText": "secure context", "refSections": [{"refs": [{"id": "ref-for-secure-context"}], "title": "6. Privacy and Security Considerations"}], "external": true};
-window.dfnpanelData['dca2de17'] = {"dfnID": "dca2de17", "url": "https://webidl.spec.whatwg.org/#idl-DOMException", "dfnText": "DOMException", "refSections": [{"refs": [{"id": "ref-for-idl-DOMException"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-idl-DOMException\u2460"}, {"id": "ref-for-idl-DOMException\u2461"}, {"id": "ref-for-idl-DOMException\u2462"}, {"id": "ref-for-idl-DOMException\u2463"}, {"id": "ref-for-idl-DOMException\u2464"}, {"id": "ref-for-idl-DOMException\u2465"}, {"id": "ref-for-idl-DOMException\u2466"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-idl-DOMException\u2467"}], "title": "4.1. General principles"}, {"refs": [{"id": "ref-for-idl-DOMException\u2468"}], "title": "4.3. Exception Summary"}], "external": true};
+window.dfnpanelData['dca2de17'] = {"dfnID": "dca2de17", "url": "https://webidl.spec.whatwg.org/#idl-DOMException", "dfnText": "DOMException", "refSections": [{"refs": [{"id": "ref-for-idl-DOMException"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-idl-DOMException\u2460"}, {"id": "ref-for-idl-DOMException\u2461"}, {"id": "ref-for-idl-DOMException\u2462"}, {"id": "ref-for-idl-DOMException\u2463"}, {"id": "ref-for-idl-DOMException\u2464"}, {"id": "ref-for-idl-DOMException\u2465"}, {"id": "ref-for-idl-DOMException\u2466"}, {"id": "ref-for-idl-DOMException\u2467"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-idl-DOMException\u2468"}], "title": "4.1. General principles"}, {"refs": [{"id": "ref-for-idl-DOMException\u2460\u24ea"}], "title": "4.3. Exception Summary"}], "external": true};
 window.dfnpanelData['8855a9aa'] = {"dfnID": "8855a9aa", "url": "https://webidl.spec.whatwg.org/#idl-DOMString", "dfnText": "DOMString", "refSections": [{"refs": [{"id": "ref-for-idl-DOMString"}, {"id": "ref-for-idl-DOMString\u2460"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-idl-DOMString\u2461"}], "title": "2.2. Attributes"}, {"refs": [{"id": "ref-for-idl-DOMString\u2462"}], "title": "2.5. MediaRecorderOptions"}, {"refs": [{"id": "ref-for-idl-DOMString\u2463"}], "title": "2.5.1. Members"}, {"refs": [{"id": "ref-for-idl-DOMString\u2464"}], "title": "3. Blob Event"}], "external": true};
 window.dfnpanelData['889e932f'] = {"dfnID": "889e932f", "url": "https://webidl.spec.whatwg.org/#Exposed", "dfnText": "Exposed", "refSections": [{"refs": [{"id": "ref-for-Exposed"}], "title": "2. Media Recorder API"}, {"refs": [{"id": "ref-for-Exposed\u2460"}], "title": "3. Blob Event"}], "external": true};
 window.dfnpanelData['cae6bf57'] = {"dfnID": "cae6bf57", "url": "https://webidl.spec.whatwg.org/#invalidmodificationerror", "dfnText": "InvalidModificationError", "refSections": [{"refs": [{"id": "ref-for-invalidmodificationerror"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-invalidmodificationerror\u2460"}], "title": "4.3. Exception Summary"}], "external": true};
 window.dfnpanelData['797018a7'] = {"dfnID": "797018a7", "url": "https://webidl.spec.whatwg.org/#invalidstateerror", "dfnText": "InvalidStateError", "refSections": [{"refs": [{"id": "ref-for-invalidstateerror"}, {"id": "ref-for-invalidstateerror\u2460"}, {"id": "ref-for-invalidstateerror\u2461"}, {"id": "ref-for-invalidstateerror\u2462"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-invalidstateerror\u2463"}], "title": "4.3. Exception Summary"}], "external": true};
-window.dfnpanelData['3182eb71'] = {"dfnID": "3182eb71", "url": "https://webidl.spec.whatwg.org/#notsupportederror", "dfnText": "NotSupportedError", "refSections": [{"refs": [{"id": "ref-for-notsupportederror"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-notsupportederror\u2460"}, {"id": "ref-for-notsupportederror\u2461"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-notsupportederror\u2462"}], "title": "4.3. Exception Summary"}], "external": true};
+window.dfnpanelData['3182eb71'] = {"dfnID": "3182eb71", "url": "https://webidl.spec.whatwg.org/#notsupportederror", "dfnText": "NotSupportedError", "refSections": [{"refs": [{"id": "ref-for-notsupportederror"}], "title": "2.1. Constructors"}, {"refs": [{"id": "ref-for-notsupportederror\u2460"}, {"id": "ref-for-notsupportederror\u2461"}, {"id": "ref-for-notsupportederror\u2462"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-notsupportederror\u2463"}], "title": "4.3. Exception Summary"}], "external": true};
 window.dfnpanelData['a5c91173'] = {"dfnID": "a5c91173", "url": "https://webidl.spec.whatwg.org/#SameObject", "dfnText": "SameObject", "refSections": [{"refs": [{"id": "ref-for-SameObject"}], "title": "3. Blob Event"}], "external": true};
 window.dfnpanelData['c3e881ef'] = {"dfnID": "c3e881ef", "url": "https://webidl.spec.whatwg.org/#securityerror", "dfnText": "SecurityError", "refSections": [{"refs": [{"id": "ref-for-securityerror"}, {"id": "ref-for-securityerror\u2460"}], "title": "2.3. Methods"}, {"refs": [{"id": "ref-for-securityerror\u2461"}], "title": "4.3. Exception Summary"}], "external": true};
 window.dfnpanelData['81dd847b'] = {"dfnID": "81dd847b", "url": "https://webidl.spec.whatwg.org/#unknownerror", "dfnText": "UnknownError", "refSections": [{"refs": [{"id": "ref-for-unknownerror"}], "title": "2.3. Methods"}], "external": true};
