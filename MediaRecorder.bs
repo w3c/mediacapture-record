@@ -264,7 +264,7 @@ interface MediaRecorder : EventTarget {
     frames passed since the last key frame.</li>
 
     <li>If both |videoKeyFrameIntervalDuration| and |videoKeyFrameIntervalCount| are not <code>null</code>,
-    the UA may ignore either.</li>
+    then throw a {{NotSupportedError}} {{DOMException}} and abort these steps.</li>
 
     <li>If both |videoKeyFrameIntervalDuration| and |videoKeyFrameIntervalCount| are <code>null</code>,
     the User Agent may emit key frames as it deems fit.</li>
