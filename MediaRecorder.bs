@@ -680,10 +680,11 @@ enum RecordingState {
   encoding of the blob data.
 
   <dt><dfn attribute for="BlobEvent"><code>timecode</code></dfn></dt>
-  <dd>The difference between the timestamp of the first chunk in
-  {{BlobEvent/data}} and the timestamp of the first chunk in the first
-  {{BlobEvent}} produced by this recorder as a {{DOMHighResTimeStamp}} [[!HR-TIME]].  Note that the {{BlobEvent/timecode}}
-  in the first produced {{BlobEvent}} does not need to be zero.
+  <dd>For a MediaRecorder instance, the {{BlobEvent/timecode}} in the first
+  produced {{BlobEvent}} contains 0. Subsequent {{BlobEvent}}'s
+  {{BlobEvent/timecode}} contain the difference of the timestamp of creation of
+  the first chunk in said {{BlobEvent}} and the timestamp of the first chunk of the
+  first produced {{BlobEvent}}, as {{DOMHighResTimeStamp}} [[!HR-TIME]].
   </dd>
 
 </dl>
