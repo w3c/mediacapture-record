@@ -89,7 +89,7 @@ interface MediaRecorder : EventTarget {
   <ol>
     <li>Let |stream| be the constructor's first argument.</li>
     <li>Let |options| be the constructor's second argument.</li>
-    <li>Let |type| be |options|' {{MediaRecorderOptions/mimeType}}.
+    <li>Let |type| be |options|' {{MediaRecorderOptions/mimeType}}.</li>
     <li>If invoking [$is type supported$] with |type| and the value true returns false,
     throw a {{NotSupportedError}} {{DOMException}} and abort these steps.</li>
     <li>Let |recorder| be a newly constructed {{MediaRecorder}} object.</li>
@@ -288,7 +288,7 @@ interface MediaRecorder : EventTarget {
       fully specified, the User Agent specifies them in |recorder|'s current
       configuration. The User Agent MAY take the sources of the tracks in
       |tracks| into account when deciding which container and codecs to
-      use.
+      use.</li>
       <div class="note">
         By looking at the sources of the tracks in |tracks| when recording
         starts, the User Agent could choose a configuration that avoids
@@ -309,7 +309,6 @@ interface MediaRecorder : EventTarget {
         <var>recorder</var>.</li>
         <li><a>Fire an event</a> named <a event>stop</a> at <var>recorder</var>.</li>
       </ol>
-      </li>
       </li>
       <li>Start recording all tracks in |tracks| using the |recorder|'s current
       configuration and gather the data into a {{Blob}} <var>blob</var>. Queue a
