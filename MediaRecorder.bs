@@ -850,7 +850,7 @@ exhausting the resources.
 MIME types via the {{isTypeSupported()}} method. It will also select the most
 appropriate codec and bandwidth allocation combination when these are not
 defined in the {{MediaRecorderOptions}}, and make this information available via
-the {{Blob/type}} attribute of the <code>event</code>'s' <code>data</code>
+the {{Blob/type}} attribute of the <code>event</code>'s <code>data</code>
 received in {{ondataavailable}}. It will also try to honour the
 {{MediaRecorderOptions}} if specified.
 
