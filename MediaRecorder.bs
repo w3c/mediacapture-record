@@ -524,6 +524,8 @@ interface MediaRecorder : EventTarget {
   The <dfn>list of synchronously exposed codecs</dfn> is: <code>vp8</code>,
   <code>vp9</code>, <code>h264</code>, and <code>opus</code>.
   <div class="note" highlight="javascript">
+    Due to the difficulty of detecting hardware support synchronously, precise
+    answers may be timing dependent.
     Users are expected to discover newer codecs through {{MediaCapabilities}} instead.
     For example:
     <pre>
