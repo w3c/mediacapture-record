@@ -523,11 +523,12 @@ interface MediaRecorder : EventTarget {
   This method is deprecated; it exists for legacy compatibility reasons only.
   The <dfn>list of synchronously exposed codec specifiers</dfn> are:
   <code>"vp8"</code>, <code>"vp9"</code>, <code>"h264"</code> aka
-  <code>"avc1"</code>, <code>"av01"</code>, and <code>"opus"</code>.
+  <code>"avc1"</code>, <code>"av1"</code> aka <code>"av01"</code>, and
+  <code>"opus"</code>.
   <div class="note" highlight="javascript">
     Due to the difficulty of detecting hardware support synchronously,
     precise answers can be timing dependent.
-    For example <code>"av01"</code> is synchronously exposed whereas
+    For example: <code>"av01"</code> is synchronously exposed whereas
     <code>"av01.0.19M.08"</code> is not. Users are expected to discover
     specific profile levels and newer codecs through {{MediaCapabilities}}
     instead:
