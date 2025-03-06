@@ -521,17 +521,21 @@ interface MediaRecorder : EventTarget {
     </code></dfn></dt>
   <dd>
   This method is deprecated; it exists for legacy compatibility reasons only.
-  The <dfn>list of synchronously exposed codecs</dfn> is: <code>vp8</code>,
-  <code>vp9</code>, <code>h264</code>, and <code>opus</code>.
+  The <dfn>list of synchronously exposed codec specifiers</dfn> are:
+  <code>"vp8"</code>, <code>"vp9"</code>, <code>"h264"</code> aka
+  <code>"avc1"</code>, <code>"av01"</code>, and <code>"opus"</code>.
   <div class="note" highlight="javascript">
     Due to the difficulty of detecting hardware support synchronously,
-    precise answers may be timing dependent. Users are expected to discover
-    newer codecs through {{MediaCapabilities}} instead. For example:
+    precise answers can be timing dependent.
+    For example <code>"av01"</code> is synchronously exposed whereas
+    <code>"av01.0.19M.08"</code> is not. Users are expected to discover
+    specific profile levels and newer codecs through {{MediaCapabilities}}
+    instead:
     <pre>
     await navigator.mediaCapabilities.encodingInfo({
       type: "record",
       video: {
-        contentType: "video/webm;codecs=av01",
+        contentType: "video/webm;codecs=av01.0.19M.08",
         width: 1920,
         height: 1080,
         bitrate: 120000,
@@ -566,13 +570,16 @@ interface MediaRecorder : EventTarget {
     <li>If |type| contains more than one audio codec, or more than one video
     codec, then return false.</li>
     <li>If |type| contains a codec that the MediaRecorder does not support, and
-    that codec  is in the [=list of synchronously exposed codecs=], then
-    return false.</li>
+    that standalone or comma-separated codec specifier string in its entirety is
+    a case-insensitive exact match for an item in the
+    [=list of synchronously exposed codec specifiers=], then return false.
+    </li>
     <li>If the MediaRecorder does not support the specified combination of media
     type/subtype, and container then return false.</li>
-    <li>If |type| contains a codec that is not in the
-    [=list of synchronously exposed codecs=] and |deferNewerCodecsCheck| is true,
-    then return true.</li>
+    <li>If |type| contains a standalone or comma-separated codec specifier string
+    that in its entirety is <em>not</em> a case-insensitive exact match for any
+    item in the [=list of synchronously exposed codec specifiers=] and
+    |deferNewerCodecsCheck| is true, then return true.</li>
     <li>If the MediaRecorder does not support the specified combination of media
     type/subtype, codecs and container then return false.</li>
     <li>Return true.</li>
