@@ -692,7 +692,7 @@ enum RecordingState {
 ## BlobEventInit ## {#blobeventinit}
 
 <pre class="idl">
-dictionary BlobEventInit {
+dictionary BlobEventInit : EventInit {
   required Blob data;
   DOMHighResTimeStamp timecode;
 };
