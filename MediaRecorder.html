@@ -5,9 +5,9 @@
   <title>MediaStream Recording</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version 0781e88e0, updated Fri Feb 14 13:26:46 2025 -0800" name="generator">
+  <meta content="Bikeshed version b25686b9f, updated Fri Mar 14 14:15:20 2025 -0700" name="generator">
   <link href="https://www.w3.org/TR/mediastream-recording/" rel="canonical">
-  <meta content="ab247052add15671ddcf4c55ec1baffafab5d819" name="revision">
+  <meta content="c1d06e7745d724df81fb3049e1fb82501cdc1352" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -755,7 +755,7 @@ var[data-var-color="6"] { --var-vg: #FFBCF2; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Recording</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2025-02-17">17 February 2025</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2025-04-17">17 April 2025</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1346,7 +1346,7 @@ its <code class="idl"><a data-link-type="idl" href="#dom-blobevent-data" id="ref
   first produced <code class="idl"><a data-link-type="idl" href="#blobevent" id="ref-for-blobevent④">BlobEvent</a></code>, as <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp④">DOMHighResTimeStamp</a></code> <a data-link-type="biblio" href="#biblio-hr-time" title="High Resolution Time">[HR-TIME]</a>. 
    </dl>
    <h3 class="heading settled" data-level="3.3" id="blobeventinit"><span class="secno">3.3. </span><span class="content">BlobEventInit</span><a class="self-link" href="#blobeventinit"></a></h3>
-<pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-blobeventinit"><code><c- g>BlobEventInit</c-></code></dfn> {
+<pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-blobeventinit"><code><c- g>BlobEventInit</c-></code></dfn> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#dictdef-eventinit" id="ref-for-dictdef-eventinit"><c- n>EventInit</c-></a> {
   <c- b>required</c-> <a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob①①"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="Blob" href="#dom-blobeventinit-data" id="ref-for-dom-blobeventinit-data"><c- g>data</c-></a>;
   <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp" id="ref-for-dom-domhighrestimestamp⑤"><c- n>DOMHighResTimeStamp</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="DOMHighResTimeStamp" href="#dom-blobeventinit-timecode" id="ref-for-dom-blobeventinit-timecode"><c- g>timecode</c-></a>;
 };
@@ -1658,6 +1658,7 @@ the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediac
     <a data-link-type="biblio">[DOM]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="129bdae8">Event</span>
+     <li><span class="dfn-paneled" id="44a7708c">EventInit</span>
      <li><span class="dfn-paneled" id="2bc0cdf4">EventTarget</span>
      <li><span class="dfn-paneled" id="5fd23811">fire an event</span>
     </ul>
@@ -1727,7 +1728,7 @@ the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediac
    <dt id="biblio-fileapi">[FileAPI]
    <dd>Marijn Kruisselbrink. <a href="https://w3c.github.io/FileAPI/"><cite>File API</cite></a>. URL: <a href="https://w3c.github.io/FileAPI/">https://w3c.github.io/FileAPI/</a>
    <dt id="biblio-fingerprinting-guidance">[FINGERPRINTING-GUIDANCE]
-   <dd>Nick Doty. <a href="https://w3c.github.io/fingerprinting-guidance/"><cite>Mitigating Browser Fingerprinting in Web Specifications</cite></a>. URL: <a href="https://w3c.github.io/fingerprinting-guidance/">https://w3c.github.io/fingerprinting-guidance/</a>
+   <dd>Nick Doty; Tom Ritter. <a href="https://w3c.github.io/fingerprinting-guidance/"><cite>Mitigating Browser Fingerprinting in Web Specifications</cite></a>. URL: <a href="https://w3c.github.io/fingerprinting-guidance/">https://w3c.github.io/fingerprinting-guidance/</a>
    <dt id="biblio-getusermedia">[GETUSERMEDIA]
    <dd>Cullen Jennings; et al. <a href="https://w3c.github.io/mediacapture-main/"><cite>Media Capture and Streams</cite></a>. URL: <a href="https://w3c.github.io/mediacapture-main/">https://w3c.github.io/mediacapture-main/</a>
    <dt id="biblio-hr-time">[HR-TIME]
@@ -1800,7 +1801,7 @@ the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/mediac
   <c- b>readonly</c-> <c- b>attribute</c-> <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp"><c- n>DOMHighResTimeStamp</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMHighResTimeStamp" href="#dom-blobevent-timecode"><c- g>timecode</c-></a>;
 };
 
-<c- b>dictionary</c-> <a href="#dictdef-blobeventinit"><code><c- g>BlobEventInit</c-></code></a> {
+<c- b>dictionary</c-> <a href="#dictdef-blobeventinit"><code><c- g>BlobEventInit</c-></code></a> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#dictdef-eventinit"><c- n>EventInit</c-></a> {
   <c- b>required</c-> <a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob"><c- n>Blob</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="Blob" href="#dom-blobeventinit-data"><c- g>data</c-></a>;
   <a data-link-type="idl-name" href="https://w3c.github.io/hr-time/#dom-domhighrestimestamp"><c- n>DOMHighResTimeStamp</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="DOMHighResTimeStamp" href="#dom-blobeventinit-timecode"><c- g>timecode</c-></a>;
 };
@@ -2013,6 +2014,7 @@ let dfnPanelData = {
 "2bc0cdf4": {"dfnID":"2bc0cdf4","dfnText":"EventTarget","external":true,"refSections":[{"refs":[{"id":"ref-for-eventtarget"}],"title":"2. Media Recorder API"}],"url":"https://dom.spec.whatwg.org/#eventtarget"},
 "2cf6d842": {"dfnID":"2cf6d842","dfnText":"muted","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-mediastreamtrack-muted"}],"title":"2.3. Methods"}],"url":"https://w3c.github.io/mediacapture-main/#dom-mediastreamtrack-muted"},
 "3182eb71": {"dfnID":"3182eb71","dfnText":"NotSupportedError","external":true,"refSections":[{"refs":[{"id":"ref-for-notsupportederror"}],"title":"2.1. Constructors"},{"refs":[{"id":"ref-for-notsupportederror\u2460"},{"id":"ref-for-notsupportederror\u2461"},{"id":"ref-for-notsupportederror\u2462"}],"title":"2.3. Methods"},{"refs":[{"id":"ref-for-notsupportederror\u2463"}],"title":"4.3. Exception Summary"}],"url":"https://webidl.spec.whatwg.org/#notsupportederror"},
+"44a7708c": {"dfnID":"44a7708c","dfnText":"EventInit","external":true,"refSections":[{"refs":[{"id":"ref-for-dictdef-eventinit"}],"title":"3.3. BlobEventInit"}],"url":"https://dom.spec.whatwg.org/#dictdef-eventinit"},
 "5372cca8": {"dfnID":"5372cca8","dfnText":"boolean","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-boolean"}],"title":"2. Media Recorder API"}],"url":"https://webidl.spec.whatwg.org/#idl-boolean"},
 "5f90bbfb": {"dfnID":"5f90bbfb","dfnText":"undefined","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-undefined"},{"id":"ref-for-idl-undefined\u2460"},{"id":"ref-for-idl-undefined\u2461"},{"id":"ref-for-idl-undefined\u2462"},{"id":"ref-for-idl-undefined\u2463"}],"title":"2. Media Recorder API"}],"url":"https://webidl.spec.whatwg.org/#idl-undefined"},
 "5fd23811": {"dfnID":"5fd23811","dfnText":"fire an event","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-event-fire"},{"id":"ref-for-concept-event-fire\u2460"},{"id":"ref-for-concept-event-fire\u2461"},{"id":"ref-for-concept-event-fire\u2462"},{"id":"ref-for-concept-event-fire\u2463"},{"id":"ref-for-concept-event-fire\u2464"},{"id":"ref-for-concept-event-fire\u2465"},{"id":"ref-for-concept-event-fire\u2466"}],"title":"2.3. Methods"},{"refs":[{"id":"ref-for-concept-event-fire\u2467"}],"title":"2.4. Data handling"},{"refs":[{"id":"ref-for-concept-event-fire\u2468"}],"title":"4.1. General principles"},{"refs":[{"id":"ref-for-concept-event-fire\u2460\u24ea"}],"title":"4.2. Error events"},{"refs":[{"id":"f95f167f0"}],"title":"5. Event summary"}],"url":"https://dom.spec.whatwg.org/#concept-event-fire"},
@@ -2548,6 +2550,7 @@ let refsData = {
 "#videokeyframeintervalcount": {"displayText":"[[videokeyframeintervalcount]]","export":true,"for_":[],"level":"","normative":true,"shortname":"mediastream-recording","spec":"mediastream-recording","status":"local","text":"[[videokeyframeintervalcount]]","type":"dfn","url":"#videokeyframeintervalcount"},
 "#videokeyframeintervalduration": {"displayText":"[[videokeyframeintervalduration]]","export":true,"for_":[],"level":"","normative":true,"shortname":"mediastream-recording","spec":"mediastream-recording","status":"local","text":"[[videokeyframeintervalduration]]","type":"dfn","url":"#videokeyframeintervalduration"},
 "https://dom.spec.whatwg.org/#concept-event-fire": {"displayText":"fire an event","export":true,"for_":[],"level":"1","normative":true,"shortname":"dom","spec":"dom","status":"current","text":"fire an event","type":"dfn","url":"https://dom.spec.whatwg.org/#concept-event-fire"},
+"https://dom.spec.whatwg.org/#dictdef-eventinit": {"displayText":"EventInit","export":true,"for_":[],"level":"1","normative":true,"shortname":"dom","spec":"dom","status":"current","text":"EventInit","type":"dictionary","url":"https://dom.spec.whatwg.org/#dictdef-eventinit"},
 "https://dom.spec.whatwg.org/#event": {"displayText":"Event","export":true,"for_":[],"level":"1","normative":true,"shortname":"dom","spec":"dom","status":"current","text":"Event","type":"interface","url":"https://dom.spec.whatwg.org/#event"},
 "https://dom.spec.whatwg.org/#eventtarget": {"displayText":"EventTarget","export":true,"for_":[],"level":"1","normative":true,"shortname":"dom","spec":"dom","status":"current","text":"EventTarget","type":"interface","url":"https://dom.spec.whatwg.org/#eventtarget"},
 "https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel": {"displayText":"in parallel","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"in parallel","type":"dfn","url":"https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel"},
@@ -2663,7 +2666,12 @@ function hideRefHint(refHint) {
 function showRefHint(link) {
     if(link.classList.contains("dfn-link")) return;
     const url = link.getAttribute("href");
-    const ref = refsData[url];
+    const refHintKey = link.getAttribute("data-refhint-key");
+    let key = url;
+    if(refHintKey) {
+        key = refHintKey + "_" + url;
+    }
+    const ref = refsData[key];
     if(!ref) return;
 
     hideAllRefHints(); // Only display one at this time.
