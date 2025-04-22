@@ -89,8 +89,8 @@ interface MediaRecorder : EventTarget {
   <ol>
     <li>Let |stream| be the constructor's first argument.</li>
     <li>Let |options| be the constructor's second argument.</li>
-    <li>If invoking [$is type supported$] with |options|'
-    {{MediaRecorderOptions/mimeType}} member as its argument returns false,
+    <li>Let |type| be |options|' {{MediaRecorderOptions/mimeType}}.</li>
+    <li>If invoking [$is type supported$] with |type| and the value true returns false,
     throw a {{NotSupportedError}} {{DOMException}} and abort these steps.</li>
     <li>Let |recorder| be a newly constructed {{MediaRecorder}} object.</li>
     <li>Let |recorder| have a <dfn>\[[ConstrainedMimeType]]</dfn> internal slot,
@@ -288,7 +288,7 @@ interface MediaRecorder : EventTarget {
       fully specified, the User Agent specifies them in |recorder|'s current
       configuration. The User Agent MAY take the sources of the tracks in
       |tracks| into account when deciding which container and codecs to
-      use.
+      use.</li>
       <div class="note">
         By looking at the sources of the tracks in |tracks| when recording
         starts, the User Agent could choose a configuration that avoids
@@ -299,6 +299,16 @@ interface MediaRecorder : EventTarget {
         while recording, the User Agent has to be prepared to re-encode it to
         avoid interruptions.
       </div>
+      <li>If the User Agent does not support the specified combination of media
+      type/subtype, codecs and container, then it MUST abort the remaining
+      steps and queue a task, using the DOM manipulation task source, that runs
+      the following steps:
+      <ol>
+        <li>[$Inactivate the recorder$] with |recorder|.</li>
+        <li><a>Fire an error event</a> named {{NotSupportedError}} at
+        <var>recorder</var>.</li>
+        <li><a>Fire an event</a> named <a event>stop</a> at <var>recorder</var>.</li>
+      </ol>
       </li>
       <li>Start recording all tracks in |tracks| using the |recorder|'s current
       configuration and gather the data into a {{Blob}} <var>blob</var>. Queue a
@@ -510,18 +520,45 @@ interface MediaRecorder : EventTarget {
   <dt><dfn method for="MediaRecorder"><code>isTypeSupported(DOMString type)
     </code></dfn></dt>
   <dd>
+  This method is deprecated; it exists for legacy compatibility reasons only.
+  The <dfn>list of synchronously exposed codec specifiers</dfn> is:
+  <code>"vp8"</code>, <code>"vp9"</code>, <code>"h264"</code> aka
+  <code>"avc1"</code>, <code>"av1"</code> aka <code>"av01"</code>,
+  <code>"opus"</code>, and <code>"pcm"</code>.
+  <div class="note" highlight="javascript">
+    Due to the difficulty of detecting hardware support synchronously,
+    precise answers can be timing dependent.
+    For example: <code>"av01"</code> is synchronously exposed whereas
+    <code>"av01.0.19M.08"</code> is not. Users are expected to discover
+    specific profile levels and newer codecs through {{MediaCapabilities}}
+    instead:
+    <pre>
+    await navigator.mediaCapabilities.encodingInfo({
+      type: "record",
+      video: {
+        contentType: "video/webm;codecs=av01.0.19M.08",
+        width: 1920,
+        height: 1080,
+        bitrate: 120000,
+        framerate: 48,
+      }
+    });
+    </pre>
+  </div>
+  </dd>
+  <dd>
   Check to see whether a {{MediaRecorder}} can record in a specified MIME type.
   If true is returned from this method, it only indicates that the
   {{MediaRecorder}} implementation is capable of recording {{Blob}} objects for
   the specified MIME type. Recording may still fail if sufficient resources are
   not available to support the concrete media encoding. When this method is
   invoked, the User Agent must return the result of [$is type supported$],
-  given the method's first argument.
+  with the method's first argument and the value false.
   </dd>
   <dd algorithm="is type supported">The <dfn abstract-op>is type supported</dfn>
-  algorithm consists of the following steps.
+  algorithm, given a |type| and a boolean |deferNewerCodecsCheck|, consists of
+  the following steps.
   <ol>
-    <li>Let |type| be the algorithm's argument.</li>
     <li>If |type| is an empty string, then return true (note that this case is
     essentially equivalent to leaving up to the UA the choice of both container
     and codecs).</li>
@@ -533,8 +570,17 @@ interface MediaRecorder : EventTarget {
     support, then return false.</li>
     <li>If |type| contains more than one audio codec, or more than one video
     codec, then return false.</li>
-    <li>If |type| contains a codec that the MediaRecorder does not support, then
-    return false.</li>
+    <li>If |type| contains a codec that the MediaRecorder does not support, and
+    that standalone or comma-separated codec specifier string in its entirety is
+    a case-insensitive exact match for an item in the
+    [=list of synchronously exposed codec specifiers=], then return false.
+    </li>
+    <li>If the MediaRecorder does not support the specified combination of media
+    type/subtype, and container then return false.</li>
+    <li>If |type| contains a standalone or comma-separated codec specifier string
+    that in its entirety is <em>not</em> a case-insensitive exact match for any
+    item in the [=list of synchronously exposed codec specifiers=] and
+    |deferNewerCodecsCheck| is true, then return true.</li>
     <li>If the MediaRecorder does not support the specified combination of media
     type/subtype, codecs and container then return false.</li>
     <li>Return true.</li>
