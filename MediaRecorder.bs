@@ -521,15 +521,14 @@ interface MediaRecorder : EventTarget {
     </code></dfn></dt>
   <dd>
   This method is deprecated; it exists for legacy compatibility reasons only.
-  The <dfn>list of synchronously exposed codec specifiers</dfn> is:
+  The <dfn>list of synchronously exposed codec identifiers</dfn> is:
   <code>"vp8"</code>, <code>"vp9"</code>, <code>"h264"</code> aka
   <code>"avc1"</code>, <code>"av1"</code> aka <code>"av01"</code>,
+  <code>hvc1</code> aka <code>hev1</code>, <code>avc1</code> aka <code>avc3</code>,
   <code>"opus"</code>, and <code>"pcm"</code>.
   <div class="note" highlight="javascript">
     Due to the difficulty of detecting hardware support synchronously,
-    precise answers can be timing dependent.
-    For example: <code>"av01"</code> is synchronously exposed whereas
-    <code>"av01.0.19M.08"</code> is not. Users are expected to discover
+    precise answers can be timing dependent. Users are expected to discover
     specific profile levels and newer codecs through {{MediaCapabilities}}
     instead:
     <pre>
@@ -562,28 +561,45 @@ interface MediaRecorder : EventTarget {
     <li>If |type| is an empty string, then return true (note that this case is
     essentially equivalent to leaving up to the UA the choice of both container
     and codecs).</li>
-    <li>If |type| does not contain a valid MIME type string, then return false.
+    <li>If |type| is not a valid MIME type string, then return false.
     </li>
-    <li>If |type| contains a media type or media subtype that the MediaRecorder
-    does not support, then return false.</li>
-    <li>If |type| contains a media container that the MediaRecorder does not
-    support, then return false.</li>
-    <li>If |type| contains more than one audio codec, or more than one video
-    codec, then return false.</li>
-    <li>If |type| contains a codec that the MediaRecorder does not support, and
-    that standalone or comma-separated codec specifier string in its entirety is
-    a case-insensitive exact match for an item in the
-    [=list of synchronously exposed codec specifiers=], then return false.
+    <li>If the MediaRecorder does not support the combination of media
+    type/subtype, and container specified in |type| then return false.</li>
+    <li>Let |codecStrings| be the [=list=] result of [=strictly splitting=] on
+    <code>","</code> the string after <code>codecs=</code> if present in |type|,
+    or an empty [=list=] otherwise.
+    <li>If |codecStrings| contains more than one audio codec or more than one
+    video codec, then return false.</li>
+    <li>Let |codecIdentifiers| be an empty [=list=].</li>
+    <li>For each |codecString| in |codecStrings|, run the following steps:
+      <ol>
+        <li>Let |codecIdentifier| be the [=ASCII lowercase=] of the first part
+          of [=strictly splitting=] |codecString| on <code>"."</code>.</li>
+        <li>[=list/Append=] |codecIdentifier| to |codecIdentifiers|.</li>
+      </ol>
+      <div class="note">
+        The remainder of this algorithm only tests against the identifier
+        part of the codec specifier (e.g. <code>"av01"</code>), ignoring
+        any part after a period (e.g. <code>"av01.0.19M.08"</code>).
+      </div>
     </li>
-    <li>If the MediaRecorder does not support the specified combination of media
-    type/subtype, and container then return false.</li>
-    <li>If |type| contains a standalone or comma-separated codec specifier string
-    that in its entirety is <em>not</em> a case-insensitive exact match for any
-    item in the [=list of synchronously exposed codec specifiers=] and
-    |deferNewerCodecsCheck| is true, then return true.</li>
-    <li>If the MediaRecorder does not support the specified combination of media
-    type/subtype, codecs and container then return false.</li>
+    <li>For each |codecIdentifier| in |codecIdentifiers| that [$is synchronously exposed$], run the following step:
+      <ol>
+        <li>If the MediaRecorder does not support |codecIdentifier| in combination
+          with the media type/subtype and container specified in |type|, then return false.
+        </li>
+      </ol>
+    </li>
+    <li>If any |codecIdentifier| in |codecIdentifiers| is not [$is synchronously exposed|synchronously exposed$], then return |deferNewerCodecsCheck|.</li>
     <li>Return true.</li>
+  </ol>
+  </dd>
+  <dd algorithm="is synchronously exposed">The <dfn abstract-op>is synchronously exposed</dfn>
+  algorithm, given a |codecIdentifier|, consists of
+  the following steps:
+  <ol>
+    <li>Return true if any item in the [=list of synchronously exposed codec identifiers=]
+      is an exact match for |codecIdentifier|, otherwise false.</li>
   </ol>
   </dd>
 </dl>
@@ -1033,4 +1049,5 @@ urlPrefix: https://www.w3.org/TR/fingerprinting-guidance/#
 spec:mediacapture-streams; type:enum-value; text:ended
 spec:mediacapture-streams; type:attribute; text:muted
 spec:mediacapture-streams; type:attribute; text:enabled
+spec:infra; type:dfn; text:list
 </pre>
