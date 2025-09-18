@@ -524,7 +524,7 @@ interface MediaRecorder : EventTarget {
   The <dfn>list of synchronously exposed codec identifiers</dfn> is:
   <code>"vp8"</code>, <code>"vp9"</code>, <code>"h264"</code> aka
   <code>"avc1"</code>, <code>"av1"</code> aka <code>"av01"</code>,
-  <code>hvc1</code> aka <code>hev1</code>, <code>avc1</code> aka <code>avc3</code>,
+  <code>hvc1</code> aka <code>hev1</code>, <code>avc1</code>, <code>avc3</code>,
   <code>"opus"</code>, and <code>"pcm"</code>.
   <div class="note" highlight="javascript">
     Due to the difficulty of detecting hardware support synchronously,
