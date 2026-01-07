@@ -524,7 +524,7 @@ interface MediaRecorder : EventTarget {
   The <dfn>list of synchronously exposed codec identifiers</dfn> is:
   <code>"vp8"</code>, <code>"vp9"</code>, <code>"h264"</code> aka
   <code>"avc1"</code>, <code>"av1"</code> aka <code>"av01"</code>,
-  <code>hvc1</code>, <code>hev1</code>, <code>avc1</code>, <code>avc3</code>,
+  <code>"hvc1"</code>, <code>"hev1"</code>, <code>"avc1"</code>, <code>"avc3"</code>,
   <code>"opus"</code>, and <code>"pcm"</code>.
   <div class="note" highlight="javascript">
     Due to the difficulty of detecting hardware support synchronously,
@@ -532,14 +532,10 @@ interface MediaRecorder : EventTarget {
     specific profile levels and newer codecs through {{MediaCapabilities}}
     instead:
     <pre>
-    await navigator.mediaCapabilities.encodingInfo({
+    const {supported} = await navigator.mediaCapabilities.encodingInfo({
       type: "record",
       video: {
         contentType: "video/webm;codecs=av01.0.19M.08",
-        width: 1920,
-        height: 1080,
-        bitrate: 120000,
-        framerate: 48,
       }
     });
     </pre>
