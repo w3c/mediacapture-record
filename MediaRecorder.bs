@@ -539,7 +539,7 @@ interface MediaRecorder : EventTarget {
         width: 640,
         height: 480,
         framerate: 30,
-        bitrate: 120000,
+        bitrate: 300000,
       }
     });
     </pre>
