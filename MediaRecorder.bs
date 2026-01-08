@@ -536,6 +536,10 @@ interface MediaRecorder : EventTarget {
       type: "record",
       video: {
         contentType: "video/webm;codecs=av01.0.19M.08",
+        width: 640,
+        height: 480,
+        framerate: 30,
+        bitrate: 120000,
       }
     });
     </pre>
