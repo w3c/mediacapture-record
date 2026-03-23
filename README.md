@@ -21,13 +21,13 @@ During development it's often a good idea to try and render `MediaRecorder.bs`
 locally, for that, and using the online compiler:
 
 ```
-curl https://api.csswg.org/bikeshed/ -F file=@MediaRecorder.bs -F force=1 > MediaRecorder.html
+curl https://www.w3.org/publications/spec-generator/ -F file=@MediaRecorder.bs -F type=bikeshed-spec -F die-on=nothing > MediaRecorder.html
 ```
 
 if the produced file has a strange size (i.e. zero, a few KBs), then something went terribly wrong; run instead:
 
 ```
-curl https://api.csswg.org/bikeshed/ -F file=@MediaRecorder.bs -F output=err
+curl https://www.w3.org/publications/spec-generator/ -F file=@MediaRecorder.bs -F type=bikeshed-spec -F output=messages
 ```
 
 and try to figure out why `bikeshed` did not like the `.bs` :'(
