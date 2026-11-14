@@ -995,14 +995,14 @@ with minimal modifications.
   <pre>
   &lt;html>
   &lt;body>
-  &lt;video autoplay/>
+  &lt;video autoplay>&lt;/video>
   &lt;script>
     var recordedChunks = [];
 
     function gotMedia(stream) {
       // |video| shows a live view of the captured MediaStream.
       var video = document.querySelector('video');
-      video.src = URL.createObjectURL(stream);
+      video.srcObject = stream;
 
       var recorder = null;
       try {
