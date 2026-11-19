@@ -487,7 +487,7 @@ interface MediaRecorder : EventTarget {
       <li>Resume (or continue) gathering data into the current <var>blob</var>.
       </li>
       <li>Let <var>target</var> be the MediaRecorder context object. <a>Fire
-      an event</a> named <a>resume</a> at <var>target</var>.</li>
+      an event</a> named <a event>resume</a> at <var>target</var>.</li>
     </ol>
     </li>
     <li>return <code>undefined</code>.</li>
