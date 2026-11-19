@@ -415,7 +415,7 @@ interface MediaRecorder : EventTarget {
     [=[[ConstrainedMimeType]]=] slot.</li>
     <li>Set |recorder|'s {{state}} attribute to {{inactive}}.</li>
     <li>If |recorder|'s [=[[ConstrainedBitsPerSecond]]=] slot is not
-    <code>undefined</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
+    <code>null</code>, set |recorder|'s {{MediaRecorder/videoBitsPerSecond}} and
     {{MediaRecorder/audioBitsPerSecond}} attributes to values the User Agent deems reasonable
     for the respective media types, such that the sum of {{MediaRecorder/videoBitsPerSecond}}
     and {{MediaRecorder/audioBitsPerSecond}} is close to the value of |recorder|'s
